@@ -28,6 +28,7 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
     // SQL queries
     private static final String SQL_SELECT_ENROLLEES;
     private static final String SQL_DELETE_ENROLLEE_BY_ID;
+    private static final String SQL_DELETE_ENROLLEE;
     private static final String SQL_INSERT_ENROLLEE;
 
     // column labels
@@ -108,8 +109,21 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
     }
 
     @Override
-    public boolean delete(Enrollee enrollee) throws NotSupportedOperationException {
-        throw new NotSupportedOperationException();
+    public boolean delete(Enrollee enrollee) throws DAOException {
+        int flag = 0;
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_DELETE_ENROLLEE)) {
+            st.setInt(1, enrollee.getId());
+            st.setString(2, enrollee.getCountry());
+            st.setString(3, enrollee.getCity());
+            st.setInt(4, enrollee.getSchoolCertificate());
+            st.setInt(5, enrollee.getUserId());
+            st.setInt(6, enrollee.getFacultyId());
+            flag = st.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Deletion error", e);
+        }
+        return flag != 0;
     }
 
     @Override
@@ -190,6 +204,15 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
         SQL_DELETE_ENROLLEE_BY_ID =
                 "DELETE FROM `enrollees` " +
                 "WHERE `enrollees`.`id` = ?";
+        SQL_DELETE_ENROLLEE =
+                "UPDATE `enrollees` " +
+                "SET `available` = 1 " +
+                "WHERE  `id` = ? " +
+                        "AND `country` = ? " +
+                        "AND `city` = ? " +
+                        "AND `school_certificate` = ? " +
+                        "AND `users_id` = ? " +
+                        "AND `faculties_id` = ?";
         SQL_INSERT_ENROLLEE =
                 "INSERT INTO `enrollees` " +
                 "(`country`,`city`,`school_certificate`,`users_id`,`faculties_id`,`available`) " +

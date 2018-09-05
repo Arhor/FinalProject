@@ -19,7 +19,7 @@ public class ConnectionPoolTest {
 
     @Test
     public void mainTest() {
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 100; i++) {
             new Thread() {
                 public void run() {
                     ProxyConnection connection = ConnectionPool.POOL.getConnection();

@@ -24,7 +24,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.0.27" level="application_server_libraries" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.33" level="application_server_libraries" />
     <orderEntry type="library" name="log4j-api-2.4" level="project" />
     <orderEntry type="library" name="log4j-core-2.4" level="project" />
     <orderEntry type="library" name="mysql-connector-java-8.0.12" level="project" />
