@@ -23,40 +23,40 @@ public class SubjectDAOTest {
 
     @BeforeClass
     public void setUp() {
-//        subjectDao = new SubjectDAO();
-//        transactionHelper = new TransactionHelper();
+        subjectDao = new SubjectDAO();
+        transactionHelper = new TransactionHelper();
     }
 
     @AfterClass
     public void tearDown() {
-//        subjectDao = null;
-//        transactionHelper = null;
-//        ConnectionPool.POOL.closeConnections();
+        subjectDao = null;
+        transactionHelper = null;
+        ConnectionPool.POOL.closeConnections();
     }
 
     @Test
     public void testFindAll() {
-//        transactionHelper.startTransaction(subjectDao);
-//        for (Subject subject : subjectDao.findAll()) {
-//            LOG.info(subject);
-//        }
-//        transactionHelper.endTransaction();
+        transactionHelper.startTransaction(subjectDao);
+        for (Subject subject : subjectDao.findAll()) {
+            LOG.info(subject);
+        }
+        transactionHelper.endTransaction();
     }
 
     @Test
     public void findEntityByIdTest() {
-//        transactionHelper.startTransaction(subjectDao);
-//        LOG.info(subjectDao.findEntityById(101));
-//        transactionHelper.endTransaction();
+        transactionHelper.startTransaction(subjectDao);
+        LOG.info(subjectDao.findEntityById(101));
+        transactionHelper.endTransaction();
     }
 
     @Test
     public void findFacultyBySubjectIdTest() {
-//        transactionHelper.startTransaction(subjectDao);
-//        for (Subject subject : subjectDao.findSubjectsByFacultyId(205)) {
-//            LOG.info(subject);
-//        }
-//        transactionHelper.endTransaction();
+        transactionHelper.startTransaction(subjectDao);
+        for (Subject subject : subjectDao.findSubjectsByFacultyId(205)) {
+            LOG.info(subject);
+        }
+        transactionHelper.endTransaction();
     }
 
     @Test

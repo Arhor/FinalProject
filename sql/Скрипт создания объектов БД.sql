@@ -36,16 +36,41 @@ DROP TABLE IF EXISTS `admission_committee`.`users` ;
 CREATE TABLE IF NOT EXISTS `admission_committee`.`users` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'user ID',
   `email` VARCHAR(129) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL COMMENT 'e-mail - уникален для каждого пользователя, используется как логин',
-  `password` CHAR(32) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL COMMENT 'password',
+  `password` CHAR(128) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL COMMENT 'password',
   `first_name` VARCHAR(35) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL COMMENT 'first name',
   `last_name` VARCHAR(35) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL COMMENT 'last name',
   `role` ENUM('admin', 'client') CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL DEFAULT 'client' COMMENT 'user role',
   `lang` ENUM('ru', 'en') CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL DEFAULT 'ru' COMMENT 'user language',
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_users_UNIQUE` (`email` ASC))
+  `available` BIT(1) NOT NULL DEFAULT 1,
+  UNIQUE INDEX `email_users_UNIQUE` (`email` ASC),
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = 'users';
+
+
+-- -----------------------------------------------------
+-- Table `admission_committee`.`enrollees`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `admission_committee`.`enrollees` ;
+
+CREATE TABLE IF NOT EXISTS `admission_committee`.`enrollees` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'enrollee id',
+  `country` VARCHAR(55) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL COMMENT 'enrollee country',
+  `city` VARCHAR(55) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL COMMENT 'enrollee city',
+  `school_certificate` TINYINT UNSIGNED NOT NULL COMMENT 'average value of school certificate',
+  `users_id` INT UNSIGNED NOT NULL COMMENT 'users_id',
+  `available` BIT(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `fk_enrollees_users1_idx` (`users_id` ASC),
+  CONSTRAINT `fk_enrollees_users1`
+    FOREIGN KEY (`users_id`)
+    REFERENCES `admission_committee`.`users` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COMMENT = 'enrollees';
 
 
 -- -----------------------------------------------------
@@ -63,37 +88,6 @@ CREATE TABLE IF NOT EXISTS `admission_committee`.`faculties` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = 'faculties';
-
-
--- -----------------------------------------------------
--- Table `admission_committee`.`enrollees`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `admission_committee`.`enrollees` ;
-
-CREATE TABLE IF NOT EXISTS `admission_committee`.`enrollees` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'enrollee id',
-  `country` VARCHAR(55) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL COMMENT 'enrollee country',
-  `city` VARCHAR(55) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL COMMENT 'enrollee city',
-  `school_certificate` TINYINT UNSIGNED NOT NULL COMMENT 'average value of school certificate',
-  `is_passed` BIT(1) NULL COMMENT 'admission result (passed or not)',
-  `users_id` INT UNSIGNED NOT NULL COMMENT 'users_id',
-  `faculties_id` TINYINT UNSIGNED NOT NULL COMMENT 'faculties_id',
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `fk_enrollees_users1_idx` (`users_id` ASC),
-  INDEX `fk_enrollees_faculties1_idx` (`faculties_id` ASC),
-  CONSTRAINT `fk_enrollees_users1`
-    FOREIGN KEY (`users_id`)
-    REFERENCES `admission_committee`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_enrollees_faculties1`
-    FOREIGN KEY (`faculties_id`)
-    REFERENCES `admission_committee`.`faculties` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COMMENT = 'enrollees';
 
 
 -- -----------------------------------------------------
@@ -125,13 +119,13 @@ CREATE TABLE IF NOT EXISTS `admission_committee`.`faculties_has_subjects` (
   CONSTRAINT `fk_faculties_has_subjects_faculties1`
     FOREIGN KEY (`faculties_id`)
     REFERENCES `admission_committee`.`faculties` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_faculties_has_subjects_subjects1`
     FOREIGN KEY (`subjects_id`)
     REFERENCES `admission_committee`.`subjects` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = 'К одному факультету относится несколько предметов\nОдин предмет относится к нескольким факультетам';
@@ -146,55 +140,120 @@ CREATE TABLE IF NOT EXISTS `admission_committee`.`enrollees_has_subjects` (
   `enrollees_id` INT UNSIGNED NOT NULL COMMENT 'enrollees_id',
   `subjects_id` TINYINT UNSIGNED NOT NULL COMMENT 'subjects_id',
   `score` TINYINT UNSIGNED NOT NULL COMMENT 'оценка студента по соотв. предмету',
+  `available` BIT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`enrollees_id`, `subjects_id`),
   INDEX `fk_enrollees_has_subjects_subjects1_idx` (`subjects_id` ASC),
   INDEX `fk_enrollees_has_subjects_enrollees1_idx` (`enrollees_id` ASC),
   CONSTRAINT `fk_enrollees_has_subjects_enrollees1`
     FOREIGN KEY (`enrollees_id`)
     REFERENCES `admission_committee`.`enrollees` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_enrollees_has_subjects_subjects1`
     FOREIGN KEY (`subjects_id`)
     REFERENCES `admission_committee`.`subjects` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = 'Один абитуриент сдаёт экзамен по нескольким предметам\nПо одному предмету экзамен сдают несколько абитуриентов\nКаждая пара \'абитуриент-предмет\' характеризуется ценкой по предмету для конкретного абитуриента';
 
-USE `admission_committee` ;
 
 -- -----------------------------------------------------
--- Placeholder table for view `admission_committee`.`admission_list`
+-- Table `admission_committee`.`admission_list`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `admission_committee`.`admission_list` (`id` INT, `'Имя'` INT, `'Фамилия'` INT, `'Факультет'` INT, `'Общий балл'` INT, `'Зачислен'` INT);
+DROP TABLE IF EXISTS `admission_committee`.`admission_list` ;
 
--- -----------------------------------------------------
--- View `admission_committee`.`admission_list`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `admission_committee`.`admission_list`;
-DROP VIEW IF EXISTS `admission_committee`.`admission_list` ;
-USE `admission_committee`;
-CREATE  OR REPLACE VIEW `admission_list` AS
-	SELECT `enrollees`.`id`, 
-		   `users`.`first_name` AS 'Имя',
-           `users`.`last_name` AS 'Фамилия', 
-           CASE 
-				WHEN users.lang = 'ru' THEN faculties.name_ru 
-									   ELSE faculties.name_en 
-		   END AS 'Факультет' ,
-           (`score` + `enrollees`.`school_certificate`) AS 'Общий балл',
-           `enrollees`.`is_passed` AS 'Зачислен'
-	FROM `enrollees`
-		JOIN `users`     ON `users`.`id` = `enrollees`.`users_id`
-		JOIN `faculties` ON `enrollees`.`faculties_id` = `faculties`.`id`
-		JOIN (
-				SELECT `enrollees_has_subjects`.`enrollees_id` ,sum(`score`) as `score`
-				FROM `enrollees_has_subjects`
-				GROUP BY `enrollees_has_subjects`.`enrollees_id`
-			 ) AS `total_score` ON `enrollees`.`id` = `total_score`.`enrollees_id`;
+CREATE TABLE IF NOT EXISTS `admission_committee`.`admission_list` (
+  `enrollees_id` INT UNSIGNED NOT NULL,
+  `faculties_id` TINYINT UNSIGNED NOT NULL,
+  `is_passed` BIT(1) NOT NULL DEFAULT 0,
+  `available` BIT(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`enrollees_id`, `faculties_id`),
+  INDEX `fk_enrollees_has_faculties_faculties1_idx` (`faculties_id` ASC),
+  INDEX `fk_enrollees_has_faculties_enrollees1_idx` (`enrollees_id` ASC),
+  CONSTRAINT `fk_enrollees_has_faculties_enrollees1`
+    FOREIGN KEY (`enrollees_id`)
+    REFERENCES `admission_committee`.`enrollees` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_enrollees_has_faculties_faculties1`
+    FOREIGN KEY (`faculties_id`)
+    REFERENCES `admission_committee`.`faculties` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `admission_committee`.`faculties`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `admission_committee`;
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (201, 'Факультет компьютерного проектирования', 'Faculty of computer-aided design', 113, 20);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (202, 'Факультет информационных технологий и управления', 'Faculty of information technologies and control', 170, 15);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (203, 'Факультет радиотехники и электроники', 'Faculty of radioengineering and electronics', 149, 17);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (204, 'Факультет компьютерных систем и сетей', 'Faculty of computer systems and networks', 250, 10);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (205, 'Факультет инфокоммуникаций', 'Faculty of infocommunications', 97, 10);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (206, 'Инженерно-экономический факультет', 'Faculty of engineering and economics', 180, 30);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (207, 'Факультет инновационного непрерывного образования', 'Faculty of innovative lifelong learning', 50, 20);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (208, 'Военный факультет', 'Military faculty', 123, 50);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `admission_committee`.`subjects`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `admission_committee`;
+INSERT INTO `admission_committee`.`subjects` (`id`, `name_ru`, `name_en`) VALUES (101, 'Русский язык', 'Russian language');
+INSERT INTO `admission_committee`.`subjects` (`id`, `name_ru`, `name_en`) VALUES (102, 'Физика', 'Physics');
+INSERT INTO `admission_committee`.`subjects` (`id`, `name_ru`, `name_en`) VALUES (103, 'Математика', 'Math');
+INSERT INTO `admission_committee`.`subjects` (`id`, `name_ru`, `name_en`) VALUES (104, 'Химия', 'Chemistry');
+INSERT INTO `admission_committee`.`subjects` (`id`, `name_ru`, `name_en`) VALUES (105, 'Биология', 'Biology');
+INSERT INTO `admission_committee`.`subjects` (`id`, `name_ru`, `name_en`) VALUES (106, 'Иностранный язык', 'Foreign language');
+INSERT INTO `admission_committee`.`subjects` (`id`, `name_ru`, `name_en`) VALUES (107, 'Всемирная история', 'The world history');
+INSERT INTO `admission_committee`.`subjects` (`id`, `name_ru`, `name_en`) VALUES (108, 'Обществоведение', 'Social studies');
+INSERT INTO `admission_committee`.`subjects` (`id`, `name_ru`, `name_en`) VALUES (109, 'География', 'Geography');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `admission_committee`.`faculties_has_subjects`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `admission_committee`;
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (201, 101);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (201, 102);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (201, 103);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (202, 101);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (202, 106);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (202, 108);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (203, 101);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (203, 102);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (203, 104);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (204, 101);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (204, 102);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (204, 103);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (205, 101);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (205, 106);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (205, 107);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (206, 106);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (206, 108);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (206, 109);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (207, 105);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (207, 106);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (207, 107);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (208, 101);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (208, 104);
+INSERT INTO `admission_committee`.`faculties_has_subjects` (`faculties_id`, `subjects_id`) VALUES (208, 109);
+
+COMMIT;
+

@@ -290,11 +290,14 @@ public class UserDAO extends AbstractDAO<Integer, User> {
                 "UPDATE `users` " +
                 "JOIN   `enrollees` ON `users`.`id` = `enrollees`.`users_id` " +
                 "JOIN   `enrollees_has_subjects` ON `enrollees`.`id` = `enrollees_has_subjects`.`enrollees_id` " +
+                "JOIN   `admission_list` ON `enrollees`.`id` = `admission_list`.`enrollees_id`" +
                 "SET    `users`.`available` = 0, " +
                         "`enrollees`.`available` = 0, " +
-                        "`enrollees_has_subjects`.`available` = 0 " +
+                        "`enrollees_has_subjects`.`available` = 0, " +
+                        "`admission_list`.`available` = 0 " +
                 "WHERE  `users`.`email` = ?" +
-                        "AND `users`.`password` = ?";
+                        "AND `users`.`password` = ?" +
+                        "AND `users`.`available` = 1";
         SQL_DELETE_USER_BY_ID =
                 "DELETE FROM `users` " +
                 "WHERE `users`.`id` = ?";

@@ -26,53 +26,53 @@ public class FacultyDAOTest {
 
     @Test
     public void findAllTest() {
-//        transactionHelper.startTransaction(facultyDao);
-//        for (Faculty faculty : facultyDao.findAll()) {
-//            LOG.info(faculty);
-//        }
-//        transactionHelper.endTransaction();
+        transactionHelper.startTransaction(facultyDao);
+        for (Faculty faculty : facultyDao.findAll()) {
+            LOG.info(faculty);
+        }
+        transactionHelper.endTransaction();
     }
 
     @Test
     public void findEntityByIdTest() {
-//        transactionHelper.startTransaction(facultyDao);
-//        LOG.info(facultyDao.findEntityById(201));
-//        transactionHelper.endTransaction();
+        transactionHelper.startTransaction(facultyDao);
+        LOG.info(facultyDao.findEntityById(201));
+        transactionHelper.endTransaction();
     }
 
     @Test
     public void findFacultyBySubjectIdTest() {
-//        transactionHelper.startTransaction(facultyDao);
-//        for (Faculty faculty : facultyDao.findFacultiesBySubjectId(101)) {
-//            LOG.info(faculty);
-//        }
-//        transactionHelper.endTransaction();
+        transactionHelper.startTransaction(facultyDao);
+        for (Faculty faculty : facultyDao.findFacultiesBySubjectId(101)) {
+            LOG.info(faculty);
+        }
+        transactionHelper.endTransaction();
     }
 
     @Test
     public void createTest() {
-//        Faculty faculty = new Faculty();
-//        faculty.setId(201);
-//        faculty.setNameRu("Тестовый факультет");
-//        faculty.setNameEn("Test faculty");
-//        faculty.setSeatsTotal(200);
-//        faculty.setSeatsBudget(50);
-//        transactionHelper.startTransaction(facultyDao);
-//        boolean result = facultyDao.create(faculty);
-//        transactionHelper.endTransaction();
-//        Assert.assertFalse(result);
+        Faculty faculty = new Faculty();
+        faculty.setId(201);
+        faculty.setNameRu("Тестовый факультет");
+        faculty.setNameEn("Test faculty");
+        faculty.setSeatsTotal(200);
+        faculty.setSeatsBudget(50);
+        transactionHelper.startTransaction(facultyDao);
+        boolean result = facultyDao.create(faculty);
+        transactionHelper.endTransaction();
+        Assert.assertFalse(result);
     }
 
     @BeforeClass
     public void setUp() {
-//        facultyDao = new FacultyDAO();
-//        transactionHelper = new TransactionHelper();
+        facultyDao = new FacultyDAO();
+        transactionHelper = new TransactionHelper();
     }
 
     @AfterClass
     public void tearDown() {
-//        facultyDao = null;
-//        transactionHelper = null;
-//        ConnectionPool.POOL.closeConnections();
+        facultyDao = null;
+        transactionHelper = null;
+        ConnectionPool.POOL.closeConnections();
     }
 }

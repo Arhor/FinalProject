@@ -7,6 +7,7 @@ package by.epam.admission.dao;
 import by.epam.admission.exception.DAOException;
 import by.epam.admission.exception.NotSupportedOperationException;
 import by.epam.admission.model.Enrollee;
+import by.epam.admission.model.Subject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,15 +31,16 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
     private static final String SQL_DELETE_ENROLLEE_BY_ID;
     private static final String SQL_DELETE_ENROLLEE;
     private static final String SQL_INSERT_ENROLLEE;
+    private static final String SQL_UPDATE_ENROLLEE;
+    private static final String SQL_INSERT_TO_ADMISSION_LIST;
+    private static final String SQL_SELECT_ENROLLEE_TOTAL_SCORE;
 
     // column labels
     private static final String ID = "id";
     private static final String COUNTRY = "country";
     private static final String CITY = "city";
     private static final String SCHOOL_CERTIFICATE = "school_certificate";
-    private static final String IS_PASSED = "is_passed";
     private static final String USER_ID = "users_id";
-    private static final String FACULTY_ID = "faculties_id";
     private static final String AVAILABLE = "available";
 
     @Override
@@ -71,27 +73,44 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
         return enrollee;
     }
 
-    public List<Enrollee> findEnrolleesByCountry(String country) {
+    public List<Enrollee> findEnrolleesByCountry(String country)
+            throws DAOException {
         ArrayList<Enrollee> enrollees = new ArrayList<>();
         findByAddress(COUNTRY, enrollees, country);
         return enrollees;
     }
 
-    public List<Enrollee> findEnrolleesByCity(String city) {
+    public List<Enrollee> findEnrolleesByCity(String city)
+            throws DAOException {
         ArrayList<Enrollee> enrollees = new ArrayList<>();
         findByAddress(CITY, enrollees, city);
         return enrollees;
     }
 
-    private void findByAddress(String place, ArrayList<Enrollee> enrollees, String value) {
+    public int findEnrolleeTotalScore(Enrollee enrollee) throws DAOException {
+        int result = -1;
         try (PreparedStatement st = connection.prepareStatement(
-                String.format(SQL_SELECT_ENROLLEES, place))) {
-            st.setString(1, value);
+                SQL_SELECT_ENROLLEE_TOTAL_SCORE)) {
+            st.setInt(1, enrollee.getId());
             ResultSet rs = st.executeQuery();
-            processResult(enrollees, rs);
+            if (rs.next()) {
+                result = rs.getInt(1);
+            }
         } catch (SQLException e) {
             LOG.error("Selection error", e);
+            throw new DAOException("Selection error", e);
         }
+        return result;
+    }
+
+    // TODO: implemet
+    public int findSubjectScoreByEnrolle(Enrollee enrollee, int subjectId) {
+        return -1;
+    }
+
+    // TODO: find subject by enrollee
+    public List<Subject> findSubjectsByEnrollee() {
+        return null;
     }
 
     @Override
@@ -114,16 +133,16 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_ENROLLEE)) {
             st.setInt(1, enrollee.getId());
-            st.setString(2, enrollee.getCountry());
-            st.setString(3, enrollee.getCity());
-            st.setInt(4, enrollee.getSchoolCertificate());
-            st.setInt(5, enrollee.getUserId());
-            st.setInt(6, enrollee.getFacultyId());
             flag = st.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Deletion error", e);
         }
         return flag != 0;
+    }
+
+    // TODO: implement faculty registration delete
+    public boolean deleteRegistration(Enrollee enrollee) {
+        return false;
     }
 
     @Override
@@ -137,7 +156,6 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
                 st.setString(2, enrollee.getCity());
                 st.setInt(3, enrollee.getSchoolCertificate());
                 st.setInt(4, enrollee.getUserId());
-                st.setInt(5,enrollee.getFacultyId());
                 flag = st.executeUpdate();
                 ResultSet rs = st.getGeneratedKeys();
                 if (rs.next()) {
@@ -152,9 +170,33 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
         return result;
     }
 
+    public boolean registerToFacultyById(Enrollee enrollee, int facultyId)
+            throws DAOException {
+        int flag = 0;
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_INSERT_TO_ADMISSION_LIST)) {
+            st.setInt(1, enrollee.getId());
+            st.setInt(2, facultyId);
+            flag = st.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Updating error", e);
+        }
+        return flag != 0;
+    }
+
     @Override
-    public Enrollee update(Enrollee enrollee) {
-        return null;
+    public Enrollee update(Enrollee enrollee) throws DAOException {
+        int flag = 0;
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_UPDATE_ENROLLEE)) {
+            st.setString(1, enrollee.getCountry());
+            st.setString(2, enrollee.getCity());
+            st.setInt(3, enrollee.getSchoolCertificate());
+            flag = st.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Updating error", e);
+        }
+        return flag != 0 ? enrollee : null;
     }
 
     private void processResult(ArrayList<Enrollee> enrollees, ResultSet rs)
@@ -164,30 +206,28 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
         }
     }
 
-    private boolean executeDMLQuery(Enrollee enrollee, String query)
-            throws SQLException {
-        int flag = 0;
-        try (PreparedStatement st = connection.prepareStatement(query)) {
-            st.setString(1, enrollee.getCountry());
-            st.setString(2, enrollee.getCity());
-            st.setInt(3, enrollee.getSchoolCertificate());
-            st.setInt(4, enrollee.getUserId());
-            st.setInt(5,enrollee.getFacultyId());
-            flag = st.executeUpdate();
-        }
-        return flag != 0;
-    }
-
     private Enrollee setEnrolle(ResultSet resultSet) throws SQLException {
         Enrollee enrollee = new Enrollee();
         enrollee.setId(resultSet.getInt(ID));
         enrollee.setCountry(resultSet.getString(COUNTRY));
         enrollee.setCity(resultSet.getString(CITY));
         enrollee.setSchoolCertificate(resultSet.getByte(SCHOOL_CERTIFICATE));
-        enrollee.setPassed(resultSet.getByte(IS_PASSED) == 1);
         enrollee.setUserId(resultSet.getInt(USER_ID));
-        enrollee.setFacultyId(resultSet.getInt(FACULTY_ID));
         return enrollee;
+    }
+
+    private void findByAddress(String place, ArrayList<Enrollee> enrollees,
+                               String value)
+            throws DAOException {
+        try (PreparedStatement st = connection.prepareStatement(
+                String.format(SQL_SELECT_ENROLLEES, place))) {
+            st.setString(1, value);
+            ResultSet rs = st.executeQuery();
+            processResult(enrollees, rs);
+        } catch (SQLException e) {
+            LOG.error("Selection error", e);
+            throw new DAOException("Selection error", e);
+        }
     }
 
     static {
@@ -196,9 +236,7 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
                         "`country`, " +
                         "`city`, " +
                         "`school_certificate`, " +
-                        "`is_passed`, " +
-                        "`users_id`, " +
-                        "`faculties_id` " +
+                        "`users_id` " +
                 "FROM `enrollees` " +
                 "WHERE %s = ?";
         SQL_DELETE_ENROLLEE_BY_ID =
@@ -206,17 +244,42 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
                 "WHERE `enrollees`.`id` = ?";
         SQL_DELETE_ENROLLEE =
                 "UPDATE `enrollees` " +
-                "SET `available` = 1 " +
+                "JOIN   `enrollees_has_subjects` " +
+                        "ON `enrollees`.`id` = `enrollees_has_subjects`.`enrollees_id` " +
+                "JOIN   `admission_list` " +
+                        "ON `enrollees`.`id` = `admission_list`.`enrollees_id`" +
+                "SET    `enrollees`.`available` = 0, " +
+                        "`enrollees_has_subjects`.`available` = 0, " +
+                        "`admission_list`.`available` = 0 " +
                 "WHERE  `id` = ? " +
-                        "AND `country` = ? " +
-                        "AND `city` = ? " +
-                        "AND `school_certificate` = ? " +
-                        "AND `users_id` = ? " +
-                        "AND `faculties_id` = ?";
+                "AND `enrollees`.`available` = 1";
         SQL_INSERT_ENROLLEE =
                 "INSERT INTO `enrollees` " +
-                "(`country`,`city`,`school_certificate`,`users_id`,`faculties_id`,`available`) " +
-                "VALUES (?,?,?,?,?,1)"; // 1 - means account is available
+                        "(`country`," +
+                        "`city`," +
+                        "`school_certificate`," +
+                        "`users_id`," +
+                        "`faculties_id`) " +
+                "VALUES (?,?,?,?,?)";
+        SQL_UPDATE_ENROLLEE =
+                "UPDATE `enrollees` " +
+                "SET    `country` = ?," +
+                        "`city` = ?, " +
+                        "`school_certificate` = ? " +
+                "WHERE  `email` = ? " +
+                        "AND `password` = ?";
+        SQL_INSERT_TO_ADMISSION_LIST =
+                "INSERT INTO `admission_list` " +
+                "(`enrollees_id`,`faculties_id`) " +
+                "VALUES (?,?)";
+        SQL_SELECT_ENROLLEE_TOTAL_SCORE =
+                "SELECT (SUM(enrollees_has_subjects.score) " +
+                        "+ enrollees.school_certificate) AS `total_score` " +
+                "FROM enrollees_has_subjects " +
+                "JOIN enrollees " +
+                        "ON enrollees.id = enrollees_has_subjects.enrollees_id " +
+                "WHERE enrollees.id = ? " +
+                "GROUP BY enrollees_has_subjects.enrollees_id";
     }
 
 }
