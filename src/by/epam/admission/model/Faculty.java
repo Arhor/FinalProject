@@ -14,18 +14,18 @@ public class Faculty extends Entity {
     
     private String nameRu;
     private String nameEn;
-    private int seatsTotal;
+    private int seatsPaid;
     private int seatsBudget;
 
     public Faculty() {
         super();
     }
 
-    public Faculty(int id, String nameRu, String nameEn, int seatsTotal, int seatsBudget) {
+    public Faculty(int id, String nameRu, String nameEn, int seatsPaid, int seatsBudget) {
         super(id);
         this.nameRu = nameRu;
         this.nameEn = nameEn;
-        this.seatsTotal = seatsTotal;
+        this.seatsPaid = seatsPaid;
         this.seatsBudget = seatsBudget;
     }
 
@@ -45,12 +45,12 @@ public class Faculty extends Entity {
         this.nameEn = nameEn;
     }
 
-    public int getSeatsTotal() {
-        return seatsTotal;
+    public int getSeatsPaid() {
+        return seatsPaid;
     }
 
-    public void setSeatsTotal(int seatsTotal) {
-        this.seatsTotal = seatsTotal;
+    public void setSeatsPaid(int seatsPaid) {
+        this.seatsPaid = seatsPaid;
     }
 
     public int getSeatsBudget() {
@@ -63,9 +63,11 @@ public class Faculty extends Entity {
 
     @Override
     public boolean equals(Object obj) {
-        if (!super.equals(obj)) { return false; }
+        if (obj == this) { return true; }
+        if (obj == null) { return false; }
+        if (obj.getClass() != getClass()) { return false; }
         Faculty faculty = (Faculty) obj;
-        if (seatsTotal != faculty.seatsTotal) { return false; }
+        if (seatsPaid != faculty.seatsPaid) { return false; }
         if (seatsBudget != faculty.seatsBudget) { return false; }
         if (nameRu == null) {
             if (faculty.nameRu != null) {
@@ -89,7 +91,7 @@ public class Faculty extends Entity {
         int hashCode = super.hashCode();
         hashCode += nameRu == null ? 0 : nameRu.hashCode();
         hashCode += nameEn == null ? 0 : nameEn.hashCode();
-        hashCode += 31 * seatsTotal;
+        hashCode += 31 * seatsPaid;
         hashCode += 31 * seatsBudget;
         return hashCode;
     }
@@ -100,7 +102,7 @@ public class Faculty extends Entity {
                 + "[ID=" + getId()
                 + ", name_ru='" + nameRu
                 + "', name_en='" + nameEn
-                + "', seats_total=" + seatsTotal
+                + "', seats_paid=" + seatsPaid
                 + ", seats_budget=" + seatsBudget + "]";
     }
 

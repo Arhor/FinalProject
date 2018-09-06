@@ -36,7 +36,7 @@ public class FacultyDAO extends AbstractDAO<Integer, Faculty> {
     private static final String ID = "id";
     private static final String NAME_RU = "name_ru";
     private static final String NAME_EN = "name_en";
-    private static final String SEATS_TOTAL = "seats_total";
+    private static final String SEATS_PAID = "seats_paid";
     private static final String SEATS_BUDGET = "seats_budget";
 
     @Override
@@ -62,7 +62,7 @@ public class FacultyDAO extends AbstractDAO<Integer, Faculty> {
                 faculty.setId(id);
                 faculty.setNameRu(rs.getString(NAME_RU));
                 faculty.setNameEn(rs.getString(NAME_EN));
-                faculty.setSeatsTotal(rs.getInt(SEATS_TOTAL));
+                faculty.setSeatsPaid(rs.getInt(SEATS_PAID));
                 faculty.setSeatsBudget(rs.getInt(SEATS_BUDGET));
             }
         } catch (SQLException e) {
@@ -119,7 +119,7 @@ public class FacultyDAO extends AbstractDAO<Integer, Faculty> {
             faculty.setId(rs.getInt(ID));
             faculty.setNameRu(rs.getString(NAME_RU));
             faculty.setNameEn(rs.getString(NAME_EN));
-            faculty.setSeatsTotal(rs.getInt(SEATS_TOTAL));
+            faculty.setSeatsPaid(rs.getInt(SEATS_PAID));
             faculty.setSeatsBudget(rs.getInt(SEATS_BUDGET));
             faculties.add(faculty);
         }
@@ -130,7 +130,7 @@ public class FacultyDAO extends AbstractDAO<Integer, Faculty> {
         try (PreparedStatement st = connection.prepareStatement(query)) {
             st.setString(1, faculty.getNameRu());
             st.setString(2, faculty.getNameEn());
-            st.setInt(3, faculty.getSeatsTotal());
+            st.setInt(3, faculty.getSeatsPaid());
             st.setInt(4, faculty.getSeatsBudget());
             st.setInt(5, faculty.getId());
             flag = st.executeUpdate();
@@ -145,26 +145,26 @@ public class FacultyDAO extends AbstractDAO<Integer, Faculty> {
                 "SELECT  `id`, " +
                         "`name_ru`, " +
                         "`name_en`, " +
-                        "`seats_total`, " +
+                        "`seats_paid`, " +
                         "`seats_budget` " +
                 "FROM `faculties`";
         SQL_SELECT_FACULTY_BY_ID =
                 "SELECT  `id`, " +
                         "`name_ru`, " +
                         "`name_en`, " +
-                        "`seats_total`, " +
+                        "`seats_paid`, " +
                         "`seats_budget` " +
                 "FROM `faculties` " +
                 "WHERE `id` = ?";
         SQL_INSERT_FACULTY =
                 "INSERT INTO `faculties` " +
-                "(`name_ru`,`name_en`,`seats_total`,`seats_budget`,`id`) " +
+                "(`name_ru`,`name_en`,`seats_paid`,`seats_budget`,`id`) " +
                 "VALUES (?,?,?,?,?)";
         SQL_DELETE_FACULTY =
                 "DELETE FROM `faculties` " +
                 "WHERE  `name_ru` = ? " +
                         "AND `name_en` = ? " +
-                        "AND `seats_total` = ? " +
+                        "AND `seats_paid` = ? " +
                         "AND `seats_budget` = ? " +
                         "AND `id` = ?";
         SQL_DELETE_FACULTY_BY_ID =
@@ -174,14 +174,14 @@ public class FacultyDAO extends AbstractDAO<Integer, Faculty> {
                 "UPDATE  `faculties` " +
                 "SET     `name_ru` = ?, " +
                         "`name_en` = ?, " +
-                        "`seats_total` = ?, " +
+                        "`seats_paid` = ?, " +
                         "`seats_budget` = ? " +
                 "WHERE `id` = ?";
         SQL_SELECT_FACULTIES_BY_SUBJECT_ID =
                 "SELECT  `faculties`.`id`, " +
                         "`faculties`.`name_ru`, " +
                         "`faculties`.`name_en`, " +
-                        "`faculties`.`seats_total`, " +
+                        "`faculties`.`seats_paid`, " +
                         "`faculties`.`seats_budget` " +
                 "FROM `faculties` " +
                 "JOIN `faculties_has_subjects` " +

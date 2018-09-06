@@ -55,7 +55,7 @@ public class FacultyDAOTest {
         faculty.setId(201);
         faculty.setNameRu("Тестовый факультет");
         faculty.setNameEn("Test faculty");
-        faculty.setSeatsTotal(200);
+        faculty.setSeatsPaid(200);
         faculty.setSeatsBudget(50);
         transactionHelper.startTransaction(facultyDao);
         boolean result = facultyDao.create(faculty);

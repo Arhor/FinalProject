@@ -76,7 +76,9 @@ public class User extends Entity {
 
     @Override
     public boolean equals(Object obj) {
-        if (!super.equals(obj)) { return false; }
+        if (obj == this) { return true; }
+        if (obj == null) { return false; }
+        if (obj.getClass() != getClass()) { return false; }
         User user = (User) obj;
         if (role != user.role) { return false; }
         if (lang != user.lang) { return false; }

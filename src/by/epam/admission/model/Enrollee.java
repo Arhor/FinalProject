@@ -41,7 +41,9 @@ public class Enrollee extends Entity{
 
     @Override
     public boolean equals(Object obj) {
-        if (!super.equals(obj)) { return false; }
+        if (obj == this) { return true; }
+        if (obj == null) { return false; }
+        if (obj.getClass() != getClass()) { return false; }
         Enrollee enrollee = (Enrollee) obj;
         if (schoolCertificate != enrollee.schoolCertificate) { return false; }
         if (userId != enrollee.getUserId()) { return false; }
