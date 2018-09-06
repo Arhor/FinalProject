@@ -268,8 +268,8 @@ public class UserDAO extends AbstractDAO<Integer, User> {
                         "AND `available` = 1";
         SQL_INSERT_USER =
                 "INSERT INTO `users` " +
-                "(`email`,`password`,`first_name`,`last_name`,`role`,`lang`, `available`) " +
-                "VALUES (?,?,?,?,?,?,1)"; // 1 - means account is available
+                "(`email`,`password`,`first_name`,`last_name`,`role`,`lang`) " +
+                "VALUES (?,?,?,?,?,?)";
         SQL_UPDATE_USER =
                 "UPDATE  `users` " +
                 "SET     `password` = ?," +
@@ -288,9 +288,9 @@ public class UserDAO extends AbstractDAO<Integer, User> {
                 "WHERE `email` = ?";
         SQL_DELETE_USER_BY_EMAIL_AND_PASSWORD =
                 "UPDATE `users` " +
-                "JOIN   `enrollees` ON `users`.`id` = `enrollees`.`users_id` " +
-                "JOIN   `enrollees_has_subjects` ON `enrollees`.`id` = `enrollees_has_subjects`.`enrollees_id` " +
-                "JOIN   `admission_list` ON `enrollees`.`id` = `admission_list`.`enrollees_id`" +
+                "LEFT JOIN   `enrollees` ON `users`.`id` = `enrollees`.`users_id` " +
+                "LEFT JOIN   `enrollees_has_subjects` ON `enrollees`.`id` = `enrollees_has_subjects`.`enrollees_id` " +
+                "LEFT JOIN   `admission_list` ON `enrollees`.`id` = `admission_list`.`enrollees_id`" +
                 "SET    `users`.`available` = 0, " +
                         "`enrollees`.`available` = 0, " +
                         "`enrollees_has_subjects`.`available` = 0, " +

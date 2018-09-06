@@ -61,8 +61,8 @@ public class UserDAOTest {
     @Test
     public void testDeleteByEmailAndPassword() {
         User user = new User();
-        user.setEmail("example.29@gmail.com");
-        String password = "example.29@gmail.com";
+        user.setEmail("test@gmail.com");
+        String password = "test@gmail.com";
         TransactionHelper t = new TransactionHelper();
         UserDAO uDAO = new UserDAO();
         t.startTransaction(uDAO);
@@ -77,7 +77,7 @@ public class UserDAOTest {
     }
 
     @Test
-    public void testCreate() {
+    public void testMultiCreate() {
         for (int i = 50; i < 60; i++) {
             final int number = i;
             new Thread() {
@@ -110,6 +110,31 @@ public class UserDAOTest {
             LOG.error("Interrupted exception", e);
             Thread.currentThread().interrupt();
         }
+    }
+
+    @Test
+    public void testCreate() {
+        TransactionHelper t = new TransactionHelper();
+        UserDAO uDAO = new UserDAO();
+        t.startTransaction(uDAO);
+        User user = new User();
+        user.setEmail("test@gmail.com");
+        user.setFirstName("test");
+        user.setLastName("test");
+        user.setRole(User.Role.CLIENT);
+        user.setLang(User.Lang.RU);
+        String password = "test@gmail.com";
+        try {
+            boolean flag = uDAO.create(user, password);
+            t.commit();
+            if (flag) {
+                LOG.info("created user: " + user);
+            }
+        } catch (DAOException e) {
+            LOG.error("DAO exception", e);
+            t.rollback();
+        }
+        t.endTransaction();
     }
 
     @Test

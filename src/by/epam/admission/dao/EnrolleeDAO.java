@@ -244,9 +244,9 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
                 "WHERE `enrollees`.`id` = ?";
         SQL_DELETE_ENROLLEE =
                 "UPDATE `enrollees` " +
-                "JOIN   `enrollees_has_subjects` " +
+                "LEFT JOIN   `enrollees_has_subjects` " +
                         "ON `enrollees`.`id` = `enrollees_has_subjects`.`enrollees_id` " +
-                "JOIN   `admission_list` " +
+                "LEFT JOIN   `admission_list` " +
                         "ON `enrollees`.`id` = `admission_list`.`enrollees_id`" +
                 "SET    `enrollees`.`available` = 0, " +
                         "`enrollees_has_subjects`.`available` = 0, " +
