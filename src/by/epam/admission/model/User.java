@@ -75,6 +75,47 @@ public class User extends Entity {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) { return false; }
+        User user = (User) obj;
+        if (role != user.role) { return false; }
+        if (lang != user.lang) { return false; }
+        if (firstName == null) {
+            if (user.firstName != null) {
+                return false;
+            }
+        } else if (!firstName.equals(user.firstName)) {
+            return false;
+        }
+        if (lastName == null) {
+            if (user.lastName != null) {
+                return false;
+            }
+        } else if (!lastName.equals(user.lastName)) {
+            return false;
+        }
+        if (email == null) {
+            if (user.email != null) {
+                return false;
+            }
+        } else if (!email.equals(user.email)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hashCode = super.hashCode();
+        hashCode += firstName == null ? 0 : firstName.hashCode();
+        hashCode += lastName == null ? 0 : lastName.hashCode();
+        hashCode += email == null ? 0 : email.hashCode();
+        hashCode += role == null ? 0 : role.hashCode();
+        hashCode += lang == null ? 0 : lang.hashCode();
+        return hashCode;
+    }
+
+    @Override
     public String toString() {
         return getClass().getSimpleName()
                 + "[ID=" + getId()

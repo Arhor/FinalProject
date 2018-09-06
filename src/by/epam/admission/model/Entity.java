@@ -24,4 +24,19 @@ public abstract class Entity implements Serializable, Cloneable {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) { return true; }
+        if (obj == null) { return false; }
+        if (obj.getClass() != getClass()) { return false; }
+        Entity entity = (Entity) obj;
+        if (id != entity.id) { return false; }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * id;
+    }
+
 }

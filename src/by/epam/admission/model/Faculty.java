@@ -62,6 +62,39 @@ public class Faculty extends Entity {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) { return false; }
+        Faculty faculty = (Faculty) obj;
+        if (seatsTotal != faculty.seatsTotal) { return false; }
+        if (seatsBudget != faculty.seatsBudget) { return false; }
+        if (nameRu == null) {
+            if (faculty.nameRu != null) {
+                return false;
+            }
+        } else if (!nameRu.equals(faculty.nameRu)) {
+            return false;
+        }
+        if (nameEn == null) {
+            if (faculty.nameEn != null) {
+                return false;
+            }
+        } else if (!nameEn.equals(faculty.nameEn)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hashCode = super.hashCode();
+        hashCode += nameRu == null ? 0 : nameRu.hashCode();
+        hashCode += nameEn == null ? 0 : nameEn.hashCode();
+        hashCode += 31 * seatsTotal;
+        hashCode += 31 * seatsBudget;
+        return hashCode;
+    }
+
+    @Override
     public String toString() {
         return getClass().getSimpleName()
                 + "[ID=" + getId()

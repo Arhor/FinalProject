@@ -40,6 +40,39 @@ public class Enrollee extends Entity{
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) { return false; }
+        Enrollee enrollee = (Enrollee) obj;
+        if (schoolCertificate != enrollee.schoolCertificate) { return false; }
+        if (userId != enrollee.getUserId()) { return false; }
+        if (country == null) {
+            if (enrollee.country != null) {
+                return false;
+            }
+        } else if (!country.equals(enrollee.country)) {
+            return false;
+        }
+        if (city == null) {
+            if (enrollee.city != null) {
+                return false;
+            }
+        } else if (!city.equals(enrollee.city)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hashCode = super.hashCode();
+        hashCode += country == null ? 0 : country.hashCode();
+        hashCode += city == null ? 0 : city.hashCode();
+        hashCode += 31 * schoolCertificate;
+        hashCode += 31 * userId;
+        return hashCode;
+    }
+
+    @Override
     public String toString() {
         return getClass().getSimpleName()
                 + " [ID=" + getId()

@@ -42,6 +42,35 @@ public class Subject extends Entity {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) { return false; }
+        Subject subject = (Subject) obj;
+        if (nameRu == null) {
+            if (subject.nameRu != null) {
+                return false;
+            }
+        } else if (!nameRu.equals(subject.nameRu)) {
+            return false;
+        }
+        if (nameEn == null) {
+            if (subject.nameEn != null) {
+                return false;
+            }
+        } else if (!nameEn.equals(subject.nameEn)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hashCode = super.hashCode();
+        hashCode += nameRu == null ? 0 : nameRu.hashCode();
+        hashCode += nameEn == null ? 0 : nameEn.hashCode();
+        return hashCode;
+    }
+
+    @Override
     public String toString() {
         return getClass().getSimpleName()
                 + "ID=" + getId()
