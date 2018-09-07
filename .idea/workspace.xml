@@ -7,21 +7,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43dc64a4-49e4-4d08-bbd3-db3f7a64b274" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/dbunit_2_5_4__2_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/slf4j_api_1_7_25.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/dbunit-2.5.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/slf4j-api-1.7.25.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/slf4j-simple-1.7.25.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/all-tables-dataset.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/by/epam/admission/dao/TransactionHelperDBUnit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/by/epam/admission/pool/ConnectionPoolDBUnit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/dao/AbstractDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/dao/AbstractDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/dao/Coder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/util/EncryptAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/dao/EnrolleeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/dao/impl/EnrolleeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/dao/FacultyDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/dao/impl/FacultyDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/dao/SubjectDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/dao/impl/SubjectDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/dao/impl/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/model/Enrollee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/model/Enrollee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/pool/ConnectionPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/pool/ConnectionPool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/pool/PropertiesHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/pool/PropertiesHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/by/epam/admission/dao/CoderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/by/epam/admission/dao/EncryptActionTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/by/epam/admission/dao/EnrolleeDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/by/epam/admission/dao/EnrolleeDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/by/epam/admission/dao/FacultyDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/by/epam/admission/dao/FacultyDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/by/epam/admission/dao/SubjectDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/by/epam/admission/dao/SubjectDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/by/epam/admission/dao/UserDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/by/epam/admission/dao/UserDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/error.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/error.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/by/epam/admission/dao/EncryptActionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/by/epam/admission/util/EncryptActionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/by/epam/admission/dao/EnrolleeDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/by/epam/admission/dao/impl/EnrolleeDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/by/epam/admission/dao/FacultyDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/by/epam/admission/dao/impl/FacultyDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/by/epam/admission/dao/SubjectDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/by/epam/admission/dao/impl/SubjectDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/by/epam/admission/dao/UserDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/by/epam/admission/dao/impl/UserDAOTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -44,30 +45,34 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="52" />
+          <entry key="class" value="4" />
+          <entry key="java" value="65" />
           <entry key="log" value="4" />
           <entry key="sql" value="2" />
-          <entry key="xml" value="1" />
+          <entry key="xml" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="52" />
+          <entry key="CLASS" value="4" />
+          <entry key="JAVA" value="65" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="SQL" value="2" />
-          <entry key="XML" value="1" />
+          <entry key="XML" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3795" />
+          <entry key="java" value="4906" />
           <entry key="sql" value="28" />
+          <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3795" />
+          <entry key="JAVA" value="4906" />
           <entry key="SQL" value="28" />
+          <entry key="XML" value="1" />
         </counts>
       </usages-collector>
     </session>
@@ -115,57 +120,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/dao/impl/EnrolleeDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1361">
-              <caret line="135" column="7" lean-forward="true" selection-start-line="135" selection-start-column="7" selection-end-line="135" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="59" column="42" selection-start-line="59" selection-start-column="42" selection-end-line="59" selection-end-column="42" />
-              <folding>
-                <element signature="e#1371#1372#0" expanded="true" />
-                <element signature="e#1418#1419#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/pool/ConnectionPool.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="43" column="59" lean-forward="true" selection-start-line="43" selection-start-column="59" selection-end-line="43" selection-end-column="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/pool/PropertiesHandler.java">
+        <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/impl/EnrolleeDAOTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/model/Enrollee.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
-              <folding>
-                <element signature="e#870#871#0" expanded="true" />
-                <element signature="e#902#903#0" expanded="true" />
-                <element signature="e#953#954#0" expanded="true" />
-                <element signature="e#995#996#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="170">
+              <caret line="88" column="61" selection-start-line="88" selection-start-column="61" selection-end-line="88" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -185,6 +144,7 @@
       <find>DML</find>
       <find>seat</find>
       <find>sea</find>
+      <find>ConnectionPool</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -197,7 +157,6 @@
         <option value="$PROJECT_DIR$/web/css/style.css" />
         <option value="$PROJECT_DIR$/test/by/epam/admission/dao/CoderTest.java" />
         <option value="$PROJECT_DIR$/test/by/epam/admission/dao/SubjectDAOTest.java" />
-        <option value="$PROJECT_DIR$/test/by/epam/admission/dao/EnrolleeDAOTest.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/model/Entity.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/model/comparsion/IdComparator.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/model/comparsion/UserNameComparator.java" />
@@ -225,8 +184,19 @@
         <option value="$PROJECT_DIR$/test/by/epam/admission/dao/FacultyDAOTest.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/pool/PropertiesHandler.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/model/Enrollee.java" />
-        <option value="$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolTest.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/pool/ConnectionPool.java" />
+        <option value="$PROJECT_DIR$/test/by/epam/admission/pool/DBusintTest.java" />
+        <option value="$PROJECT_DIR$/all-tables-dataset.xml" />
+        <option value="$PROJECT_DIR$/test/by/epam/admission/pool/DBunitTest.java" />
+        <option value="$PROJECT_DIR$/test/by/epam/admission/pool/DaoTester.java" />
+        <option value="$PROJECT_DIR$/test/by/epam/admission/dao/EncryptActionTest.java" />
+        <option value="$PROJECT_DIR$/test/by/epam/admission/dao/DaoTester.java" />
+        <option value="$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolDBUnit.java" />
+        <option value="$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolTest.java" />
+        <option value="$PROJECT_DIR$/src/by/epam/admission/dao/TransactionHelperDBUnit.java" />
+        <option value="$PROJECT_DIR$/src/by/epam/admission/pool/ConnectionPoolDBUnit.java" />
+        <option value="$PROJECT_DIR$/test/by/epam/admission/dao/EnrolleeDAOTest.java" />
+        <option value="$PROJECT_DIR$/test/by/epam/admission/dao/impl/EnrolleeDAOTest.java" />
       </list>
     </option>
   </component>
@@ -244,25 +214,25 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="9" />
-    <option name="y" value="25" />
-    <option name="width" value="1338" />
-    <option name="height" value="743" />
+    <option name="width" value="960" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
@@ -297,8 +267,7 @@
               <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="admission" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
+              <item name="exception" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
@@ -337,18 +306,35 @@
               <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="admission" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="admission" type="462c0819:PsiDirectoryNode" />
               <item name="pool" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="admission" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536340363278" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536361514581" />
     <property name="last_opened_file_path" value="$USER_HOME$/eclipse-workspace/Task_1" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -357,8 +343,12 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="by.epam.admission.util" />
       <recent name="by.epam.admission.dao.impl" />
+      <recent name="by.epam.admission.util" />
+      <recent name="by.epam.admission.dao" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="by.epam.admission.dao" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -373,8 +363,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.ConnectionPoolTest.serializationTest">
-    <configuration name="ConnectionPoolTest.serializationTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.EnrolleeDAOTest.testFindEntityById">
+    <configuration name="ConnectionPoolTest.mainTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="FinalProject" />
       <extension name="coverage">
         <pattern>
@@ -384,7 +374,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="by.epam.admission.pool" />
       <option name="MAIN_CLASS_NAME" value="by.epam.admission.pool.ConnectionPoolTest" />
-      <option name="METHOD_NAME" value="serializationTest" />
+      <option name="METHOD_NAME" value="mainTest" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -392,17 +382,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EnrolleeDAOTest.testDelete" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="EnrolleeDAOTest.testFindAll" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="FinalProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="by.epam.admission.dao.impl.*" />
+          <option name="PATTERN" value="by.epam.admission.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="by.epam.admission.dao" />
-      <option name="MAIN_CLASS_NAME" value="by.epam.admission.dao.EnrolleeDAOTest" />
-      <option name="METHOD_NAME" value="testDelete" />
+      <option name="MAIN_CLASS_NAME" value="by.epam.admission.dao.impl.EnrolleeDAOTest" />
+      <option name="METHOD_NAME" value="testFindAll" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -410,17 +400,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserDAOTest.testCreate" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="EnrolleeDAOTest.testFindEnrolleesByCity" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="FinalProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="by.epam.admission.dao.impl.*" />
+          <option name="PATTERN" value="by.epam.admission.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="by.epam.admission.dao" />
-      <option name="MAIN_CLASS_NAME" value="by.epam.admission.dao.UserDAOTest" />
-      <option name="METHOD_NAME" value="testCreate" />
+      <option name="MAIN_CLASS_NAME" value="by.epam.admission.dao.impl.EnrolleeDAOTest" />
+      <option name="METHOD_NAME" value="testFindEnrolleesByCity" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -428,17 +418,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserDAOTest.testDeleteByEmailAndPassword" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="EnrolleeDAOTest.testFindEnrolleesByCountry" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="FinalProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="by.epam.admission.dao.impl.*" />
+          <option name="PATTERN" value="by.epam.admission.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="by.epam.admission.dao" />
-      <option name="MAIN_CLASS_NAME" value="by.epam.admission.dao.UserDAOTest" />
-      <option name="METHOD_NAME" value="testDeleteByEmailAndPassword" />
+      <option name="MAIN_CLASS_NAME" value="by.epam.admission.dao.impl.EnrolleeDAOTest" />
+      <option name="METHOD_NAME" value="testFindEnrolleesByCountry" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -446,16 +436,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserDAOTest.testFindEntityById" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="EnrolleeDAOTest.testFindEntityById" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="FinalProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="by.epam.admission.dao.*" />
+          <option name="PATTERN" value="by.epam.admission.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="by.epam.admission.dao" />
-      <option name="MAIN_CLASS_NAME" value="by.epam.admission.dao.UserDAOTest" />
+      <option name="MAIN_CLASS_NAME" value="by.epam.admission.dao.impl.EnrolleeDAOTest" />
       <option name="METHOD_NAME" value="testFindEntityById" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
@@ -537,19 +527,19 @@
     </configuration>
     <list>
       <item itemvalue="Tomcat Server.Tomcat 8.5.33" />
-      <item itemvalue="TestNG.EnrolleeDAOTest.testDelete" />
-      <item itemvalue="TestNG.UserDAOTest.testCreate" />
-      <item itemvalue="TestNG.UserDAOTest.testDeleteByEmailAndPassword" />
-      <item itemvalue="TestNG.UserDAOTest.testFindEntityById" />
-      <item itemvalue="TestNG.ConnectionPoolTest.serializationTest" />
+      <item itemvalue="TestNG.ConnectionPoolTest.mainTest" />
+      <item itemvalue="TestNG.EnrolleeDAOTest.testFindAll" />
+      <item itemvalue="TestNG.EnrolleeDAOTest.testFindEnrolleesByCountry" />
+      <item itemvalue="TestNG.EnrolleeDAOTest.testFindEnrolleesByCity" />
+      <item itemvalue="TestNG.EnrolleeDAOTest.testFindEntityById" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.ConnectionPoolTest.serializationTest" />
-        <item itemvalue="TestNG.UserDAOTest.testFindEntityById" />
-        <item itemvalue="TestNG.UserDAOTest.testDeleteByEmailAndPassword" />
-        <item itemvalue="TestNG.UserDAOTest.testCreate" />
-        <item itemvalue="TestNG.EnrolleeDAOTest.testDelete" />
+        <item itemvalue="TestNG.EnrolleeDAOTest.testFindEntityById" />
+        <item itemvalue="TestNG.EnrolleeDAOTest.testFindEnrolleesByCity" />
+        <item itemvalue="TestNG.EnrolleeDAOTest.testFindEnrolleesByCountry" />
+        <item itemvalue="TestNG.EnrolleeDAOTest.testFindAll" />
+        <item itemvalue="TestNG.ConnectionPoolTest.mainTest" />
       </list>
     </recent_temporary>
   </component>
@@ -574,39 +564,39 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="UserDAOTest_testCreate - 2018.09.06 at 14h 21m 58s.xml">
-      <configuration name="UserDAOTest.testCreate" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="UserDAOTest_testDeleteByEmailAndPassword - 2018.09.06 at 14h 23m 25s.xml">
-      <configuration name="UserDAOTest.testDeleteByEmailAndPassword" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="UserDAOTest_testDeleteByEmailAndPassword - 2018.09.06 at 14h 27m 50s.xml">
-      <configuration name="UserDAOTest.testDeleteByEmailAndPassword" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="UserDAOTest_testDeleteByEmailAndPassword - 2018.09.06 at 14h 27m 57s.xml">
-      <configuration name="UserDAOTest.testDeleteByEmailAndPassword" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="UserDAOTest_testFindEntityById - 2018.09.07 at 18h 59m 40s.xml">
-      <configuration name="UserDAOTest.testFindEntityById" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="UserDAOTest_testFindEntityById - 2018.09.07 at 19h 50m 47s.xml">
-      <configuration name="UserDAOTest.testFindEntityById" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="ConnectionPoolTest_serializationTest - 2018.09.07 at 20h 03m 12s.xml">
+    <history-entry file="ConnectionPoolTest_serializationTest - 2018.09.08 at 01h 39m 26s.xml">
       <configuration name="ConnectionPoolTest.serializationTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="ConnectionPoolTest_serializationTest - 2018.09.07 at 20h 04m 30s.xml">
+    <history-entry file="ConnectionPoolTest_serializationTest - 2018.09.08 at 01h 40m 22s.xml">
       <configuration name="ConnectionPoolTest.serializationTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="ConnectionPoolTest_serializationTest - 2018.09.07 at 20h 07m 00s.xml">
-      <configuration name="ConnectionPoolTest.serializationTest" configurationId="TestNG" />
+    <history-entry file="ConnectionPoolTest_mainTest - 2018.09.08 at 01h 42m 02s.xml">
+      <configuration name="ConnectionPoolTest.mainTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="ConnectionPoolTest_serializationTest - 2018.09.07 at 20h 10m 27s.xml">
-      <configuration name="ConnectionPoolTest.serializationTest" configurationId="TestNG" />
+    <history-entry file="ConnectionPoolTest_mainTest - 2018.09.08 at 01h 43m 46s.xml">
+      <configuration name="ConnectionPoolTest.mainTest" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="EnrolleeDAOTest_testFindAll - 2018.09.08 at 01h 53m 42s.xml">
+      <configuration name="EnrolleeDAOTest.testFindAll" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="EnrolleeDAOTest_testFindEnrolleesByCountry - 2018.09.08 at 01h 55m 10s.xml">
+      <configuration name="EnrolleeDAOTest.testFindEnrolleesByCountry" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="EnrolleeDAOTest_testFindEnrolleesByCity - 2018.09.08 at 01h 56m 09s.xml">
+      <configuration name="EnrolleeDAOTest.testFindEnrolleesByCity" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="EnrolleeDAOTest_testFindEntityById - 2018.09.08 at 01h 57m 09s.xml">
+      <configuration name="EnrolleeDAOTest.testFindEntityById" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="EnrolleeDAOTest_testFindEntityById - 2018.09.08 at 01h 58m 07s.xml">
+      <configuration name="EnrolleeDAOTest.testFindEntityById" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="EnrolleeDAOTest_testFindEntityById - 2018.09.08 at 01h 59m 22s.xml">
+      <configuration name="EnrolleeDAOTest.testFindEntityById" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39081000" />
+    <option name="totallyTimeSpent" value="46897000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -618,9 +608,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="25" width="1368" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6795491" visible="true" weight="0.19772728" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6795491" visible="true" weight="0.16897655" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -629,7 +619,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info id="Web" order="7" sideWeight="0.32045087" side_tool="true" weight="0.2563966" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.329582" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
@@ -641,6 +631,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="12" />
+      <window_info anchor="bottom" id="Run" order="13" weight="0.496208" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -650,7 +641,6 @@
       <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info anchor="right" id="Run" order="9" weight="0.30227274" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -678,25 +668,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/EncryptActionTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/SubjectDAOTest.java">
+    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/impl/SubjectDAOTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
           <caret line="54" column="29" lean-forward="true" selection-start-line="54" selection-start-column="29" selection-end-line="58" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logs/debug.log">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="-149568" />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/debug.log" />
     <entry file="file://$PROJECT_DIR$/logs/error.log">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-819">
@@ -704,22 +683,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/EnrolleeDAOTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="153" column="1" selection-start-line="153" selection-start-column="1" selection-end-line="153" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/model/comparsion/IdComparator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="53" lean-forward="true" selection-start-line="10" selection-start-column="53" selection-end-line="10" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#247#248#0" expanded="true" />
-            <element signature="e#307#308#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -727,11 +694,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="72" selection-start-line="10" selection-start-column="72" selection-end-line="10" selection-end-column="72" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#245#246#0" expanded="true" />
-            <element signature="e#274#275#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -739,11 +701,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="70" selection-start-line="10" selection-start-column="70" selection-end-line="10" selection-end-column="70" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#244#245#0" expanded="true" />
-            <element signature="e#273#274#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -751,11 +708,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="62" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#245#246#0" expanded="true" />
-            <element signature="e#274#275#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -763,9 +715,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="76" selection-start-line="10" selection-start-column="76" selection-end-line="10" selection-end-column="76" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -773,9 +722,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="70" selection-start-line="10" selection-start-column="70" selection-end-line="10" selection-end-column="70" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -783,9 +729,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="58" selection-start-line="9" selection-start-column="58" selection-end-line="9" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -793,9 +736,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="65" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -810,9 +750,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="69" selection-start-line="10" selection-start-column="69" selection-end-line="10" selection-end-column="69" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -820,9 +757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="73" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -830,9 +764,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -895,14 +826,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/FacultyDAOTest.java">
+    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/impl/FacultyDAOTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="68" column="41" selection-start-line="68" selection-start-column="41" selection-end-line="68" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/UserDAOTest.java">
+    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/impl/UserDAOTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
           <caret line="54" column="54" lean-forward="true" selection-start-line="54" selection-start-column="54" selection-end-line="54" selection-end-column="54" />
@@ -913,9 +844,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-          <folding>
-            <element signature="method#Faculty#1;class#Faculty#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -937,12 +865,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="257">
           <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
-          <folding>
-            <element signature="e#870#871#0" expanded="true" />
-            <element signature="e#902#903#0" expanded="true" />
-            <element signature="e#953#954#0" expanded="true" />
-            <element signature="e#995#996#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -953,28 +875,136 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolTest.java">
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/pool/PropertiesHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="59" column="42" selection-start-line="59" selection-start-column="42" selection-end-line="59" selection-end-column="42" />
+        <state relative-caret-position="240">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/database.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/mysql-connector-java-8.0.12.jar!/com/mysql/cj/jdbc/exceptions/SQLExceptionsMapping.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/mysql-connector-java-8.0.12.jar!/com/mysql/cj/jdbc/StatementImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="951" selection-start-line="951" selection-end-line="951" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/dbunit-2.5.4.jar!/org/dbunit/database/AbstractResultSetTable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/mysql-connector-java-8.0.12.jar!/com/mysql/cj/jdbc/exceptions/SQLError.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users-and-articles-dataset.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1961">
+          <caret line="59" column="50" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/all-tables-dataset.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/pool/DBunitTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="29" column="62" lean-forward="true" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="62" />
           <folding>
-            <element signature="e#1371#1372#0" expanded="true" />
-            <element signature="e#1418#1419#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/util/EncryptActionTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="69" selection-start-line="14" selection-start-column="69" selection-end-line="14" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/pool/ConnectionPool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="43" column="59" lean-forward="true" selection-start-line="43" selection-start-column="59" selection-end-line="43" selection-end-column="59" />
+        <state relative-caret-position="425">
+          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="152" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/pool/PropertiesHandler.java">
+    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolDBUnit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="1266">
+          <caret line="128" column="43" selection-start-line="128" selection-start-column="43" selection-end-line="128" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/dao/TransactionHelperDBUnit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="60" column="36" lean-forward="true" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="63" column="44" lean-forward="true" selection-start-line="63" selection-start-column="44" selection-end-line="63" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/pool/ConnectionPoolDBUnit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="45" column="54" selection-start-line="45" selection-start-column="54" selection-end-line="45" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/DaoTester.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="569">
+          <caret line="49" column="4" lean-forward="true" selection-start-line="49" selection-start-column="4" selection-end-line="52" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/impl/EnrolleeDAOTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="88" column="61" selection-start-line="88" selection-start-column="61" selection-end-line="88" selection-end-column="61" />
         </state>
       </provider>
     </entry>

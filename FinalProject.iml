@@ -29,5 +29,8 @@
     <orderEntry type="library" name="log4j-core-2.4" level="project" />
     <orderEntry type="library" name="mysql-connector-java-8.0.12" level="project" />
     <orderEntry type="library" name="testng-6.7" level="project" />
+    <orderEntry type="library" name="dbunit-2.5.4 (2)" level="project" />
+    <orderEntry type="library" name="slf4j-api-1.7.25" level="project" />
+    <orderEntry type="library" name="slf4j-simple-1.7.25 (2)" level="project" />
   </component>
 </module>

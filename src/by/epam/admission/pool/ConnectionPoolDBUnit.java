@@ -18,7 +18,7 @@ public enum ConnectionPoolDBUnit {
 
     public IDatabaseTester tester = null;
 
-    private final Logger LOG = LogManager.getLogger(ConnectionPool.class);
+    private final Logger LOG = LogManager.getLogger(ConnectionPoolDBUnit.class);
 
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL =
@@ -44,13 +44,6 @@ public enum ConnectionPoolDBUnit {
         }
         availableConnections = new LinkedBlockingQueue<>();
         usedConnections = new LinkedBlockingQueue<>();
-        try {
-            Driver driver = new Driver();
-            DriverManager.registerDriver(driver);
-            LOG.debug("driver " + driver + " registered...");
-        } catch (SQLException e) {
-            LOG.error("SQL exception", e);
-        }
         for (int i = 0; i < DB_POOLSIZE; i++) {
             Connection connection;
             try {

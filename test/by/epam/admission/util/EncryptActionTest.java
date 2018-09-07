@@ -1,4 +1,4 @@
-package by.epam.admission.dao;
+package by.epam.admission.util;
 
 import by.epam.admission.util.EncryptAction;
 import org.testng.annotations.Test;

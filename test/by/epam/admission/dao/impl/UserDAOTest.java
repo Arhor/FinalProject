@@ -2,9 +2,9 @@
  * class: UserDAOTest
  */
 
-package by.epam.admission.dao;
+package by.epam.admission.dao.impl;
 
-import by.epam.admission.dao.impl.UserDAO;
+import by.epam.admission.dao.TransactionHelper;
 import by.epam.admission.exception.DAOException;
 import by.epam.admission.model.User;
 import by.epam.admission.pool.ConnectionPool;

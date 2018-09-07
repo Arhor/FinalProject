@@ -1,6 +1,6 @@
 package by.epam.admission.dao;
 
-import by.epam.admission.pool.ConnectionPool;
+import by.epam.admission.pool.ConnectionPoolDBUnit;
 import by.epam.admission.pool.ProxyConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,21 +8,21 @@ import org.apache.logging.log4j.Logger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class TransactionHelper {
+public class TransactionHelperDBUnit {
 
-    private static final Logger LOG = LogManager.getLogger(TransactionHelper.class);
+    private static final Logger LOG = LogManager.getLogger(TransactionHelperDBUnit.class);
 
     private ProxyConnection connection;
 
     private ArrayList<AbstractDAO> currentDAOs;
 
-    public TransactionHelper() {
+    public TransactionHelperDBUnit() {
         currentDAOs = new ArrayList<>();
     }
 
     public void startTransaction(AbstractDAO dao, AbstractDAO...daos) {
         if (connection == null) {
-            connection = ConnectionPool.POOL.getConnection();
+            connection = ConnectionPoolDBUnit.POOL.getConnection();
         }
         try {
             connection.setAutoCommit(false);
@@ -50,7 +50,7 @@ public class TransactionHelper {
         }
         currentDAOs.clear();
         if (connection != null) {
-            ConnectionPool.POOL.releaseConnection(connection);
+            ConnectionPoolDBUnit.POOL.releaseConnection(connection);
             connection = null;
         }
     }

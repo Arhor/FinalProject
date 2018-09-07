@@ -2,9 +2,9 @@
  * class: SubjectDAOTest
  */
 
-package by.epam.admission.dao;
+package by.epam.admission.dao.impl;
 
-import by.epam.admission.dao.impl.SubjectDAO;
+import by.epam.admission.dao.TransactionHelper;
 import by.epam.admission.model.Subject;
 import by.epam.admission.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
