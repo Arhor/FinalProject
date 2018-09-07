@@ -4,9 +4,15 @@ import by.epam.admission.dao.impl.EnrolleeDAO;
 import by.epam.admission.exception.DAOException;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.pool.ConnectionPool;
+import by.epam.admission.pool.ConnectionPoolDBUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.operation.DatabaseOperation;
 import org.testng.annotations.*;
+
+import java.io.File;
 
 public class EnrolleeDAOTest {
 
@@ -14,7 +20,7 @@ public class EnrolleeDAOTest {
 
     @Test
     public void testFindAll() {
-        TransactionHelper t = new TransactionHelper();
+        TransactionHelperDBUnit t = new TransactionHelperDBUnit();
         EnrolleeDAO enrolleeDAO = new EnrolleeDAO();
         t.startTransaction(enrolleeDAO);
         for (Enrollee enrollee : enrolleeDAO.findAll()) {
@@ -25,7 +31,7 @@ public class EnrolleeDAOTest {
 
     @Test
     public void testFindEnrolleesByCountry() {
-        TransactionHelper t = new TransactionHelper();
+        TransactionHelperDBUnit t = new TransactionHelperDBUnit();
         EnrolleeDAO enrolleeDAO = new EnrolleeDAO();
         t.startTransaction(enrolleeDAO);
         try {
@@ -40,7 +46,7 @@ public class EnrolleeDAOTest {
 
     @Test
     public void testFindEnrolleesByCity() {
-        TransactionHelper t = new TransactionHelper();
+        TransactionHelperDBUnit t = new TransactionHelperDBUnit();
         EnrolleeDAO enrolleeDAO = new EnrolleeDAO();
         t.startTransaction(enrolleeDAO);
         try {
@@ -55,7 +61,7 @@ public class EnrolleeDAOTest {
 
     @Test
     public void testRegisterToFacultyById() {
-        TransactionHelper t = new TransactionHelper();
+        TransactionHelperDBUnit t = new TransactionHelperDBUnit();
         EnrolleeDAO enrolleeDAO = new EnrolleeDAO();
         Enrollee enrollee = new Enrollee();
         enrollee.setId(2);
@@ -77,10 +83,10 @@ public class EnrolleeDAOTest {
         for (int i = 0; i < 10; i++) {
             new Thread() {
                 public void run() {
-                    TransactionHelper t = new TransactionHelper();
+                    TransactionHelperDBUnit t = new TransactionHelperDBUnit();
                     EnrolleeDAO enrolleeDAO = new EnrolleeDAO();
                     t.startTransaction(enrolleeDAO);
-                    int id = (int)(Math.random() * 55 + 0.5);
+                    int id = (int)(Math.random() * 29 + 0.5);
                     LOG.info("ID: " + id + " - " + enrolleeDAO.findEntityById(id));
                     t.endTransaction();
                 }
@@ -100,7 +106,7 @@ public class EnrolleeDAOTest {
             final int num = i;
             new Thread() {
                 public void run() {
-                    TransactionHelper t = new TransactionHelper();
+                    TransactionHelperDBUnit t = new TransactionHelperDBUnit();
                     EnrolleeDAO enrolleeDAO = new EnrolleeDAO();
                     t.startTransaction(enrolleeDAO);
                     Enrollee enrollee = new Enrollee();
@@ -124,7 +130,7 @@ public class EnrolleeDAOTest {
 
     @Test
     public void testDelete() {
-        TransactionHelper t = new TransactionHelper();
+        TransactionHelperDBUnit t = new TransactionHelperDBUnit();
         EnrolleeDAO enrolleeDAO = new EnrolleeDAO();
         Enrollee enrollee = new Enrollee();
         enrollee.setId(2);
@@ -139,16 +145,33 @@ public class EnrolleeDAOTest {
         t.endTransaction();
     }
 
+
     @BeforeClass
-    public void setUp() {
+    public void setUpClass() {
+        ConnectionPoolDBUnit.POOL.tester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
+        ConnectionPoolDBUnit.POOL.tester.setTearDownOperation(DatabaseOperation.NONE);
     }
 
     @AfterClass
     public void tearDown() {
-        ConnectionPool.POOL.closePool();
         LOG.info("available connections: "
                 + ConnectionPool.POOL.countAvailableConnections());
         LOG.info("used connections: "
                 + ConnectionPool.POOL.countUsedConnections());
     }
+
+    @BeforeMethod
+    public void setUpMethod() throws Exception {
+        FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+        IDataSet dataSet = builder.build(new File("resources/all-tables-dataset.xml"));
+        ConnectionPoolDBUnit.POOL.tester.setDataSet(dataSet);
+        ConnectionPoolDBUnit.POOL.tester.onSetup();
+    }
+
+    @AfterMethod
+    public void tearDownMethod() throws Exception {
+        ConnectionPoolDBUnit.POOL.tester.onTearDown();
+    }
+
+
 }
