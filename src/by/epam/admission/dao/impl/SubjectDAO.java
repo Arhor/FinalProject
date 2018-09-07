@@ -2,8 +2,9 @@
  * class: SubjectDAO
  */
 
-package by.epam.admission.dao;
+package by.epam.admission.dao.impl;
 
+import by.epam.admission.dao.AbstractDAO;
 import by.epam.admission.exception.DAOException;
 import by.epam.admission.model.Subject;
 import org.apache.logging.log4j.LogManager;

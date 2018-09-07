@@ -67,6 +67,10 @@ public enum ConnectionPool {
                 Thread.currentThread().interrupt();
             }
         }
+        if (countAvailableConnections() != POOL_SIZE) {
+            LOG.fatal("Connection pool initiation error");
+            throw new RuntimeException();
+        }
     }
 
     public ProxyConnection getConnection() {
@@ -107,7 +111,7 @@ public enum ConnectionPool {
         }
     }
 
-    public void closeConnections() {
+    public void closePool() {
         for (int i = 0; i < POOL_SIZE; i++) {
             try {
                 availableConnections.take().closeConnection();

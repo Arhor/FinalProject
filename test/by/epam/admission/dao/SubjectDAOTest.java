@@ -4,6 +4,7 @@
 
 package by.epam.admission.dao;
 
+import by.epam.admission.dao.impl.SubjectDAO;
 import by.epam.admission.model.Subject;
 import by.epam.admission.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
@@ -31,7 +32,7 @@ public class SubjectDAOTest {
     public void tearDown() {
         subjectDao = null;
         transactionHelper = null;
-        ConnectionPool.POOL.closeConnections();
+        ConnectionPool.POOL.closePool();
     }
 
     @Test

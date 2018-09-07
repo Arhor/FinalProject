@@ -24,7 +24,7 @@ public abstract class AbstractDAO<K, T extends Entity> {
     
     public abstract T findEntityById(K id);
     
-    public abstract boolean delete(K id) throws NotSupportedOperationException, SQLException, DAOException;
+    public abstract boolean delete(K id) throws NotSupportedOperationException, DAOException;
     
     public abstract boolean delete(T entity) throws NotSupportedOperationException, DAOException;
     

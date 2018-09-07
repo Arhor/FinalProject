@@ -2,7 +2,7 @@
  * class: FacultyDAO
  */
 
-package by.epam.admission.dao;
+package by.epam.admission.dao.impl;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import by.epam.admission.dao.AbstractDAO;
 import by.epam.admission.exception.DAOException;
 import by.epam.admission.model.Faculty;
 import org.apache.logging.log4j.LogManager;

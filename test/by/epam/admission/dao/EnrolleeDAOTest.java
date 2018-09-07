@@ -1,8 +1,8 @@
 package by.epam.admission.dao;
 
+import by.epam.admission.dao.impl.EnrolleeDAO;
 import by.epam.admission.exception.DAOException;
 import by.epam.admission.model.Enrollee;
-import by.epam.admission.model.User;
 import by.epam.admission.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -145,7 +145,7 @@ public class EnrolleeDAOTest {
 
     @AfterClass
     public void tearDown() {
-        ConnectionPool.POOL.closeConnections();
+        ConnectionPool.POOL.closePool();
         LOG.info("available connections: "
                 + ConnectionPool.POOL.countAvailableConnections());
         LOG.info("used connections: "

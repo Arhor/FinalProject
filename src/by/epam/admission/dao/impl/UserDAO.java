@@ -1,5 +1,7 @@
-package by.epam.admission.dao;
+package by.epam.admission.dao.impl;
 
+import by.epam.admission.dao.AbstractDAO;
+import by.epam.admission.util.EncryptAction;
 import by.epam.admission.exception.DAOException;
 import by.epam.admission.exception.NotSupportedOperationException;
 import by.epam.admission.model.User;
@@ -69,9 +71,9 @@ public class UserDAO extends AbstractDAO<Integer, User> {
         User user = null;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_SELECT_USER_BY_EMAIL_AND_PASSWORD)) {
-            Coder coder = new Coder();
+            EncryptAction encryptAction = new EncryptAction();
             String name = findNameByEmail(email);
-            String encryptedPassword = coder.encrypt(password, name);
+            String encryptedPassword = encryptAction.encrypt(password, name);
             st.setString(1, email);
             st.setString(2, encryptedPassword);
             ResultSet rs = st.executeQuery();
@@ -100,19 +102,18 @@ public class UserDAO extends AbstractDAO<Integer, User> {
 
     public boolean delete(User user, String password) throws DAOException {
         int flag;
-        Coder coder = new Coder();
+        EncryptAction encryptAction = new EncryptAction();
         String name = findNameByEmail(user.getEmail());
-        String encryptedPassword = coder.encrypt(password, name);
+        String encryptedPassword = encryptAction.encrypt(password, name);
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_USER_BY_EMAIL_AND_PASSWORD)) {
             st.setString(1, user.getEmail());
             st.setString(2, encryptedPassword);
             flag = st.executeUpdate();
         } catch (SQLException e) {
-            LOG.error("Deletion error", e);
             throw new DAOException("Deletion error", e);
         }
-        return flag != 0;
+        return (flag != 0);
     }
 
     @Override
@@ -126,8 +127,8 @@ public class UserDAO extends AbstractDAO<Integer, User> {
         if (findNameByEmail(user.getEmail()) == null) {
             try {
                 int flag;
-                Coder coder = new Coder();
-                String encryptedPassword = coder.encrypt(
+                EncryptAction encryptAction = new EncryptAction();
+                String encryptedPassword = encryptAction.encrypt(
                         password, user.getFirstName());
                 try (PreparedStatement st = connection.prepareStatement(
                         SQL_INSERT_USER, Statement.RETURN_GENERATED_KEYS)) {
@@ -160,10 +161,10 @@ public class UserDAO extends AbstractDAO<Integer, User> {
     // password changes every time on first_name change
     public User update(User user, String password) throws DAOException {
         int flag;
-        Coder coder = new Coder();
+        EncryptAction encryptAction = new EncryptAction();
         String name = findNameByEmail(user.getEmail());
-        String encryptedPassword = coder.encrypt(password, name);
-        String newPassword = coder.encrypt(password, user.getFirstName());
+        String encryptedPassword = encryptAction.encrypt(password, name);
+        String newPassword = encryptAction.encrypt(password, user.getFirstName());
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_UPDATE_USER)) {
             st.setString(1, newPassword);

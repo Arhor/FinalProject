@@ -2,8 +2,9 @@
  * class: EnrolleeDAO
  */
 
-package by.epam.admission.dao;
+package by.epam.admission.dao.impl;
 
+import by.epam.admission.dao.AbstractDAO;
 import by.epam.admission.exception.DAOException;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Subject;

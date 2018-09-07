@@ -6,6 +6,7 @@ public class Enrollee extends Entity{
     private String city;
     private int schoolCertificate;
     private int userId;
+    private boolean available;
 
     public String getCountry() {
         return country;
@@ -37,6 +38,14 @@ public class Enrollee extends Entity{
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     @Override

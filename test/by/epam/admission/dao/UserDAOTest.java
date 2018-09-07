@@ -4,6 +4,7 @@
 
 package by.epam.admission.dao;
 
+import by.epam.admission.dao.impl.UserDAO;
 import by.epam.admission.exception.DAOException;
 import by.epam.admission.model.User;
 import by.epam.admission.pool.ConnectionPool;
@@ -33,7 +34,7 @@ public class UserDAOTest {
 
     @Test
     public void testFindEntityById() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             new Thread() {
                 public void run() {
                     TransactionHelper t = new TransactionHelper();
@@ -180,7 +181,7 @@ public class UserDAOTest {
 
     @AfterClass
     public void tearDown() {
-        ConnectionPool.POOL.closeConnections();
+        ConnectionPool.POOL.closePool();
         LOG.info("available connections: "
                 + ConnectionPool.POOL.countAvailableConnections());
         LOG.info("used connections: "

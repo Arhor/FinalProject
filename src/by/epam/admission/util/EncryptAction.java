@@ -1,8 +1,8 @@
 /*
- * class: Coder
+ * class: EncryptAction
  */
 
-package by.epam.admission.dao;
+package by.epam.admission.util;
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
 import org.apache.logging.log4j.LogManager;
@@ -16,15 +16,17 @@ import java.security.NoSuchAlgorithmException;
  * @author Maxmim Burishinets
  * @version 1.0 03 Sep 2018
  */
-public class Coder {
+public class EncryptAction {
 
-    private static final Logger LOG = LogManager.getLogger(Coder.class);
+    private static final Logger LOG = LogManager.getLogger(EncryptAction.class);
+
+    private static final String ENCRYPTION_TYPE = "SHA-512";
 
     public <T> String encrypt(String toEncrypt, T salt) {
         String result = null;
         try {
             String saltString = String.valueOf(salt);
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            MessageDigest md = MessageDigest.getInstance(ENCRYPTION_TYPE);
             md.update(saltString.getBytes(StandardCharsets.UTF_8));
             byte[] rawBytes = toEncrypt.getBytes(StandardCharsets.UTF_8);
             byte[] encryptedBytes = md.digest(rawBytes);

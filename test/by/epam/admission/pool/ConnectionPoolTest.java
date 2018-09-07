@@ -6,8 +6,11 @@ package by.epam.admission.pool;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
+
+import java.io.*;
 
 /**
  * @author Maxim Burishinets
@@ -19,7 +22,7 @@ public class ConnectionPoolTest {
 
     @Test
     public void mainTest() {
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 100; i++) {
             new Thread() {
                 public void run() {
                     ProxyConnection connection = ConnectionPool.POOL.getConnection();
@@ -41,8 +44,24 @@ public class ConnectionPoolTest {
         }
     }
 
+    @Test
+    public void serializationTest() throws IOException, ClassNotFoundException {
+        ConnectionPool pool_1 = ConnectionPool.POOL;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(pool_1);
+        oos.close();
+
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ObjectInputStream ois = new ObjectInputStream(bais);
+
+        ConnectionPool pool_2 = (ConnectionPool) ois.readObject();
+        ois.close();
+        Assert.assertTrue(pool_1 == pool_2);
+    }
+
     @AfterClass
     public void tearDown() {
-        ConnectionPool.POOL.closeConnections();
+        ConnectionPool.POOL.closePool();
     }
 }

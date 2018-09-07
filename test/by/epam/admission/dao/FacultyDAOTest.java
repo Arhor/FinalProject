@@ -4,6 +4,8 @@
 
 package by.epam.admission.dao;
 
+import by.epam.admission.dao.impl.FacultyDAO;
+import by.epam.admission.exception.DAOException;
 import by.epam.admission.model.Faculty;
 import by.epam.admission.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
@@ -58,7 +60,14 @@ public class FacultyDAOTest {
         faculty.setSeatsPaid(200);
         faculty.setSeatsBudget(50);
         transactionHelper.startTransaction(facultyDao);
-        boolean result = facultyDao.create(faculty);
+        boolean result = false;
+        try {
+            result = facultyDao.create(faculty);
+            transactionHelper.commit();
+        } catch (DAOException e) {
+            LOG.error("DAO exception", e);
+            transactionHelper.rollback();
+        }
         transactionHelper.endTransaction();
         Assert.assertFalse(result);
     }
@@ -73,6 +82,6 @@ public class FacultyDAOTest {
     public void tearDown() {
         facultyDao = null;
         transactionHelper = null;
-        ConnectionPool.POOL.closeConnections();
+        ConnectionPool.POOL.closePool();
     }
 }
