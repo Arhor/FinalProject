@@ -4,6 +4,7 @@
 
 package by.epam.admission.dao;
 
+import by.epam.admission.exception.DAOException;
 import by.epam.admission.model.Subject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -51,12 +52,13 @@ public class SubjectDAO extends AbstractDAO<Integer, Subject> {
 
     @Override
     public Subject findEntityById(Integer id) {
-        Subject subject = new Subject();
+        Subject subject = null;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_SELECT_SUBJECT_BY_ID)) {
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
+                subject = new Subject();
                 subject.setId(id);
                 subject.setNameRu(rs.getString(NAME_RU));
                 subject.setNameEn(rs.getString(NAME_EN));
@@ -81,30 +83,47 @@ public class SubjectDAO extends AbstractDAO<Integer, Subject> {
     }
 
     @Override
-    public boolean delete(Integer id) {
-        int flag = 0;
+    public boolean delete(Integer id) throws DAOException {
+        int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_SUBJECT_BY_ID)) {
+            st.setInt(1, id);
             flag = st.executeUpdate();
         } catch (SQLException e) {
-            LOG.error("SQL exception", e);
+            LOG.error("Deletion error", e);
+            throw new DAOException("Deletion error", e);
         }
         return flag != 0;
     }
 
     @Override
-    public boolean delete(Subject subject) {
-        return executeDMLQuery(subject, SQL_DELETE_SUBJECT);
+    public boolean delete(Subject subject) throws DAOException {
+        try {
+            return executeDMLQuery(subject, SQL_DELETE_SUBJECT);
+        } catch (SQLException e) {
+            LOG.error("Deletion error", e);
+            throw new DAOException("Deletion error", e);
+        }
     }
 
     @Override
-    public boolean create(Subject subject) {
-        return executeDMLQuery(subject, SQL_INSERT_SUBJECT);
+    public boolean create(Subject subject) throws DAOException {
+        try {
+            return executeDMLQuery(subject, SQL_INSERT_SUBJECT);
+        } catch (SQLException e) {
+            LOG.error("Insertion error", e);
+            throw new DAOException("Insertion error", e);
+        }
     }
 
     @Override
-    public Subject update(Subject subject) {
-        return executeDMLQuery(subject, SQL_UPDATE_SUBJECT) ? subject : null;
+    public Subject update(Subject subject) throws DAOException {
+        try {
+            return executeDMLQuery(subject, SQL_UPDATE_SUBJECT) ? subject : null;
+        } catch (SQLException e) {
+            LOG.error("Update error", e);
+            throw new DAOException("Update error", e);
+        }
     }
 
     private void processResult(ArrayList<Subject> subjects, ResultSet rs)
@@ -118,15 +137,14 @@ public class SubjectDAO extends AbstractDAO<Integer, Subject> {
         }
     }
 
-    private boolean executeDMLQuery(Subject entity, String query) {
-        int flag = 0;
+    private boolean executeDMLQuery(Subject entity, String query)
+            throws SQLException {
+        int flag;
         try (PreparedStatement st = connection.prepareStatement(query)) {
             st.setString(1, entity.getNameRu());
             st.setString(2, entity.getNameEn());
             st.setInt(3, entity.getId());
             flag = st.executeUpdate();
-        } catch (SQLException e) {
-            LOG.error("SQL exception", e);
         }
         return flag != 0;
     }

@@ -5,7 +5,6 @@
 package by.epam.admission.dao;
 
 import by.epam.admission.exception.DAOException;
-import by.epam.admission.exception.NotSupportedOperationException;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Subject;
 import org.apache.logging.log4j.LogManager;
@@ -65,7 +64,7 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                enrollee = setEnrolle(rs);
+                enrollee = setEnrollee(rs);
             }
         } catch (SQLException e) {
             LOG.error("Selection error", e);
@@ -113,9 +112,15 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
         return null;
     }
 
+    /**
+     * Hard deletion of Enrollee from database, supposed to use only by admin
+     * @param id - Enrollee ID to delete from database
+     * @return true - if deletion was successful
+     * @throws DAOException - wrapped SQL exception
+     */
     @Override
     public boolean delete(Integer id) throws DAOException {
-        int flag = 0;
+        int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_ENROLLEE_BY_ID)) {
             st.setInt(1, id);
@@ -127,9 +132,16 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
         return flag != 0;
     }
 
+    /**
+     * Soft deletion of Enrollee from database, supposed to use by client.
+     * Sets value `available` of corresponding enrollee to `0`
+     * @param enrollee - Enrollee object to delete from database
+     * @return true - if deletion was successful
+     * @throws DAOException - wrapped SQL exception
+     */
     @Override
     public boolean delete(Enrollee enrollee) throws DAOException {
-        int flag = 0;
+        int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_ENROLLEE)) {
             st.setInt(1, enrollee.getId());
@@ -140,16 +152,11 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
         return flag != 0;
     }
 
-    // TODO: implement faculty registration delete
-    public boolean deleteRegistration(Enrollee enrollee) {
-        return false;
-    }
-
     @Override
     public boolean create(Enrollee enrollee) throws DAOException {
-        boolean result = false;
+        boolean result;
         try {
-            int flag = 0;
+            int flag;
             try (PreparedStatement st = connection.prepareStatement(
                     SQL_INSERT_ENROLLEE, Statement.RETURN_GENERATED_KEYS)) {
                 st.setString(1, enrollee.getCountry());
@@ -172,7 +179,7 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
 
     public boolean registerToFacultyById(Enrollee enrollee, int facultyId)
             throws DAOException {
-        int flag = 0;
+        int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_INSERT_TO_ADMISSION_LIST)) {
             st.setInt(1, enrollee.getId());
@@ -184,9 +191,14 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
         return flag != 0;
     }
 
+    // TODO: implement faculty deregister
+    public boolean deregisterFromFacultyById(Enrollee enrollee, int facultyId) {
+        return false;
+    }
+
     @Override
     public Enrollee update(Enrollee enrollee) throws DAOException {
-        int flag = 0;
+        int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_UPDATE_ENROLLEE)) {
             st.setString(1, enrollee.getCountry());
@@ -202,11 +214,11 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
     private void processResult(ArrayList<Enrollee> enrollees, ResultSet rs)
             throws SQLException {
         while (rs.next()) {
-            enrollees.add(setEnrolle(rs));
+            enrollees.add(setEnrollee(rs));
         }
     }
 
-    private Enrollee setEnrolle(ResultSet resultSet) throws SQLException {
+    private Enrollee setEnrollee(ResultSet resultSet) throws SQLException {
         Enrollee enrollee = new Enrollee();
         enrollee.setId(resultSet.getInt(ID));
         enrollee.setCountry(resultSet.getString(COUNTRY));
@@ -245,10 +257,10 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
         SQL_DELETE_ENROLLEE =
                 "UPDATE `enrollees` " +
                 "LEFT JOIN   `enrollees_has_subjects` " +
-                        "ON `enrollees`.`id` = `enrollees_has_subjects`.`enrollees_id` " +
+                "ON `enrollees`.`id` = `enrollees_has_subjects`.`enrollees_id` " +
                 "LEFT JOIN   `admission_list` " +
-                        "ON `enrollees`.`id` = `admission_list`.`enrollees_id`" +
-                "SET    `enrollees`.`available` = 0, " +
+                "ON `enrollees`.`id` = `admission_list`.`enrollees_id`" +
+                "SET     `enrollees`.`available` = 0, " +
                         "`enrollees_has_subjects`.`available` = 0, " +
                         "`admission_list`.`available` = 0 " +
                 "WHERE  `id` = ? " +
@@ -273,13 +285,13 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
                 "(`enrollees_id`,`faculties_id`) " +
                 "VALUES (?,?)";
         SQL_SELECT_ENROLLEE_TOTAL_SCORE =
-                "SELECT (SUM(enrollees_has_subjects.score) " +
-                        "+ enrollees.school_certificate) AS `total_score` " +
-                "FROM enrollees_has_subjects " +
-                "JOIN enrollees " +
-                        "ON enrollees.id = enrollees_has_subjects.enrollees_id " +
-                "WHERE enrollees.id = ? " +
-                "GROUP BY enrollees_has_subjects.enrollees_id";
+                "SELECT (COALESCE(SUM(`enrollees_has_subjects`.`score`), 0) " +
+                        "+ `enrollees`.`school_certificate`) AS `total_score` " +
+                "FROM `enrollees_has_subjects` " +
+                "RIGHT JOIN `enrollees` " +
+                "ON `enrollees`.`id` = `enrollees_has_subjects`.`enrollees_id` " +
+                "WHERE `enrollees`.`id` = ? " +
+                "GROUP BY `enrollees_has_subjects`.`enrollees_id`";
     }
 
 }

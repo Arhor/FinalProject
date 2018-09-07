@@ -31,11 +31,11 @@ public class TransactionHelper {
         }
         dao.setConnection(connection);
         currentDAOs.add(dao);
-        LOG.debug(dao.getClass().getSimpleName() + " - added to transaction list");
+        LOG.debug(dao.getClass().getSimpleName() + " - added to transaction");
         for (AbstractDAO concreteDao : daos) {
             concreteDao.setConnection(connection);
             currentDAOs.add(concreteDao);
-            LOG.debug(dao.getClass().getSimpleName() + " - added to transaction list");
+            LOG.debug(dao.getClass().getSimpleName() + " - added to transaction");
         }
     }
 

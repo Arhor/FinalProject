@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import by.epam.admission.exception.DAOException;
 import by.epam.admission.model.Faculty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -46,7 +47,8 @@ public class FacultyDAO extends AbstractDAO<Integer, Faculty> {
             ResultSet rs = st.executeQuery(SQL_SELECT_ALL_FACULTIES);
             processResult(faculties, rs);
         } catch (SQLException e) {
-            LOG.error("SQL exception", e);
+            LOG.error("Selection error", e);
+
         }
         return faculties;
     }
@@ -66,7 +68,7 @@ public class FacultyDAO extends AbstractDAO<Integer, Faculty> {
                 faculty.setSeatsBudget(rs.getInt(SEATS_BUDGET));
             }
         } catch (SQLException e) {
-            LOG.error("SQL exception", e);
+            LOG.error("Selection error", e);
         }
         return faculty;
     }
@@ -79,37 +81,53 @@ public class FacultyDAO extends AbstractDAO<Integer, Faculty> {
             ResultSet rs = st.executeQuery();
             processResult(faculties, rs);
         } catch (SQLException e) {
-            LOG.error("SQL exception", e);
+            LOG.error("Selection error", e);
         }
         return faculties;
     }
 
     @Override
-    public boolean delete(Integer id) {
-        int flag = 0;
+    public boolean delete(Integer id) throws DAOException {
+        int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_FACULTY_BY_ID)) {
             flag = st.executeUpdate();
         } catch (SQLException e) {
-            LOG.error("SQL exception", e);
+            LOG.error("Deletion error", e);
+            throw new DAOException("Deletion error", e);
         }
         return flag != 0;
     }
 
     @Override
-    public boolean delete(Faculty faculty) {
-        return executeDMLQuery(faculty, SQL_DELETE_FACULTY);
+    public boolean delete(Faculty faculty) throws DAOException {
+        try {
+            return executeDMLQuery(faculty, SQL_DELETE_FACULTY);
+        } catch (SQLException e) {
+            LOG.error("Deletion error", e);
+            throw new DAOException("Deletion error", e);
+        }
     }
 
     @Override
-    public boolean create(Faculty faculty) {
-        return executeDMLQuery(faculty, SQL_INSERT_FACULTY);
+    public boolean create(Faculty faculty) throws DAOException {
+        try {
+            return executeDMLQuery(faculty, SQL_INSERT_FACULTY);
+        } catch (SQLException e) {
+            LOG.error("Insertion error", e);
+            throw new DAOException("Insertion error", e);
+        }
     }
 
     @Override
-    public Faculty update(Faculty faculty) {
-
-        return executeDMLQuery(faculty, SQL_UPDATE_FACULTY) ? faculty : null;
+    public Faculty update(Faculty faculty) throws DAOException {
+        try {
+            boolean result = executeDMLQuery(faculty, SQL_UPDATE_FACULTY);
+            return result ? faculty : null;
+        } catch (SQLException e) {
+            LOG.error("Update error", e);
+            throw new DAOException("Update error", e);
+        }
     }
 
     private void processResult(ArrayList<Faculty> faculties, ResultSet rs)
@@ -125,8 +143,9 @@ public class FacultyDAO extends AbstractDAO<Integer, Faculty> {
         }
     }
 
-    private boolean executeDMLQuery(Faculty faculty, String query) {
-        int flag = 0;
+    private boolean executeDMLQuery(Faculty faculty, String query)
+            throws SQLException {
+        int flag;
         try (PreparedStatement st = connection.prepareStatement(query)) {
             st.setString(1, faculty.getNameRu());
             st.setString(2, faculty.getNameEn());
@@ -134,8 +153,6 @@ public class FacultyDAO extends AbstractDAO<Integer, Faculty> {
             st.setInt(4, faculty.getSeatsBudget());
             st.setInt(5, faculty.getId());
             flag = st.executeUpdate();
-        } catch (SQLException e) {
-            LOG.error("SQL exception", e);
         }
         return flag != 0;
     }
