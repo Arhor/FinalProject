@@ -46,7 +46,7 @@ public class TransactionHelperDBUnit {
          */
         for (AbstractDAO dao : currentDAOs) {
             dao.setConnection(null);
-            LOG.debug(dao.getClass().getSimpleName() + " - lost connection");
+            LOG.debug(dao.getClass().getSimpleName() + " - lost test connection");
         }
         currentDAOs.clear();
         if (connection != null) {

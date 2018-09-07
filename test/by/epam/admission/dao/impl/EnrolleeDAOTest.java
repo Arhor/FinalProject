@@ -154,10 +154,11 @@ public class EnrolleeDAOTest {
 
     @AfterClass
     public void tearDown() {
+        ConnectionPoolDBUnit.POOL.closePool();
         LOG.info("available connections: "
-                + ConnectionPool.POOL.countAvailableConnections());
+                + ConnectionPoolDBUnit.POOL.countAvailableConnections());
         LOG.info("used connections: "
-                + ConnectionPool.POOL.countUsedConnections());
+                + ConnectionPoolDBUnit.POOL.countUsedConnections());
     }
 
     @BeforeMethod
