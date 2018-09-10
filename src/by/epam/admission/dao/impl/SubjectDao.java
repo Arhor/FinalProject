@@ -1,11 +1,11 @@
 /*
- * class: SubjectDAO
+ * class: SubjectDao
  */
 
 package by.epam.admission.dao.impl;
 
-import by.epam.admission.dao.AbstractDAO;
-import by.epam.admission.exception.DAOException;
+import by.epam.admission.dao.AbstractDao;
+import by.epam.admission.exception.DaoException;
 import by.epam.admission.model.Subject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,9 +21,9 @@ import java.util.List;
  * @author Maxim Burishinets
  * @version 1.0 2 Sep 2018
  */
-public class SubjectDAO extends AbstractDAO<Integer, Subject> {
+public class SubjectDao extends AbstractDao<Integer, Subject> {
 
-    private static final Logger LOG = LogManager.getLogger(SubjectDAO.class);
+    private static final Logger LOG = LogManager.getLogger(SubjectDao.class);
 
     // SQL queries
     private static final String SQL_SELECT_ALL_SUBJECTS;
@@ -84,7 +84,7 @@ public class SubjectDAO extends AbstractDAO<Integer, Subject> {
     }
 
     @Override
-    public boolean delete(Integer id) throws DAOException {
+    public boolean delete(Integer id) throws DaoException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_SUBJECT_BY_ID)) {
@@ -92,38 +92,38 @@ public class SubjectDAO extends AbstractDAO<Integer, Subject> {
             flag = st.executeUpdate();
         } catch (SQLException e) {
             LOG.error("Deletion error", e);
-            throw new DAOException("Deletion error", e);
+            throw new DaoException("Deletion error", e);
         }
         return flag != 0;
     }
 
     @Override
-    public boolean delete(Subject subject) throws DAOException {
+    public boolean delete(Subject subject) throws DaoException {
         try {
             return executeDMLQuery(subject, SQL_DELETE_SUBJECT);
         } catch (SQLException e) {
             LOG.error("Deletion error", e);
-            throw new DAOException("Deletion error", e);
+            throw new DaoException("Deletion error", e);
         }
     }
 
     @Override
-    public boolean create(Subject subject) throws DAOException {
+    public boolean create(Subject subject) throws DaoException {
         try {
             return executeDMLQuery(subject, SQL_INSERT_SUBJECT);
         } catch (SQLException e) {
             LOG.error("Insertion error", e);
-            throw new DAOException("Insertion error", e);
+            throw new DaoException("Insertion error", e);
         }
     }
 
     @Override
-    public Subject update(Subject subject) throws DAOException {
+    public Subject update(Subject subject) throws DaoException {
         try {
             return executeDMLQuery(subject, SQL_UPDATE_SUBJECT) ? subject : null;
         } catch (SQLException e) {
             LOG.error("Update error", e);
-            throw new DAOException("Update error", e);
+            throw new DaoException("Update error", e);
         }
     }
 

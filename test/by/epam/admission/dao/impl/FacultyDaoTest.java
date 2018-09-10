@@ -1,11 +1,11 @@
 /*
- * class: FacultyDAOTest
+ * class: FacultyDaoTest
  */
 
 package by.epam.admission.dao.impl;
 
 import by.epam.admission.dao.TransactionHelper;
-import by.epam.admission.exception.DAOException;
+import by.epam.admission.exception.DaoException;
 import by.epam.admission.model.Faculty;
 import by.epam.admission.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
@@ -19,11 +19,11 @@ import org.testng.annotations.Test;
  * @author Maxim Burishinets
  * @version 1.0 29 Aug 2018
  */
-public class FacultyDAOTest {
+public class FacultyDaoTest {
 
-    private static final Logger LOG = LogManager.getLogger(FacultyDAOTest.class);
+    private static final Logger LOG = LogManager.getLogger(FacultyDaoTest.class);
 
-    private FacultyDAO facultyDao;
+    private FacultyDao facultyDao;
     private TransactionHelper transactionHelper;
 
     @Test
@@ -64,7 +64,7 @@ public class FacultyDAOTest {
         try {
             result = facultyDao.create(faculty);
             transactionHelper.commit();
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             LOG.error("DAO exception", e);
             transactionHelper.rollback();
         }
@@ -74,7 +74,7 @@ public class FacultyDAOTest {
 
     @BeforeClass
     public void setUp() {
-        facultyDao = new FacultyDAO();
+        facultyDao = new FacultyDao();
         transactionHelper = new TransactionHelper();
     }
 

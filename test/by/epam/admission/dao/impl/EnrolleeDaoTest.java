@@ -1,9 +1,8 @@
 package by.epam.admission.dao.impl;
 
 import by.epam.admission.dao.TransactionHelperDBUnit;
-import by.epam.admission.exception.DAOException;
+import by.epam.admission.exception.DaoException;
 import by.epam.admission.model.Enrollee;
-import by.epam.admission.pool.ConnectionPool;
 import by.epam.admission.pool.ConnectionPoolDBUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,14 +13,14 @@ import org.testng.annotations.*;
 
 import java.io.File;
 
-public class EnrolleeDAOTest {
+public class EnrolleeDaoTest {
 
-    private static final Logger LOG = LogManager.getLogger(EnrolleeDAOTest.class);
+    private static final Logger LOG = LogManager.getLogger(EnrolleeDaoTest.class);
 
     @Test
     public void testFindAll() {
         TransactionHelperDBUnit t = new TransactionHelperDBUnit();
-        EnrolleeDAO enrolleeDAO = new EnrolleeDAO();
+        EnrolleeDao enrolleeDAO = new EnrolleeDao();
         t.startTransaction(enrolleeDAO);
         for (Enrollee enrollee : enrolleeDAO.findAll()) {
             LOG.info(enrollee);
@@ -32,13 +31,13 @@ public class EnrolleeDAOTest {
     @Test
     public void testFindEnrolleesByCountry() {
         TransactionHelperDBUnit t = new TransactionHelperDBUnit();
-        EnrolleeDAO enrolleeDAO = new EnrolleeDAO();
+        EnrolleeDao enrolleeDAO = new EnrolleeDao();
         t.startTransaction(enrolleeDAO);
         try {
             for (Enrollee enrollee : enrolleeDAO.findEnrolleesByCountry("Беларусь")) {
                 LOG.info(enrollee);
             }
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             LOG.error("DAO exception", e);
         }
         t.endTransaction();
@@ -47,13 +46,13 @@ public class EnrolleeDAOTest {
     @Test
     public void testFindEnrolleesByCity() {
         TransactionHelperDBUnit t = new TransactionHelperDBUnit();
-        EnrolleeDAO enrolleeDAO = new EnrolleeDAO();
+        EnrolleeDao enrolleeDAO = new EnrolleeDao();
         t.startTransaction(enrolleeDAO);
         try {
             for (Enrollee enrollee : enrolleeDAO.findEnrolleesByCity("Минск")) {
                 LOG.info(enrollee);
             }
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             LOG.error("DAO exception", e);
         }
         t.endTransaction();
@@ -62,7 +61,7 @@ public class EnrolleeDAOTest {
     @Test
     public void testRegisterToFacultyById() {
         TransactionHelperDBUnit t = new TransactionHelperDBUnit();
-        EnrolleeDAO enrolleeDAO = new EnrolleeDAO();
+        EnrolleeDao enrolleeDAO = new EnrolleeDao();
         Enrollee enrollee = new Enrollee();
         enrollee.setId(2);
         for (int i = 201; i < 209; i++) {
@@ -70,7 +69,7 @@ public class EnrolleeDAOTest {
             try {
                 enrolleeDAO.registerToFacultyById(enrollee, i);
                 t.commit();
-            } catch (DAOException e) {
+            } catch (DaoException e) {
                 t.rollback();
                 LOG.error("DAO exception", e);
             }
@@ -84,7 +83,7 @@ public class EnrolleeDAOTest {
             new Thread() {
                 public void run() {
                     TransactionHelperDBUnit t = new TransactionHelperDBUnit();
-                    EnrolleeDAO enrolleeDAO = new EnrolleeDAO();
+                    EnrolleeDao enrolleeDAO = new EnrolleeDao();
                     t.startTransaction(enrolleeDAO);
                     int id = (int)(Math.random() * 29 + 0.5);
                     LOG.info("ID: " + id + " - " + enrolleeDAO.findEntityById(id));
@@ -107,7 +106,7 @@ public class EnrolleeDAOTest {
             new Thread() {
                 public void run() {
                     TransactionHelperDBUnit t = new TransactionHelperDBUnit();
-                    EnrolleeDAO enrolleeDAO = new EnrolleeDAO();
+                    EnrolleeDao enrolleeDAO = new EnrolleeDao();
                     t.startTransaction(enrolleeDAO);
                     Enrollee enrollee = new Enrollee();
                     enrollee.setCountry("Testerstan");
@@ -118,7 +117,7 @@ public class EnrolleeDAOTest {
                         enrolleeDAO.create(enrollee);
                         t.commit();
                         LOG.info("created enrolle: " + enrollee);
-                    } catch (DAOException e) {
+                    } catch (DaoException e) {
                         t.rollback();
                         LOG.error("DAO exception", e);
                     }
@@ -131,14 +130,14 @@ public class EnrolleeDAOTest {
     @Test
     public void testDelete() {
         TransactionHelperDBUnit t = new TransactionHelperDBUnit();
-        EnrolleeDAO enrolleeDAO = new EnrolleeDAO();
+        EnrolleeDao enrolleeDAO = new EnrolleeDao();
         Enrollee enrollee = new Enrollee();
         enrollee.setId(2);
         t.startTransaction(enrolleeDAO);
         try {
             LOG.info(enrolleeDAO.delete(enrollee));
             t.commit();
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             t.rollback();
             LOG.error("DAO exception", e);
         }

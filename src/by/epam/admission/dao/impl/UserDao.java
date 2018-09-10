@@ -1,8 +1,8 @@
 package by.epam.admission.dao.impl;
 
-import by.epam.admission.dao.AbstractDAO;
+import by.epam.admission.dao.AbstractDao;
+import by.epam.admission.exception.DaoException;
 import by.epam.admission.util.EncryptAction;
-import by.epam.admission.exception.DAOException;
 import by.epam.admission.exception.NotSupportedOperationException;
 import by.epam.admission.model.User;
 import org.apache.logging.log4j.LogManager;
@@ -15,9 +15,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO extends AbstractDAO<Integer, User> {
+public class UserDao extends AbstractDao<Integer, User> {
 
-    private static final Logger LOG = LogManager.getLogger(UserDAO.class);
+    private static final Logger LOG = LogManager.getLogger(UserDao.class);
 
     // SQL queries
     private static final String SQL_SELECT_USERS;
@@ -87,7 +87,7 @@ public class UserDAO extends AbstractDAO<Integer, User> {
     }
 
     @Override
-    public boolean delete(Integer id) throws DAOException {
+    public boolean delete(Integer id) throws DaoException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_USER_BY_ID)) {
@@ -95,12 +95,12 @@ public class UserDAO extends AbstractDAO<Integer, User> {
             flag = st.executeUpdate();
         } catch (SQLException e) {
             LOG.error("Deletion error", e);
-            throw new DAOException("Deletion error", e);
+            throw new DaoException("Deletion error", e);
         }
         return flag != 0;
     }
 
-    public boolean delete(User user, String password) throws DAOException {
+    public boolean delete(User user, String password) throws DaoException {
         int flag;
         EncryptAction encryptAction = new EncryptAction();
         String name = findNameByEmail(user.getEmail());
@@ -111,7 +111,7 @@ public class UserDAO extends AbstractDAO<Integer, User> {
             st.setString(2, encryptedPassword);
             flag = st.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Deletion error", e);
+            throw new DaoException("Deletion error", e);
         }
         return (flag != 0);
     }
@@ -122,7 +122,7 @@ public class UserDAO extends AbstractDAO<Integer, User> {
     }
 
     // if return false - user with the same email already exists
-    public boolean create(User user, String password) throws DAOException {
+    public boolean create(User user, String password) throws DaoException {
         boolean result = false;
         if (findNameByEmail(user.getEmail()) == null) {
             try {
@@ -147,7 +147,7 @@ public class UserDAO extends AbstractDAO<Integer, User> {
                 result = flag != 0;
             } catch (SQLException e) {
                 LOG.error("SQL exception", e);
-                throw new DAOException("Insertion error", e);
+                throw new DaoException("Insertion error", e);
             }
         }
         return result;
@@ -159,7 +159,7 @@ public class UserDAO extends AbstractDAO<Integer, User> {
     }
 
     // password changes every time on first_name change
-    public User update(User user, String password) throws DAOException {
+    public User update(User user, String password) throws DaoException {
         int flag;
         EncryptAction encryptAction = new EncryptAction();
         String name = findNameByEmail(user.getEmail());
@@ -176,7 +176,7 @@ public class UserDAO extends AbstractDAO<Integer, User> {
             flag = st.executeUpdate();
         } catch (SQLException e) {
             LOG.error("Updating error", e);
-            throw new DAOException("Updating error", e);
+            throw new DaoException("Updating error", e);
         }
         return flag != 0 ? user : null;
     }

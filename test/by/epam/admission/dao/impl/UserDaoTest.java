@@ -1,11 +1,11 @@
 /*
- * class: UserDAOTest
+ * class: UserDaoTest
  */
 
 package by.epam.admission.dao.impl;
 
 import by.epam.admission.dao.TransactionHelper;
-import by.epam.admission.exception.DAOException;
+import by.epam.admission.exception.DaoException;
 import by.epam.admission.model.User;
 import by.epam.admission.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
@@ -17,14 +17,14 @@ import org.testng.annotations.*;
  * @author Maxim Burishinets
  * @version 1.0 3 Sep 2018
  */
-public class UserDAOTest {
+public class UserDaoTest {
 
-    private static final Logger LOG = LogManager.getLogger(UserDAOTest.class);
+    private static final Logger LOG = LogManager.getLogger(UserDaoTest.class);
 
     @Test
     public void testFindAll() {
         TransactionHelper t = new TransactionHelper();
-        UserDAO uDAO = new UserDAO();
+        UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
         for (User user : uDAO.findAll()) {
             LOG.info(user);
@@ -38,7 +38,7 @@ public class UserDAOTest {
             new Thread() {
                 public void run() {
                     TransactionHelper t = new TransactionHelper();
-                    UserDAO uDAO = new UserDAO();
+                    UserDao uDAO = new UserDao();
                     t.startTransaction(uDAO);
                     int id = (int)(Math.random() * 55 + 0.5);
                     LOG.info("UID: " + id + " - " + uDAO.findEntityById(id));
@@ -53,7 +53,7 @@ public class UserDAOTest {
         String email = "example.30@gmail.com";
         String password = "example.30@gmail.com";
         TransactionHelper t = new TransactionHelper();
-        UserDAO uDAO = new UserDAO();
+        UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
         LOG.info(uDAO.findUserByEmailAndPassword(email, password));
         t.endTransaction();
@@ -65,12 +65,12 @@ public class UserDAOTest {
         user.setEmail("test@gmail.com");
         String password = "test@gmail.com";
         TransactionHelper t = new TransactionHelper();
-        UserDAO uDAO = new UserDAO();
+        UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
         try {
             LOG.info(uDAO.delete(user, password));
             t.commit();
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             LOG.error("DAO exception", e);
             t.rollback();
         }
@@ -84,7 +84,7 @@ public class UserDAOTest {
             new Thread() {
                 public void run() {
                     TransactionHelper t = new TransactionHelper();
-                    UserDAO uDAO = new UserDAO();
+                    UserDao uDAO = new UserDao();
                     t.startTransaction(uDAO);
                     User user = new User();
                     user.setEmail("test"+ number +"@gmail.com");
@@ -97,7 +97,7 @@ public class UserDAOTest {
                         uDAO.create(user, password);
                         t.commit();
                         LOG.info("created user: " + user);
-                    } catch (DAOException e) {
+                    } catch (DaoException e) {
                         LOG.error("DAO exception", e);
                         t.rollback();
                     }
@@ -116,7 +116,7 @@ public class UserDAOTest {
     @Test
     public void testCreate() {
         TransactionHelper t = new TransactionHelper();
-        UserDAO uDAO = new UserDAO();
+        UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
         User user = new User();
         user.setEmail("test@gmail.com");
@@ -131,7 +131,7 @@ public class UserDAOTest {
             if (flag) {
                 LOG.info("created user: " + user);
             }
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             LOG.error("DAO exception", e);
             t.rollback();
         }
@@ -141,7 +141,7 @@ public class UserDAOTest {
     @Test
     public void testUpdateByEmailAndPassword() {
         TransactionHelper t = new TransactionHelper();
-        UserDAO uDAO = new UserDAO();
+        UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
         User user = new User();
         user.setEmail("example.48@gmail.com");
@@ -153,7 +153,7 @@ public class UserDAOTest {
         try {
             result = uDAO.update(user, password);
             t.commit();
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             t.rollback();
         }
         LOG.debug(user);
@@ -164,12 +164,12 @@ public class UserDAOTest {
     public void testDelete() {
         boolean result = false;
         TransactionHelper t = new TransactionHelper();
-        UserDAO uDAO = new UserDAO();
+        UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
         try {
             result = uDAO.delete(50);
             t.commit();
-        } catch (DAOException e) {
+        } catch (DaoException e) {
             t.rollback();
         }
         Assert.assertFalse(result);

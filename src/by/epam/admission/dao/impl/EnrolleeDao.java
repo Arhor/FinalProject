@@ -1,11 +1,11 @@
 /*
- * class: EnrolleeDAO
+ * class: EnrolleeDao
  */
 
 package by.epam.admission.dao.impl;
 
-import by.epam.admission.dao.AbstractDAO;
-import by.epam.admission.exception.DAOException;
+import by.epam.admission.dao.AbstractDao;
+import by.epam.admission.exception.DaoException;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Subject;
 import org.apache.logging.log4j.LogManager;
@@ -22,9 +22,9 @@ import java.util.List;
  * @author Maxim Burishinets
  * @version 1.0 1 Sep 2018
  */
-public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
+public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
 
-    private static final Logger LOG = LogManager.getLogger(EnrolleeDAO.class);
+    private static final Logger LOG = LogManager.getLogger(EnrolleeDao.class);
 
     // SQL queries
     private static final String SQL_SELECT_ENROLLEES;
@@ -74,20 +74,20 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
     }
 
     public List<Enrollee> findEnrolleesByCountry(String country)
-            throws DAOException {
+            throws DaoException {
         ArrayList<Enrollee> enrollees = new ArrayList<>();
         findByAddress(COUNTRY, enrollees, country);
         return enrollees;
     }
 
     public List<Enrollee> findEnrolleesByCity(String city)
-            throws DAOException {
+            throws DaoException {
         ArrayList<Enrollee> enrollees = new ArrayList<>();
         findByAddress(CITY, enrollees, city);
         return enrollees;
     }
 
-    public int findEnrolleeTotalScore(Enrollee enrollee) throws DAOException {
+    public int findEnrolleeTotalScore(Enrollee enrollee) throws DaoException {
         int result = -1;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_SELECT_ENROLLEE_TOTAL_SCORE)) {
@@ -98,7 +98,7 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
             }
         } catch (SQLException e) {
             LOG.error("Selection error", e);
-            throw new DAOException("Selection error", e);
+            throw new DaoException("Selection error", e);
         }
         return result;
     }
@@ -117,10 +117,10 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
      * Hard deletion of Enrollee from database, supposed to use only by admin
      * @param id - Enrollee ID to delete from database
      * @return true - if deletion was successful
-     * @throws DAOException - wrapped SQL exception
+     * @throws DaoException - wrapped SQL exception
      */
     @Override
-    public boolean delete(Integer id) throws DAOException {
+    public boolean delete(Integer id) throws DaoException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_ENROLLEE_BY_ID)) {
@@ -128,7 +128,7 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
             flag = st.executeUpdate();
         } catch (SQLException e) {
             LOG.error("Deletion error", e);
-            throw new DAOException("Deletion error", e);
+            throw new DaoException("Deletion error", e);
         }
         return flag != 0;
     }
@@ -138,23 +138,23 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
      * Sets value `available` of corresponding enrollee to `0`
      * @param enrollee - Enrollee object to delete from database
      * @return true - if deletion was successful
-     * @throws DAOException - wrapped SQL exception
+     * @throws DaoException - wrapped SQL exception
      */
     @Override
-    public boolean delete(Enrollee enrollee) throws DAOException {
+    public boolean delete(Enrollee enrollee) throws DaoException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_ENROLLEE)) {
             st.setInt(1, enrollee.getId());
             flag = st.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Deletion error", e);
+            throw new DaoException("Deletion error", e);
         }
         return flag != 0;
     }
 
     @Override
-    public boolean create(Enrollee enrollee) throws DAOException {
+    public boolean create(Enrollee enrollee) throws DaoException {
         boolean result;
         try {
             int flag;
@@ -173,13 +173,13 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
             result = flag != 0;
         } catch (SQLException e) {
             LOG.error("SQL exception", e);
-            throw new DAOException("Insertion error", e);
+            throw new DaoException("Insertion error", e);
         }
         return result;
     }
 
     public boolean registerToFacultyById(Enrollee enrollee, int facultyId)
-            throws DAOException {
+            throws DaoException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_INSERT_TO_ADMISSION_LIST)) {
@@ -187,7 +187,7 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
             st.setInt(2, facultyId);
             flag = st.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Updating error", e);
+            throw new DaoException("Updating error", e);
         }
         return flag != 0;
     }
@@ -198,7 +198,7 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
     }
 
     @Override
-    public Enrollee update(Enrollee enrollee) throws DAOException {
+    public Enrollee update(Enrollee enrollee) throws DaoException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_UPDATE_ENROLLEE)) {
@@ -207,7 +207,7 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
             st.setInt(3, enrollee.getSchoolCertificate());
             flag = st.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Updating error", e);
+            throw new DaoException("Updating error", e);
         }
         return flag != 0 ? enrollee : null;
     }
@@ -231,7 +231,7 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
 
     private void findByAddress(String place, ArrayList<Enrollee> enrollees,
                                String value)
-            throws DAOException {
+            throws DaoException {
         try (PreparedStatement st = connection.prepareStatement(
                 String.format(SQL_SELECT_ENROLLEES, place))) {
             st.setString(1, value);
@@ -239,7 +239,7 @@ public class EnrolleeDAO extends AbstractDAO<Integer, Enrollee> {
             processResult(enrollees, rs);
         } catch (SQLException e) {
             LOG.error("Selection error", e);
-            throw new DAOException("Selection error", e);
+            throw new DaoException("Selection error", e);
         }
     }
 

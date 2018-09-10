@@ -1,5 +1,5 @@
 /*
- * class: DAOException
+ * class: DaoException
  */
 
 package by.epam.admission.exception;
@@ -8,17 +8,17 @@ package by.epam.admission.exception;
  * @author Maxim Burishinets
  * @version 1.0 1 Sep 2018
  */
-public class DAOException extends Exception {
+public class DaoException extends Exception {
 
-    public DAOException() {
+    public DaoException() {
         super();
     }
 
-    public DAOException(String message) {
+    public DaoException(String message) {
         super(message);
     }
 
-    public DAOException(String message, Throwable cause) {
+    public DaoException(String message, Throwable cause) {
         super(message, cause);
     }
 }

@@ -1,5 +1,5 @@
 /*
- * class: FacultyDAO
+ * class: FacultyDao
  */
 
 package by.epam.admission.dao.impl;
@@ -11,8 +11,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.epam.admission.dao.AbstractDAO;
-import by.epam.admission.exception.DAOException;
+import by.epam.admission.dao.AbstractDao;
+import by.epam.admission.exception.DaoException;
 import by.epam.admission.model.Faculty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,9 +21,9 @@ import org.apache.logging.log4j.Logger;
  * @author Maxim Burishinets
  * @version 1.1 30 Aug 2018
  */
-public class FacultyDAO extends AbstractDAO<Integer, Faculty> {
+public class FacultyDao extends AbstractDao<Integer, Faculty> {
 
-    private static final Logger LOG = LogManager.getLogger(FacultyDAO.class);
+    private static final Logger LOG = LogManager.getLogger(FacultyDao.class);
 
     // SQL queries
     private static final String SQL_SELECT_ALL_FACULTIES;
@@ -88,46 +88,46 @@ public class FacultyDAO extends AbstractDAO<Integer, Faculty> {
     }
 
     @Override
-    public boolean delete(Integer id) throws DAOException {
+    public boolean delete(Integer id) throws DaoException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_FACULTY_BY_ID)) {
             flag = st.executeUpdate();
         } catch (SQLException e) {
             LOG.error("Deletion error", e);
-            throw new DAOException("Deletion error", e);
+            throw new DaoException("Deletion error", e);
         }
         return flag != 0;
     }
 
     @Override
-    public boolean delete(Faculty faculty) throws DAOException {
+    public boolean delete(Faculty faculty) throws DaoException {
         try {
             return executeDMLQuery(faculty, SQL_DELETE_FACULTY);
         } catch (SQLException e) {
             LOG.error("Deletion error", e);
-            throw new DAOException("Deletion error", e);
+            throw new DaoException("Deletion error", e);
         }
     }
 
     @Override
-    public boolean create(Faculty faculty) throws DAOException {
+    public boolean create(Faculty faculty) throws DaoException {
         try {
             return executeDMLQuery(faculty, SQL_INSERT_FACULTY);
         } catch (SQLException e) {
             LOG.error("Insertion error", e);
-            throw new DAOException("Insertion error", e);
+            throw new DaoException("Insertion error", e);
         }
     }
 
     @Override
-    public Faculty update(Faculty faculty) throws DAOException {
+    public Faculty update(Faculty faculty) throws DaoException {
         try {
             boolean result = executeDMLQuery(faculty, SQL_UPDATE_FACULTY);
             return result ? faculty : null;
         } catch (SQLException e) {
             LOG.error("Update error", e);
-            throw new DAOException("Update error", e);
+            throw new DaoException("Update error", e);
         }
     }
 

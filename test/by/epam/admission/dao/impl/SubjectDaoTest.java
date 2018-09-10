@@ -1,5 +1,5 @@
 /*
- * class: SubjectDAOTest
+ * class: SubjectDaoTest
  */
 
 package by.epam.admission.dao.impl;
@@ -15,16 +15,16 @@ import org.testng.annotations.*;
  * @author Maxim Burishinets
  * @version 1.0 30 Aug 2018
  */
-public class SubjectDAOTest {
+public class SubjectDaoTest {
 
-    private static final Logger LOG = LogManager.getLogger(SubjectDAOTest.class);
+    private static final Logger LOG = LogManager.getLogger(SubjectDaoTest.class);
 
-    private SubjectDAO subjectDao;
+    private SubjectDao subjectDao;
     private TransactionHelper transactionHelper;
 
     @BeforeClass
     public void setUp() {
-        subjectDao = new SubjectDAO();
+        subjectDao = new SubjectDao();
         transactionHelper = new TransactionHelper();
     }
 

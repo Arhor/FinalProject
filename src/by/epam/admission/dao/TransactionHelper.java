@@ -14,13 +14,13 @@ public class TransactionHelper {
 
     private ProxyConnection connection;
 
-    private ArrayList<AbstractDAO> currentDAOs;
+    private ArrayList<AbstractDao> currentDAOs;
 
     public TransactionHelper() {
         currentDAOs = new ArrayList<>();
     }
 
-    public void startTransaction(AbstractDAO dao, AbstractDAO...daos) {
+    public void startTransaction(AbstractDao dao, AbstractDao...daos) {
         if (connection == null) {
             connection = ConnectionPool.POOL.getConnection();
         }
@@ -32,7 +32,7 @@ public class TransactionHelper {
         dao.setConnection(connection);
         currentDAOs.add(dao);
         LOG.debug(dao.getClass().getSimpleName() + " - added to transaction");
-        for (AbstractDAO concreteDao : daos) {
+        for (AbstractDao concreteDao : daos) {
             concreteDao.setConnection(connection);
             currentDAOs.add(concreteDao);
             LOG.debug(dao.getClass().getSimpleName() + " - added to transaction");
@@ -44,7 +44,7 @@ public class TransactionHelper {
          * IF statement prevents adding the same connection
          * to connection pool more then once
          */
-        for (AbstractDAO dao : currentDAOs) {
+        for (AbstractDao dao : currentDAOs) {
             dao.setConnection(null);
             LOG.debug(dao.getClass().getSimpleName() + " - lost connection");
         }
