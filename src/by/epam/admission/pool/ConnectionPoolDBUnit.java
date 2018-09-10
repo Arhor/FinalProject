@@ -38,7 +38,11 @@ public enum ConnectionPoolDBUnit {
 
     ConnectionPoolDBUnit() {
         try {
-            tester = new JdbcDatabaseTester(DB_DRIVER, DB_URL, DB_USER, DB_PASSWORD);
+            tester = new JdbcDatabaseTester(
+                    DB_DRIVER,
+                    DB_URL,
+                    DB_USER,
+                    DB_PASSWORD);
         } catch (ClassNotFoundException e) {
             LOG.fatal("JDBC driver not found");
             throw new RuntimeException();
