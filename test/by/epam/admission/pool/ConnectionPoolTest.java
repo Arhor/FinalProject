@@ -25,7 +25,7 @@ public class ConnectionPoolTest {
 
     @Test
     public void mainTest() {
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 100; i++) {
             new Thread() {
                 public void run() {
                     ProxyConnection connection = ConnectionPoolDBUnit.POOL.getConnection();
@@ -71,10 +71,10 @@ public class ConnectionPoolTest {
         ConnectionPoolDBUnit.POOL.tester.setTearDownOperation(DatabaseOperation.NONE);
     }
 
-//    @AfterClass
-//    public void tearDown() {
-//        ConnectionPoolDBUnit.POOL.closePool();
-//    }
+    @AfterClass
+    public void tearDown() {
+        ConnectionPoolDBUnit.POOL.closePool();
+    }
 
     @BeforeMethod
     public void setUpMethod() throws Exception {

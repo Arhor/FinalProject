@@ -7,10 +7,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43dc64a4-49e4-4d08-bbd3-db3f7a64b274" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/resources/all-tables-dataset.xml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/all-tables-dataset.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/dao/TransactionHelperDBUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/dao/TransactionHelperDBUnit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/pool/ConnectionPoolDBUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/pool/ConnectionPoolDBUnit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/by/epam/admission/dao/impl/EnrolleeDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/by/epam/admission/dao/impl/EnrolleeDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/lib/dbunit-2.5.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/lib/log4j-api-2.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/lib/log4j-core-2.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/lib/mysql-connector-java-8.0.12.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/lib/slf4j-api-1.7.25.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/lib/slf4j-simple-1.7.25.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/lib/testng-6.7.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/dbunit_2_5_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/dbunit_2_5_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/dbunit_2_5_4__2_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/log4j_api_2_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/log4j_api_2_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/log4j_core_2_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/log4j_core_2_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_12.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_12.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/slf4j_api_1_7_25.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/slf4j_api_1_7_25.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/slf4j_simple_1_7_25.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/slf4j_simple_1_7_25.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/slf4j_simple_1_7_25__2_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/testng_6_7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/testng_6_7.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/dbunit-2.5.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/log4j-api-2.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/log4j-core-2.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mysql-connector-java-8.0.12.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/slf4j-api-1.7.25.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/slf4j-simple-1.7.25.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/testng-6.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,7 +55,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="4" />
-          <entry key="java" value="68" />
+          <entry key="java" value="69" />
           <entry key="log" value="4" />
           <entry key="sql" value="2" />
           <entry key="xml" value="9" />
@@ -42,7 +64,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="4" />
-          <entry key="JAVA" value="68" />
+          <entry key="JAVA" value="69" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="SQL" value="2" />
           <entry key="XML" value="9" />
@@ -50,14 +72,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="5030" />
+          <entry key="java" value="5032" />
           <entry key="sql" value="28" />
           <entry key="xml" value="747" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="5030" />
+          <entry key="JAVA" value="5032" />
           <entry key="SQL" value="28" />
           <entry key="XML" value="747" />
         </counts>
@@ -110,29 +132,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/impl/EnrolleeDAOTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1275">
+            <state relative-caret-position="235">
               <caret line="156" column="46" selection-start-line="156" selection-start-column="46" selection-end-line="156" selection-end-column="46" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/dao/TransactionHelperDBUnit.java">
+        <entry file="file://$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="48" column="68" selection-start-line="48" selection-start-column="68" selection-end-line="48" selection-end-column="68" />
+            <state>
+              <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#2418#2419#0" expanded="true" />
+                <element signature="e#2471#2472#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/pool/ConnectionPoolDBUnit.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="467">
-              <caret line="109" column="62" selection-start-line="109" selection-start-column="62" selection-end-line="109" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -153,6 +167,7 @@
       <find>seat</find>
       <find>sea</find>
       <find>ConnectionPool</find>
+      <find>ConnectionPoolDBUnit</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -200,12 +215,12 @@
         <option value="$PROJECT_DIR$/test/by/epam/admission/dao/EncryptActionTest.java" />
         <option value="$PROJECT_DIR$/test/by/epam/admission/dao/DaoTester.java" />
         <option value="$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolDBUnit.java" />
-        <option value="$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolTest.java" />
         <option value="$PROJECT_DIR$/test/by/epam/admission/dao/EnrolleeDAOTest.java" />
         <option value="$PROJECT_DIR$/resources/all-tables-dataset.xml" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/pool/ConnectionPoolDBUnit.java" />
         <option value="$PROJECT_DIR$/test/by/epam/admission/dao/impl/EnrolleeDAOTest.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/dao/TransactionHelperDBUnit.java" />
+        <option value="$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolTest.java" />
       </list>
     </option>
   </component>
@@ -231,6 +246,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -241,7 +259,7 @@
             <path>
               <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
@@ -331,19 +349,34 @@
               <item name="admission" type="462c0819:PsiDirectoryNode" />
               <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536363476409" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536582832827" />
     <property name="last_opened_file_path" value="$USER_HOME$/eclipse-workspace/Task_1" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -372,7 +405,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.EnrolleeDAOTest.testFindEntityById">
+  <component name="RunManager" selected="TestNG.ConnectionPoolTest.mainTest">
     <configuration name="ConnectionPoolTest.mainTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="FinalProject" />
       <extension name="coverage">
@@ -544,11 +577,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.ConnectionPoolTest.mainTest" />
         <item itemvalue="TestNG.EnrolleeDAOTest.testFindEntityById" />
         <item itemvalue="TestNG.EnrolleeDAOTest.testFindEnrolleesByCity" />
         <item itemvalue="TestNG.EnrolleeDAOTest.testFindEnrolleesByCountry" />
         <item itemvalue="TestNG.EnrolleeDAOTest.testFindAll" />
-        <item itemvalue="TestNG.ConnectionPoolTest.mainTest" />
       </list>
     </recent_temporary>
   </component>
@@ -573,21 +606,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ConnectionPoolTest_mainTest - 2018.09.08 at 01h 43m 46s.xml">
-      <configuration name="ConnectionPoolTest.mainTest" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="EnrolleeDAOTest_testFindAll - 2018.09.08 at 01h 53m 42s.xml">
-      <configuration name="EnrolleeDAOTest.testFindAll" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="EnrolleeDAOTest_testFindEnrolleesByCountry - 2018.09.08 at 01h 55m 10s.xml">
-      <configuration name="EnrolleeDAOTest.testFindEnrolleesByCountry" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="EnrolleeDAOTest_testFindEnrolleesByCity - 2018.09.08 at 01h 56m 09s.xml">
-      <configuration name="EnrolleeDAOTest.testFindEnrolleesByCity" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="EnrolleeDAOTest_testFindEntityById - 2018.09.08 at 01h 57m 09s.xml">
-      <configuration name="EnrolleeDAOTest.testFindEntityById" configurationId="TestNG" />
-    </history-entry>
     <history-entry file="EnrolleeDAOTest_testFindEntityById - 2018.09.08 at 01h 58m 07s.xml">
       <configuration name="EnrolleeDAOTest.testFindEntityById" configurationId="TestNG" />
     </history-entry>
@@ -603,9 +621,24 @@
     <history-entry file="EnrolleeDAOTest_testFindEntityById - 2018.09.08 at 02h 37m 19s.xml">
       <configuration name="EnrolleeDAOTest.testFindEntityById" configurationId="TestNG" />
     </history-entry>
+    <history-entry file="ConnectionPoolTest_mainTest - 2018.09.10 at 15h 28m 52s.xml">
+      <configuration name="ConnectionPoolTest.mainTest" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="ConnectionPoolTest_mainTest - 2018.09.10 at 15h 29m 18s.xml">
+      <configuration name="ConnectionPoolTest.mainTest" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="ConnectionPoolTest_mainTest - 2018.09.10 at 15h 29m 42s.xml">
+      <configuration name="ConnectionPoolTest.mainTest" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="ConnectionPoolTest_mainTest - 2018.09.10 at 15h 32m 52s.xml">
+      <configuration name="ConnectionPoolTest.mainTest" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="ConnectionPoolTest_mainTest - 2018.09.10 at 15h 33m 46s.xml">
+      <configuration name="ConnectionPoolTest.mainTest" configurationId="TestNG" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48857000" />
+    <option name="totallyTimeSpent" value="49191000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -620,7 +653,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6795491" visible="true" weight="0.16897655" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6795491" visible="true" weight="0.17377399" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -830,9 +863,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="497">
           <caret line="53" column="12" lean-forward="true" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -927,63 +957,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/users-and-articles-dataset.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1961">
-          <caret line="59" column="50" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/all-tables-dataset.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/pool/DBunitTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="29" column="62" lean-forward="true" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/users-and-articles-dataset.xml" />
+    <entry file="file://$PROJECT_DIR$/all-tables-dataset.xml" />
+    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/pool/DBunitTest.java" />
     <entry file="file://$PROJECT_DIR$/test/by/epam/admission/util/EncryptActionTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="69" selection-start-line="14" selection-start-column="69" selection-end-line="14" selection-end-column="69" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolDBUnit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1266">
-          <caret line="128" column="43" selection-start-line="128" selection-start-column="43" selection-end-line="128" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="63" column="44" lean-forward="true" selection-start-line="63" selection-start-column="44" selection-end-line="63" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/DaoTester.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="49" column="4" lean-forward="true" selection-start-line="49" selection-start-column="4" selection-end-line="52" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolDBUnit.java" />
+    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/DaoTester.java" />
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/pool/ConnectionPool.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -1003,15 +988,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/pool/ConnectionPoolDBUnit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
+        <state relative-caret-position="1564">
           <caret line="109" column="62" selection-start-line="109" selection-start-column="62" selection-end-line="109" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/impl/EnrolleeDAOTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="156" column="46" selection-start-line="156" selection-start-column="46" selection-end-line="156" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -1021,6 +999,24 @@
           <caret line="48" column="68" selection-start-line="48" selection-start-column="68" selection-end-line="48" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/impl/EnrolleeDAOTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="156" column="46" selection-start-line="156" selection-start-column="46" selection-end-line="156" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+          <folding>
+            <element signature="e#2418#2419#0" expanded="true" />
+            <element signature="e#2471#2472#0" expanded="true" />
           </folding>
         </state>
       </provider>
