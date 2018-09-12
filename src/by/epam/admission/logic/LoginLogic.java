@@ -1,12 +1,23 @@
 package by.epam.admission.logic;
 
+import by.epam.admission.dao.TransactionHelper;
+import by.epam.admission.dao.impl.UserDao;
+import by.epam.admission.model.User;
+
 public class LoginLogic {
 
-    private static final String ADMIN_LOGIN = "admin";
-    private static final String ADMIN_PASSWORD = "qwe123";
-
     public static boolean checkLogin(String login, String password) {
-        return ADMIN_LOGIN.equals(login) && ADMIN_PASSWORD.equals(password);
+
+        TransactionHelper helper = new TransactionHelper();
+        UserDao userDao = new UserDao();
+
+        helper.startTransaction(userDao);
+        User user = userDao.findUserByEmailAndPassword(login, password);
+        helper.endTransaction();
+
+        boolean result = (user != null);
+
+        return result;
     }
 
 }
