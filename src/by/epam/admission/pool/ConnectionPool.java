@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.DriverManager;
 
 import java.util.Enumeration;
-import java.util.Properties;
+import java.util.ResourceBundle;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import com.mysql.cj.jdbc.Driver;
@@ -40,7 +40,7 @@ public enum ConnectionPool {
     private LinkedBlockingQueue<ProxyConnection> usedConnections;
 
     ConnectionPool() {
-        Properties prop = PropertiesHandler.readProperties();
+        ResourceBundle prop = DatabaseManager.readProperties();
         availableConnections = new LinkedBlockingQueue<>();
         usedConnections = new LinkedBlockingQueue<>();
         try {
@@ -50,14 +50,14 @@ public enum ConnectionPool {
         } catch (SQLException e) {
             LOG.error("SQL exception", e);
         }
-        POOL_SIZE = Integer.parseInt(prop.getProperty(DB_POOLSIZE));
+        POOL_SIZE = Integer.parseInt(prop.getString(DB_POOLSIZE));
         for (int i = 0; i < POOL_SIZE; i++) {
             Connection connection;
             try {
                 connection = DriverManager.getConnection(
-                        prop.getProperty(DB_URL),
-                        prop.getProperty(DB_USER),
-                        prop.getProperty(DB_PASSWORD));
+                        prop.getString(DB_URL),
+                        prop.getString(DB_USER),
+                        prop.getString(DB_PASSWORD));
                 LOG.debug("connection established...");
                 availableConnections.put(new ProxyConnection(connection));
             } catch (SQLException e) {

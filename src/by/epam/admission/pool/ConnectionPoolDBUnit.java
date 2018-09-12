@@ -17,8 +17,6 @@ public enum ConnectionPoolDBUnit {
 
     POOL;
 
-    public IDatabaseTester tester = null;
-
     private final Logger LOG = LogManager.getLogger(ConnectionPoolDBUnit.class);
 
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -28,13 +26,16 @@ public enum ConnectionPoolDBUnit {
             "&useSSL=false" +
             "&requireSSL=false" +
             "&useLegacyDatetimeCode=false" +
-            "&amp&serverTimezone=UTC";;
+            "&amp&serverTimezone=UTC";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "dragonlance";
+
     private static final int DB_POOLSIZE = 10;
 
     private LinkedBlockingQueue<ProxyConnection> availableConnections;
     private LinkedBlockingQueue<ProxyConnection> usedConnections;
+
+    private IDatabaseTester tester;
 
     ConnectionPoolDBUnit() {
         try {
@@ -134,4 +135,9 @@ public enum ConnectionPoolDBUnit {
     public int countUsedConnections() {
         return usedConnections.size();
     }
+
+    public IDatabaseTester getTester() {
+        return tester;
+    }
+
 }

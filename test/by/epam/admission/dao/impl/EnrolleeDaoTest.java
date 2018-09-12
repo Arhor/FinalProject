@@ -6,6 +6,7 @@ import by.epam.admission.model.Enrollee;
 import by.epam.admission.pool.ConnectionPoolDBUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.dbunit.IDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
@@ -15,7 +16,8 @@ import java.io.File;
 
 public class EnrolleeDaoTest {
 
-    private static final Logger LOG = LogManager.getLogger(EnrolleeDaoTest.class);
+    private static final Logger LOG = LogManager.getLogger(
+            EnrolleeDaoTest.class);
 
     @Test
     public void testFindAll() {
@@ -147,8 +149,9 @@ public class EnrolleeDaoTest {
 
     @BeforeClass
     public void setUpClass() {
-        ConnectionPoolDBUnit.POOL.tester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
-        ConnectionPoolDBUnit.POOL.tester.setTearDownOperation(DatabaseOperation.NONE);
+        IDatabaseTester tester = ConnectionPoolDBUnit.POOL.getTester();
+        tester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
+        tester.setTearDownOperation(DatabaseOperation.DELETE_ALL);
     }
 
     @AfterClass
@@ -163,14 +166,14 @@ public class EnrolleeDaoTest {
     @BeforeMethod
     public void setUpMethod() throws Exception {
         FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-        IDataSet dataSet = builder.build(new File("resources/all-tables-dataset.xml"));
-        ConnectionPoolDBUnit.POOL.tester.setDataSet(dataSet);
-        ConnectionPoolDBUnit.POOL.tester.onSetup();
+        IDataSet dataSet = builder.build(new File("all-tables-dataset.xml"));
+        ConnectionPoolDBUnit.POOL.getTester().setDataSet(dataSet);
+        ConnectionPoolDBUnit.POOL.getTester().onSetup();
     }
 
     @AfterMethod
     public void tearDownMethod() throws Exception {
-        ConnectionPoolDBUnit.POOL.tester.onTearDown();
+        ConnectionPoolDBUnit.POOL.getTester().onTearDown();
     }
 
 

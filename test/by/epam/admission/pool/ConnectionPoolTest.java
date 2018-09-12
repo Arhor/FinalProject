@@ -6,6 +6,7 @@ package by.epam.admission.pool;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
@@ -21,17 +22,20 @@ import java.io.*;
  */
 public class ConnectionPoolTest {
 
-    private static final Logger LOG = LogManager.getLogger(ConnectionPoolTest.class);
+    private static final Logger LOG = LogManager.getLogger(
+            ConnectionPoolTest.class);
+
+    private static ConnectionPoolDBUnit pool = ConnectionPoolDBUnit.POOL;
 
     @Test
     public void mainTest() {
         for (int i = 0; i < 100; i++) {
             new Thread() {
                 public void run() {
-                    ProxyConnection connection = ConnectionPoolDBUnit.POOL.getConnection();
+                    ProxyConnection connection = pool.getConnection();
                     try {
                         Thread.sleep((int)(Math.random() * 10));
-                        ConnectionPoolDBUnit.POOL.releaseConnection(connection);
+                        pool.releaseConnection(connection);
                     } catch (InterruptedException e) {
                         LOG.error("Interrupted exception: ", e);
                         Thread.currentThread().interrupt();
@@ -47,45 +51,47 @@ public class ConnectionPoolTest {
         }
     }
 
-    @Test
-    public void serializationTest() throws IOException, ClassNotFoundException, InterruptedException {
-        ConnectionPool pool_1 = ConnectionPool.POOL;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(baos);
-        oos.writeObject(pool_1);
-        oos.close();
-
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-        ObjectInputStream ois = new ObjectInputStream(bais);
-
-        ConnectionPool pool_2 = (ConnectionPool) ois.readObject();
-        ois.close();
-        Thread.sleep(10000);
-        Assert.assertTrue(pool_1 == pool_2);
-    }
+//    @Test
+//    public void serializationTest()
+//            throws IOException, ClassNotFoundException, InterruptedException {
+//        ConnectionPool pool_1 = ConnectionPool.POOL;
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        ObjectOutputStream oos = new ObjectOutputStream(baos);
+//        oos.writeObject(pool_1);
+//        oos.close();
+//
+//        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+//        ObjectInputStream ois = new ObjectInputStream(bais);
+//
+//        ConnectionPool pool_2 = (ConnectionPool) ois.readObject();
+//        ois.close();
+//        Thread.sleep(10000);
+//        Assert.assertTrue(pool_1 == pool_2);
+//    }
 
 
     @BeforeClass
-    public void setUpClass() throws Exception {
-        ConnectionPoolDBUnit.POOL.tester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
-        ConnectionPoolDBUnit.POOL.tester.setTearDownOperation(DatabaseOperation.NONE);
+    public void setUpClass() {
+        IDatabaseTester tester = pool.getTester();
+        tester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
+        tester.setTearDownOperation(DatabaseOperation.DELETE_ALL);
     }
 
     @AfterClass
     public void tearDown() {
-        ConnectionPoolDBUnit.POOL.closePool();
+        pool.closePool();
     }
 
     @BeforeMethod
     public void setUpMethod() throws Exception {
         FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-        IDataSet dataSet = builder.build(new File("resources/all-tables-dataset.xml"));
-        ConnectionPoolDBUnit.POOL.tester.setDataSet(dataSet);
-        ConnectionPoolDBUnit.POOL.tester.onSetup();
+        IDataSet dataSet = builder.build(new File("all-tables-dataset.xml"));
+        pool.getTester().setDataSet(dataSet);
+        pool.getTester().onSetup();
     }
 
     @AfterMethod
     public void tearDownMethod() throws Exception {
-        ConnectionPoolDBUnit.POOL.tester.onTearDown();
+        pool.getTester().onTearDown();
     }
 }

@@ -1,5 +1,7 @@
 package by.epam.admission.model;
 
+import java.util.HashMap;
+
 public class Enrollee extends Entity{
 
     private String country;
@@ -7,6 +9,7 @@ public class Enrollee extends Entity{
     private int schoolCertificate;
     private int userId;
     private boolean available;
+    private HashMap<Subject, Integer> marks;
 
     public String getCountry() {
         return country;
@@ -46,6 +49,14 @@ public class Enrollee extends Entity{
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public HashMap<Subject, Integer> getMarks() {
+        return marks;
+    }
+
+    public void setMarks(HashMap<Subject, Integer> marks) {
+        this.marks = marks;
     }
 
     @Override
