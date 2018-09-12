@@ -1,8 +1,6 @@
 package by.epam.admission.command;
 
-import by.epam.admission.dao.TransactionHelper;
-import by.epam.admission.dao.impl.UserDao;
-import by.epam.admission.exception.DaoException;
+import by.epam.admission.logic.RegistrationLogic;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.MessageManager;
@@ -16,39 +14,38 @@ public class RegistrationCommand implements ActionCommand {
 
     private static final Logger LOG = LogManager.getLogger(RegistrationCommand.class);
 
+    private static final String PARAM_NAME_LOGIN = "login";
+    private static final String PARAM_NAME_PASSWORD = "password";
+    private static final String PARAM_NAME_FIRST_NAME = "firstName";
+    private static final String PARAM_NAME_LAST_NAME = "lastName";
+
     @Override
     public String execute(HttpServletRequest request) {
         String page;
 
         HttpSession session = request.getSession();
 
-        User user = new User();
-        user.setEmail(request.getParameter("email"));
-        user.setFirstName(request.getParameter("firstName"));
-        user.setLastName(request.getParameter("lastName"));
+        String login = request.getParameter(PARAM_NAME_LOGIN);
+        String password = request.getParameter(PARAM_NAME_PASSWORD);
+        String firstName = request.getParameter(PARAM_NAME_FIRST_NAME);
+        String lastName = request.getParameter(PARAM_NAME_LAST_NAME);
 
+        User user = new User();
+
+        user.setEmail(login);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
         user.setRole(User.Role.CLIENT);
         user.setLang(User.Lang.RU);
 
-        String password = request.getParameter("password");
 
         LOG.debug("User to create: " + user);
 
-        TransactionHelper helper = new TransactionHelper();
-        UserDao userDao = new UserDao();
-        helper.startTransaction(userDao);
-        boolean result = false;
-        try {
-            result = userDao.create(user, password);
-            helper.commit();
-        } catch (DaoException e) {
-            LOG.error("Registration error", e); // TODO: implement registration error handling
-            helper.rollback();
-        }
+        user = RegistrationLogic.registerUser(user, password);
 
-        helper.endTransaction();
+        LOG.debug("Registration result: " + user);
 
-        if (result) {
+        if (user != null) {
             request.setAttribute("user", user.getFirstName() + " " + user.getLastName());
             session.setAttribute("role", user.getRole());
             page = ConfigurationManager.getProperty("path.page.main");

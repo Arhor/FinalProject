@@ -1,6 +1,6 @@
 package by.epam.admission.filter;
 
-import by.epam.admission.command.client.ClientType;
+import by.epam.admission.model.User;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -23,9 +23,9 @@ public class LoginFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpsResponse = (HttpServletResponse) servletResponse;
         HttpSession session = httpRequest.getSession();
-        ClientType type = (ClientType) session.getAttribute("userType");
+        User.Role type = (User.Role) session.getAttribute("userType");
         if (type == null) {
-            type = ClientType.GUEST;
+            type = User.Role.GUEST;
             session.setAttribute("userType", type);
             RequestDispatcher dispatcher = servletRequest.getServletContext().getRequestDispatcher("/jsp/guest.jsp");
             dispatcher.forward(httpRequest, httpsResponse);
