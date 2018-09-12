@@ -85,7 +85,7 @@ public class ConnectionPoolTest {
     @BeforeMethod
     public void setUpMethod() throws Exception {
         FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-        IDataSet dataSet = builder.build(new File("all-tables-dataset.xml"));
+        IDataSet dataSet = builder.build(new File("resources/all-tables-dataset.xml"));
         pool.getTester().setDataSet(dataSet);
         pool.getTester().onSetup();
     }
