@@ -2,7 +2,7 @@ package by.epam.admission.command.factory;
 
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.impl.EmptyCommand;
-import by.epam.admission.command.client.CommandEnum;
+import by.epam.admission.command.CommandEnum;
 import by.epam.admission.util.MessageManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -1,6 +1,5 @@
-package by.epam.admission.command.client;
+package by.epam.admission.command;
 
-import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.impl.*;
 
 public enum CommandEnum {
