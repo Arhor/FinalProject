@@ -1,5 +1,6 @@
-package by.epam.admission.command;
+package by.epam.admission.command.impl;
 
+import by.epam.admission.command.ActionCommand;
 import by.epam.admission.logic.RegistrationLogic;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;

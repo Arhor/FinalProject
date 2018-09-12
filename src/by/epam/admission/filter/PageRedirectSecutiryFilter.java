@@ -1,35 +1,30 @@
 package by.epam.admission.filter;
 
-import by.epam.admission.model.User;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "loginFilter")
-public class LoginFilter implements Filter {
+@WebFilter(filterName = "PageRedirectFilter", urlPatterns = "/jsp/*",
+        initParams = {
+        @WebInitParam(name = "INDEX_PATH", value = "/index.jsp")
+})
+public class PageRedirectSecutiryFilter implements Filter {
+
+    private String indexPath;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        indexPath = filterConfig.getInitParameter("INDEX_PATH");
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
-        HttpServletResponse httpsResponse = (HttpServletResponse) servletResponse;
-        HttpSession session = httpRequest.getSession();
-        User.Role type = (User.Role) session.getAttribute("role");
-        if (type == null) {
-            type = User.Role.GUEST;
-            session.setAttribute("role", type);
-            RequestDispatcher dispatcher = servletRequest.getServletContext().getRequestDispatcher("/jsp/guest.jsp");
-            dispatcher.forward(httpRequest, httpsResponse);
-        }
+        HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
+        httpResponse.sendRedirect(httpRequest.getContextPath() + indexPath);
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

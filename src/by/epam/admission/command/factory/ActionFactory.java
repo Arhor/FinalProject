@@ -1,7 +1,7 @@
 package by.epam.admission.command.factory;
 
 import by.epam.admission.command.ActionCommand;
-import by.epam.admission.command.EmptyCommand;
+import by.epam.admission.command.impl.EmptyCommand;
 import by.epam.admission.command.client.CommandEnum;
 import by.epam.admission.util.MessageManager;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +17,7 @@ public class ActionFactory {
 
         ActionCommand current = new EmptyCommand();
 
-        String action = request.getParameter("command");
+        String action = request.getParameter("command").replace(" ", "_").toUpperCase();
 
         LOG.debug("command: " + action);
 
@@ -26,7 +26,7 @@ public class ActionFactory {
             return current;
         }
         try {
-            CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
+            CommandEnum currentEnum = CommandEnum.valueOf(action);
 
             LOG.debug("currentEnum: " + currentEnum);
 

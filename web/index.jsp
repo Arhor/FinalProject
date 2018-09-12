@@ -14,10 +14,14 @@
     </head>
     <body>
         <div class="container">
-            <div class="login-form">
-                <a href="/jsp/login.jsp"><div class="button">SIGN IN</div></a>
-                <a href="/jsp/registration.jsp"><div class="button">SIGN UP</div></a>
-            </div>
+            <form class="login-form" action="/controller" name="chooseForm" method="POST">
+                <input type="submit" name="command" value="SIGN IN" />
+                <input type="submit" name="command" value="SIGN UP" />
+            </form>
+            <%--<div class="login-form">--%>
+                <%--<a href="/jsp/login.jsp"><div class="button">SIGN IN</div></a>--%>
+                <%--<a href="/jsp/registration.jsp"><div class="button">SIGN UP</div></a>--%>
+            <%--</div>--%>
         </div>
     </body>
 </html>

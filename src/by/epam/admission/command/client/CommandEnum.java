@@ -1,9 +1,7 @@
 package by.epam.admission.command.client;
 
 import by.epam.admission.command.ActionCommand;
-import by.epam.admission.command.LoginCommand;
-import by.epam.admission.command.LogoutCommand;
-import by.epam.admission.command.RegistrationCommand;
+import by.epam.admission.command.impl.*;
 
 public enum CommandEnum {
 
@@ -21,6 +19,16 @@ public enum CommandEnum {
     LOGOUT {
         {
             this.command = new LogoutCommand();
+        }
+    },
+    SIGN_IN {
+        {
+            this.command = new SignInCommand();
+        }
+    },
+    SIGN_UP {
+        {
+            this.command = new SignUpCommand();
         }
     };
 

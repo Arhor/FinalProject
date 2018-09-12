@@ -1,6 +1,6 @@
 package by.epam.admission.logic;
 
-import by.epam.admission.command.RegistrationCommand;
+import by.epam.admission.command.impl.RegistrationCommand;
 import by.epam.admission.dao.TransactionHelper;
 import by.epam.admission.dao.impl.UserDao;
 import by.epam.admission.exception.DaoException;

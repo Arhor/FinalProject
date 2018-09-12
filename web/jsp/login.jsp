@@ -21,7 +21,7 @@
             ${errorLoginMessage}
             ${wrongAction}
             ${nullPage}
-            <input type="submit" value="Sign in" />
+            <input type="submit" value="SIGN IN" />
         </form>
     </div>
 </body>

@@ -1,4 +1,4 @@
-package by.epam.admission.command;
+package by.epam.admission.command.impl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
