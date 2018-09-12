@@ -79,7 +79,7 @@ public class UserDaoTest {
 
     @Test
     public void testMultiCreate() {
-        for (int i = 50; i < 60; i++) {
+        for (int i = 1; i < 11; i++) {
             final int number = i;
             new Thread() {
                 public void run() {

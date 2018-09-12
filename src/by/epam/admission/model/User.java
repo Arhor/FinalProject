@@ -71,7 +71,7 @@ public class User extends Entity {
     }
 
     public enum Role {
-        ADMIN, CLIENT;
+        GUEST, CLIENT, ADMIN
     }
 
     @Override

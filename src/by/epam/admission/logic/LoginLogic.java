@@ -6,7 +6,7 @@ import by.epam.admission.model.User;
 
 public class LoginLogic {
 
-    public static boolean checkLogin(String login, String password) {
+    public static User checkLogin(String login, String password) {
 
         TransactionHelper helper = new TransactionHelper();
         UserDao userDao = new UserDao();
@@ -15,9 +15,7 @@ public class LoginLogic {
         User user = userDao.findUserByEmailAndPassword(login, password);
         helper.endTransaction();
 
-        boolean result = (user != null);
-
-        return result;
+        return user;
     }
 
 }

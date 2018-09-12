@@ -14,7 +14,9 @@ public class ActionFactory {
     private static final Logger LOG = LogManager.getLogger(ActionFactory.class);
 
     public ActionCommand defineCommand(HttpServletRequest request) {
+
         ActionCommand current = new EmptyCommand();
+
         String action = request.getParameter("command");
 
         LOG.debug("command: " + action);

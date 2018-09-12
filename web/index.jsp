@@ -16,9 +16,8 @@
         <div class="container">
             <div class="login-form">
                 <a href="/jsp/login.jsp"><div class="button">SIGN IN</div></a>
-                <a href="/jsp/register.jsp"><div class="button">SIGN UP</div></a>
+                <a href="/jsp/registration.jsp"><div class="button">SIGN UP</div></a>
             </div>
-
         </div>
     </body>
 </html>

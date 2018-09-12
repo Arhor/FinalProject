@@ -10,7 +10,7 @@
 <head>
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/style.css">
-    <title>Title</title>
+    <title>Login Page</title>
 </head>
 <body>
     <div class="container">

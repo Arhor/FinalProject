@@ -1,10 +1,12 @@
 package by.epam.admission.command;
 
 import by.epam.admission.logic.LoginLogic;
+import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class LoginCommand implements ActionCommand {
 
@@ -18,8 +20,13 @@ public class LoginCommand implements ActionCommand {
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String password = request.getParameter(PARAM_NAME_PASSWORD);
 
-        if(LoginLogic.checkLogin(login, password)) {
-            request.setAttribute("user", login);
+        HttpSession session = request.getSession();
+
+        User user = LoginLogic.checkLogin(login, password);
+
+        if(user != null) {
+            request.setAttribute("user", user.getFirstName() + " " + user.getLastName());
+            session.setAttribute("role", user.getRole());
             page = ConfigurationManager.getProperty("path.page.main");
         } else {
             request.setAttribute("errorLoginMessage", MessageManager.getProperty("message.loginerror"));

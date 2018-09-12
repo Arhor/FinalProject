@@ -35,9 +35,10 @@ public class ControllerServlet extends HttpServlet {
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
 
-        page = command.execute(request);
+        LOG.debug("current role: " + request.getSession().getAttribute("role"));
 
-        LOG.debug(page);
+
+        page = command.execute(request);
 
         if (page != null) {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
@@ -48,6 +49,7 @@ public class ControllerServlet extends HttpServlet {
                     MessageManager.getProperty("message.nullpage"));
             response.sendRedirect(request.getContextPath() + page);
         }
+        LOG.debug("current role: " + request.getSession().getAttribute("role"));
     }
 
     public void destroy() {

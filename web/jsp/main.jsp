@@ -13,7 +13,7 @@
 <body>
     <h3>Welcome!</h3>
     <hr />
-    ${user}, hello!
+    ${user}, hello! current role: ${role}
     <hr />
     <a href="controller?command=logout">Logout</a>
 </body>
