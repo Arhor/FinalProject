@@ -104,7 +104,7 @@
                     <div class="col-lg-4 col-md-4 ml-auto mr-auto">
                         <div class="card">
                             <div class="card-header card-header-primary">
-                                <h3 class="card-title">Login form</h3>
+                                <h3 class="card-title">Registration form</h3>
                             </div>
                             <div class="card-body">
                                 <form action="/controller" name="registrationForm" method="POST">

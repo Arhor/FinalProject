@@ -6,7 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43dc64a4-49e4-4d08-bbd3-db3f7a64b274" name="Default Changelist" comment="" />
+    <list default="true" id="43dc64a4-49e4-4d08-bbd3-db3f7a64b274" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/web/jsp/registration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/registration.jsp" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +62,7 @@
           <entry key="css" value="52" />
           <entry key="dummy" value="19" />
           <entry key="java" value="6304" />
-          <entry key="jsp" value="1291" />
+          <entry key="jsp" value="1304" />
           <entry key="properties" value="48" />
           <entry key="sql" value="28" />
           <entry key="xml" value="750" />
@@ -70,7 +72,7 @@
         <counts>
           <entry key="CSS" value="52" />
           <entry key="JAVA" value="6304" />
-          <entry key="JSP" value="1291" />
+          <entry key="JSP" value="1304" />
           <entry key="PLAIN_TEXT" value="19" />
           <entry key="Properties" value="48" />
           <entry key="SQL" value="28" />
@@ -125,19 +127,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/jsp/registration.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+            <state relative-caret-position="306">
+              <caret line="106" column="67" selection-start-line="106" selection-start-column="67" selection-end-line="106" selection-end-column="67" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/jsp/main.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-312">
+            <state relative-caret-position="473">
               <caret line="108" column="63" selection-start-line="108" selection-start-column="63" selection-end-line="108" selection-end-column="63" />
             </state>
           </provider>
@@ -224,6 +226,7 @@
       <find>sea</find>
       <find>ConnectionPool</find>
       <find>ConnectionPoolDBUnit</find>
+      <find>dashboa</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -280,9 +283,9 @@
         <option value="$PROJECT_DIR$/src/by/epam/admission/command/CommandEnum.java" />
         <option value="$PROJECT_DIR$/web/index.jsp" />
         <option value="$PROJECT_DIR$/web/jsp/login.jsp" />
-        <option value="$PROJECT_DIR$/web/jsp/registration.jsp" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/controller/ControllerServlet.java" />
         <option value="$PROJECT_DIR$/web/jsp/main.jsp" />
+        <option value="$PROJECT_DIR$/web/jsp/registration.jsp" />
       </list>
     </option>
   </component>
@@ -401,7 +404,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536834768257" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536835153691" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../WEB-MODULES/Authentication" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -639,7 +642,7 @@
       <workItem from="1536765367256" duration="6447000" />
       <workItem from="1536774110724" duration="3229000" />
       <workItem from="1536805807534" duration="1363000" />
-      <workItem from="1536829388379" duration="3802000" />
+      <workItem from="1536829388379" duration="4355000" />
     </task>
     <servers />
   </component>
@@ -676,7 +679,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86797000" />
+    <option name="totallyTimeSpent" value="87350000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1034,13 +1037,6 @@
     <entry file="file://$PROJECT_DIR$/web/jsp/admin.jsp">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/jsp/registration.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/jsp/error.jsp">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1053,8 +1049,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/jsp/main.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-312">
+        <state relative-caret-position="473">
           <caret line="108" column="63" selection-start-line="108" selection-start-column="63" selection-end-line="108" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/jsp/registration.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="106" column="67" selection-start-line="106" selection-start-column="67" selection-end-line="106" selection-end-column="67" />
         </state>
       </provider>
     </entry>
