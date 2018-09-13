@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <title>Welcome</title>
 </head>
 <body>
@@ -15,6 +17,8 @@
     <hr />
     ${user}, hello! current role: ${role}
     <hr />
-    <a href="controller?command=logout">Logout</a>
+    <form class="login-form" action="/controller" method="POST">
+        <input type="submit" name="command" value="LOGOUT">
+    </form>
 </body>
 </html>

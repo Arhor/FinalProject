@@ -31,13 +31,9 @@ public class ControllerServlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String page;
-
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
-
         LOG.debug("current role: " + request.getSession().getAttribute("role"));
-
-
         page = command.execute(request);
 
         if (page != null) {
@@ -45,8 +41,6 @@ public class ControllerServlet extends HttpServlet {
             dispatcher.forward(request, response);
         } else {
             page = ConfigurationManager.getProperty("path.page.index");
-            request.getSession().setAttribute("nullPage",
-                    MessageManager.getProperty("message.nullpage"));
             response.sendRedirect(request.getContextPath() + page);
         }
         LOG.debug("current role: " + request.getSession().getAttribute("role"));

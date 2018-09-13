@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 @WebListener
-public class SessionAttributeListener implements HttpSessionListener {
+public class SessionRoleListener implements HttpSessionListener {
 
     // Sets newly crated session user-role to "GUEST"
     @Override

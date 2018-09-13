@@ -3,7 +3,6 @@ package by.epam.admission.command.factory;
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.impl.EmptyCommand;
 import by.epam.admission.command.CommandEnum;
-import by.epam.admission.util.MessageManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,27 +14,24 @@ public class ActionFactory {
 
     public ActionCommand defineCommand(HttpServletRequest request) {
 
-        ActionCommand current = new EmptyCommand();
+        ActionCommand currentCommand = new EmptyCommand();
 
-        String action = request.getParameter("command").replace(" ", "_").toUpperCase();
-
-        LOG.debug("command: " + action);
+        String action = request.getParameter("command")
+                               .replace(" ", "_")
+                               .toUpperCase();
 
         if (action == null || action.isEmpty()) {
-
-            return current;
+            return currentCommand;
         }
+
         try {
             CommandEnum currentEnum = CommandEnum.valueOf(action);
-
-            LOG.debug("currentEnum: " + currentEnum);
-
-            current = currentEnum.getCurrentCommand();
+            currentCommand = currentEnum.getCurrentCommand();
         } catch(IllegalArgumentException e) {
-            LOG.debug("error: " + e);
-            request.setAttribute("wrongAction", action + " " + MessageManager.getProperty("message.wrongaction"));
+            LOG.error("Unknown command: " + action, e);
         }
-        return current;
+
+        return currentCommand;
     }
 
 }

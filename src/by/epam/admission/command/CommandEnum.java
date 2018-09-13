@@ -4,6 +4,16 @@ import by.epam.admission.command.impl.*;
 
 public enum CommandEnum {
 
+    SIGN_IN {
+        {
+            this.command = new SignInCommand();
+        }
+    },
+    SIGN_UP {
+        {
+            this.command = new SignUpCommand();
+        }
+    },
     REGISTRATION {
         {
             this.command = new RegistrationCommand();
@@ -20,14 +30,9 @@ public enum CommandEnum {
             this.command = new LogoutCommand();
         }
     },
-    SIGN_IN {
+    HOME {
         {
-            this.command = new SignInCommand();
-        }
-    },
-    SIGN_UP {
-        {
-            this.command = new SignUpCommand();
+            this.command = new HomeCommand();
         }
     };
 
