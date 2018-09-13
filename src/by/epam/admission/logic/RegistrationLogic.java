@@ -24,7 +24,7 @@ public class RegistrationLogic {
             result = userDao.create(user, password);
             helper.commit();
         } catch (DaoException e) {
-            LOG.error("Registration error", e); // TODO: implement registration error handling
+            LOG.error("Registration error", e); // TODO: implement registration error handling by throwing ServiceException
             helper.rollback();
         }
         helper.endTransaction();

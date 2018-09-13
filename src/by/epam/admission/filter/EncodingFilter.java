@@ -1,5 +1,8 @@
 package by.epam.admission.filter;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
@@ -11,6 +14,8 @@ import java.io.IOException;
                 description = "Encoding param")
 })
 public class EncodingFilter implements Filter {
+
+    private static final Logger LOG = LogManager.getLogger(EncodingFilter.class);
 
     private String code;
 
@@ -26,6 +31,7 @@ public class EncodingFilter implements Filter {
             servletRequest.setCharacterEncoding(code);
             servletResponse.setCharacterEncoding(code);
         }
+        LOG.debug(getClass().getSimpleName() + " worked");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

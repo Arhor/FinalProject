@@ -1,5 +1,8 @@
 package by.epam.admission.filter;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
@@ -13,6 +16,8 @@ import java.io.IOException;
 })
 public class PageRedirectSecutiryFilter implements Filter {
 
+    private static final Logger LOG = LogManager.getLogger();
+
     private String indexPath;
 
     @Override
@@ -24,7 +29,11 @@ public class PageRedirectSecutiryFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
+
+        LOG.debug("raw link redirect filter");
+
         httpResponse.sendRedirect(httpRequest.getContextPath() + indexPath);
+
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

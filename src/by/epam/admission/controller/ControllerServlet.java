@@ -2,6 +2,7 @@ package by.epam.admission.controller;
 
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.factory.ActionFactory;
+import by.epam.admission.model.User;
 import by.epam.admission.pool.ConnectionPool;
 import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.MessageManager;
@@ -34,7 +35,10 @@ public class ControllerServlet extends HttpServlet {
         String page;
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
-        LOG.debug("current role: " + request.getSession().getAttribute("role"));
+
+        User.Role role = (User.Role) request.getSession().getAttribute("role");
+
+        LOG.debug("current role: " + role);
         page = command.execute(request);
 
         if (page != null) {
@@ -42,9 +46,10 @@ public class ControllerServlet extends HttpServlet {
             dispatcher.forward(request, response);
         } else {
             page = ConfigurationManager.getProperty("path.page.index");
+            LOG.debug("Redirecting to: " + page);
             response.sendRedirect(request.getContextPath() + page);
         }
-        LOG.debug("current role: " + request.getSession().getAttribute("role"));
+//        LOG.debug("current role: " + request.getSession().getAttribute("role"));
     }
 
     public void destroy() {
