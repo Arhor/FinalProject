@@ -5,6 +5,7 @@ import by.epam.admission.command.factory.ActionFactory;
 import by.epam.admission.pool.ConnectionPool;
 import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.MessageManager;
+import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -47,6 +48,7 @@ public class ControllerServlet extends HttpServlet {
     }
 
     public void destroy() {
+        AbandonedConnectionCleanupThread.checkedShutdown();
         ConnectionPool.POOL.closePool();
     }
 }

@@ -7,17 +7,177 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43dc64a4-49e4-4d08-bbd3-db3f7a64b274" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/by/epam/admission/command/HomeCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/CommandEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/CommandEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/factory/ActionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/factory/ActionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/EmptyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/EmptyCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/LogoutCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/LogoutCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/by/epam/admission/controller/ControllerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/controller/ControllerServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/listener/SessionAttributeListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/listener/SessionRoleListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/css/material-dashboard.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/demo/demo.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/demo/demo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/img/favicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/img/favicon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_alerts.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_buttons.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_cards.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_checkboxes.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_core-bootstrap.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_dropdown.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_example-pages.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_fixed-plugin.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_footers.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_forms.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_headers.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_images.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_input-group.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_misc.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_mixins.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_navbar.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_popover.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_popups.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_radios.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_responsive.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_ripples.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_sidebar-and-main-panel.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_social-buttons.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_tables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_tabs.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_togglebutton.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_tooltip.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_type.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/_variables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_alert.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_badge.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_breadcrumb.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_button-group.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_buttons.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_card.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_carousel.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_close.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_code.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_custom-forms.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_dropdown.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_forms.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_functions.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_grid.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_images.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_input-group.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_jumbotron.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_list-group.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_media.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_mixins.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_modal.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_nav.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_navbar.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_pagination.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_popover.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_print.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_progress.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_reboot.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_root.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_tables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_tooltip.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_transitions.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_type.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_utilities.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/_variables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/bootstrap-grid.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/bootstrap-reboot.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/bootstrap.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_alert.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_background-variant.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_badge.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_border-radius.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_box-shadow.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_breakpoints.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_buttons.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_caret.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_clearfix.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_float.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_forms.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_gradients.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_grid-framework.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_grid.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_hover.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_image.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_list-group.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_lists.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_nav-divider.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_navbar-align.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_pagination.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_reset-text.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_resize.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_screen-reader.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_size.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_table-row.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_text-emphasis.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_text-hide.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_text-truncate.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_transition.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/mixins/_visibility.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/utilities/_align.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/utilities/_background.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/utilities/_borders.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/utilities/_clearfix.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/utilities/_display.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/utilities/_embed.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/utilities/_flex.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/utilities/_float.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/utilities/_position.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/utilities/_screenreaders.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/utilities/_sizing.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/utilities/_spacing.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/utilities/_text.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/bootstrap/scss/utilities/_visibility.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/cards/_card-plain.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/cards/_card-profile.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/cards/_card-stats.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_alert.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_animations.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_breakpoints.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_buttons.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_chartist.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_colored-shadows.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_drawer.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_forms.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_hover.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_layout.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_navbar-colors.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_navs.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_sidebar-color.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_transparency.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_type.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_utilities.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_variables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/mixins/_vendor-prefixes.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/plugins/_animate.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/plugins/_chartist.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/plugins/_perfect-scrollbar.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_body.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_bootstrap-material-design-base.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_bootstrap-material-design.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_brand.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_buttons.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_card.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_code.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_colors-map.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_colors.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_custom-forms.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_drawer.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_dropdown.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_forms.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_layout.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_list-group.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_menu.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_modals.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_nav.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_pagination.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_shadow.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_snackbar.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_spacing.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_state.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_tables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_tooltip.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/scss/material-dashboard/variables/_type.scss" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/jsp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/main.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/main.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/jsp/registration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/registration.jsp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -31,21 +191,22 @@
     <session id="1803808687">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.42" value="1" />
           <entry key="project.open.time.44" value="2" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.open.time.46" value="1" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="4" />
+          <entry key="class" value="5" />
           <entry key="css" value="3" />
           <entry key="iml" value="1" />
-          <entry key="java" value="125" />
+          <entry key="java" value="127" />
           <entry key="jsp" value="9" />
           <entry key="log" value="4" />
           <entry key="properties" value="3" />
@@ -55,10 +216,10 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="4" />
+          <entry key="CLASS" value="5" />
           <entry key="CSS" value="3" />
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="125" />
+          <entry key="JAVA" value="127" />
           <entry key="JSP" value="9" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="Properties" value="3" />
@@ -70,8 +231,8 @@
         <counts>
           <entry key="css" value="52" />
           <entry key="dummy" value="19" />
-          <entry key="java" value="6297" />
-          <entry key="jsp" value="939" />
+          <entry key="java" value="6304" />
+          <entry key="jsp" value="1031" />
           <entry key="properties" value="48" />
           <entry key="sql" value="28" />
           <entry key="xml" value="750" />
@@ -80,8 +241,8 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="52" />
-          <entry key="JAVA" value="6297" />
-          <entry key="JSP" value="939" />
+          <entry key="JAVA" value="6304" />
+          <entry key="JSP" value="1031" />
           <entry key="PLAIN_TEXT" value="19" />
           <entry key="Properties" value="48" />
           <entry key="SQL" value="28" />
@@ -139,11 +300,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="58" column="72" lean-forward="true" selection-start-line="58" selection-start-column="72" selection-end-line="58" selection-end-column="72" />
-              <folding>
-                <element signature="e#4521#4527#0#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="323">
+              <caret line="31" column="37" lean-forward="true" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -151,41 +309,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/jsp/login.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="165" column="31" lean-forward="true" selection-start-line="165" selection-start-column="31" selection-end-line="165" selection-end-column="31" />
-              <folding>
-                <element signature="e#5843#5849#0#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="249">
+              <caret line="36" column="18" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/jsp/registration.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="283">
+              <caret line="182" column="76" selection-start-line="182" selection-start-column="76" selection-end-line="182" selection-end-column="76" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/jsp/registration.jsp">
+        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/controller/ControllerServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="148" column="42" selection-start-line="148" selection-start-column="42" selection-end-line="148" selection-end-column="42" />
-              <folding>
-                <element signature="e#6932#6938#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/jsp/main.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="65" selection-start-line="11" selection-start-column="65" selection-end-line="11" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/listener/SessionRoleListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="12" column="53" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
+            <state relative-caret-position="595">
+              <caret line="50" column="59" selection-start-line="50" selection-start-column="59" selection-end-line="50" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -193,7 +336,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/SignInCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
+            <state relative-caret-position="136">
               <caret line="11" column="74" selection-start-line="11" selection-start-column="74" selection-end-line="11" selection-end-column="74" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -205,7 +348,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/LogoutCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
+            <state relative-caret-position="136">
               <caret line="11" column="71" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -217,7 +360,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/HomeCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
+            <state relative-caret-position="153">
               <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -238,7 +381,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/CommandEnum.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
+            <state relative-caret-position="578">
               <caret line="34" column="45" selection-start-line="34" selection-start-column="45" selection-end-line="34" selection-end-column="45" />
             </state>
           </provider>
@@ -310,7 +453,6 @@
         <option value="$PROJECT_DIR$/src/resources/config.properties" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/command/client/CommandEnum.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/filter/PageRedirectSecutiryFilter.java" />
-        <option value="$PROJECT_DIR$/src/by/epam/admission/controller/ControllerServlet.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/command/impl/EmptyCommand.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/command/factory/ActionFactory.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/listener/SessionRoleListener.java" />
@@ -321,6 +463,7 @@
         <option value="$PROJECT_DIR$/web/index.jsp" />
         <option value="$PROJECT_DIR$/web/jsp/login.jsp" />
         <option value="$PROJECT_DIR$/web/jsp/registration.jsp" />
+        <option value="$PROJECT_DIR$/src/by/epam/admission/controller/ControllerServlet.java" />
       </list>
     </option>
   </component>
@@ -346,6 +489,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -394,6 +540,13 @@
               <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="admission" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="admission" type="462c0819:PsiDirectoryNode" />
               <item name="filter" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -424,15 +577,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536804087304" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536804140225" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../WEB-MODULES/Authentication" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -669,6 +819,7 @@
       <workItem from="1536745795940" duration="5386000" />
       <workItem from="1536765367256" duration="6447000" />
       <workItem from="1536774110724" duration="3229000" />
+      <workItem from="1536805807534" duration="1363000" />
     </task>
     <servers />
   </component>
@@ -705,7 +856,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81474000" />
+    <option name="totallyTimeSpent" value="82995000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -718,9 +869,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.67450273" visible="true" weight="0.18336888" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.67450273" visible="true" weight="0.18550107" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -741,7 +891,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info anchor="bottom" id="Run" order="13" visible="true" weight="0.36511377" />
+      <window_info anchor="bottom" id="Run" order="13" weight="0.36511377" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -767,8 +917,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/all-tables-dataset.xml" />
-    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/pool/DBunitTest.java" />
     <entry file="file://$PROJECT_DIR$/test/by/epam/admission/util/EncryptActionTest.java" />
     <entry file="file://$PROJECT_DIR$/test/by/epam/admission/pool/ConnectionPoolDBUnit.java" />
     <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/DaoTester.java" />
@@ -910,13 +1058,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/client/ClientType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/client/ClientType.java" />
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/filter/EncodingFilter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -928,9 +1070,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="31" column="35" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -938,9 +1077,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -951,48 +1087,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/ChooseCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/ChooseCommand.java" />
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/RegistrationCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/SessionRequestContent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/controller/ControllerServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="46" column="5" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
-          <folding>
-            <element signature="e#2049#2050#0" expanded="true" />
-            <element signature="e#2096#2097#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/SessionRequestContent.java" />
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/SignUpCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="78" selection-start-line="11" selection-start-column="78" selection-end-line="11" selection-end-column="78" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1014,40 +1121,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="71" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/SignInCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="74" selection-start-line="11" selection-start-column="74" selection-end-line="11" selection-end-column="74" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/listener/SessionRoleListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="12" column="53" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/jsp/main.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="65" selection-start-line="11" selection-start-column="65" selection-end-line="11" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/factory/ActionFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
@@ -1058,9 +1131,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/LogoutCommand.java">
+    <entry file="file://$PROJECT_DIR$/web/jsp/main.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
+          <caret line="11" column="65" selection-start-line="11" selection-start-column="65" selection-end-line="11" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/listener/SessionRoleListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="12" column="53" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/SignInCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="11" column="74" selection-start-line="11" selection-start-column="74" selection-end-line="11" selection-end-column="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/LogoutCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
           <caret line="11" column="71" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1070,7 +1167,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/HomeCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
+        <state relative-caret-position="153">
           <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1078,40 +1175,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/factory/ActionFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/CommandEnum.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
+        <state relative-caret-position="578">
           <caret line="34" column="45" selection-start-line="34" selection-start-column="45" selection-end-line="34" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="58" column="72" lean-forward="true" selection-start-line="58" selection-start-column="72" selection-end-line="58" selection-end-column="72" />
-          <folding>
-            <element signature="e#4521#4527#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="323">
+          <caret line="31" column="37" lean-forward="true" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/jsp/login.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="165" column="31" lean-forward="true" selection-start-line="165" selection-start-column="31" selection-end-line="165" selection-end-column="31" />
-          <folding>
-            <element signature="e#5843#5849#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="249">
+          <caret line="36" column="18" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/util/concurrent/ThreadPoolExecutor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-119">
+          <caret line="1148" selection-start-line="1148" selection-end-line="1148" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/web/WEB-INF/lib/mysql-connector-java-8.0.12.jar!/com/mysql/cj/jdbc/AbandonedConnectionCleanupThread.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/jsp/registration.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="148" column="42" selection-start-line="148" selection-start-column="42" selection-end-line="148" selection-end-column="42" />
-          <folding>
-            <element signature="e#6932#6938#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="283">
+          <caret line="182" column="76" selection-start-line="182" selection-start-column="76" selection-end-line="182" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/controller/ControllerServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="50" column="59" selection-start-line="50" selection-start-column="59" selection-end-line="50" selection-end-column="59" />
         </state>
       </provider>
     </entry>
