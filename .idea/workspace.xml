@@ -6,20 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43dc64a4-49e4-4d08-bbd3-db3f7a64b274" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/HomeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/HomeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/LogoutCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/LogoutCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/controller/ControllerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/controller/ControllerServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/filter/EncodingFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/filter/EncodingFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/filter/PageRedirectSecutiryFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/filter/PageRedirectSecutiryFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/logic/RegistrationLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/logic/RegistrationLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/assets/css/material-dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/css/material-dashboard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/main.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/main.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/registration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/registration.jsp" afterDir="false" />
-    </list>
+    <list default="true" id="43dc64a4-49e4-4d08-bbd3-db3f7a64b274" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +81,7 @@
     <session id="669592454">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.26" value="1" />
           <entry key="project.open.time.4" value="1" />
@@ -151,47 +138,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/jsp/main.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="77">
               <caret line="121" column="28" selection-start-line="121" selection-start-column="32" selection-end-line="123" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/controller/ControllerServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/assets/css/material-dashboard.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/LoginCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-75">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/filter/PageRedirectSecutiryFilter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="32" column="43" selection-start-line="32" selection-start-column="43" selection-end-line="32" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -652,7 +603,7 @@
       <workItem from="1536805807534" duration="1363000" />
       <workItem from="1536829388379" duration="4355000" />
       <workItem from="1536839414963" duration="820000" />
-      <workItem from="1536849899797" duration="8154000" />
+      <workItem from="1536849899797" duration="8852000" />
     </task>
     <servers />
   </component>
@@ -689,7 +640,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96324000" />
+    <option name="totallyTimeSpent" value="97022000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -702,7 +653,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="1368" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.67450273" visible="true" weight="0.19318181" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -725,7 +675,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info anchor="bottom" id="Run" order="13" visible="true" weight="0.43890676" />
+      <window_info anchor="bottom" id="Run" order="13" weight="0.43890676" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -919,13 +869,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/jsp/main.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="121" column="28" selection-start-line="121" selection-start-column="32" selection-end-line="123" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/jsp/registration.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="212">
@@ -1015,17 +958,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/filter/PageRedirectSecutiryFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="32" column="43" selection-start-line="32" selection-start-column="43" selection-end-line="32" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/LoginCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-75">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/assets/css/material-dashboard.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="7967" column="20" selection-start-line="7967" selection-start-column="20" selection-end-line="7967" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -1036,10 +979,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/assets/css/material-dashboard.css">
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/filter/PageRedirectSecutiryFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="225">
+          <caret line="32" column="43" selection-start-line="32" selection-start-column="43" selection-end-line="32" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/jsp/main.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="77">
+          <caret line="121" column="28" selection-start-line="121" selection-start-column="32" selection-end-line="123" selection-end-column="36" />
         </state>
       </provider>
     </entry>
