@@ -1,4 +1,4 @@
-package by.epam.admission.filter;
+package by.epam.admission.controller.filter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -4,6 +4,7 @@
 
 package by.epam.admission.util;
 
+import by.epam.admission.exception.ProjectException;
 import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,7 +23,10 @@ public class EncryptAction {
 
     private static final String ENCRYPTION_TYPE = "SHA-512";
 
-    public <T> String encrypt(String toEncrypt, T salt) {
+    public <T> String encrypt(String toEncrypt, T salt) throws ProjectException {
+        if (toEncrypt == null || salt == null) {
+            throw new ProjectException("Wrong encryption arguments");
+        }
         String result = null;
         try {
             String saltString = String.valueOf(salt);

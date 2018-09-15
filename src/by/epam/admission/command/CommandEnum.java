@@ -16,7 +16,7 @@ public enum CommandEnum {
     },
     REGISTRATION {
         {
-            this.command = new RegistrationCommand();
+            this.command = new RegisterCommand();
         }
     },
 
@@ -33,6 +33,11 @@ public enum CommandEnum {
     HOME {
         {
             this.command = new HomeCommand();
+        }
+    },
+    CONFIRM {
+        {
+            this.command = new ConfirmCommand();
         }
     };
 

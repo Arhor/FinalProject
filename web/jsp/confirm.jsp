@@ -1,11 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
-  User: arhor
-  Date: 12.9.18
-  Time: 20.56
+  User: Maxim Burishinets
+  Date: 15.09.2018
+  Time: 21:17
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -83,42 +83,17 @@
                                 <h3 class="card-title">Registration form</h3>
                             </div>
                             <div class="card-body">
-                                <form action="/controller" name="registrationForm" method="POST">
+                                <form action="/controller" name="confirmationForm" method="POST">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating">E-mail</label>
-                                                <input class="form-control" name="email" type="text" required />
+                                                <label class="bmd-label-floating">Confirm registration</label>
+                                                <input class="form-control" name="confirmationCode" type="text" required />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating">Password</label>
-                                                <input class="form-control" name="password" type="password" required />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating">First name</label>
-                                                <input class="form-control" name="firstName" type="text" required />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating">Last name</label>
-                                                <input class="form-control" name="lastName" type="text" required />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    ${registrationError}
-                                    <div class="row">
-                                        <button class="btn btn-primary col-lg-8 col-md-8 ml-auto mr-auto" name="command" value="registration">SIGN UP</button>
+                                        <button class="btn btn-primary col-lg-8 col-md-8 ml-auto mr-auto" name="command" value="confirm">CONFIRM</button>
                                     </div>
                                 </form>
                             </div>
@@ -133,17 +108,17 @@
                     <ul>
                         <li>
                             <%--<a href="https://www.creative-tim.com">--%>
-                                <%--Creative Tim--%>
+                            <%--Creative Tim--%>
                             <%--</a>--%>
                         </li>
                     </ul>
                 </nav>
                 <%--<div class="copyright float-right">--%>
-                    <%--&copy;--%>
-                    <%--<script>--%>
-                        <%--document.write(new Date().getFullYear())--%>
-                    <%--</script>, made with <i class="material-icons">favorite</i> by--%>
-                    <%--<a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.--%>
+                <%--&copy;--%>
+                <%--<script>--%>
+                <%--document.write(new Date().getFullYear())--%>
+                <%--</script>, made with <i class="material-icons">favorite</i> by--%>
+                <%--<a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.--%>
                 <%--</div>--%>
                 <!-- your footer here -->
             </div>

@@ -5,7 +5,7 @@
 package by.epam.admission.dao.impl;
 
 import by.epam.admission.dao.AbstractDao;
-import by.epam.admission.exception.DaoException;
+import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Subject;
 import org.apache.logging.log4j.LogManager;
@@ -44,7 +44,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String AVAILABLE = "available";
 
     @Override
-    public List<Enrollee> findAll() {
+    public List<Enrollee> findAll() throws ProjectException {
         ArrayList<Enrollee> enrollees = new ArrayList<>();
         try (PreparedStatement st = connection.prepareStatement(
                 String.format(SQL_SELECT_ENROLLEES, AVAILABLE))) {
@@ -52,13 +52,13 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
             ResultSet rs = st.executeQuery();
             processResult(enrollees, rs);
         } catch (SQLException e) {
-            LOG.error("Selection error", e);
+            throw new ProjectException("Selection error", e);
         }
         return enrollees;
     }
 
     @Override
-    public Enrollee findEntityById(Integer id) {
+    public Enrollee findEntityById(Integer id) throws ProjectException {
         Enrollee enrollee = null;
         try (PreparedStatement st = connection.prepareStatement(
                 String.format(SQL_SELECT_ENROLLEES, ID))) {
@@ -68,26 +68,26 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 enrollee = setEnrollee(rs);
             }
         } catch (SQLException e) {
-            LOG.error("Selection error", e);
+            throw new ProjectException("Selection error", e);
         }
         return enrollee;
     }
 
     public List<Enrollee> findEnrolleesByCountry(String country)
-            throws DaoException {
+            throws ProjectException {
         ArrayList<Enrollee> enrollees = new ArrayList<>();
         findByAddress(COUNTRY, enrollees, country);
         return enrollees;
     }
 
     public List<Enrollee> findEnrolleesByCity(String city)
-            throws DaoException {
+            throws ProjectException {
         ArrayList<Enrollee> enrollees = new ArrayList<>();
         findByAddress(CITY, enrollees, city);
         return enrollees;
     }
 
-    public int findEnrolleeTotalScore(Enrollee enrollee) throws DaoException {
+    public int findEnrolleeTotalScore(Enrollee enrollee) throws ProjectException {
         int result = -1;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_SELECT_ENROLLEE_TOTAL_SCORE)) {
@@ -98,7 +98,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
             }
         } catch (SQLException e) {
             LOG.error("Selection error", e);
-            throw new DaoException("Selection error", e);
+            throw new ProjectException("Selection error", e);
         }
         return result;
     }
@@ -117,10 +117,10 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
      * Hard deletion of Enrollee from database, supposed to use only by admin
      * @param id - Enrollee ID to delete from database
      * @return true - if deletion was successful
-     * @throws DaoException - wrapped SQL exception
+     * @throws ProjectException - wrapped SQL exception
      */
     @Override
-    public boolean delete(Integer id) throws DaoException {
+    public boolean delete(Integer id) throws ProjectException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_ENROLLEE_BY_ID)) {
@@ -128,7 +128,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
             flag = st.executeUpdate();
         } catch (SQLException e) {
             LOG.error("Deletion error", e);
-            throw new DaoException("Deletion error", e);
+            throw new ProjectException("Deletion error", e);
         }
         return flag != 0;
     }
@@ -138,23 +138,23 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
      * Sets value `available` of corresponding enrollee to `0`
      * @param enrollee - Enrollee object to delete from database
      * @return true - if deletion was successful
-     * @throws DaoException - wrapped SQL exception
+     * @throws ProjectException - wrapped SQL exception
      */
     @Override
-    public boolean delete(Enrollee enrollee) throws DaoException {
+    public boolean delete(Enrollee enrollee) throws ProjectException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_ENROLLEE)) {
             st.setInt(1, enrollee.getId());
             flag = st.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("Deletion error", e);
+            throw new ProjectException("Deletion error", e);
         }
         return flag != 0;
     }
 
     @Override
-    public boolean create(Enrollee enrollee) throws DaoException {
+    public boolean create(Enrollee enrollee) throws ProjectException {
         boolean result;
         try {
             int flag;
@@ -173,13 +173,13 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
             result = flag != 0;
         } catch (SQLException e) {
             LOG.error("SQL exception", e);
-            throw new DaoException("Insertion error", e);
+            throw new ProjectException("Insertion error", e);
         }
         return result;
     }
 
     public boolean registerToFacultyById(Enrollee enrollee, int facultyId)
-            throws DaoException {
+            throws ProjectException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_INSERT_TO_ADMISSION_LIST)) {
@@ -187,7 +187,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
             st.setInt(2, facultyId);
             flag = st.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("Updating error", e);
+            throw new ProjectException("Updating error", e);
         }
         return flag != 0;
     }
@@ -198,7 +198,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     }
 
     @Override
-    public Enrollee update(Enrollee enrollee) throws DaoException {
+    public Enrollee update(Enrollee enrollee) throws ProjectException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_UPDATE_ENROLLEE)) {
@@ -207,7 +207,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
             st.setInt(3, enrollee.getSchoolCertificate());
             flag = st.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("Updating error", e);
+            throw new ProjectException("Updating error", e);
         }
         return flag != 0 ? enrollee : null;
     }
@@ -231,15 +231,14 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
 
     private void findByAddress(String place, ArrayList<Enrollee> enrollees,
                                String value)
-            throws DaoException {
+            throws ProjectException {
         try (PreparedStatement st = connection.prepareStatement(
                 String.format(SQL_SELECT_ENROLLEES, place))) {
             st.setString(1, value);
             ResultSet rs = st.executeQuery();
             processResult(enrollees, rs);
         } catch (SQLException e) {
-            LOG.error("Selection error", e);
-            throw new DaoException("Selection error", e);
+            throw new ProjectException("Selection error", e);
         }
     }
 

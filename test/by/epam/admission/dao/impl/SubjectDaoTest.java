@@ -5,6 +5,7 @@
 package by.epam.admission.dao.impl;
 
 import by.epam.admission.dao.TransactionHelper;
+import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Subject;
 import by.epam.admission.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
@@ -38,8 +39,12 @@ public class SubjectDaoTest {
     @Test
     public void testFindAll() {
         transactionHelper.startTransaction(subjectDao);
-        for (Subject subject : subjectDao.findAll()) {
-            LOG.info(subject);
+        try {
+            for (Subject subject : subjectDao.findAll()) {
+                LOG.info(subject);
+            }
+        } catch (ProjectException e) {
+            LOG.error("Test exception", e);
         }
         transactionHelper.endTransaction();
     }
@@ -47,15 +52,23 @@ public class SubjectDaoTest {
     @Test
     public void findEntityByIdTest() {
         transactionHelper.startTransaction(subjectDao);
-        LOG.info(subjectDao.findEntityById(101));
+        try {
+            LOG.info(subjectDao.findEntityById(101));
+        } catch (ProjectException e) {
+            LOG.error("Test exception", e);
+        }
         transactionHelper.endTransaction();
     }
 
     @Test
     public void findFacultyBySubjectIdTest() {
         transactionHelper.startTransaction(subjectDao);
-        for (Subject subject : subjectDao.findSubjectsByFacultyId(205)) {
-            LOG.info(subject);
+        try {
+            for (Subject subject : subjectDao.findSubjectsByFacultyId(205)) {
+                LOG.info(subject);
+            }
+        } catch (ProjectException e) {
+            LOG.error("Test exception", e);
         }
         transactionHelper.endTransaction();
     }

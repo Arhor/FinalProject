@@ -5,7 +5,7 @@
 package by.epam.admission.dao.impl;
 
 import by.epam.admission.dao.AbstractDao;
-import by.epam.admission.exception.DaoException;
+import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Subject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,19 +40,19 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
     private static final String NAME_EN = "name_en";
 
     @Override
-    public List<Subject> findAll() {
+    public List<Subject> findAll() throws ProjectException {
         ArrayList<Subject> subjects = new ArrayList<>();
         try (Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery(SQL_SELECT_ALL_SUBJECTS);
             processResult(subjects, rs);
         } catch (SQLException e) {
-            LOG.error("SQL exception", e);
+            throw new ProjectException("Selection error", e);
         }
         return subjects;
     }
 
     @Override
-    public Subject findEntityById(Integer id) {
+    public Subject findEntityById(Integer id) throws ProjectException {
         Subject subject = null;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_SELECT_SUBJECT_BY_ID)) {
@@ -65,12 +65,12 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
                 subject.setNameEn(rs.getString(NAME_EN));
             }
         } catch (SQLException e) {
-            LOG.error("SQL exception", e);
+            throw new ProjectException("Selection error", e);
         }
         return subject;
     }
 
-    public List<Subject> findSubjectsByFacultyId(int id) {
+    public List<Subject> findSubjectsByFacultyId(int id) throws ProjectException {
         ArrayList<Subject> subjects = new ArrayList<>();
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_SELECT_SUBJECTS_BY_FACULTY_ID)) {
@@ -78,13 +78,13 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
             ResultSet rs = st.executeQuery();
             processResult(subjects, rs);
         } catch (SQLException e) {
-            LOG.error("SQL exception", e);
+            throw new ProjectException("Selection error", e);
         }
         return subjects;
     }
 
     @Override
-    public boolean delete(Integer id) throws DaoException {
+    public boolean delete(Integer id) throws ProjectException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_SUBJECT_BY_ID)) {
@@ -92,38 +92,38 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
             flag = st.executeUpdate();
         } catch (SQLException e) {
             LOG.error("Deletion error", e);
-            throw new DaoException("Deletion error", e);
+            throw new ProjectException("Deletion error", e);
         }
         return flag != 0;
     }
 
     @Override
-    public boolean delete(Subject subject) throws DaoException {
+    public boolean delete(Subject subject) throws ProjectException {
         try {
             return executeDMLQuery(subject, SQL_DELETE_SUBJECT);
         } catch (SQLException e) {
             LOG.error("Deletion error", e);
-            throw new DaoException("Deletion error", e);
+            throw new ProjectException("Deletion error", e);
         }
     }
 
     @Override
-    public boolean create(Subject subject) throws DaoException {
+    public boolean create(Subject subject) throws ProjectException {
         try {
             return executeDMLQuery(subject, SQL_INSERT_SUBJECT);
         } catch (SQLException e) {
             LOG.error("Insertion error", e);
-            throw new DaoException("Insertion error", e);
+            throw new ProjectException("Insertion error", e);
         }
     }
 
     @Override
-    public Subject update(Subject subject) throws DaoException {
+    public Subject update(Subject subject) throws ProjectException {
         try {
             return executeDMLQuery(subject, SQL_UPDATE_SUBJECT) ? subject : null;
         } catch (SQLException e) {
             LOG.error("Update error", e);
-            throw new DaoException("Update error", e);
+            throw new ProjectException("Update error", e);
         }
     }
 

@@ -109,7 +109,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group bmd-form-group">
                                                 <label class="bmd-label-floating">E-mail</label>
-                                                <input class="form-control" name="login" type="text" required />
+                                                <input class="form-control" name="email" type="text" required />
                                             </div>
                                         </div>
                                     </div>
@@ -122,8 +122,6 @@
                                         </div>
                                     </div>
                                     ${errorLoginMessage}
-                                    ${wrongAction}
-                                    ${nullPage}
                                     <div class="row">
                                         <button class="btn btn-primary col-lg-8 col-md-8 ml-auto mr-auto" name="command" value="login">SIGN IN</button>
                                     </div>

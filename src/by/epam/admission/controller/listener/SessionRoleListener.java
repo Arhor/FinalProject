@@ -1,4 +1,4 @@
-package by.epam.admission.listener;
+package by.epam.admission.controller.listener;
 
 import by.epam.admission.model.User;
 

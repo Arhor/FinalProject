@@ -3,21 +3,19 @@ package by.epam.admission.logic;
 import by.epam.admission.dao.TransactionHelper;
 import by.epam.admission.dao.impl.UserDao;
 import by.epam.admission.exception.ProjectException;
-import by.epam.admission.model.User;
 
-public class LoginLogic {
+public class CheckEmailLogic {
 
-    public static User checkLogin(String login, String password) throws ProjectException {
+    public static boolean checkEmail(String email) throws ProjectException {
+        boolean result;
         TransactionHelper helper = new TransactionHelper();
         UserDao userDao = new UserDao();
-        User user;
-        helper.startTransaction(userDao);
         try {
-            user = userDao.findUserByEmailAndPassword(login, password);
+            helper.startTransaction(userDao);
+            result = userDao.checkEmail(email);
         } finally {
             helper.endTransaction();
         }
-        return user;
+        return result;
     }
-
 }

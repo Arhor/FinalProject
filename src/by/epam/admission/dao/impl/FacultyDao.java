@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.epam.admission.dao.AbstractDao;
-import by.epam.admission.exception.DaoException;
+import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Faculty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,20 +42,19 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
     private static final String SEATS_BUDGET = "seats_budget";
 
     @Override
-    public List<Faculty> findAll() {
+    public List<Faculty> findAll() throws ProjectException {
         ArrayList<Faculty> faculties = new ArrayList<>();
         try (Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery(SQL_SELECT_ALL_FACULTIES);
             processResult(faculties, rs);
         } catch (SQLException e) {
-            LOG.error("Selection error", e);
-
+            throw new ProjectException("Selection error", e);
         }
         return faculties;
     }
 
     @Override
-    public Faculty findEntityById(Integer id) {
+    public Faculty findEntityById(Integer id) throws ProjectException {
         Faculty faculty = new Faculty();
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_SELECT_FACULTY_BY_ID)) {
@@ -69,12 +68,12 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
                 faculty.setSeatsBudget(rs.getInt(SEATS_BUDGET));
             }
         } catch (SQLException e) {
-            LOG.error("Selection error", e);
+            throw new ProjectException("Selection error", e);
         }
         return faculty;
     }
 
-    public List<Faculty> findFacultiesBySubjectId(int id) {
+    public List<Faculty> findFacultiesBySubjectId(int id) throws ProjectException {
         ArrayList<Faculty> faculties = new ArrayList<>();
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_SELECT_FACULTIES_BY_SUBJECT_ID)) {
@@ -82,52 +81,52 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
             ResultSet rs = st.executeQuery();
             processResult(faculties, rs);
         } catch (SQLException e) {
-            LOG.error("Selection error", e);
+            throw new ProjectException("Selection error", e);
         }
         return faculties;
     }
 
     @Override
-    public boolean delete(Integer id) throws DaoException {
+    public boolean delete(Integer id) throws ProjectException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_FACULTY_BY_ID)) {
             flag = st.executeUpdate();
         } catch (SQLException e) {
             LOG.error("Deletion error", e);
-            throw new DaoException("Deletion error", e);
+            throw new ProjectException("Deletion error", e);
         }
         return flag != 0;
     }
 
     @Override
-    public boolean delete(Faculty faculty) throws DaoException {
+    public boolean delete(Faculty faculty) throws ProjectException {
         try {
             return executeDMLQuery(faculty, SQL_DELETE_FACULTY);
         } catch (SQLException e) {
             LOG.error("Deletion error", e);
-            throw new DaoException("Deletion error", e);
+            throw new ProjectException("Deletion error", e);
         }
     }
 
     @Override
-    public boolean create(Faculty faculty) throws DaoException {
+    public boolean create(Faculty faculty) throws ProjectException {
         try {
             return executeDMLQuery(faculty, SQL_INSERT_FACULTY);
         } catch (SQLException e) {
             LOG.error("Insertion error", e);
-            throw new DaoException("Insertion error", e);
+            throw new ProjectException("Insertion error", e);
         }
     }
 
     @Override
-    public Faculty update(Faculty faculty) throws DaoException {
+    public Faculty update(Faculty faculty) throws ProjectException {
         try {
             boolean result = executeDMLQuery(faculty, SQL_UPDATE_FACULTY);
             return result ? faculty : null;
         } catch (SQLException e) {
             LOG.error("Update error", e);
-            throw new DaoException("Update error", e);
+            throw new ProjectException("Update error", e);
         }
     }
 

@@ -1,7 +1,7 @@
 package by.epam.admission.dao.impl;
 
 import by.epam.admission.dao.AbstractDao;
-import by.epam.admission.exception.DaoException;
+import by.epam.admission.exception.ProjectException;
 import by.epam.admission.util.EncryptAction;
 import by.epam.admission.exception.NotSupportedOperationException;
 import by.epam.admission.model.User;
@@ -27,6 +27,7 @@ public class UserDao extends AbstractDao<Integer, User> {
     private static final String SQL_DELETE_USER_BY_EMAIL_AND_PASSWORD;
     private static final String SQL_DELETE_USER_BY_ID;
     private static final String SQL_SELECT_USER_NAME_BY_EMAIL;
+    private static final String SQL_SELECT_USER_BY_EMAIL;
 
     // column labels
     private static final String ID = "id";
@@ -38,7 +39,7 @@ public class UserDao extends AbstractDao<Integer, User> {
     private static final String AVAILABLE = "available";
 
     @Override
-    public List<User> findAll() {
+    public List<User> findAll() throws ProjectException {
         ArrayList<User> users = new ArrayList<>();
         try (PreparedStatement st = connection.prepareStatement(
                 String.format(SQL_SELECT_USERS, AVAILABLE))) {
@@ -46,13 +47,13 @@ public class UserDao extends AbstractDao<Integer, User> {
             ResultSet rs = st.executeQuery();
             processResult(users, rs);
         } catch (SQLException e) {
-            LOG.error("Selection error", e);
+            throw new ProjectException("Selection error", e);
         }
         return users;
     }
 
     @Override
-    public User findEntityById(Integer id) {
+    public User findEntityById(Integer id) throws ProjectException {
         User user = null;
         try (PreparedStatement st = connection.prepareStatement(
                 String.format(SQL_SELECT_USERS, ID))) {
@@ -62,12 +63,12 @@ public class UserDao extends AbstractDao<Integer, User> {
                 user = setUser(rs);
             }
         } catch (SQLException e) {
-            LOG.error("Selection error", e);
+            throw new ProjectException("Selection error", e);
         }
         return user;
     }
 
-    public User findUserByEmailAndPassword(String email, String password) {
+    public User findUserByEmailAndPassword(String email, String password) throws ProjectException {
         User user = null;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_SELECT_USER_BY_EMAIL_AND_PASSWORD)) {
@@ -81,13 +82,25 @@ public class UserDao extends AbstractDao<Integer, User> {
                 user = setUser(rs);
             }
         } catch (SQLException e) {
-            LOG.error("Selection error", e);
+            throw new ProjectException("Selection error", e);
         }
         return user;
     }
 
+    public boolean checkEmail(String email) throws ProjectException {
+        boolean result;
+        try (PreparedStatement st = connection.prepareStatement(SQL_SELECT_USER_BY_EMAIL)) {
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            result = !rs.next();
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return result;
+    }
+
     @Override
-    public boolean delete(Integer id) throws DaoException {
+    public boolean delete(Integer id) throws ProjectException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_USER_BY_ID)) {
@@ -95,12 +108,12 @@ public class UserDao extends AbstractDao<Integer, User> {
             flag = st.executeUpdate();
         } catch (SQLException e) {
             LOG.error("Deletion error", e);
-            throw new DaoException("Deletion error", e);
+            throw new ProjectException("Deletion error", e);
         }
         return flag != 0;
     }
 
-    public boolean delete(User user, String password) throws DaoException {
+    public boolean delete(User user, String password) throws ProjectException {
         int flag;
         EncryptAction encryptAction = new EncryptAction();
         String name = findNameByEmail(user.getEmail());
@@ -111,7 +124,7 @@ public class UserDao extends AbstractDao<Integer, User> {
             st.setString(2, encryptedPassword);
             flag = st.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("Deletion error", e);
+            throw new ProjectException("Deletion error", e);
         }
         return (flag != 0);
     }
@@ -122,7 +135,7 @@ public class UserDao extends AbstractDao<Integer, User> {
     }
 
     // if return false - user with the same email already exists
-    public boolean create(User user, String password) throws DaoException {
+    public boolean create(User user, String password) throws ProjectException {
         boolean result = false;
         if (findNameByEmail(user.getEmail()) == null) {
             try {
@@ -147,7 +160,7 @@ public class UserDao extends AbstractDao<Integer, User> {
                 result = flag != 0;
             } catch (SQLException e) {
                 LOG.error("SQL exception", e);
-                throw new DaoException("Insertion error", e);
+                throw new ProjectException("Insertion error", e);
             }
         }
         return result;
@@ -159,7 +172,7 @@ public class UserDao extends AbstractDao<Integer, User> {
     }
 
     // password changes every time on first_name change
-    public User update(User user, String password) throws DaoException {
+    public User update(User user, String password) throws ProjectException {
         int flag;
         EncryptAction encryptAction = new EncryptAction();
         String name = findNameByEmail(user.getEmail());
@@ -176,7 +189,7 @@ public class UserDao extends AbstractDao<Integer, User> {
             flag = st.executeUpdate();
         } catch (SQLException e) {
             LOG.error("Updating error", e);
-            throw new DaoException("Updating error", e);
+            throw new ProjectException("Updating error", e);
         }
         return flag != 0 ? user : null;
     }
@@ -241,6 +254,8 @@ public class UserDao extends AbstractDao<Integer, User> {
                 "WHERE  `email` = ? " +
                         "AND `password` = ?" +
                         "AND `available` = 1";
+        SQL_SELECT_USER_BY_EMAIL =
+                "SELECT COUNT(*) FROM `users` WHERE `email` = ?";
         SQL_INSERT_USER =
                 "INSERT INTO `users` " +
                 "(`email`,`password`,`first_name`,`last_name`,`role`,`lang`) " +

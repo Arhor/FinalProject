@@ -1,7 +1,7 @@
 package by.epam.admission.dao.impl;
 
 import by.epam.admission.dao.TransactionHelperDBUnit;
-import by.epam.admission.exception.DaoException;
+import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.pool.ConnectionPoolDBUnit;
 import org.apache.logging.log4j.LogManager;
@@ -24,8 +24,12 @@ public class EnrolleeDaoTest {
         TransactionHelperDBUnit t = new TransactionHelperDBUnit();
         EnrolleeDao enrolleeDAO = new EnrolleeDao();
         t.startTransaction(enrolleeDAO);
-        for (Enrollee enrollee : enrolleeDAO.findAll()) {
-            LOG.info(enrollee);
+        try {
+            for (Enrollee enrollee : enrolleeDAO.findAll()) {
+                LOG.info(enrollee);
+            }
+        } catch (ProjectException e) {
+            LOG.error("Test exception", e);
         }
         t.endTransaction();
     }
@@ -39,7 +43,7 @@ public class EnrolleeDaoTest {
             for (Enrollee enrollee : enrolleeDAO.findEnrolleesByCountry("Беларусь")) {
                 LOG.info(enrollee);
             }
-        } catch (DaoException e) {
+        } catch (ProjectException e) {
             LOG.error("DAO exception", e);
         }
         t.endTransaction();
@@ -54,7 +58,7 @@ public class EnrolleeDaoTest {
             for (Enrollee enrollee : enrolleeDAO.findEnrolleesByCity("Минск")) {
                 LOG.info(enrollee);
             }
-        } catch (DaoException e) {
+        } catch (ProjectException e) {
             LOG.error("DAO exception", e);
         }
         t.endTransaction();
@@ -71,7 +75,7 @@ public class EnrolleeDaoTest {
             try {
                 enrolleeDAO.registerToFacultyById(enrollee, i);
                 t.commit();
-            } catch (DaoException e) {
+            } catch (ProjectException e) {
                 t.rollback();
                 LOG.error("DAO exception", e);
             }
@@ -88,7 +92,11 @@ public class EnrolleeDaoTest {
                     EnrolleeDao enrolleeDAO = new EnrolleeDao();
                     t.startTransaction(enrolleeDAO);
                     int id = (int)(Math.random() * 29 + 0.5);
-                    LOG.info("ID: " + id + " - " + enrolleeDAO.findEntityById(id));
+                    try {
+                        LOG.info("ID: " + id + " - " + enrolleeDAO.findEntityById(id));
+                    } catch (ProjectException e) {
+                        LOG.error("Test exception", e);
+                    }
                     t.endTransaction();
                 }
             }.start();
@@ -119,7 +127,7 @@ public class EnrolleeDaoTest {
                         enrolleeDAO.create(enrollee);
                         t.commit();
                         LOG.info("created enrolle: " + enrollee);
-                    } catch (DaoException e) {
+                    } catch (ProjectException e) {
                         t.rollback();
                         LOG.error("DAO exception", e);
                     }
@@ -139,7 +147,7 @@ public class EnrolleeDaoTest {
         try {
             LOG.info(enrolleeDAO.delete(enrollee));
             t.commit();
-        } catch (DaoException e) {
+        } catch (ProjectException e) {
             t.rollback();
             LOG.error("DAO exception", e);
         }

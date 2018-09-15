@@ -5,7 +5,7 @@
 package by.epam.admission.dao.impl;
 
 import by.epam.admission.dao.TransactionHelper;
-import by.epam.admission.exception.DaoException;
+import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.User;
 import by.epam.admission.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
@@ -26,8 +26,12 @@ public class UserDaoTest {
         TransactionHelper t = new TransactionHelper();
         UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
-        for (User user : uDAO.findAll()) {
-            LOG.info(user);
+        try {
+            for (User user : uDAO.findAll()) {
+                LOG.info(user);
+            }
+        } catch (ProjectException e) {
+            LOG.error(e);
         }
         t.endTransaction();
     }
@@ -41,7 +45,11 @@ public class UserDaoTest {
                     UserDao uDAO = new UserDao();
                     t.startTransaction(uDAO);
                     int id = (int)(Math.random() * 55 + 0.5);
-                    LOG.info("UID: " + id + " - " + uDAO.findEntityById(id));
+                    try {
+                        LOG.info("UID: " + id + " - " + uDAO.findEntityById(id));
+                    } catch (ProjectException e) {
+                        LOG.error(e);
+                    }
                     t.endTransaction();
                 }
             }.start();
@@ -55,7 +63,11 @@ public class UserDaoTest {
         TransactionHelper t = new TransactionHelper();
         UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
-        LOG.info(uDAO.findUserByEmailAndPassword(email, password));
+        try {
+            LOG.info(uDAO.findUserByEmailAndPassword(email, password));
+        } catch (ProjectException e) {
+            LOG.error(e);
+        }
         t.endTransaction();
     }
 
@@ -70,7 +82,7 @@ public class UserDaoTest {
         try {
             LOG.info(uDAO.delete(user, password));
             t.commit();
-        } catch (DaoException e) {
+        } catch (ProjectException e) {
             LOG.error("DAO exception", e);
             t.rollback();
         }
@@ -97,7 +109,7 @@ public class UserDaoTest {
                         uDAO.create(user, password);
                         t.commit();
                         LOG.info("created user: " + user);
-                    } catch (DaoException e) {
+                    } catch (ProjectException e) {
                         LOG.error("DAO exception", e);
                         t.rollback();
                     }
@@ -131,7 +143,7 @@ public class UserDaoTest {
             if (flag) {
                 LOG.info("created user: " + user);
             }
-        } catch (DaoException e) {
+        } catch (ProjectException e) {
             LOG.error("DAO exception", e);
             t.rollback();
         }
@@ -153,7 +165,7 @@ public class UserDaoTest {
         try {
             result = uDAO.update(user, password);
             t.commit();
-        } catch (DaoException e) {
+        } catch (ProjectException e) {
             t.rollback();
         }
         LOG.debug(user);
@@ -169,7 +181,7 @@ public class UserDaoTest {
         try {
             result = uDAO.delete(50);
             t.commit();
-        } catch (DaoException e) {
+        } catch (ProjectException e) {
             t.rollback();
         }
         Assert.assertFalse(result);

@@ -5,7 +5,7 @@
 package by.epam.admission.dao.impl;
 
 import by.epam.admission.dao.TransactionHelper;
-import by.epam.admission.exception.DaoException;
+import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Faculty;
 import by.epam.admission.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
@@ -29,8 +29,12 @@ public class FacultyDaoTest {
     @Test
     public void findAllTest() {
         transactionHelper.startTransaction(facultyDao);
-        for (Faculty faculty : facultyDao.findAll()) {
-            LOG.info(faculty);
+        try {
+            for (Faculty faculty : facultyDao.findAll()) {
+                LOG.info(faculty);
+            }
+        } catch (ProjectException e) {
+            LOG.error("Test exception", e);
         }
         transactionHelper.endTransaction();
     }
@@ -38,15 +42,23 @@ public class FacultyDaoTest {
     @Test
     public void findEntityByIdTest() {
         transactionHelper.startTransaction(facultyDao);
-        LOG.info(facultyDao.findEntityById(201));
+        try {
+            LOG.info(facultyDao.findEntityById(201));
+        } catch (ProjectException e) {
+            LOG.error("Test exception", e);
+        }
         transactionHelper.endTransaction();
     }
 
     @Test
     public void findFacultyBySubjectIdTest() {
         transactionHelper.startTransaction(facultyDao);
-        for (Faculty faculty : facultyDao.findFacultiesBySubjectId(101)) {
-            LOG.info(faculty);
+        try {
+            for (Faculty faculty : facultyDao.findFacultiesBySubjectId(101)) {
+                LOG.info(faculty);
+            }
+        } catch (ProjectException e) {
+            LOG.error("Test exception", e);
         }
         transactionHelper.endTransaction();
     }
@@ -64,7 +76,7 @@ public class FacultyDaoTest {
         try {
             result = facultyDao.create(faculty);
             transactionHelper.commit();
-        } catch (DaoException e) {
+        } catch (ProjectException e) {
             LOG.error("DAO exception", e);
             transactionHelper.rollback();
         }

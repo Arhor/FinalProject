@@ -34,4 +34,12 @@ public class ActionFactory {
         return currentCommand;
     }
 
+//    public static Optional<ActionCommand> getCommand(String commandName) {
+//        return Arrays.stream(CommandEnum.values())
+//                     .filter(o -> o.name().equalsIgnoreCase(commandName))
+//                     .map(CommandEnum::getCurrentCommand)
+//                     .findAny();
+//        // Optional.ofNullable(type.orElse(null).getCommand());
+//    }
+
 }
