@@ -27,13 +27,7 @@ public class ConfirmCommand implements ActionCommand {
         String submittedCode = request.getParameter("confirmationCode");
         String realCode = String.valueOf(session.getAttribute("confirmationCode"));
 
-        boolean equivalency = submittedCode.equals(realCode);
-
-        LOG.debug("submitted code: " + submittedCode);
-        LOG.debug("Real code: " + realCode);
-        LOG.debug("Equality: " + equivalency);
-
-        if (equivalency) {
+        if (submittedCode.equals(realCode)) {
             user = RegisterLogic.registerUser(user, password);
             if (user != null) {
                 session.setAttribute("role", user.getRole());
@@ -46,8 +40,7 @@ public class ConfirmCommand implements ActionCommand {
             session.removeAttribute("user");
             page = ConfigurationManager.getProperty("path.page.main");
         }
-
-
+        session.removeAttribute("confirmationCode");
         return page;
     }
 }

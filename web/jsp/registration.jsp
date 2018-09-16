@@ -94,7 +94,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group bmd-form-group">
                                                 <label class="bmd-label-floating">E-mail</label>
-                                                <input class="form-control" name="email" type="text" required />
+                                                <input class="form-control" name="email" type="email" pattern="[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*([a-z]{2,4})" required />
                                             </div>
                                         </div>
                                     </div>

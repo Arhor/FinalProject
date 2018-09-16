@@ -7,6 +7,7 @@ import by.epam.admission.logic.MailLogic;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.ConfirmationCodeGenerator;
+import by.epam.admission.util.EmailValidator;
 import by.epam.admission.util.MessageManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,34 +38,38 @@ public class RegisterCommand implements ActionCommand {
         String firstName = request.getParameter(PARAM_NAME_FIRST_NAME);
         String lastName = request.getParameter(PARAM_NAME_LAST_NAME);
 
-        try {
-            if (CheckEmailLogic.checkEmail(email)) {
-                User user = new User();
-                user.setEmail(email);
-                user.setFirstName(firstName);
-                user.setLastName(lastName);
-                user.setRole(User.Role.CLIENT);
-                user.setLang(User.Lang.RU);
-                session.setAttribute("user", user);
-                session.setAttribute("password", password);
-                String confirmationCode = ConfirmationCodeGenerator.generate();
-                session.setAttribute("confirmationCode",confirmationCode);
-                ResourceBundle mailResources =
-                        ResourceBundle.getBundle("resources.mail");
-                new MailLogic(
-                        email,
-                        CONFIRMATION_SUBJECT,
-                        confirmationCode,
-                        mailResources).start();
-                page = ConfigurationManager.getProperty("path.page.confirm");
-            } else {
-                request.setAttribute("registrationError", email + " "
-                        + MessageManager.getProperty("message.registererror"));
-                page = ConfigurationManager.getProperty("path.page.registration");
+        if (EmailValidator.validate(email)) {
+            try {
+                if (CheckEmailLogic.checkEmail(email)) {
+                    User user = new User();
+                    user.setEmail(email);
+                    user.setFirstName(firstName);
+                    user.setLastName(lastName);
+                    user.setRole(User.Role.CLIENT);
+                    user.setLang(User.Lang.RU);
+                    session.setAttribute("user", user);
+                    session.setAttribute("password", password);
+                    String confirmationCode = ConfirmationCodeGenerator.generate();
+                    session.setAttribute("confirmationCode",confirmationCode);
+                    ResourceBundle mailResources =
+                            ResourceBundle.getBundle("resources.mail");
+                    new MailLogic(
+                            email,
+                            CONFIRMATION_SUBJECT,
+                            confirmationCode,
+                            mailResources).start();
+                    page = ConfigurationManager.getProperty("path.page.confirm");
+                } else {
+                    request.setAttribute("registrationError", email + " "
+                            + MessageManager.getProperty("message.email.inuse"));
+                    page = ConfigurationManager.getProperty("path.page.registration");
+                }
+            } catch (ProjectException e) {
+                LOG.error("Registration error", e);
+                page = ConfigurationManager.getProperty("path.page.error");
             }
-        } catch (ProjectException e) {
-            LOG.error("Registration error", e);
-            page = ConfigurationManager.getProperty("path.page.error");
+        } else {
+            page = MessageManager.getProperty("message.email.invalid");
         }
         return page;
     }
