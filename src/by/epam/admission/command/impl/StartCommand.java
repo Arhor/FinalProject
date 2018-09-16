@@ -5,11 +5,10 @@ import by.epam.admission.util.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class HomeCommand implements ActionCommand {
+public class StartCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String page = ConfigurationManager.getProperty("path.page.main");
-        return page;
+        return ConfigurationManager.getProperty("path.page.main");
     }
 }

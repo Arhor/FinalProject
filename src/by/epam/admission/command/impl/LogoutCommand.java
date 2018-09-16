@@ -9,7 +9,7 @@ public class LogoutCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String page = ConfigurationManager.getProperty("path.page.index");
+        String page = ConfigurationManager.getProperty("path.page.main");
         request.getSession().invalidate();
         return null; // STUB trying to logout via redirect
     }

@@ -33,5 +33,6 @@
     <orderEntry type="library" name="slf4j-simple-1.7.25" level="project" />
     <orderEntry type="library" name="testng-6.7" level="project" />
     <orderEntry type="library" name="mail" level="project" />
+    <orderEntry type="library" name="jstl-1.2" level="project" />
   </component>
 </module>

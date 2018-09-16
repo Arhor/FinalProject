@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
 
 @WebServlet(
         name = "ControllerServlet",
@@ -50,6 +51,12 @@ public class ControllerServlet extends HttpServlet {
         User.Role role = (User.Role) request.getSession().getAttribute("role");
 
         LOG.debug("current role: " + role);
+        Enumeration headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String key = (String) headerNames.nextElement();
+            LOG.debug(key + " : " + request.getHeader(key));
+        }
+
         page = command.execute(request);
 
         if (page != null) {

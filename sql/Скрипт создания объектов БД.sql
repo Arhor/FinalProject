@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `admission_committee`.`faculties` (
   `id` TINYINT UNSIGNED NOT NULL COMMENT 'id',
   `name_ru` VARCHAR(60) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL COMMENT 'faculty\'s name in russian',
   `name_en` VARCHAR(60) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL COMMENT 'faculty\'s name in english',
-  `seats_total` TINYINT UNSIGNED NOT NULL COMMENT 'Общее кол-во мест на данном факультете',
+  `seats_paid` TINYINT UNSIGNED NOT NULL COMMENT 'Общее кол-во мест на данном факультете',
   `seats_budget` TINYINT UNSIGNED NOT NULL COMMENT 'Кол-во бесплатных мест на данном факультете',
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -195,14 +195,14 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `admission_committee`;
-INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (201, 'Факультет компьютерного проектирования', 'Faculty of computer-aided design', 113, 20);
-INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (202, 'Факультет информационных технологий и управления', 'Faculty of information technologies and control', 170, 15);
-INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (203, 'Факультет радиотехники и электроники', 'Faculty of radioengineering and electronics', 149, 17);
-INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (204, 'Факультет компьютерных систем и сетей', 'Faculty of computer systems and networks', 250, 10);
-INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (205, 'Факультет инфокоммуникаций', 'Faculty of infocommunications', 97, 10);
-INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (206, 'Инженерно-экономический факультет', 'Faculty of engineering and economics', 180, 30);
-INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (207, 'Факультет инновационного непрерывного образования', 'Faculty of innovative lifelong learning', 50, 20);
-INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_total`, `seats_budget`) VALUES (208, 'Военный факультет', 'Military faculty', 123, 50);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_paid`, `seats_budget`) VALUES (201, 'Факультет компьютерного проектирования', 'Faculty of computer-aided design', 113, 20);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_paid`, `seats_budget`) VALUES (202, 'Факультет информационных технологий и управления', 'Faculty of information technologies and control', 170, 15);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_paid`, `seats_budget`) VALUES (203, 'Факультет радиотехники и электроники', 'Faculty of radioengineering and electronics', 149, 17);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_paid`, `seats_budget`) VALUES (204, 'Факультет компьютерных систем и сетей', 'Faculty of computer systems and networks', 250, 10);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_paid`, `seats_budget`) VALUES (205, 'Факультет инфокоммуникаций', 'Faculty of infocommunications', 97, 10);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_paid`, `seats_budget`) VALUES (206, 'Инженерно-экономический факультет', 'Faculty of engineering and economics', 180, 30);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_paid`, `seats_budget`) VALUES (207, 'Факультет инновационного непрерывного образования', 'Faculty of innovative lifelong learning', 50, 20);
+INSERT INTO `admission_committee`.`faculties` (`id`, `name_ru`, `name_en`, `seats_paid`, `seats_budget`) VALUES (208, 'Военный факультет', 'Military faculty', 123, 50);
 
 COMMIT;
 

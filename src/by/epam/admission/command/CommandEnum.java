@@ -39,6 +39,16 @@ public enum CommandEnum {
         {
             this.command = new ConfirmCommand();
         }
+    },
+    START {
+        {
+            this.command = new StartCommand();
+        }
+    },
+    SHOW_FACULTIES {
+        {
+            this.command = new ShowFacultiesCommand();
+        }
     };
 
     ActionCommand command;

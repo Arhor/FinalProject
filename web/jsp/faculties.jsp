@@ -1,11 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
   User: Maxim Burishinets
-  Date: 11.09.2018
-  Time: 14:00
+  Date: 16.09.2018
+  Time: 3:06
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -83,21 +84,35 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4 col-md-4 ml-auto mr-auto">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-header-primary">
-                                <h3 class="card-title">Welcome!</h3>
+                                <h4 class="card-title">Faculties</h4>
+                                <p class="card-category">table represents available faculties and their admission plan</p>
                             </div>
                             <div class="card-body">
-                                <form action="/controller" method="POST">
-                                    <div class="row">
-                                        <button type="submit" class="btn btn-primary col-lg-8 col-md-10 ml-auto mr-auto" name="command" value="SIGN IN">SIGN IN</button>
-                                    </div>
-                                    <div class="row">
-                                        <button type="submit" class="btn btn-primary col-lg-8 col-md-10 ml-auto mr-auto" name="command" value="SIGN UP">SIGN UP</button>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </form>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Faculty</th>
+                                                <th>Payable seats</th>
+                                                <th>Free seats</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${faculties}" var="faculty">
+                                                <tr>
+                                                    <td>${faculty.id}</td>
+                                                    <td>${faculty.nameEn}</td>
+                                                    <td>${faculty.seatsPaid}</td>
+                                                    <td>${faculty.seatsBudget}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -31,7 +31,7 @@ public class LoginCommand implements ActionCommand {
                 request.setAttribute("user", user.getFirstName() + " " + user.getLastName());
                 session.setAttribute("user", user);
                 session.setAttribute("role", user.getRole());
-                page = ConfigurationManager.getProperty("path.page.main");
+                page = ConfigurationManager.getProperty("path.page.client.main");
             } else {
                 request.setAttribute("errorLoginMessage", MessageManager.getProperty("message.loginerror"));
                 page = ConfigurationManager.getProperty("path.page.login");
