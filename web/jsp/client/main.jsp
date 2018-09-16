@@ -38,10 +38,16 @@
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=logout">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/controller?command=home">
                         <i class="material-icons">home</i>
                         <p>Home page</p>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/controller?command=logout">
+                        <i class="material-icons"></i>
+                        <p>Logout</p>
                     </a>
                 </li>
                 <!-- your sidebar here -->
@@ -49,7 +55,7 @@
         </div>
     </div>
     <div class="main-panel">
-        <!-- Navbar -->
+        <!-- Navbar -->String
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
             <div class="container-fluid">
                 <div class="navbar-wrapper">

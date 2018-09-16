@@ -118,7 +118,7 @@
                                     </div>
                                     ${registrationError}
                                     <div class="row">
-                                        <button class="btn btn-primary col-lg-8 col-md-8 ml-auto mr-auto" name="command" value="registration">SIGN UP</button>
+                                        <button class="btn btn-primary col-lg-8 col-md-8 ml-auto mr-auto" name="command" value="register">SIGN UP</button>
                                     </div>
                                 </form>
                             </div>

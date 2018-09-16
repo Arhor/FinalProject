@@ -14,7 +14,7 @@ public enum CommandEnum {
             this.command = new SignUpCommand();
         }
     },
-    REGISTRATION {
+    REGISTER {
         {
             this.command = new RegisterCommand();
         }
