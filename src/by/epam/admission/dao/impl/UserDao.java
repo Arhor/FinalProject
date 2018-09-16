@@ -72,14 +72,16 @@ public class UserDao extends AbstractDao<Integer, User> {
         User user = null;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_SELECT_USER_BY_EMAIL_AND_PASSWORD)) {
-            EncryptAction encryptAction = new EncryptAction();
             String name = findNameByEmail(email);
-            String encryptedPassword = encryptAction.encrypt(password, name);
-            st.setString(1, email);
-            st.setString(2, encryptedPassword);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                user = setUser(rs);
+            if (name != null) {
+                EncryptAction encryptAction = new EncryptAction();
+                String encryptedPassword = encryptAction.encrypt(password, name);
+                st.setString(1, email);
+                st.setString(2, encryptedPassword);
+                ResultSet rs = st.executeQuery();
+                if (rs.next()) {
+                    user = setUser(rs);
+                }
             }
         } catch (SQLException e) {
             throw new ProjectException("Selection error", e);
@@ -88,11 +90,15 @@ public class UserDao extends AbstractDao<Integer, User> {
     }
 
     public boolean checkEmail(String email) throws ProjectException {
-        boolean result;
+        boolean result = false;
         try (PreparedStatement st = connection.prepareStatement(SQL_SELECT_USER_BY_EMAIL)) {
             st.setString(1, email);
             ResultSet rs = st.executeQuery();
-            result = !rs.next();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                result = (count == 0);
+            }
+
         } catch (SQLException e) {
             throw new ProjectException("Selection error", e);
         }

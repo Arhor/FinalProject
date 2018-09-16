@@ -65,6 +65,12 @@
                         <p>Home page</p>
                     </a>
                 </li>
+                <li class="nav-item active  ">
+                    <a class="nav-link" href="/controller?command=show_faculties">
+                        <i class="material-icons">domain</i>
+                        <p>Faculties</p>
+                    </a>
+                </li>
                 <!-- your sidebar here -->
             </ul>
         </div>

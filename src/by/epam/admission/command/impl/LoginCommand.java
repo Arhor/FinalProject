@@ -6,11 +6,15 @@ import by.epam.admission.logic.LoginLogic;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.MessageManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class LoginCommand implements ActionCommand {
+
+    private static final Logger LOG = LogManager.getLogger(LoginCommand.class);
 
     private static final String PARAM_NAME_EMAIL = "email";
     private static final String PARAM_NAME_PASSWORD = "password";
@@ -28,7 +32,6 @@ public class LoginCommand implements ActionCommand {
         try {
             user = LoginLogic.checkLogin(login, password);
             if(user != null) {
-                request.setAttribute("user", user.getFirstName() + " " + user.getLastName());
                 session.setAttribute("user", user);
                 session.setAttribute("role", user.getRole());
                 page = ConfigurationManager.getProperty("path.page.client.main");
@@ -37,6 +40,7 @@ public class LoginCommand implements ActionCommand {
                 page = ConfigurationManager.getProperty("path.page.login");
             }
         } catch (ProjectException e) {
+            LOG.error(e);
             page = ConfigurationManager.getProperty("path.page.error");
         }
         return page;

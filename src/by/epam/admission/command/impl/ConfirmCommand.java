@@ -36,7 +36,6 @@ public class ConfirmCommand implements ActionCommand {
         if (equivalency) {
             user = RegisterLogic.registerUser(user, password);
             if (user != null) {
-                request.setAttribute("user", user.getFirstName() + " " + user.getLastName());
                 session.setAttribute("role", user.getRole());
                 page = ConfigurationManager.getProperty("path.page.client.main");
             } else {
@@ -44,6 +43,7 @@ public class ConfirmCommand implements ActionCommand {
                 page = ConfigurationManager.getProperty("path.page.login");
             }
         } else {
+            session.removeAttribute("user");
             page = ConfigurationManager.getProperty("path.page.main");
         }
 

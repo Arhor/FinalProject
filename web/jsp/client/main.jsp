@@ -46,7 +46,7 @@
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="/controller?command=logout">
-                        <i class="material-icons"></i>
+                        <i class="material-icons">exit_to_app</i>
                         <p>Logout</p>
                     </a>
                 </li>
@@ -55,7 +55,7 @@
         </div>
     </div>
     <div class="main-panel">
-        <!-- Navbar -->String
+        <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
             <div class="container-fluid">
                 <div class="navbar-wrapper">
@@ -90,7 +90,7 @@
                                     <i class="material-icons">person</i>
                                 </div>
                                 <p class="card-category">Current User</p>
-                                <h3 class="card-title">${user}</h3>
+                                <h3 class="card-title">${sessionScope.user.firstName} ${sessionScope.user.lastName}</h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
