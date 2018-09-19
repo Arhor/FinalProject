@@ -1,6 +1,7 @@
 package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
+import by.epam.admission.command.Router;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
 
@@ -10,8 +11,9 @@ import javax.servlet.http.HttpSession;
 public class HomeCommand implements ActionCommand {
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) {
         String page;
+        Router router = new Router();
         HttpSession session = request.getSession();
         User.Role currentRole = (User.Role) session.getAttribute("role");
         switch (currentRole) {
@@ -25,6 +27,8 @@ public class HomeCommand implements ActionCommand {
             default:
                 page = ConfigurationManager.getProperty("page.path.index");
         }
-        return page;
+        router.setPage(page);
+        router.setType(Router.Type.FORWARD);
+        return router;
     }
 }

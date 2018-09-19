@@ -1,6 +1,7 @@
 package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
+import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.logic.CheckEmailLogic;
 import by.epam.admission.logic.MailLogic;
@@ -27,9 +28,11 @@ public class RegisterCommand implements ActionCommand {
     private static final String CONFIRMATION_SUBJECT = "Registration confirmation";
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) {
 
         String page;
+
+        Router router = new Router();
 
         HttpSession session = request.getSession();
 
@@ -71,6 +74,8 @@ public class RegisterCommand implements ActionCommand {
         } else {
             page = MessageManager.getProperty("message.email.invalid");
         }
-        return page;
+        router.setPage(page);
+        router.setType(Router.Type.FORWARD);
+        return router;
     }
 }

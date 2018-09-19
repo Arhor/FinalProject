@@ -1,6 +1,7 @@
 package by.epam.admission.controller;
 
 import by.epam.admission.command.ActionCommand;
+import by.epam.admission.command.Router;
 import by.epam.admission.command.factory.ActionFactory;
 import by.epam.admission.model.User;
 import by.epam.admission.pool.ConnectionPool;
@@ -44,12 +45,12 @@ public class ControllerServlet extends HttpServlet {
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response)
             throws ServletException, IOException {
-        String page;
+        Router router;
+
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
 
         User.Role role = (User.Role) request.getSession().getAttribute("role");
-
         LOG.debug("current role: " + role);
         Enumeration headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
@@ -57,15 +58,18 @@ public class ControllerServlet extends HttpServlet {
             LOG.debug(key + " : " + request.getHeader(key));
         }
 
-        page = command.execute(request);
+        router = command.execute(request);
 
-        if (page != null) {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-            dispatcher.forward(request, response);
-        } else {
-            page = ConfigurationManager.getProperty("path.page.index");
-            LOG.debug("Redirecting to: " + page);
-            response.sendRedirect(request.getContextPath() + page);
+        switch (router.getType()) {
+            case FORWARD:
+                RequestDispatcher dispatcher =
+                        getServletContext().getRequestDispatcher(router.getPage());
+                dispatcher.forward(request, response);
+                break;
+            case REDIRECT:
+                response.sendRedirect(request.getContextPath() + router.getPage());
+                break;
+            default:
         }
     }
 

@@ -1,6 +1,7 @@
 package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
+import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.logic.LoginLogic;
 import by.epam.admission.model.User;
@@ -8,6 +9,7 @@ import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.MessageManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.appender.routing.Route;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,9 +22,9 @@ public class LoginCommand implements ActionCommand {
     private static final String PARAM_NAME_PASSWORD = "password";
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) {
         String page;
-
+        Router router = new Router();
         String login = request.getParameter(PARAM_NAME_EMAIL);
         String password = request.getParameter(PARAM_NAME_PASSWORD);
 
@@ -35,15 +37,19 @@ public class LoginCommand implements ActionCommand {
                 session.setAttribute("user", user);
                 session.setAttribute("role", user.getRole());
                 page = ConfigurationManager.getProperty("path.page.client.main");
+                router.setType(Router.Type.FORWARD);
             } else {
                 request.setAttribute("errorLoginMessage", MessageManager.getProperty("message.loginerror"));
                 page = ConfigurationManager.getProperty("path.page.login");
+                router.setType(Router.Type.FORWARD);
             }
         } catch (ProjectException e) {
             LOG.error(e);
             page = ConfigurationManager.getProperty("path.page.error");
+            router.setType(Router.Type.FORWARD);
         }
-        return page;
+        router.setPage(page);
+        return router;
     }
 
 }

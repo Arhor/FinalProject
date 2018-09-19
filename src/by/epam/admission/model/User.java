@@ -67,7 +67,7 @@ public class User extends Entity {
     }
 
     public enum Lang {
-        RU, EN;
+        RU, EN
     }
 
     public enum Role {

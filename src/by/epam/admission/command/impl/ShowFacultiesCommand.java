@@ -1,6 +1,7 @@
 package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
+import by.epam.admission.command.Router;
 import by.epam.admission.dao.TransactionHelper;
 import by.epam.admission.dao.impl.FacultyDao;
 import by.epam.admission.exception.ProjectException;
@@ -13,8 +14,9 @@ import java.util.List;
 public class ShowFacultiesCommand implements ActionCommand {
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) {
         String page;
+        Router router = new Router();
         List<Faculty> faculties;
         TransactionHelper helper = new TransactionHelper();
         FacultyDao facultyDao = new FacultyDao();
@@ -28,6 +30,8 @@ public class ShowFacultiesCommand implements ActionCommand {
         } finally {
             helper.endTransaction();
         }
-        return page;
+        router.setPage(page);
+        router.setType(Router.Type.FORWARD);
+        return router;
     }
 }

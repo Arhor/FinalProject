@@ -48,7 +48,8 @@ public enum ConnectionPool {
             DriverManager.registerDriver(driver);
             LOG.debug("driver " + driver + " registered...");
         } catch (SQLException e) {
-            LOG.error("SQL exception", e);
+            LOG.fatal("Driver registration error", e);
+            throw new RuntimeException();
         }
         POOL_SIZE = Integer.parseInt(prop.getString(DB_POOLSIZE));
         for (int i = 0; i < POOL_SIZE; i++) {
