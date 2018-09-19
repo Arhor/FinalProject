@@ -6,8 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="ru_RU" />
+
+<fmt:setLocale value="${locale}" />
 <fmt:setBundle basename="resources.pagecontent" />
 <!doctype html>
 <html lang="en">
@@ -78,6 +80,19 @@
                             <%--</a>--%>
                         <%--</li>--%>
                         <!-- your navbar here -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">language</i>
+                                <p class="d-lg-none d-md-block">
+                                    Some Actions
+                                </p>
+                                <div class="ripple-container"></div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/controller?command=english">EN</a>
+                                <a class="dropdown-item" href="/controller?command=russian">RU</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -48,6 +48,7 @@ public class LoginCommand implements ActionCommand {
             page = ConfigurationManager.getProperty("path.page.error");
             router.setType(Router.Type.FORWARD);
         }
+
         router.setPage(page);
         return router;
     }

@@ -7,6 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${locale}" />
+<fmt:setBundle basename="resources.pagecontent" />
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,7 +17,7 @@
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        Admission Committee Home Page
+        <fmt:message key="label.faculties" />
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -34,7 +37,7 @@
       -->
         <div class="logo">
             <a href="#" class="simple-text logo-normal">
-                Admission Committee
+                <fmt:message key="label.title" />
             </a>
         </div>
         <div class="sidebar-wrapper">
@@ -42,13 +45,13 @@
                 <li class="nav-item active  ">
                     <a class="nav-link" href="/controller?command=home">
                         <i class="material-icons">home</i>
-                        <p>Home page</p>
+                        <p><fmt:message key="label.homepage" /></p>
                     </a>
                 </li>
                 <li class="nav-item active  ">
                     <a class="nav-link" href="/controller?command=show_faculties">
                         <i class="material-icons">domain</i>
-                        <p>Faculties</p>
+                        <p><fmt:message key="label.faculties" /></p>
                     </a>
                 </li>
                 <!-- your sidebar here -->
@@ -70,12 +73,25 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#pablo">
-                                <i class="material-icons">notifications</i> Notifications
-                            </a>
-                        </li>
+                        <%--<li class="nav-item">--%>
+                            <%--<a class="nav-link" href="#pablo">--%>
+                                <%--<i class="material-icons">notifications</i> Notifications--%>
+                            <%--</a>--%>
+                        <%--</li>--%>
                         <!-- your navbar here -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">language</i>
+                                <p class="d-lg-none d-md-block">
+                                    Some Actions
+                                </p>
+                                <div class="ripple-container"></div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/controller?command=english">EN</a>
+                                <a class="dropdown-item" href="/controller?command=russian">RU</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -87,28 +103,40 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-header-primary">
-                                <h4 class="card-title">Faculties</h4>
-                                <p class="card-category">table represents available faculties and their admission plan</p>
+                                <h4 class="card-title"><fmt:message key="label.faculties" /></h4>
+                                <p class="card-category"><fmt:message key="label.faculties.table.description" /></p>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead class="text-primary">
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Faculty</th>
-                                                <th>Payable seats</th>
-                                                <th>Free seats</th>
+                                                <th><fmt:message key="label.faculties.table.id" /></th>
+                                                <th><fmt:message key="label.faculties.table.faculty" /></th>
+                                                <th><fmt:message key="label.faculties.table.payable" /></th>
+                                                <th><fmt:message key="label.faculties.table.free" /></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <c:forEach items="${faculties}" var="faculty">
-                                                <tr>
-                                                    <td>${faculty.id}</td>
-                                                    <td>${faculty.nameEn}</td>
-                                                    <td>${faculty.seatsPaid}</td>
-                                                    <td>${faculty.seatsBudget}</td>
-                                                </tr>
+                                                <c:choose>
+                                                    <c:when test="${locale eq 'ru_RU'}" >
+                                                        <tr>
+                                                            <td>${faculty.id}</td>
+                                                            <td>${faculty.nameRu}</td>
+                                                            <td>${faculty.seatsPaid}</td>
+                                                            <td>${faculty.seatsBudget}</td>
+                                                        </tr>
+                                                    </c:when>
+                                                    <c:when test="${locale eq 'en_US'}" >
+                                                        <tr>
+                                                            <td>${faculty.id}</td>
+                                                            <td>${faculty.nameEn}</td>
+                                                            <td>${faculty.seatsPaid}</td>
+                                                            <td>${faculty.seatsBudget}</td>
+                                                        </tr>
+                                                    </c:when>
+                                                </c:choose>
                                             </c:forEach>
                                         </tbody>
                                     </table>

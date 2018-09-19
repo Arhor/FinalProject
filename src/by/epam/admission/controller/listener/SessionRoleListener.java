@@ -17,6 +17,7 @@ public class SessionRoleListener implements HttpSessionListener {
         User.Role role = (User.Role) session.getAttribute("role");
         if (role == null) {
             session.setAttribute("role", User.Role.GUEST);
+            session.setAttribute("locale", "ru_RU");
         }
     }
 

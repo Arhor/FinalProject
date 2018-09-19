@@ -49,6 +49,16 @@ public enum CommandEnum {
         {
             this.command = new ShowFacultiesCommand();
         }
+    },
+    ENGLISH {
+        {
+            this.command = new EnglishCommand();
+        }
+    },
+    RUSSIAN {
+        {
+            this.command = new RussianCommand();
+        }
     };
 
     ActionCommand command;

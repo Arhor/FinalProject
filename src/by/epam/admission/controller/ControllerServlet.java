@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -50,14 +51,6 @@ public class ControllerServlet extends HttpServlet {
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
 
-        User.Role role = (User.Role) request.getSession().getAttribute("role");
-        LOG.debug("current role: " + role);
-        Enumeration headerNames = request.getHeaderNames();
-        while (headerNames.hasMoreElements()) {
-            String key = (String) headerNames.nextElement();
-            LOG.debug(key + " : " + request.getHeader(key));
-        }
-
         router = command.execute(request);
 
         switch (router.getType()) {
@@ -70,6 +63,10 @@ public class ControllerServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + router.getPage());
                 break;
         }
+    }
+
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
     }
 
     public void destroy() {
