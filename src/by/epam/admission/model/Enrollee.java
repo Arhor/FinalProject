@@ -1,6 +1,7 @@
 package by.epam.admission.model;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class Enrollee extends Entity{
 
@@ -9,7 +10,7 @@ public class Enrollee extends Entity{
     private int schoolCertificate;
     private int userId;
     private boolean available;
-    private HashMap<Subject, Integer> marks;
+    private TreeMap<Subject, Integer> marks;
 
     public String getCountry() {
         return country;
@@ -51,11 +52,11 @@ public class Enrollee extends Entity{
         this.available = available;
     }
 
-    public HashMap<Subject, Integer> getMarks() {
+    public TreeMap<Subject, Integer> getMarks() {
         return marks;
     }
 
-    public void setMarks(HashMap<Subject, Integer> marks) {
+    public void setMarks(TreeMap<Subject, Integer> marks) {
         this.marks = marks;
     }
 
@@ -79,6 +80,13 @@ public class Enrollee extends Entity{
                 return false;
             }
         } else if (!city.equals(enrollee.city)) {
+            return false;
+        }
+        if (marks == null) {
+            if (enrollee.marks != null) {
+                return false;
+            }
+        } else if (!marks.equals(enrollee.getMarks())) {
             return false;
         }
         return true;

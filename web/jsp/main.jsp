@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <fmt:setLocale value="${locale}" />
 <fmt:setBundle basename="resources.pagecontent" />
 <!doctype html>
@@ -37,9 +36,9 @@
           Tip 2: you can also add an image using data-image tag
       -->
         <div class="logo">
-            <a href="#" class="simple-text logo-normal">
+            <span class="simple-text logo-normal">
                 <fmt:message key="label.title" />
-            </a>
+            </span>
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
@@ -60,44 +59,7 @@
         </div>
     </div>
     <div class="main-panel">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-            <div class="container-fluid">
-                <div class="navbar-wrapper">
-                    <a class="navbar-brand" href="#pablo">Dashboard</a>
-                </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="navbar-toggler-icon icon-bar"></span>
-                    <span class="navbar-toggler-icon icon-bar"></span>
-                    <span class="navbar-toggler-icon icon-bar"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end">
-                    <ul class="navbar-nav">
-                        <%--<li class="nav-item">--%>
-                            <%--<a class="nav-link" href="#pablo">--%>
-                                <%--<i class="material-icons">notifications</i> Notifications--%>
-                            <%--</a>--%>
-                        <%--</li>--%>
-                        <!-- your navbar here -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">language</i>
-                                <p class="d-lg-none d-md-block">
-                                    Some Actions
-                                </p>
-                                <div class="ripple-container"></div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="/controller?command=english">EN</a>
-                                <a class="dropdown-item" href="/controller?command=russian">RU</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- End Navbar -->
+        <c:import url="/jsp/modules/navbar_main.jspf" />
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -124,14 +86,7 @@
         </div>
         <footer class="footer">
             <div class="container-fluid">
-                <%--<div class="copyright float-right">--%>
-                <%--&copy;--%>
-                <%--<script>--%>
-                <%--document.write(new Date().getFullYear())--%>
-                <%--</script>, made with <i class="material-icons">favorite</i> by--%>
-                <%--<a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.--%>
-                <%--</div>--%>
-                <!-- your footer here -->
+                <c:import url="/jsp/modules/copyright.jspf" />
             </div>
         </footer>
     </div>

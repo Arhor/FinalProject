@@ -1,0 +1,6 @@
+<div class="copyright float-right">
+    &copy;
+    <script>
+        document.write(new Date().getFullYear().toString())
+    </script>, made by Burishinets Maxim
+</div>

@@ -6,6 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<fmt:setLocale value="${locale}" />
+<fmt:setBundle basename="resources.pagecontent" />
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,7 +17,7 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        Welcome!
+        <fmt:message key="label.title" />
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -32,22 +36,22 @@
           Tip 2: you can also add an image using data-image tag
       -->
         <div class="logo">
-            <a href="#" class="simple-text logo-normal">
-                Admission Committee
-            </a>
+            <span class="simple-text logo-normal">
+                <fmt:message key="label.title" />
+            </span>
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item active">
                     <a class="nav-link" href="/controller?command=home">
                         <i class="material-icons">home</i>
-                        <p>Home page</p>
+                        <p><fmt:message key="label.homepage" /></p>
                     </a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="/controller?command=logout">
                         <i class="material-icons">exit_to_app</i>
-                        <p>Logout</p>
+                        <p><fmt:message key="label.logout" /></p>
                     </a>
                 </li>
                 <!-- your sidebar here -->
@@ -55,44 +59,7 @@
         </div>
     </div>
     <div class="main-panel">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-            <div class="container-fluid">
-                <div class="navbar-wrapper">
-                    <a class="navbar-brand" href="#pablo">Dashboard</a>
-                </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="navbar-toggler-icon icon-bar"></span>
-                    <span class="navbar-toggler-icon icon-bar"></span>
-                    <span class="navbar-toggler-icon icon-bar"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end">
-                    <ul class="navbar-nav">
-                        <%--<li class="nav-item">--%>
-                            <%--<a class="nav-link" href="#pablo">--%>
-                                <%--<i class="material-icons">notifications</i> Notifications--%>
-                            <%--</a>--%>
-                        <%--</li>--%>
-                        <!-- your navbar here -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">language</i>
-                                <p class="d-lg-none d-md-block">
-                                    Some Actions
-                                </p>
-                                <div class="ripple-container"></div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="/controller?command=english">EN</a>
-                                <a class="dropdown-item" href="/controller?command=russian">RU</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- End Navbar -->
+        <c:import url="/jsp/modules/navbar_main.jspf" />
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -102,7 +69,7 @@
                                 <div class="card-icon">
                                     <i class="material-icons">person</i>
                                 </div>
-                                <p class="card-category">Current User</p>
+                                <p class="card-category"><fmt:message key="label.client.currentuser" /></p>
                                 <h3 class="card-title">${sessionScope.user.firstName} ${sessionScope.user.lastName}</h3>
                             </div>
                             <div class="card-footer">
@@ -127,14 +94,7 @@
                         </li>
                     </ul>
                 </nav>
-                <%--<div class="copyright float-right">--%>
-                <%--&copy;--%>
-                <%--<script>--%>
-                <%--document.write(new Date().getFullYear())--%>
-                <%--</script>, made with <i class="material-icons">favorite</i> by--%>
-                <%--<a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.--%>
-                <%--</div>--%>
-                <!-- your footer here -->
+                <c:import url="/jsp/modules/copyright.jspf" />
             </div>
         </footer>
     </div>
