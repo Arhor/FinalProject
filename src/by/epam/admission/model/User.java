@@ -67,7 +67,17 @@ public class User extends Entity {
     }
 
     public enum Lang {
-        RU, EN
+        RU("ru_RU"), EN("en_US");
+
+        private String value;
+
+        Lang(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
     }
 
     public enum Role {

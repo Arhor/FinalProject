@@ -25,6 +25,7 @@ public class RegisterCommand implements ActionCommand {
     private static final String PARAM_NAME_PASSWORD = "password";
     private static final String PARAM_NAME_FIRST_NAME = "firstName";
     private static final String PARAM_NAME_LAST_NAME = "lastName";
+    private static final String PARAM_LANGUAGE = "language";
     private static final String CONFIRMATION_SUBJECT = "Registration confirmation";
 
     @Override
@@ -40,6 +41,7 @@ public class RegisterCommand implements ActionCommand {
         String password = request.getParameter(PARAM_NAME_PASSWORD);
         String firstName = request.getParameter(PARAM_NAME_FIRST_NAME);
         String lastName = request.getParameter(PARAM_NAME_LAST_NAME);
+        String language = request.getParameter(PARAM_LANGUAGE);
 
         if (EmailValidator.validate(email)) {
             try {
@@ -49,7 +51,14 @@ public class RegisterCommand implements ActionCommand {
                     user.setFirstName(firstName);
                     user.setLastName(lastName);
                     user.setRole(User.Role.CLIENT);
-                    user.setLang(User.Lang.RU);
+                    switch (User.Lang.valueOf(language.toUpperCase())) {
+                        case RU:
+                            user.setLang(User.Lang.RU);
+                            break;
+                        case EN:
+                            user.setLang(User.Lang.EN);
+                            break;
+                    }
                     session.setAttribute("user", user);
                     session.setAttribute("password", password);
                     String confirmationCode = ConfirmationCodeGenerator.generate();

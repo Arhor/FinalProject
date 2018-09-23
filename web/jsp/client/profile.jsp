@@ -1,13 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
-  User: arhor
-  Date: 12.9.18
-  Time: 20.56
+  User: Maxim Burishinets
+  Date: 23.09.2018
+  Time: 16:37
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setLocale value="${locale}" />
 <fmt:setBundle basename="resources.pagecontent" />
 <!doctype html>
@@ -17,7 +18,7 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        <fmt:message key="label.registration.title" />
+        <fmt:message key="label.client.profile.title" />
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -42,16 +43,22 @@
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li class="nav-item active  ">
+                <li class="nav-item active">
                     <a class="nav-link" href="/controller?command=home">
                         <i class="material-icons">home</i>
                         <p><fmt:message key="label.homepage" /></p>
                     </a>
                 </li>
-                <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=show_faculties">
-                        <i class="material-icons">domain</i>
-                        <p><fmt:message key="label.faculties" /></p>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/controller?command=profile">
+                        <i class="material-icons">person</i>
+                        <p><fmt:message key="label.client.profile.title" /></p>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/controller?command=logout">
+                        <i class="material-icons">exit_to_app</i>
+                        <p><fmt:message key="label.logout" /></p>
                     </a>
                 </li>
                 <!-- your sidebar here -->
@@ -63,58 +70,57 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4 col-md-4 ml-auto mr-auto">
+                    <div class="col-md-8 mr-auto ml-auto">
                         <div class="card">
                             <div class="card-header card-header-primary">
-                                <h3 class="card-title"><fmt:message key="label.registration.title" /></h3>
+                                <h4 class="card-title"><fmt:message key="label.client.profile.title" /></h4>
                             </div>
                             <div class="card-body">
-                                <form action="/controller" name="registrationForm" method="POST">
+                                <form>
                                     <div class="row">
-                                        <div class="col-md-8 col-sm-6">
-                                            <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.email" /></label>
-                                                <input class="form-control" name="email" type="email" pattern="[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*([a-z]{2,4})" required />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="langSelector"><fmt:message key="label.lang" /></label>
-                                                <select class="form-control" id="langSelector" name="language">
-                                                    <option selected>RU</option>
-                                                    <option>EN</option>
-                                                </select>
+                                                <label class="bmd-label-floating"><fmt:message key="label.email" /></label>
+                                                <input type="email" class="form-control" value="${user.email}" disabled />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.password" /></label>
-                                                <input class="form-control" name="password" type="password" required />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group bmd-form-group">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
                                                 <label class="bmd-label-floating"><fmt:message key="label.name.first" /></label>
-                                                <input class="form-control" name="firstName" type="text" required />
+                                                <input type="text" class="form-control" name="firstName" value="${user.firstName}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,35}$"/>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group bmd-form-group">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
                                                 <label class="bmd-label-floating"><fmt:message key="label.name.last" /></label>
-                                                <input class="form-control" name="lastName" type="text" required />
+                                                <input type="text" class="form-control" name="lastName" value="${user.lastName}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,35}$"/>
                                             </div>
                                         </div>
                                     </div>
-                                    ${registrationError}
                                     <div class="row">
-                                        <button class="btn btn-primary col-lg-8 col-md-8 ml-auto mr-auto" name="command" value="register"><fmt:message key="label.register" /></button>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating"><fmt:message key="label.client.profile.city" /></label>
+                                                <input type="text" class="form-control" name="city" value="${enrollee.city}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,55}$"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating"><fmt:message key="label.client.profile.country" /></label>
+                                                <input type="text" class="form-control" name="country" value="${enrollee.country}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,55}$"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating"><fmt:message key="label.client.profile.certificate" /></label>
+                                                <input type="text" class="form-control" name="certificate" value="${enrollee.schoolCertificate}" pattern="^[0-9]{1,2}$"/>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <button type="submit" class="btn btn-primary pull-right" name="command" value="update_profile"><fmt:message key="label.client.profile.update" /></button>
+                                    <div class="clearfix"></div>
                                 </form>
                             </div>
                         </div>
@@ -128,7 +134,7 @@
                     <ul>
                         <li>
                             <%--<a href="https://www.creative-tim.com">--%>
-                                <%--Creative Tim--%>
+                            <%--Creative Tim--%>
                             <%--</a>--%>
                         </li>
                     </ul>
@@ -143,10 +149,6 @@
 <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
 <script src="../assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
 <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!-- Chartist JS -->
-<script src="../assets/js/plugins/chartist.min.js"></script>
-<!--  Notifications Plugin    -->
-<script src="../assets/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="../assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
 </body>

@@ -2,7 +2,7 @@ package by.epam.admission.model;
 
 import java.io.Serializable;
 
-public abstract class Entity implements Serializable, Cloneable {
+public abstract class Entity implements Serializable, Cloneable, Comparable<Entity> {
 
     private static final long serialVersionUID = -1825429275979947811L;
     
@@ -22,6 +22,11 @@ public abstract class Entity implements Serializable, Cloneable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public int compareTo(Entity entity) {
+        return entity.id - this.id;
     }
 
     @Override

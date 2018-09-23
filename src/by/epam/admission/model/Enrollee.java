@@ -1,6 +1,5 @@
 package by.epam.admission.model;
 
-import java.util.HashMap;
 import java.util.TreeMap;
 
 public class Enrollee extends Entity{

@@ -3,7 +3,9 @@ package by.epam.admission.command.impl;
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
+import by.epam.admission.logic.EnrolleeService;
 import by.epam.admission.logic.LoginLogic;
+import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.MessageManager;
@@ -36,10 +38,17 @@ public class LoginCommand implements ActionCommand {
             if(user != null) {
                 session.setAttribute("user", user);
                 session.setAttribute("role", user.getRole());
+                session.setAttribute("locale", user.getLang().getValue());
+                if (user.getRole() == User.Role.CLIENT) {
+                    Enrollee enrollee = EnrolleeService.findEnrollee(user.getId());
+                    LOG.debug(enrollee);
+                    session.setAttribute("enrollee", enrollee);
+                }
                 page = ConfigurationManager.getProperty("path.page.client.main");
                 router.setType(Router.Type.FORWARD);
             } else {
-                request.setAttribute("errorLoginMessage", MessageManager.getProperty("message.loginerror"));
+                String message = MessageManager.getProperty("message.loginerror");
+                request.setAttribute("errorLoginMessage", message);
                 page = ConfigurationManager.getProperty("path.page.login");
                 router.setType(Router.Type.FORWARD);
             }

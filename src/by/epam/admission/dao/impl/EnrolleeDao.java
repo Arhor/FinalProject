@@ -73,6 +73,21 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         return enrollee;
     }
 
+    public Enrollee findEnrolleeByUID(int uid) throws ProjectException {
+        Enrollee enrollee = null;
+        try (PreparedStatement st = connection.prepareStatement(
+                String.format(SQL_SELECT_ENROLLEES, USER_ID))) {
+            st.setInt(1, uid);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                enrollee = setEnrollee(rs);
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return enrollee;
+    }
+
     public List<Enrollee> findEnrolleesByCountry(String country)
             throws ProjectException {
         ArrayList<Enrollee> enrollees = new ArrayList<>();
@@ -205,6 +220,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
             st.setString(1, enrollee.getCountry());
             st.setString(2, enrollee.getCity());
             st.setInt(3, enrollee.getSchoolCertificate());
+            st.setInt(4,enrollee.getId());
             flag = st.executeUpdate();
         } catch (SQLException e) {
             throw new ProjectException("Updating error", e);
@@ -270,16 +286,14 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                         "(`country`," +
                         "`city`," +
                         "`school_certificate`," +
-                        "`users_id`," +
-                        "`faculties_id`) " +
-                "VALUES (?,?,?,?,?)";
+                        "`users_id`) " +
+                "VALUES (?,?,?,?)";
         SQL_UPDATE_ENROLLEE =
                 "UPDATE `enrollees` " +
                 "SET    `country` = ?," +
                         "`city` = ?, " +
                         "`school_certificate` = ? " +
-                "WHERE  `email` = ? " +
-                        "AND `password` = ?";
+                "WHERE  `id` = ?";
         SQL_INSERT_TO_ADMISSION_LIST =
                 "INSERT INTO `admission_list` " +
                 "(`enrollees_id`,`faculties_id`) " +

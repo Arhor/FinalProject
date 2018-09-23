@@ -49,6 +49,12 @@
                     </a>
                 </li>
                 <li class="nav-item active">
+                    <a class="nav-link" href="/controller?command=profile">
+                        <i class="material-icons">person</i>
+                        <p><fmt:message key="label.client.profile.title" /></p>
+                    </a>
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link" href="/controller?command=logout">
                         <i class="material-icons">exit_to_app</i>
                         <p><fmt:message key="label.logout" /></p>
@@ -69,7 +75,7 @@
                                 <div class="card-icon">
                                     <i class="material-icons">person</i>
                                 </div>
-                                <p class="card-category"><fmt:message key="label.client.currentuser" /></p>
+                                <p class="card-category"><fmt:message key="label.client.profile.currentuser" /></p>
                                 <h3 class="card-title">${sessionScope.user.firstName} ${sessionScope.user.lastName}</h3>
                             </div>
                             <div class="card-footer">

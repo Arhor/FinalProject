@@ -32,6 +32,7 @@ public class ConfirmCommand implements ActionCommand {
             user = RegisterLogic.registerUser(user, password);
             if (user != null) {
                 session.setAttribute("role", user.getRole());
+                session.setAttribute("locale", user.getLang().getValue());
                 router.setPage(ConfigurationManager.getProperty("path.page.client.main"));
                 router.setType(Router.Type.FORWARD);
             } else {

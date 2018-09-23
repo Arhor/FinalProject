@@ -19,20 +19,18 @@ public class Faculty extends Entity {
     private String nameEn;
     private int seatsPaid;
     private int seatsBudget;
-    private TreeSet<Subject> subjects;
 
     public Faculty() {
         super();
     }
 
     public Faculty(int id, String nameRu, String nameEn, int seatsPaid,
-                   int seatsBudget, TreeSet<Subject> subjects) {
+                   int seatsBudget) {
         super(id);
         this.nameRu = nameRu;
         this.nameEn = nameEn;
         this.seatsPaid = seatsPaid;
         this.seatsBudget = seatsBudget;
-        this.subjects = subjects;
     }
 
     public String getNameRu() {
@@ -67,14 +65,6 @@ public class Faculty extends Entity {
         this.seatsBudget = seatsBudget;
     }
 
-    public TreeSet<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(TreeSet<Subject> subjects) {
-        this.subjects = subjects;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj == this) { return true; }
@@ -95,13 +85,6 @@ public class Faculty extends Entity {
                 return false;
             }
         } else if (!nameEn.equals(faculty.nameEn)) {
-            return false;
-        }
-        if (subjects == null) {
-            if (faculty.subjects != null) {
-                return false;
-            }
-        } else if (!subjects.equals(faculty.subjects)) {
             return false;
         }
         return true;

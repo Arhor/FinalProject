@@ -59,6 +59,16 @@ public enum CommandEnum {
         {
             this.command = new RussianCommand();
         }
+    },
+    PROFILE {
+        {
+            this.command = new ProfileCommand();
+        }
+    },
+    UPDATE_PROFILE {
+        {
+            this.command = new UpdateProfileCommand();
+        }
     };
 
     ActionCommand command;
