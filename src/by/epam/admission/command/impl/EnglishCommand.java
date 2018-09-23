@@ -24,7 +24,8 @@ public class EnglishCommand implements ActionCommand {
                 page = ConfigurationManager.getProperty("path.page.main");
                 break;
             case ADMIN:
-                // TODO: implement admin main page
+                page = ConfigurationManager.getProperty("path.page.admin.main");
+                break;
             case CLIENT:
                 page = ConfigurationManager.getProperty("path.page.client.main");
                 break;

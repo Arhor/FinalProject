@@ -51,7 +51,13 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/controller?command=profile">
                         <i class="material-icons">person</i>
-                        <p><fmt:message key="label.client.profile.title" /></p>
+                        <p><fmt:message key="label.profile" /></p>
+                    </a>
+                </li>
+                <li class="nav-item active  ">
+                    <a class="nav-link" href="/controller?command=show_faculties">
+                        <i class="material-icons">domain</i>
+                        <p><fmt:message key="label.faculties" /></p>
                     </a>
                 </li>
                 <li class="nav-item active">
@@ -81,6 +87,12 @@
                                             <div class="form-group">
                                                 <label class="bmd-label-floating"><fmt:message key="label.email" /></label>
                                                 <input type="email" class="form-control" value="${user.email}" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating"><fmt:message key="label.password" /></label>
+                                                <input type="password" class="form-control" name="password" />
                                             </div>
                                         </div>
                                     </div>
@@ -118,7 +130,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary pull-right" name="command" value="update_profile"><fmt:message key="label.client.profile.update" /></button>
+                                    <button type="submit" class="btn btn-primary pull-right" name="command" value="update_profile"><fmt:message key="label.profile.update" /></button>
                                     <div class="clearfix"></div>
                                 </form>
                             </div>

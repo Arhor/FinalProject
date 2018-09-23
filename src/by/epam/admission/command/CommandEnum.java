@@ -16,7 +16,8 @@ public enum CommandEnum {
     ENGLISH (new EnglishCommand()),
     RUSSIAN (new RussianCommand()),
     PROFILE (new ProfileCommand()),
-    UPDATE_PROFILE (new UpdateProfileCommand());
+    UPDATE_PROFILE (new UpdateProfileCommand()),
+    SHOW_USERS (new ShowUsersCommand());
 
     CommandEnum(ActionCommand command) {
         this.command = command;

@@ -48,12 +48,36 @@
                         <p><fmt:message key="label.homepage" /></p>
                     </a>
                 </li>
+                <c:if test="${sessionScope.role.toString() eq 'ADMIN' || sessionScope.role.toString() eq 'CLIENT' }" >
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/controller?command=profile">
+                            <i class="material-icons">person</i>
+                            <p><fmt:message key="label.profile" /></p>
+                        </a>
+                    </li>
+                </c:if>
                 <li class="nav-item active  ">
                     <a class="nav-link" href="/controller?command=show_faculties">
                         <i class="material-icons">domain</i>
                         <p><fmt:message key="label.faculties" /></p>
                     </a>
                 </li>
+                <c:if test="${sessionScope.role.toString() eq 'ADMIN'}">
+                    <li class="nav-item active  ">
+                        <a class="nav-link" href="/controller?command=show_users">
+                            <i class="material-icons">people</i>
+                            <p><fmt:message key="label.admin.users" /></p>
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.role.toString() eq 'CLIENT' || sessionScope.role.toString() eq 'ADMIN'}">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/controller?command=logout">
+                            <i class="material-icons">exit_to_app</i>
+                            <p><fmt:message key="label.logout" /></p>
+                        </a>
+                    </li>
+                </c:if>
                 <!-- your sidebar here -->
             </ul>
         </div>

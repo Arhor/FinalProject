@@ -3,6 +3,7 @@ package by.epam.admission.command.impl;
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.logic.EnrolleeService;
+import by.epam.admission.logic.UserService;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
@@ -15,47 +16,58 @@ public class UpdateProfileCommand implements ActionCommand {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
-        String page = ConfigurationManager.getProperty("path.page.client.profile");
 
         HttpSession session = request.getSession();
 
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
-
-        String city = request.getParameter("city");
-        String country = request.getParameter("country");
-        String certificate = request.getParameter("certificate");
+        String password = request.getParameter("password");
 
         User user = (User) session.getAttribute("user");
-        Enrollee enrollee = (Enrollee) session.getAttribute("enrollee");
 
-        if (enrollee == null) {
-            enrollee = new Enrollee();
-            enrollee.setUserId(user.getId());
-            enrollee.setCity(city);
-            enrollee.setCountry(country);
-            enrollee.setSchoolCertificate(Integer.parseInt(certificate));
-            if (!EnrolleeService.registerEnrollee(enrollee)) {
-                enrollee = null;
+        if (user.getRole() == User.Role.CLIENT) {
+            String city = request.getParameter("city");
+            String country = request.getParameter("country");
+            String certificate = request.getParameter("certificate");
+            Enrollee enrollee = (Enrollee) session.getAttribute("enrollee");
+            if (enrollee == null) {
+                enrollee = new Enrollee();
+                enrollee.setUserId(user.getId());
+                enrollee.setCity(city);
+                enrollee.setCountry(country);
+                enrollee.setSchoolCertificate(Integer.parseInt(certificate));
+                if (!EnrolleeService.registerEnrollee(enrollee)) {
+                    enrollee = null;
+                }
+            } else {
+                enrollee.setCity(city);
+                enrollee.setCountry(country);
+                enrollee.setSchoolCertificate(Integer.parseInt(certificate));
+                enrollee = EnrolleeService.updateEnrollee(enrollee);
             }
-        } else {
-            enrollee.setCity(city);
-            enrollee.setCountry(country);
-            enrollee.setSchoolCertificate(Integer.parseInt(certificate));
-            enrollee = EnrolleeService.updateEnrollee(enrollee);
+            session.setAttribute("enrollee", enrollee);
         }
 
-//        if (firstName == null || lastName == null
-//                || firstName.isEmpty() || lastName.isEmpty()) {
-//            request.setAttribute("userError",
-//                    "User first name and last nam must not be empty");
-//        }
-//
-//        user.setFirstName(firstName);
-//        user.setLastName(lastName);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
 
+        if (UserService.updateUser(user, password)) {
+            session.setAttribute("user", user);
+        }
 
-        session.setAttribute("enrollee", enrollee);
+        String page;
+
+        switch ((User.Role) session.getAttribute("role")) {
+            case CLIENT:
+                page = ConfigurationManager.getProperty("path.page.client.profile");
+                break;
+            case ADMIN:
+                page = ConfigurationManager.getProperty("path.page.admin.profile");
+                break;
+            case GUEST:
+            default:
+                page = ConfigurationManager.getProperty("path.page.main");
+        }
 
         router.setPage(page);
         router.setType(Router.Type.FORWARD);

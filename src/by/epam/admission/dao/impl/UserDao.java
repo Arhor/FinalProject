@@ -178,7 +178,7 @@ public class UserDao extends AbstractDao<Integer, User> {
     }
 
     // password changes every time on first_name change
-    public User update(User user, String password) throws ProjectException {
+    public boolean update(User user, String password) throws ProjectException {
         int flag;
         EncryptAction encryptAction = new EncryptAction();
         String name = findNameByEmail(user.getEmail());
@@ -197,7 +197,7 @@ public class UserDao extends AbstractDao<Integer, User> {
             LOG.error("Updating error", e);
             throw new ProjectException("Updating error", e);
         }
-        return flag != 0 ? user : null;
+        return flag != 0;
     }
 
     @Override

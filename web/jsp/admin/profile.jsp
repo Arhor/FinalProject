@@ -17,7 +17,7 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        <fmt:message key="label.client.profile.title" />
+        <fmt:message key="label.admin.profile.title" />
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -51,7 +51,19 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/controller?command=profile">
                         <i class="material-icons">person</i>
-                        <p><fmt:message key="label.client.profile.title" /></p>
+                        <p><fmt:message key="label.profile" /></p>
+                    </a>
+                </li>
+                <li class="nav-item active  ">
+                    <a class="nav-link" href="/controller?command=show_faculties">
+                        <i class="material-icons">domain</i>
+                        <p><fmt:message key="label.faculties" /></p>
+                    </a>
+                </li>
+                <li class="nav-item active  ">
+                    <a class="nav-link" href="/controller?command=show_users">
+                        <i class="material-icons">people</i>
+                        <p><fmt:message key="label.admin.users" /></p>
                     </a>
                 </li>
                 <li class="nav-item active">
@@ -72,7 +84,7 @@
                     <div class="col-md-8 mr-auto ml-auto">
                         <div class="card">
                             <div class="card-header card-header-primary">
-                                <h4 class="card-title"><fmt:message key="label.client.profile.title" /></h4>
+                                <h4 class="card-title"><fmt:message key="label.admin.profile.title" /></h4>
                             </div>
                             <div class="card-body">
                                 <form>
@@ -81,6 +93,12 @@
                                             <div class="form-group">
                                                 <label class="bmd-label-floating"><fmt:message key="label.email" /></label>
                                                 <input type="email" class="form-control" value="${user.email}" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating"><fmt:message key="label.password" /></label>
+                                                <input type="password" class="form-control" name="password" />
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +116,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary pull-right" name="command" value="update_profile"><fmt:message key="label.client.profile.update" /></button>
+                                    <button type="submit" class="btn btn-primary pull-right" name="command" value="update_profile"><fmt:message key="label.profile.update" /></button>
                                     <div class="clearfix"></div>
                                 </form>
                             </div>

@@ -161,7 +161,7 @@ public class UserDaoTest {
         user.setLastName("xxx");
         user.setLang(User.Lang.RU);
         String password = "example.48@gmail.com";
-        User result = null;
+        boolean result = false;
         try {
             result = uDAO.update(user, password);
             t.commit();
@@ -169,7 +169,7 @@ public class UserDaoTest {
             t.rollback();
         }
         LOG.debug(user);
-        Assert.assertNotNull(result);
+        Assert.assertTrue(result);
     }
 
     @Test

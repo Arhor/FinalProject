@@ -20,7 +20,9 @@ public class HomeCommand implements ActionCommand {
             case GUEST:
                 page = ConfigurationManager.getProperty("path.page.main");
                 break;
-            case ADMIN: // STUB TODO: implement administrator view!!!
+            case ADMIN:
+                page = ConfigurationManager.getProperty("path.page.admin.main");
+                break;
             case CLIENT:
                 page = ConfigurationManager.getProperty("path.page.client.main");
                 break;

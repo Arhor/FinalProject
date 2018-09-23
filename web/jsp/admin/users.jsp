@@ -1,30 +1,30 @@
 <%--
   Created by IntelliJ IDEA.
   User: Maxim Burishinets
-  Date: 16.09.2018
-  Time: 2:47
+  Date: 24.09.2018
+  Time: 0:00
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setLocale value="${locale}" />
 <fmt:setBundle basename="resources.pagecontent" />
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        <fmt:message key="label.title" />
+        <fmt:message key="label.faculties" />
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href="../assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+    <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -60,6 +60,12 @@
                         <p><fmt:message key="label.faculties" /></p>
                     </a>
                 </li>
+                <li class="nav-item active  ">
+                    <a class="nav-link" href="/controller?command=show_users">
+                        <i class="material-icons">people</i>
+                        <p><fmt:message key="label.admin.users" /></p>
+                    </a>
+                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="/controller?command=logout">
                         <i class="material-icons">exit_to_app</i>
@@ -75,19 +81,34 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <div class="card card-stats">
-                            <div class="card-header card-header-warning card-header-icon">
-                                <div class="card-icon">
-                                    <i class="material-icons">person</i>
-                                </div>
-                                <p class="card-category"><fmt:message key="label.profile.currentuser" /></p>
-                                <h3 class="card-title">${sessionScope.user.firstName} ${sessionScope.user.lastName}</h3>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <h4 class="card-title"><fmt:message key="label.admin.users" /></h4>
+                                <p class="card-category"><fmt:message key="label.admin.users.table.description" /></p>
                             </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="material-icons">school</i>
-                                    <span class="label-on-right">${role}</span>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                        <tr>
+                                            <th><fmt:message key="label.faculties.table.id" /></th>
+                                            <th><fmt:message key="label.email" /></th>
+                                            <th><fmt:message key="label.name.first" /></th>
+                                            <th><fmt:message key="label.name.last" /></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${users}" var="currUser">
+                                            <tr>
+                                                <td>${currUser.id}</td>
+                                                <td>${currUser.email}</td>
+                                                <td>${currUser.firstName}</td>
+                                                <td>${currUser.lastName}</td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -112,12 +133,16 @@
     </div>
 </div>
 <!--   Core JS Files   -->
-<script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
+<script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+<script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!-- Chartist JS -->
+<script src="assets/js/plugins/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="assets/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="../assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
+<script src="assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
 </body>
 
 </html>

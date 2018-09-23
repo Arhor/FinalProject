@@ -51,7 +51,19 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/controller?command=profile">
                         <i class="material-icons">person</i>
-                        <p><fmt:message key="label.client.profile.title" /></p>
+                        <p><fmt:message key="label.profile" /></p>
+                    </a>
+                </li>
+                <li class="nav-item active  ">
+                    <a class="nav-link" href="/controller?command=show_faculties">
+                        <i class="material-icons">domain</i>
+                        <p><fmt:message key="label.faculties" /></p>
+                    </a>
+                </li>
+                <li class="nav-item active  ">
+                    <a class="nav-link" href="/controller?command=show_users">
+                        <i class="material-icons">people</i>
+                        <p><fmt:message key="label.admin.users" /></p>
                     </a>
                 </li>
                 <li class="nav-item active">
@@ -75,12 +87,12 @@
                                 <div class="card-icon">
                                     <i class="material-icons">person</i>
                                 </div>
-                                <p class="card-category"><fmt:message key="label.client.profile.currentuser" /></p>
+                                <p class="card-category"><fmt:message key="label.profile.currentuser" /></p>
                                 <h3 class="card-title">${sessionScope.user.firstName} ${sessionScope.user.lastName}</h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
-                                    <i class="material-icons">school</i>
+                                    <i class="material-icons">work</i>
                                     <span class="label-on-right">${role}</span>
                                 </div>
                             </div>
