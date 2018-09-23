@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Maxim Burishinets
   Date: 23.09.2018
-  Time: 16:37
+  Time: 20:20
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -95,26 +95,6 @@
                                             <div class="form-group">
                                                 <label class="bmd-label-floating"><fmt:message key="label.name.last" /></label>
                                                 <input type="text" class="form-control" name="lastName" value="${user.lastName}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,35}$" required/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.client.profile.city" /></label>
-                                                <input type="text" class="form-control" name="city" value="${enrollee.city}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,55}$" required/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.client.profile.country" /></label>
-                                                <input type="text" class="form-control" name="country" value="${enrollee.country}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,55}$" required/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.client.profile.certificate" /></label>
-                                                <input type="text" class="form-control" name="certificate" value="${enrollee.schoolCertificate}" pattern="^[0-9]{1,2}$" required/>
                                             </div>
                                         </div>
                                     </div>

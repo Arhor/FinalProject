@@ -4,74 +4,25 @@ import by.epam.admission.command.impl.*;
 
 public enum CommandEnum {
 
-    SIGN_IN {
-        {
-            this.command = new SignInCommand();
-        }
-    },
-    SIGN_UP {
-        {
-            this.command = new SignUpCommand();
-        }
-    },
-    REGISTER {
-        {
-            this.command = new RegisterCommand();
-        }
-    },
+    SIGN_IN (new SignInCommand()),
+    SIGN_UP (new SignUpCommand()),
+    REGISTER (new RegisterCommand()),
+    LOGIN (new LoginCommand()),
+    LOGOUT (new LogoutCommand()),
+    HOME (new HomeCommand()),
+    CONFIRM (new ConfirmCommand()),
+    START (new StartCommand()),
+    SHOW_FACULTIES (new ShowFacultiesCommand()),
+    ENGLISH (new EnglishCommand()),
+    RUSSIAN (new RussianCommand()),
+    PROFILE (new ProfileCommand()),
+    UPDATE_PROFILE (new UpdateProfileCommand());
 
-    LOGIN {
-        {
-            this.command = new LoginCommand();
-        }
-    },
-    LOGOUT {
-        {
-            this.command = new LogoutCommand();
-        }
-    },
-    HOME {
-        {
-            this.command = new HomeCommand();
-        }
-    },
-    CONFIRM {
-        {
-            this.command = new ConfirmCommand();
-        }
-    },
-    START {
-        {
-            this.command = new StartCommand();
-        }
-    },
-    SHOW_FACULTIES {
-        {
-            this.command = new ShowFacultiesCommand();
-        }
-    },
-    ENGLISH {
-        {
-            this.command = new EnglishCommand();
-        }
-    },
-    RUSSIAN {
-        {
-            this.command = new RussianCommand();
-        }
-    },
-    PROFILE {
-        {
-            this.command = new ProfileCommand();
-        }
-    },
-    UPDATE_PROFILE {
-        {
-            this.command = new UpdateProfileCommand();
-        }
-    };
+    CommandEnum(ActionCommand command) {
+        this.command = command;
+    }
 
-    ActionCommand command;
+    private ActionCommand command;
 
     public ActionCommand getCurrentCommand() {
         return command;

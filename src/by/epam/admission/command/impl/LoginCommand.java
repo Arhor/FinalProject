@@ -44,7 +44,18 @@ public class LoginCommand implements ActionCommand {
                     LOG.debug(enrollee);
                     session.setAttribute("enrollee", enrollee);
                 }
-                page = ConfigurationManager.getProperty("path.page.client.main");
+                switch (user.getRole()) {
+                    case CLIENT:
+                        page = ConfigurationManager.getProperty("path.page.client.main");
+                        break;
+                    case ADMIN:
+                        page = ConfigurationManager.getProperty("path.page.admin.main");
+                        break;
+                    case GUEST:
+                    default:
+                        page = ConfigurationManager.getProperty("path.page.main");
+                }
+
                 router.setType(Router.Type.FORWARD);
             } else {
                 String message = MessageManager.getProperty("message.loginerror");
