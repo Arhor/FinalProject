@@ -1,6 +1,6 @@
 package by.epam.admission.dao.impl;
 
-import by.epam.admission.dao.TransactionHelperDBUnit;
+import by.epam.admission.dao.DaoHelperDBUnit;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.pool.ConnectionPoolDBUnit;
@@ -21,7 +21,7 @@ public class EnrolleeDaoTest {
 
     @Test
     public void testFindAll() {
-        TransactionHelperDBUnit t = new TransactionHelperDBUnit();
+        DaoHelperDBUnit t = new DaoHelperDBUnit();
         EnrolleeDao enrolleeDAO = new EnrolleeDao();
         t.startTransaction(enrolleeDAO);
         try {
@@ -36,7 +36,7 @@ public class EnrolleeDaoTest {
 
     @Test
     public void testFindEnrolleesByCountry() {
-        TransactionHelperDBUnit t = new TransactionHelperDBUnit();
+        DaoHelperDBUnit t = new DaoHelperDBUnit();
         EnrolleeDao enrolleeDAO = new EnrolleeDao();
         t.startTransaction(enrolleeDAO);
         try {
@@ -51,7 +51,7 @@ public class EnrolleeDaoTest {
 
     @Test
     public void testFindEnrolleesByCity() {
-        TransactionHelperDBUnit t = new TransactionHelperDBUnit();
+        DaoHelperDBUnit t = new DaoHelperDBUnit();
         EnrolleeDao enrolleeDAO = new EnrolleeDao();
         t.startTransaction(enrolleeDAO);
         try {
@@ -66,7 +66,7 @@ public class EnrolleeDaoTest {
 
     @Test
     public void testRegisterToFacultyById() {
-        TransactionHelperDBUnit t = new TransactionHelperDBUnit();
+        DaoHelperDBUnit t = new DaoHelperDBUnit();
         EnrolleeDao enrolleeDAO = new EnrolleeDao();
         Enrollee enrollee = new Enrollee();
         enrollee.setId(2);
@@ -88,7 +88,7 @@ public class EnrolleeDaoTest {
         for (int i = 0; i < 10; i++) {
             new Thread() {
                 public void run() {
-                    TransactionHelperDBUnit t = new TransactionHelperDBUnit();
+                    DaoHelperDBUnit t = new DaoHelperDBUnit();
                     EnrolleeDao enrolleeDAO = new EnrolleeDao();
                     t.startTransaction(enrolleeDAO);
                     int id = (int)(Math.random() * 29 + 0.5);
@@ -115,7 +115,7 @@ public class EnrolleeDaoTest {
             final int num = i;
             new Thread() {
                 public void run() {
-                    TransactionHelperDBUnit t = new TransactionHelperDBUnit();
+                    DaoHelperDBUnit t = new DaoHelperDBUnit();
                     EnrolleeDao enrolleeDAO = new EnrolleeDao();
                     t.startTransaction(enrolleeDAO);
                     Enrollee enrollee = new Enrollee();
@@ -139,7 +139,7 @@ public class EnrolleeDaoTest {
 
     @Test
     public void testDelete() {
-        TransactionHelperDBUnit t = new TransactionHelperDBUnit();
+        DaoHelperDBUnit t = new DaoHelperDBUnit();
         EnrolleeDao enrolleeDAO = new EnrolleeDao();
         Enrollee enrollee = new Enrollee();
         enrollee.setId(2);

@@ -8,13 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${locale}" />
+<fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="resources.pagecontent" />
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
         <fmt:message key="label.faculties" />
@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -43,28 +43,28 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=home">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=home">
                         <i class="material-icons">home</i>
                         <p><fmt:message key="label.homepage" /></p>
                     </a>
                 </li>
                 <c:if test="${sessionScope.role.toString() eq 'ADMIN' || sessionScope.role.toString() eq 'CLIENT' }" >
                     <li class="nav-item active">
-                        <a class="nav-link" href="/controller?command=profile">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=profile">
                             <i class="material-icons">person</i>
                             <p><fmt:message key="label.profile" /></p>
                         </a>
                     </li>
                 </c:if>
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=show_faculties">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_faculties">
                         <i class="material-icons">domain</i>
                         <p><fmt:message key="label.faculties" /></p>
                     </a>
                 </li>
                 <c:if test="${sessionScope.role.toString() eq 'ADMIN'}">
                     <li class="nav-item active  ">
-                        <a class="nav-link" href="/controller?command=show_users">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_users">
                             <i class="material-icons">people</i>
                             <p><fmt:message key="label.admin.users" /></p>
                         </a>
@@ -72,7 +72,7 @@
                 </c:if>
                 <c:if test="${sessionScope.role.toString() eq 'CLIENT' || sessionScope.role.toString() eq 'ADMIN'}">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/controller?command=logout">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=logout">
                             <i class="material-icons">exit_to_app</i>
                             <p><fmt:message key="label.logout" /></p>
                         </a>
@@ -100,27 +100,54 @@
                                             <tr>
                                                 <th><fmt:message key="label.faculties.table.id" /></th>
                                                 <th><fmt:message key="label.faculties.table.faculty" /></th>
-                                                <th><fmt:message key="label.faculties.table.payable" /></th>
-                                                <th><fmt:message key="label.faculties.table.free" /></th>
+                                                <th class="text-center"><fmt:message key="label.faculties.table.payable" /></th>
+                                                <th class="text-center"><fmt:message key="label.faculties.table.free" /></th>
+                                                <c:if test="${sessionScope.role.toString() eq 'CLIENT'}">
+                                                    <th class="text-center">Actions</th>
+                                                </c:if>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach items="${faculties}" var="faculty">
+                                            <c:forEach items="${requestScope.faculties}" var="faculty">
                                                 <c:choose>
-                                                    <c:when test="${locale eq 'ru_RU'}" >
+                                                    <c:when test="${sessionScope.locale eq 'ru_RU'}" >
                                                         <tr>
                                                             <td>${faculty.id}</td>
                                                             <td>${faculty.nameRu}</td>
-                                                            <td>${faculty.seatsPaid}</td>
-                                                            <td>${faculty.seatsBudget}</td>
+                                                            <td class="text-center">${faculty.seatsPaid}</td>
+                                                            <td class="text-center">${faculty.seatsBudget}</td>
+                                                            <c:if test="${sessionScope.role.toString() eq 'CLIENT'}">
+                                                                <td class="td-actions text-center">
+                                                                    <a href="/controller?command=register_to_faculty${faculty.id}">
+                                                                        <button type="button" rel="tooltip" class="btn btn-success">
+                                                                            <i class="material-icons">edit</i>
+                                                                        </button>
+                                                                    </a>
+                                                                    <button type="button" rel="tooltip" class="btn btn-danger">
+                                                                        <i class="material-icons">close</i>
+                                                                    </button>
+                                                                </td>
+                                                            </c:if>
                                                         </tr>
                                                     </c:when>
-                                                    <c:when test="${locale eq 'en_US'}" >
+                                                    <c:when test="${sessionScope.locale eq 'en_US'}" >
                                                         <tr>
-                                                            <td>${faculty.id}</td>
+                                                            <td class="">${faculty.id}</td>
                                                             <td>${faculty.nameEn}</td>
-                                                            <td>${faculty.seatsPaid}</td>
-                                                            <td>${faculty.seatsBudget}</td>
+                                                            <td class="text-center">${faculty.seatsPaid}</td>
+                                                            <td class="text-center">${faculty.seatsBudget}</td>
+                                                            <c:if test="${sessionScope.role.toString() eq 'CLIENT'}">
+                                                                <td class="td-actions text-center">
+                                                                    <a href="/controller?command=register_to_faculty${faculty.id}">
+                                                                        <button type="button" rel="tooltip" class="btn btn-success">
+                                                                            <i class="material-icons">edit</i>
+                                                                        </button>
+                                                                    </a>
+                                                                    <button type="button" rel="tooltip" class="btn btn-danger">
+                                                                        <i class="material-icons">close</i>
+                                                                    </button>
+                                                                </td>
+                                                            </c:if>
                                                         </tr>
                                                     </c:when>
                                                 </c:choose>
@@ -133,6 +160,9 @@
                     </div>
                 </div>
             </div>
+            <form>
+                <input type="hidden" id="enrolleeID" value="${sessionScope.enrollee.id}" />
+            </form>
         </div>
         <footer class="footer">
             <div class="container-fluid">
@@ -150,17 +180,16 @@
         </footer>
     </div>
 </div>
+<!-- Ajax -->
+<script src="https://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/js/app-ajax.js" type="text/javascript"></script>
 <!--   Core JS Files   -->
-<script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
-<script src="assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-<script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!-- Chartist JS -->
-<script src="assets/js/plugins/chartist.min.js"></script>
-<!--  Notifications Plugin    -->
-<script src="assets/js/plugins/bootstrap-notify.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/core/jquery.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
 </body>
 
 </html>

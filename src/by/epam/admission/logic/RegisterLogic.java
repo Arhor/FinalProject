@@ -1,7 +1,7 @@
 package by.epam.admission.logic;
 
 import by.epam.admission.command.impl.RegisterCommand;
-import by.epam.admission.dao.TransactionHelper;
+import by.epam.admission.dao.DaoHelper;
 import by.epam.admission.dao.impl.UserDao;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.User;
@@ -13,7 +13,7 @@ public class RegisterLogic {
     private static final Logger LOG = LogManager.getLogger(RegisterCommand.class);
 
     public static User registerUser(User user, String password) {
-        TransactionHelper helper = new TransactionHelper();
+        DaoHelper helper = new DaoHelper();
         UserDao userDao = new UserDao();
         boolean result = false;
         helper.startTransaction(userDao);

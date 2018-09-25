@@ -4,7 +4,7 @@
 
 package by.epam.admission.dao.impl;
 
-import by.epam.admission.dao.TransactionHelper;
+import by.epam.admission.dao.DaoHelper;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.User;
 import by.epam.admission.pool.ConnectionPool;
@@ -23,7 +23,7 @@ public class UserDaoTest {
 
     @Test
     public void testFindAll() {
-        TransactionHelper t = new TransactionHelper();
+        DaoHelper t = new DaoHelper();
         UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
         try {
@@ -41,7 +41,7 @@ public class UserDaoTest {
         for (int i = 0; i < 100; i++) {
             new Thread() {
                 public void run() {
-                    TransactionHelper t = new TransactionHelper();
+                    DaoHelper t = new DaoHelper();
                     UserDao uDAO = new UserDao();
                     t.startTransaction(uDAO);
                     int id = (int)(Math.random() * 55 + 0.5);
@@ -60,7 +60,7 @@ public class UserDaoTest {
     public void testFindUserByEmailAndPassword() {
         String email = "example.30@gmail.com";
         String password = "example.30@gmail.com";
-        TransactionHelper t = new TransactionHelper();
+        DaoHelper t = new DaoHelper();
         UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
         try {
@@ -76,7 +76,7 @@ public class UserDaoTest {
         User user = new User();
         user.setEmail("test@gmail.com");
         String password = "test@gmail.com";
-        TransactionHelper t = new TransactionHelper();
+        DaoHelper t = new DaoHelper();
         UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
         try {
@@ -95,7 +95,7 @@ public class UserDaoTest {
             final int number = i;
             new Thread() {
                 public void run() {
-                    TransactionHelper t = new TransactionHelper();
+                    DaoHelper t = new DaoHelper();
                     UserDao uDAO = new UserDao();
                     t.startTransaction(uDAO);
                     User user = new User();
@@ -127,7 +127,7 @@ public class UserDaoTest {
 
     @Test
     public void testCreate() {
-        TransactionHelper t = new TransactionHelper();
+        DaoHelper t = new DaoHelper();
         UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
         User user = new User();
@@ -152,7 +152,7 @@ public class UserDaoTest {
 
     @Test
     public void testUpdateByEmailAndPassword() {
-        TransactionHelper t = new TransactionHelper();
+        DaoHelper t = new DaoHelper();
         UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
         User user = new User();
@@ -175,7 +175,7 @@ public class UserDaoTest {
     @Test
     public void testDelete() {
         boolean result = false;
-        TransactionHelper t = new TransactionHelper();
+        DaoHelper t = new DaoHelper();
         UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
         try {

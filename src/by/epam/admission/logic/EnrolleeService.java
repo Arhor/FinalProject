@@ -1,6 +1,6 @@
 package by.epam.admission.logic;
 
-import by.epam.admission.dao.TransactionHelper;
+import by.epam.admission.dao.DaoHelper;
 import by.epam.admission.dao.impl.EnrolleeDao;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Enrollee;
@@ -13,35 +13,35 @@ public class EnrolleeService {
 
     public static boolean registerEnrollee(Enrollee enrollee) {
         boolean result = false;
-        TransactionHelper transactionHelper = new TransactionHelper();
+        DaoHelper daoHelper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
-        transactionHelper.startTransaction(enrolleeDao);
+        daoHelper.startTransaction(enrolleeDao);
         try {
             enrolleeDao.create(enrollee);
-            transactionHelper.commit();
+            daoHelper.commit();
             result = true;
         } catch (ProjectException e) {
-            transactionHelper.rollback();
+            daoHelper.rollback();
             LOG.debug(e);
         } finally {
-            transactionHelper.endTransaction();
+            daoHelper.endTransaction();
         }
         return result;
     }
 
     public static Enrollee updateEnrollee(Enrollee enrollee) {
         Enrollee result;
-        TransactionHelper transactionHelper = new TransactionHelper();
+        DaoHelper daoHelper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
-        transactionHelper.startTransaction(enrolleeDao);
+        daoHelper.startTransaction(enrolleeDao);
         try {
             result = enrolleeDao.update(enrollee);
-            transactionHelper.commit();
+            daoHelper.commit();
         } catch (ProjectException e) {
             result = enrollee;
-            transactionHelper.rollback();
+            daoHelper.rollback();
         } finally {
-            transactionHelper.endTransaction();
+            daoHelper.endTransaction();
         }
         return result;
     }
@@ -49,15 +49,15 @@ public class EnrolleeService {
     public static Enrollee findEnrollee(int uid) {
         Enrollee enrollee = null;
 
-        TransactionHelper transactionHelper = new TransactionHelper();
+        DaoHelper daoHelper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
-        transactionHelper.startTransaction(enrolleeDao);
+        daoHelper.startTransaction(enrolleeDao);
         try {
             enrollee = enrolleeDao.findEnrolleeByUID(uid);
         } catch (ProjectException e) {
             LOG.error(e);
         } finally {
-            transactionHelper.endTransaction();
+            daoHelper.endTransaction();
         }
 
         return enrollee;

@@ -4,7 +4,7 @@
 
 package by.epam.admission.dao.impl;
 
-import by.epam.admission.dao.TransactionHelper;
+import by.epam.admission.dao.DaoHelper;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Subject;
 import by.epam.admission.pool.ConnectionPool;
@@ -21,24 +21,24 @@ public class SubjectDaoTest {
     private static final Logger LOG = LogManager.getLogger(SubjectDaoTest.class);
 
     private SubjectDao subjectDao;
-    private TransactionHelper transactionHelper;
+    private DaoHelper daoHelper;
 
     @BeforeClass
     public void setUp() {
         subjectDao = new SubjectDao();
-        transactionHelper = new TransactionHelper();
+        daoHelper = new DaoHelper();
     }
 
     @AfterClass
     public void tearDown() {
         subjectDao = null;
-        transactionHelper = null;
+        daoHelper = null;
         ConnectionPool.POOL.closePool();
     }
 
     @Test
     public void testFindAll() {
-        transactionHelper.startTransaction(subjectDao);
+        daoHelper.startTransaction(subjectDao);
         try {
             for (Subject subject : subjectDao.findAll()) {
                 LOG.info(subject);
@@ -46,23 +46,23 @@ public class SubjectDaoTest {
         } catch (ProjectException e) {
             LOG.error("Test exception", e);
         }
-        transactionHelper.endTransaction();
+        daoHelper.endTransaction();
     }
 
     @Test
     public void findEntityByIdTest() {
-        transactionHelper.startTransaction(subjectDao);
+        daoHelper.startTransaction(subjectDao);
         try {
             LOG.info(subjectDao.findEntityById(101));
         } catch (ProjectException e) {
             LOG.error("Test exception", e);
         }
-        transactionHelper.endTransaction();
+        daoHelper.endTransaction();
     }
 
     @Test
     public void findFacultyBySubjectIdTest() {
-        transactionHelper.startTransaction(subjectDao);
+        daoHelper.startTransaction(subjectDao);
         try {
             for (Subject subject : subjectDao.findSubjectsByFacultyId(205)) {
                 LOG.info(subject);
@@ -70,7 +70,7 @@ public class SubjectDaoTest {
         } catch (ProjectException e) {
             LOG.error("Test exception", e);
         }
-        transactionHelper.endTransaction();
+        daoHelper.endTransaction();
     }
 
     @Test

@@ -1,6 +1,6 @@
 package by.epam.admission.logic;
 
-import by.epam.admission.dao.TransactionHelper;
+import by.epam.admission.dao.DaoHelper;
 import by.epam.admission.dao.impl.UserDao;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.User;
@@ -9,16 +9,16 @@ public class UserService {
 
     public static boolean updateUser(User user, String password) {
         boolean result = false;
-        TransactionHelper transactionHelper = new TransactionHelper();
+        DaoHelper daoHelper = new DaoHelper();
         UserDao userDao = new UserDao();
-        transactionHelper.startTransaction(userDao);
+        daoHelper.startTransaction(userDao);
         try {
             result = userDao.update(user, password);
-            transactionHelper.commit();
+            daoHelper.commit();
         } catch (ProjectException e) {
-            transactionHelper.rollback();
+            daoHelper.rollback();
         } finally {
-            transactionHelper.endTransaction();
+            daoHelper.endTransaction();
         }
         return result;
     }

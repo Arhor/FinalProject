@@ -4,7 +4,7 @@
 
 package by.epam.admission.dao.impl;
 
-import by.epam.admission.dao.TransactionHelper;
+import by.epam.admission.dao.DaoHelper;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Faculty;
 import by.epam.admission.pool.ConnectionPool;
@@ -24,11 +24,11 @@ public class FacultyDaoTest {
     private static final Logger LOG = LogManager.getLogger(FacultyDaoTest.class);
 
     private FacultyDao facultyDao;
-    private TransactionHelper transactionHelper;
+    private DaoHelper daoHelper;
 
     @Test
     public void findAllTest() {
-        transactionHelper.startTransaction(facultyDao);
+        daoHelper.startTransaction(facultyDao);
         try {
             for (Faculty faculty : facultyDao.findAll()) {
                 LOG.info(faculty);
@@ -36,23 +36,23 @@ public class FacultyDaoTest {
         } catch (ProjectException e) {
             LOG.error("Test exception", e);
         }
-        transactionHelper.endTransaction();
+        daoHelper.endTransaction();
     }
 
     @Test
     public void findEntityByIdTest() {
-        transactionHelper.startTransaction(facultyDao);
+        daoHelper.startTransaction(facultyDao);
         try {
             LOG.info(facultyDao.findEntityById(201));
         } catch (ProjectException e) {
             LOG.error("Test exception", e);
         }
-        transactionHelper.endTransaction();
+        daoHelper.endTransaction();
     }
 
     @Test
     public void findFacultyBySubjectIdTest() {
-        transactionHelper.startTransaction(facultyDao);
+        daoHelper.startTransaction(facultyDao);
         try {
             for (Faculty faculty : facultyDao.findFacultiesBySubjectId(101)) {
                 LOG.info(faculty);
@@ -60,7 +60,7 @@ public class FacultyDaoTest {
         } catch (ProjectException e) {
             LOG.error("Test exception", e);
         }
-        transactionHelper.endTransaction();
+        daoHelper.endTransaction();
     }
 
     @Test
@@ -71,29 +71,29 @@ public class FacultyDaoTest {
         faculty.setNameEn("Test faculty");
         faculty.setSeatsPaid(200);
         faculty.setSeatsBudget(50);
-        transactionHelper.startTransaction(facultyDao);
+        daoHelper.startTransaction(facultyDao);
         boolean result = false;
         try {
             result = facultyDao.create(faculty);
-            transactionHelper.commit();
+            daoHelper.commit();
         } catch (ProjectException e) {
             LOG.error("DAO exception", e);
-            transactionHelper.rollback();
+            daoHelper.rollback();
         }
-        transactionHelper.endTransaction();
+        daoHelper.endTransaction();
         Assert.assertFalse(result);
     }
 
     @BeforeClass
     public void setUp() {
         facultyDao = new FacultyDao();
-        transactionHelper = new TransactionHelper();
+        daoHelper = new DaoHelper();
     }
 
     @AfterClass
     public void tearDown() {
         facultyDao = null;
-        transactionHelper = null;
+        daoHelper = null;
         ConnectionPool.POOL.closePool();
     }
 }

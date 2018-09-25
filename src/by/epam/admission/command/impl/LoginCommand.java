@@ -56,7 +56,7 @@ public class LoginCommand implements ActionCommand {
                         page = ConfigurationManager.getProperty("path.page.main");
                 }
 
-                router.setType(Router.Type.FORWARD);
+                router.setType(Router.Type.REDIRECT);
             } else {
                 String message = MessageManager.getProperty("message.loginerror");
                 request.setAttribute("errorLoginMessage", message);

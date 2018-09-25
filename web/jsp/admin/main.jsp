@@ -14,7 +14,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
         <fmt:message key="label.title" />
@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href="../assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -60,12 +60,14 @@
                         <p><fmt:message key="label.faculties" /></p>
                     </a>
                 </li>
-                <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=show_users">
-                        <i class="material-icons">people</i>
-                        <p><fmt:message key="label.admin.users" /></p>
-                    </a>
-                </li>
+                <c:if test="${sessionScope.role.toString() eq 'ADMIN'}">
+                    <li class="nav-item active  ">
+                        <a class="nav-link" href="/controller?command=show_users">
+                            <i class="material-icons">people</i>
+                            <p><fmt:message key="label.admin.users" /></p>
+                        </a>
+                    </li>
+                </c:if>
                 <li class="nav-item active">
                     <a class="nav-link" href="/controller?command=logout">
                         <i class="material-icons">exit_to_app</i>
@@ -92,8 +94,15 @@
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
-                                    <i class="material-icons">work</i>
-                                    <span class="label-on-right">${role}</span>
+                                    <c:choose>
+                                        <c:when test="${sessionScope.role.toString() eq 'ADMIN'}">
+                                            <i class="material-icons">work</i>
+                                        </c:when>
+                                        <c:when test="${sessionScope.role.toString() eq 'CLIENT'}">
+                                            <i class="material-icons">school</i>
+                                        </c:when>
+                                    </c:choose>
+                                    <span class="label-on-right">${sessionScope.role}</span>
                                 </div>
                             </div>
                         </div>
