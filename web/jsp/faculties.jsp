@@ -118,16 +118,12 @@
                                                             <td class="text-center">${faculty.seatsBudget}</td>
                                                             <c:if test="${sessionScope.role.toString() eq 'CLIENT'}">
                                                                 <td class="td-actions text-center">
-                                                                    <a href="/controller?command=register_to_faculty${faculty.id}" class="success">
-                                                                        <button type="button" rel="tooltip" class="btn btn-success">
-                                                                            <i class="material-icons">edit</i>
-                                                                        </button>
-                                                                    </a>
-                                                                    <a href="/controller?command=deregister_from_faculty${faculty.id}" class="danger">
-                                                                        <button type="button" rel="tooltip" class="btn btn-danger">
-                                                                            <i class="material-icons">close</i>
-                                                                        </button>
-                                                                    </a>
+                                                                    <button type="button" rel="tooltip" class="btn btn-success" style="display : none" id="fac${faculty.id}">
+                                                                        <i class="material-icons">edit</i>
+                                                                    </button>
+                                                                    <button type="button" rel="tooltip" class="btn btn-danger" style="display : none" id="fac${faculty.id}">
+                                                                        <i class="material-icons">close</i>
+                                                                    </button>
                                                                 </td>
                                                             </c:if>
                                                         </tr>
@@ -140,16 +136,12 @@
                                                             <td class="text-center">${faculty.seatsBudget}</td>
                                                             <c:if test="${sessionScope.role.toString() eq 'CLIENT'}">
                                                                 <td class="td-actions text-center">
-                                                                    <a href="/controller?command=register_to_faculty${faculty.id}" class="success">
-                                                                        <button type="button" rel="tooltip" class="btn btn-success">
-                                                                            <i class="material-icons">edit</i>
-                                                                        </button>
-                                                                    </a>
-                                                                    <a href="/controller?command=deregister_from_faculty${faculty.id}" class="danger">
-                                                                        <button type="button" rel="tooltip" class="btn btn-danger">
-                                                                            <i class="material-icons">close</i>
-                                                                        </button>
-                                                                    </a>
+                                                                    <button type="button" rel="tooltip" class="btn btn-success" style="display : none" id="fac${faculty.id}">
+                                                                        <i class="material-icons">edit</i>
+                                                                    </button>
+                                                                    <button type="button" rel="tooltip" class="btn btn-danger" style="display : none" id="fac${faculty.id}">
+                                                                        <i class="material-icons">close</i>
+                                                                    </button>
                                                                 </td>
                                                             </c:if>
                                                         </tr>

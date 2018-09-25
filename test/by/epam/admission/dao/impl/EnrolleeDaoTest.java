@@ -73,7 +73,7 @@ public class EnrolleeDaoTest {
         for (int i = 201; i < 209; i++) {
             t.startTransaction(enrolleeDAO);
             try {
-                enrolleeDAO.registerToFacultyById(enrollee, i);
+                enrolleeDAO.registerToFacultyById(enrollee.getId(), i);
                 t.commit();
             } catch (ProjectException e) {
                 t.rollback();

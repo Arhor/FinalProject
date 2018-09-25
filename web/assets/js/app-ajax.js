@@ -17,14 +17,12 @@ $(document).ready(function () {
                 dataType: 'text json',
                 success : function (data) {
 
-                    console.log()
-
                     switch (data['result'].toString()) {
                         case 'true':
-                            $('#' + data['faculty'].toString()).find('.success').css('visibility', 'hidden').attr('hidden', 'hidden');
+                            $('#fac' + data['faculty'].toString() + '.btn-danger').css('display', 'inline');
                             break;
                         case 'false':
-                            $('#' + data['faculty'].toString()).find('.danger').css('visibility', 'hidden').attr('hidden', 'hidden');
+                            $('#fac' + data['faculty'].toString() + '.btn-success').css('display', 'inline');
                             break;
                     }
                 }
@@ -32,7 +30,55 @@ $(document).ready(function () {
         });
     } else {
         $('.success').css('visibility', 'hidden').attr('disabled', 'disabled');
-        $('.danger').css('visibility', 'hidden').attr('disabled', 'disabled');
+        $('.danger').css('visibility', 'hidden').attr('disabled', 'disabled'); // REFACTORING AWAITS YOU *_*
     }
 
+});
+
+$('.btn-success').click(function () {
+    var sendTo = {
+        command : 'register_to_faculty',
+        enrolleeId : $('#enrolleeID').val(),
+        facultyId  : $(this).attr('id')
+    };
+    $.ajax({
+        url: 'ajaxServlet',
+        data: sendTo,
+        dataType: 'text json',
+        success : function (data) {
+            switch (data['result'].toString()) {
+                case 'true':
+                    $('#fac' + data['faculty'].toString() + '.btn-danger').css('display', 'inline');
+                    $('#fac' + data['faculty'].toString() + '.btn-success').css('display', 'none');
+                    break;
+                case 'false':
+                    // TODO: implement false faculty registration handling
+                    break;
+            }
+        }
+    });
+});
+
+$('.btn-danger').click(function () {
+    var sendTo = {
+        command : 'deregister_from_faculty',
+        enrolleeId : $('#enrolleeID').val(),
+        facultyId  : $(this).attr('id')
+    };
+    $.ajax({
+        url: 'ajaxServlet',
+        data: sendTo,
+        dataType: 'text json',
+        success : function (data) {
+            switch (data['result'].toString()) {
+                case 'true':
+                    $('#fac' + data['faculty'].toString() + '.btn-success').css('display', 'inline');
+                    $('#fac' + data['faculty'].toString() + '.btn-danger').css('display', 'none');
+                    break;
+                case 'false':
+                    // TODO: implement false faculty registration handling
+                    break;
+            }
+        }
+    });
 });

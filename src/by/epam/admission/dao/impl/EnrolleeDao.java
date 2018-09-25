@@ -33,6 +33,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SQL_INSERT_ENROLLEE;
     private static final String SQL_UPDATE_ENROLLEE;
     private static final String SQL_INSERT_TO_ADMISSION_LIST;
+    private static final String SQL_DELETE_FROM_ADMISSION_LIST;
     private static final String SQL_SELECT_ENROLLEE_TOTAL_SCORE;
     private static final String SQL_SELECT_ADMISSION_LIST_ENTRY;
 
@@ -43,6 +44,9 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SCHOOL_CERTIFICATE = "school_certificate";
     private static final String USER_ID = "users_id";
     private static final String AVAILABLE = "available";
+
+    private static final int ACTIVE = 1;
+    private static final int INACTIVE = 0;
 
     @Override
     public List<Enrollee> findAll() throws ProjectException {
@@ -110,6 +114,25 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 SQL_SELECT_ADMISSION_LIST_ENTRY)) {
             st.setInt(1, enrolleeId);
             st.setInt(2, facultyId);
+            st.setInt(3, ACTIVE);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                result = (rs.getInt(1) == 1);
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return result;
+    }
+
+    public boolean checkInactive(int enrolleeId, int facultyId)
+            throws ProjectException {
+        boolean result = false;
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_SELECT_ADMISSION_LIST_ENTRY)) {
+            st.setInt(1, enrolleeId);
+            st.setInt(2, facultyId);
+            st.setInt(3, INACTIVE);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 result = (rs.getInt(1) == 1);
@@ -211,12 +234,12 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         return result;
     }
 
-    public boolean registerToFacultyById(Enrollee enrollee, int facultyId)
+    public boolean registerToFacultyById(int enrolleeId, int facultyId)
             throws ProjectException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_INSERT_TO_ADMISSION_LIST)) {
-            st.setInt(1, enrollee.getId());
+            st.setInt(1, enrolleeId);
             st.setInt(2, facultyId);
             flag = st.executeUpdate();
         } catch (SQLException e) {
@@ -226,8 +249,18 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     }
 
     // TODO: implement faculty deregister
-    public boolean deregisterFromFacultyById(Enrollee enrollee, int facultyId) {
-        return false;
+    public boolean deregisterFromFacultyById(int enrolleeId, int facultyId)
+            throws ProjectException {
+        int flag;
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_DELETE_FROM_ADMISSION_LIST)) {
+            st.setInt(1, enrolleeId);
+            st.setInt(2, facultyId);
+            flag = st.executeUpdate();
+        } catch (SQLException e) {
+            throw new ProjectException("Updating error", e);
+        }
+        return flag != 0;
     }
 
     @Override
@@ -326,9 +359,15 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "GROUP BY `enrollees_has_subjects`.`enrollees_id`";
         SQL_SELECT_ADMISSION_LIST_ENTRY =
                 "SELECT COUNT(*)" +
-                "FROM  `admission_list` " +
-                "WHERE `enrollees_id` = ? " +
-                       "AND `faculties_id` = ?";
+                "FROM   `admission_list` " +
+                "WHERE  `enrollees_id` = ? " +
+                        "AND `faculties_id` = ? " +
+                        "AND `available` = ?";
+        SQL_DELETE_FROM_ADMISSION_LIST =
+                "UPDATE `admission_list` " +
+                "SET    `available` = 0 " +
+                "WHERE  `enrollees_id` = ? " +
+                        "AND `faculties_id` = ?";
     }
 
 }

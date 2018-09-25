@@ -13,15 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class RegisterToFacultyCommand implements ActionCommand {
+public class DeregisterFromFaculty implements ActionCommand {
 
-    private static final Logger LOG = LogManager.getLogger(RegisterToFacultyCommand.class);
+    private static final Logger LOG = LogManager.getLogger(DeregisterFromFaculty.class);
 
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
-
-        boolean result;
-
         String enrolleeId = request.getParameter("enrolleeId");
         String facultyId = request.getParameter("facultyId").replaceAll("[^0-9]","");
 
@@ -31,12 +28,7 @@ public class RegisterToFacultyCommand implements ActionCommand {
         LOG.debug("Enrolle ID: " + eid + "\nFaculty ID: " + fid);
 
         try {
-            if (FacultyService.checkInactive(eid, fid)) {
-                result = FacultyService.restoreFacultyRegistration(eid, fid);
-            } else {
-                result = FacultyService.registerToFaculty(eid, fid);
-            }
-
+            boolean result = FacultyService.deregisterFromFaculty(eid, fid);
 
             JSONObject jsonObject = new JSONObject();
 

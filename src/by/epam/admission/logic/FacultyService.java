@@ -26,14 +26,14 @@ public class FacultyService {
         return faculties;
     }
 
-    public static boolean registerToFaculty(Enrollee enrollee, int facultyId)
+    public static boolean registerToFaculty(int enrolleeId, int facultyId)
             throws ProjectException {
         boolean result = false;
         DaoHelper helper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
         try {
             helper.startTransaction(enrolleeDao);
-            result = enrolleeDao.registerToFacultyById(enrollee, facultyId);
+            result = enrolleeDao.registerToFacultyById(enrolleeId, facultyId);
         } catch (ProjectException e) {
             throw e;
         } finally {
@@ -50,6 +50,38 @@ public class FacultyService {
         try {
             helper.startTransaction(enrolleeDao);
             result = enrolleeDao.checkFaculty(enrolleeId, facultyId);
+        } catch (ProjectException e) {
+            throw e;
+        } finally {
+            helper.endTransaction();
+        }
+        return result;
+    }
+
+    public static boolean checkInactive(int enrolleeId, int facultyId)
+            throws ProjectException {
+        boolean result = false;
+        DaoHelper helper = new DaoHelper();
+        EnrolleeDao enrolleeDao = new EnrolleeDao();
+        try {
+            helper.startTransaction(enrolleeDao);
+            result = enrolleeDao.checkInactive(enrolleeId, facultyId);
+        } catch (ProjectException e) {
+            throw e;
+        } finally {
+            helper.endTransaction();
+        }
+        return result;
+    }
+
+    public static boolean deregisterFromFaculty(int enrolleeId, int facultyId)
+            throws ProjectException {
+        boolean result = false;
+        DaoHelper helper = new DaoHelper();
+        EnrolleeDao enrolleeDao = new EnrolleeDao();
+        try {
+            helper.startTransaction(enrolleeDao);
+            result = enrolleeDao.deregisterFromFacultyById(enrolleeId, facultyId);
         } catch (ProjectException e) {
             throw e;
         } finally {
