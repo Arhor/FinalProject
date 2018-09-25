@@ -7,15 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43dc64a4-49e4-4d08-bbd3-db3f7a64b274" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/DeregisterFromFaculty.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/CommandEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/CommandEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/RegisterToFacultyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/RegisterToFacultyCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/by/epam/admission/dao/impl/EnrolleeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/dao/impl/EnrolleeDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/by/epam/admission/logic/FacultyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/logic/FacultyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/by/epam/admission/dao/impl/EnrolleeDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/by/epam/admission/dao/impl/EnrolleeDaoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/assets/js/app-ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/js/app-ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/jsp/faculties.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/jsp/faculties.jsp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,20 +23,20 @@
     <session id="1803808687">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="11" />
+          <entry key="project.closed" value="12" />
           <entry key="project.open.time.1" value="4" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.41" value="1" />
           <entry key="project.open.time.42" value="1" />
-          <entry key="project.open.time.44" value="2" />
+          <entry key="project.open.time.44" value="3" />
           <entry key="project.open.time.46" value="1" />
           <entry key="project.open.time.47" value="2" />
           <entry key="project.open.time.50" value="1" />
           <entry key="project.open.time.59" value="1" />
           <entry key="project.open.time.64" value="1" />
-          <entry key="project.opened" value="17" />
+          <entry key="project.opened" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -49,7 +44,7 @@
           <entry key="class" value="5" />
           <entry key="css" value="4" />
           <entry key="iml" value="1" />
-          <entry key="java" value="290" />
+          <entry key="java" value="294" />
           <entry key="js" value="4" />
           <entry key="jsp" value="111" />
           <entry key="jspf" value="1" />
@@ -66,7 +61,7 @@
           <entry key="CLASS" value="5" />
           <entry key="CSS" value="4" />
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="290" />
+          <entry key="JAVA" value="294" />
           <entry key="JSP" value="112" />
           <entry key="JavaScript" value="4" />
           <entry key="PLAIN_TEXT" value="4" />
@@ -81,7 +76,7 @@
         <counts>
           <entry key="css" value="52" />
           <entry key="dummy" value="50" />
-          <entry key="java" value="17274" />
+          <entry key="java" value="17381" />
           <entry key="js" value="1288" />
           <entry key="jsp" value="4521" />
           <entry key="jspf" value="56" />
@@ -93,7 +88,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="52" />
-          <entry key="JAVA" value="17274" />
+          <entry key="JAVA" value="17381" />
           <entry key="JSP" value="4577" />
           <entry key="JavaScript" value="1288" />
           <entry key="PLAIN_TEXT" value="50" />
@@ -106,7 +101,7 @@
     <session id="669592454">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="11" />
           <entry key="project.open.time.108" value="1" />
           <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.26" value="1" />
@@ -116,16 +111,15 @@
           <entry key="project.open.time.64" value="1" />
           <entry key="project.open.time.66" value="1" />
           <entry key="project.open.time.70" value="1" />
-          <entry key="project.open.time.73" value="1" />
           <entry key="project.open.time.74" value="2" />
           <entry key="project.open.time.95" value="1" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="2" />
-          <entry key="java" value="117" />
+          <entry key="java" value="109" />
           <entry key="jsp" value="16" />
           <entry key="log" value="2" />
           <entry key="properties" value="1" />
@@ -135,7 +129,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="2" />
-          <entry key="JAVA" value="117" />
+          <entry key="JAVA" value="109" />
           <entry key="JSP" value="16" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="Properties" value="1" />
@@ -146,9 +140,8 @@
         <counts>
           <entry key="css" value="191" />
           <entry key="dummy" value="24" />
-          <entry key="java" value="8036" />
-          <entry key="js" value="371" />
-          <entry key="jsp" value="463" />
+          <entry key="java" value="6964" />
+          <entry key="jsp" value="390" />
           <entry key="properties" value="61" />
           <entry key="regexp" value="1" />
           <entry key="xml" value="6" />
@@ -157,9 +150,8 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="191" />
-          <entry key="JAVA" value="8035" />
-          <entry key="JSP" value="463" />
-          <entry key="JavaScript" value="371" />
+          <entry key="JAVA" value="6963" />
+          <entry key="JSP" value="390" />
           <entry key="PLAIN_TEXT" value="24" />
           <entry key="Properties" value="61" />
           <entry key="RegExp" value="2" />
@@ -173,32 +165,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/jsp/faculties.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="141" column="157" selection-start-line="141" selection-start-column="157" selection-end-line="141" selection-end-column="157" />
+            <state relative-caret-position="2431">
+              <caret line="143" column="77" selection-start-line="143" selection-start-column="77" selection-end-line="143" selection-end-column="77" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/CheckFacultyCommand.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="518">
+              <caret line="33" column="64" selection-start-line="33" selection-start-column="64" selection-end-line="33" selection-end-column="64" />
               <folding>
-                <element signature="n#style#0;n#button#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#1;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#0;n#td#4;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#1;n#td#4;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/assets/js/app-ajax.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="75" column="72" selection-start-line="75" selection-start-column="72" selection-end-line="75" selection-end-column="72" />
+            <state relative-caret-position="187">
+              <caret line="11" column="14" selection-start-line="7" selection-start-column="12" selection-end-line="11" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/DeregisterFromFaculty.java">
+        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/controller/AjaxServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="30" column="65" selection-start-line="30" selection-start-column="65" selection-end-line="30" selection-end-column="65" />
+            <state relative-caret-position="442">
+              <caret line="38" column="50" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -209,8 +207,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/by/epam/admission/logic/FacultyService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="61" column="12" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="12" />
+            <state relative-caret-position="450">
+              <caret line="77" column="12" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -219,22 +217,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/dao/impl/EnrolleeDao.java">
+        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/RegisterToFacultyCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="128" column="12" selection-start-line="128" selection-start-column="12" selection-end-line="128" selection-end-column="12" />
+            <state relative-caret-position="459">
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/RegisterToFacultyCommand.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/by/epam/admission/dao/impl/EnrolleeDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="34" column="71" lean-forward="true" selection-start-line="34" selection-start-column="71" selection-end-line="34" selection-end-column="71" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="2694">
+              <caret line="387" column="39" selection-start-line="387" selection-start-column="39" selection-end-line="387" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -270,6 +265,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/web/jsp/modules/copyright.jsp" />
+        <option value="$PROJECT_DIR$/web/jsp/modules/copyright.jspf" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/model/Entity.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/model/Faculty.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/model/Enrollee.java" />
@@ -294,6 +291,7 @@
         <option value="$PROJECT_DIR$/web/jsp/admin/main.jsp" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/command/factory/ActionFactory.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/command/impl/RegisterToFaculty.java" />
+        <option value="$PROJECT_DIR$/src/by/epam/admission/command/CommandEnum.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/command/ActionCommand.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/command/impl/ConfirmCommand.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/command/impl/EmptyCommand.java" />
@@ -313,10 +311,7 @@
         <option value="$PROJECT_DIR$/src/by/epam/admission/controller/ControllerServlet.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/controller/AjaxServlet.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/command/impl/CheckFacultyCommand.java" />
-        <option value="$PROJECT_DIR$/test/by/epam/admission/dao/impl/EnrolleeDaoTest.java" />
         <option value="$PROJECT_DIR$/web/jsp/faculties.jsp" />
-        <option value="$PROJECT_DIR$/src/by/epam/admission/command/CommandEnum.java" />
-        <option value="$PROJECT_DIR$/src/by/epam/admission/command/impl/DeregisterFromFaculty.java" />
         <option value="$PROJECT_DIR$/web/assets/js/app-ajax.js" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/dao/impl/EnrolleeDao.java" />
         <option value="$PROJECT_DIR$/src/by/epam/admission/logic/FacultyService.java" />
@@ -346,7 +341,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -490,12 +484,13 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537890564300" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537865831670" />
     <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/uml" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -754,8 +749,8 @@
       <workItem from="1537651159197" duration="1627000" />
       <workItem from="1537693393399" duration="4282000" />
       <workItem from="1537708963303" duration="23488000" />
-      <workItem from="1537857443442" duration="7961000" />
-      <workItem from="1537870112899" duration="11803000" />
+      <workItem from="1537857443442" duration="8623000" />
+      <workItem from="1537890551041" duration="1860000" />
     </task>
     <servers />
   </component>
@@ -792,7 +787,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="217694000" />
+    <option name="totallyTimeSpent" value="208413000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -804,16 +799,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="25" width="1368" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6607717" visible="true" weight="0.22878788" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6630824" visible="true" weight="0.22761194" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info id="Capture Tool" order="6" />
-      <window_info id="Web" order="7" sideWeight="0.3392283" side_tool="true" weight="0.22878788" />
+      <window_info id="Web" order="7" sideWeight="0.33691755" side_tool="true" weight="0.28837952" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32719395" />
       <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
@@ -823,11 +819,11 @@
       <window_info anchor="bottom" id="Application Servers" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.3279743" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.32936078" />
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info anchor="bottom" id="Run" order="13" weight="0.40996784" />
+      <window_info active="true" anchor="bottom" id="Run" order="13" visible="true" weight="0.3629469" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -853,6 +849,13 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/logic/CheckEmailLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/logic/LoginLogic.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -867,7 +870,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/uml/dao.uml" />
+    <entry file="file://$PROJECT_DIR$/uml/dao.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="" y="">by.epam.admission.dao.impl.FacultyDao</node>
+            <node x="" y="">by.epam.admission.dao.impl.UserDao</node>
+            <node x="" y="">by.epam.admission.dao.impl.SubjectDao</node>
+            <node x="" y="">by.epam.admission.dao.AbstractDao</node>
+            <node x="" y="">by.epam.admission.dao.impl.EnrolleeDao</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="703.0" y="328.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Methods</Category>
+            <Category>Properties</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/logic/EnrolleeService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -889,9 +916,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -997,13 +1021,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/dao/impl/FacultyDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-595">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/factory/ActionFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -1011,13 +1028,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/CommandEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/ActionCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="75" selection-start-line="6" selection-start-column="75" selection-end-line="6" selection-end-column="75" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1039,9 +1060,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="16" column="82" selection-start-line="16" selection-start-column="82" selection-end-line="16" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1063,9 +1081,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="14" column="82" selection-start-line="14" selection-start-column="82" selection-end-line="14" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1080,9 +1095,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="257">
           <caret line="17" column="82" selection-start-line="17" selection-start-column="82" selection-end-line="17" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1104,9 +1116,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="82" selection-start-line="12" selection-start-column="82" selection-end-line="12" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1121,9 +1130,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="17" column="82" selection-start-line="17" selection-start-column="82" selection-end-line="17" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1145,15 +1151,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="47">
           <caret line="48" column="50" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/jsp/faculties.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2431">
+          <caret line="143" column="77" selection-start-line="143" selection-start-column="77" selection-end-line="143" selection-end-column="77" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/controller/AjaxServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
+        <state relative-caret-position="442">
           <caret line="38" column="50" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1161,71 +1171,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/dao/impl/FacultyDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-136">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/CheckFacultyCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="43" column="9" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="43" selection-end-column="9" />
+        <state relative-caret-position="518">
+          <caret line="33" column="64" selection-start-line="33" selection-start-column="64" selection-end-line="33" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/epam/admission/dao/impl/EnrolleeDaoTest.java">
+    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/controller/filter/EncodingFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="75" column="66" selection-start-line="75" selection-start-column="66" selection-end-line="75" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/jsp/faculties.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="141" column="157" selection-start-line="141" selection-start-column="157" selection-end-line="141" selection-end-column="157" />
-          <folding>
-            <element signature="n#style#0;n#button#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#1;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#td#4;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#1;n#td#4;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/CommandEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/DeregisterFromFaculty.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="30" column="65" selection-start-line="30" selection-start-column="65" selection-end-line="30" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/assets/js/app-ajax.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="75" column="72" selection-start-line="75" selection-start-column="72" selection-end-line="75" selection-end-column="72" />
+        <state relative-caret-position="153">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/dao/impl/EnrolleeDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="128" column="12" selection-start-line="128" selection-start-column="12" selection-end-line="128" selection-end-column="12" />
+        <state relative-caret-position="2694">
+          <caret line="387" column="39" selection-start-line="387" selection-start-column="39" selection-end-line="387" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/logic/FacultyService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="61" column="12" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="12" />
+        <state relative-caret-position="450">
+          <caret line="77" column="12" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1234,11 +1214,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/impl/RegisterToFacultyCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="34" column="71" lean-forward="true" selection-start-line="34" selection-start-column="71" selection-end-line="34" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="459">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/assets/js/app-ajax.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="14" selection-start-line="7" selection-start-column="12" selection-end-line="11" selection-end-column="14" />
         </state>
       </provider>
     </entry>

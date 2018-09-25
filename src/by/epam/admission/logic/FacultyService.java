@@ -74,6 +74,22 @@ public class FacultyService {
         return result;
     }
 
+    public static boolean restoreFacultyRegistration(int enrolleeId, int facultyId)
+            throws ProjectException {
+        boolean result = false;
+        DaoHelper helper = new DaoHelper();
+        EnrolleeDao enrolleeDao = new EnrolleeDao();
+        try {
+            helper.startTransaction(enrolleeDao);
+            result = enrolleeDao.restoreFacultyRegistration(enrolleeId, facultyId);
+        } catch (ProjectException e) {
+            throw e;
+        } finally {
+            helper.endTransaction();
+        }
+        return result;
+    }
+
     public static boolean deregisterFromFaculty(int enrolleeId, int facultyId)
             throws ProjectException {
         boolean result = false;

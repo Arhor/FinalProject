@@ -36,6 +36,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SQL_DELETE_FROM_ADMISSION_LIST;
     private static final String SQL_SELECT_ENROLLEE_TOTAL_SCORE;
     private static final String SQL_SELECT_ADMISSION_LIST_ENTRY;
+    private static final String SQL_RESTORE_ADMISSION_LIST_ENTRY;
 
     // column labels
     private static final String ID = "id";
@@ -263,6 +264,20 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         return flag != 0;
     }
 
+    public boolean restoreFacultyRegistration(int enrolleeId, int facultyId)
+            throws ProjectException {
+        int flag;
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_RESTORE_ADMISSION_LIST_ENTRY)) {
+            st.setInt(1, enrolleeId);
+            st.setInt(2, facultyId);
+            flag = st.executeUpdate();
+        } catch (SQLException e) {
+            throw new ProjectException("Updating error", e);
+        }
+        return flag != 0;
+    }
+
     @Override
     public Enrollee update(Enrollee enrollee) throws ProjectException {
         int flag;
@@ -366,6 +381,11 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         SQL_DELETE_FROM_ADMISSION_LIST =
                 "UPDATE `admission_list` " +
                 "SET    `available` = 0 " +
+                "WHERE  `enrollees_id` = ? " +
+                        "AND `faculties_id` = ?";
+        SQL_RESTORE_ADMISSION_LIST_ENTRY =
+                "UPDATE `admission_list` " +
+                "SET    `available` = 1 " +
                 "WHERE  `enrollees_id` = ? " +
                         "AND `faculties_id` = ?";
     }

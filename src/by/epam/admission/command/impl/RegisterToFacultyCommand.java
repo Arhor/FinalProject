@@ -37,7 +37,6 @@ public class RegisterToFacultyCommand implements ActionCommand {
                 result = FacultyService.registerToFaculty(eid, fid);
             }
 
-
             JSONObject jsonObject = new JSONObject();
 
             try {
