@@ -10,12 +10,13 @@ import by.epam.admission.model.Faculty;
 import by.epam.admission.util.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class ShowFacultiesCommand implements ActionCommand {
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
         Router router = new Router();
         List<Faculty> faculties = null;

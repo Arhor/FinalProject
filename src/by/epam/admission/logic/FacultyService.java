@@ -26,13 +26,30 @@ public class FacultyService {
         return faculties;
     }
 
-    public static boolean registerToFaculty(Enrollee enrollee, int facultyId) throws ProjectException {
+    public static boolean registerToFaculty(Enrollee enrollee, int facultyId)
+            throws ProjectException {
         boolean result = false;
         DaoHelper helper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
         try {
             helper.startTransaction(enrolleeDao);
             result = enrolleeDao.registerToFacultyById(enrollee, facultyId);
+        } catch (ProjectException e) {
+            throw e;
+        } finally {
+            helper.endTransaction();
+        }
+        return result;
+    }
+
+    public static boolean checkFaculty(int enrolleeId, int facultyId)
+            throws ProjectException {
+        boolean result = false;
+        DaoHelper helper = new DaoHelper();
+        EnrolleeDao enrolleeDao = new EnrolleeDao();
+        try {
+            helper.startTransaction(enrolleeDao);
+            result = enrolleeDao.checkFaculty(enrolleeId, facultyId);
         } catch (ProjectException e) {
             throw e;
         } finally {

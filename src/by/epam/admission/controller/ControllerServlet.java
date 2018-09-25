@@ -46,7 +46,7 @@ public class ControllerServlet extends HttpServlet {
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
 
-        router = command.execute(request);
+        router = command.execute(request, response);
 
         switch (router.getType()) {
             case FORWARD:

@@ -6,6 +6,7 @@ import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class EnglishCommand implements ActionCommand {
@@ -13,7 +14,7 @@ public class EnglishCommand implements ActionCommand {
     private static final String LOCALE = "en_US";
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
         String page;
         HttpSession session = request.getSession();

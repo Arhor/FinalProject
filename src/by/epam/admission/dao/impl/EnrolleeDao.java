@@ -34,6 +34,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SQL_UPDATE_ENROLLEE;
     private static final String SQL_INSERT_TO_ADMISSION_LIST;
     private static final String SQL_SELECT_ENROLLEE_TOTAL_SCORE;
+    private static final String SQL_SELECT_ADMISSION_LIST_ENTRY;
 
     // column labels
     private static final String ID = "id";
@@ -100,6 +101,23 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         ArrayList<Enrollee> enrollees = new ArrayList<>();
         findByAddress(CITY, enrollees, city);
         return enrollees;
+    }
+
+    public boolean checkFaculty(int enrolleeId, int facultyId)
+            throws ProjectException {
+        boolean result = false;
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_SELECT_ADMISSION_LIST_ENTRY)) {
+            st.setInt(1, enrolleeId);
+            st.setInt(2, facultyId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                result = (rs.getInt(1) == 1);
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return result;
     }
 
     public int findEnrolleeTotalScore(Enrollee enrollee) throws ProjectException {
@@ -306,6 +324,11 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "ON `enrollees`.`id` = `enrollees_has_subjects`.`enrollees_id` " +
                 "WHERE `enrollees`.`id` = ? " +
                 "GROUP BY `enrollees_has_subjects`.`enrollees_id`";
+        SQL_SELECT_ADMISSION_LIST_ENTRY =
+                "SELECT COUNT(*)" +
+                "FROM  `admission_list` " +
+                "WHERE `enrollees_id` = ? " +
+                       "AND `faculties_id` = ?";
     }
 
 }

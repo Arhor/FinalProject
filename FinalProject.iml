@@ -34,5 +34,6 @@
     <orderEntry type="library" name="testng-6.7" level="project" />
     <orderEntry type="library" name="mail" level="project" />
     <orderEntry type="library" name="jstl-1.2" level="project" />
+    <orderEntry type="library" name="java-json" level="project" />
   </component>
 </module>

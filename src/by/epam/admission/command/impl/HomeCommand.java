@@ -6,12 +6,13 @@ import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class HomeCommand implements ActionCommand {
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request, HttpServletResponse response) {
         String page;
         Router router = new Router();
         HttpSession session = request.getSession();

@@ -111,41 +111,45 @@
                                             <c:forEach items="${requestScope.faculties}" var="faculty">
                                                 <c:choose>
                                                     <c:when test="${sessionScope.locale eq 'ru_RU'}" >
-                                                        <tr>
+                                                        <tr class="faculty" id="${faculty.id}">
                                                             <td>${faculty.id}</td>
                                                             <td>${faculty.nameRu}</td>
                                                             <td class="text-center">${faculty.seatsPaid}</td>
                                                             <td class="text-center">${faculty.seatsBudget}</td>
                                                             <c:if test="${sessionScope.role.toString() eq 'CLIENT'}">
                                                                 <td class="td-actions text-center">
-                                                                    <a href="/controller?command=register_to_faculty${faculty.id}">
+                                                                    <a href="/controller?command=register_to_faculty${faculty.id}" class="success">
                                                                         <button type="button" rel="tooltip" class="btn btn-success">
                                                                             <i class="material-icons">edit</i>
                                                                         </button>
                                                                     </a>
-                                                                    <button type="button" rel="tooltip" class="btn btn-danger">
-                                                                        <i class="material-icons">close</i>
-                                                                    </button>
+                                                                    <a href="/controller?command=deregister_from_faculty${faculty.id}" class="danger">
+                                                                        <button type="button" rel="tooltip" class="btn btn-danger">
+                                                                            <i class="material-icons">close</i>
+                                                                        </button>
+                                                                    </a>
                                                                 </td>
                                                             </c:if>
                                                         </tr>
                                                     </c:when>
                                                     <c:when test="${sessionScope.locale eq 'en_US'}" >
-                                                        <tr>
+                                                        <tr class="faculty" id="${faculty.id}">
                                                             <td class="">${faculty.id}</td>
                                                             <td>${faculty.nameEn}</td>
                                                             <td class="text-center">${faculty.seatsPaid}</td>
                                                             <td class="text-center">${faculty.seatsBudget}</td>
                                                             <c:if test="${sessionScope.role.toString() eq 'CLIENT'}">
                                                                 <td class="td-actions text-center">
-                                                                    <a href="/controller?command=register_to_faculty${faculty.id}">
+                                                                    <a href="/controller?command=register_to_faculty${faculty.id}" class="success">
                                                                         <button type="button" rel="tooltip" class="btn btn-success">
                                                                             <i class="material-icons">edit</i>
                                                                         </button>
                                                                     </a>
-                                                                    <button type="button" rel="tooltip" class="btn btn-danger">
-                                                                        <i class="material-icons">close</i>
-                                                                    </button>
+                                                                    <a href="/controller?command=deregister_from_faculty${faculty.id}" class="danger">
+                                                                        <button type="button" rel="tooltip" class="btn btn-danger">
+                                                                            <i class="material-icons">close</i>
+                                                                        </button>
+                                                                    </a>
                                                                 </td>
                                                             </c:if>
                                                         </tr>

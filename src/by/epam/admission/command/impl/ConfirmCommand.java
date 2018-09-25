@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ConfirmCommand implements ActionCommand {
@@ -18,7 +19,7 @@ public class ConfirmCommand implements ActionCommand {
     private static final Logger LOG = LogManager.getLogger(ConfirmCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
         HttpSession session = request.getSession();
 

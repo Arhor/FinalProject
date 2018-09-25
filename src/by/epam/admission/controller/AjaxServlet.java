@@ -1,5 +1,8 @@
 package by.epam.admission.controller;
 
+import by.epam.admission.command.ActionCommand;
+import by.epam.admission.command.Router;
+import by.epam.admission.command.factory.ActionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
 
 @WebServlet(
         name = "AjaxServlet",
@@ -34,12 +38,10 @@ public class AjaxServlet extends HttpServlet {
                                 HttpServletResponse response)
             throws ServletException, IOException {
 
-        String enrolleeId = request.getParameter("command");
+        ActionFactory client = new ActionFactory();
+        ActionCommand command = client.defineCommand(request);
 
-        LOG.debug(enrolleeId);
-
-        response.setContentType("text/plain");
-        response.getWriter().write(String.valueOf(enrolleeId));
+        command.execute(request, response);
     }
 
 }

@@ -18,7 +18,8 @@ public enum CommandEnum {
     PROFILE (new ProfileCommand()),
     UPDATE_PROFILE (new UpdateProfileCommand()),
     SHOW_USERS (new ShowUsersCommand()),
-    REGISTER_TO_FACULTY (new RegisterToFacultyCommand());
+    REGISTER_TO_FACULTY (new RegisterToFacultyCommand()),
+    CHECK_FACULTY (new CheckFacultyCommand());
 
     CommandEnum(ActionCommand command) {
         this.command = command;
