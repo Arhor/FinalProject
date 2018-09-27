@@ -19,7 +19,7 @@ import java.io.IOException;
 
 @WebServlet(
         name = "ControllerServlet",
-        urlPatterns = "/controller"
+        urlPatterns = {"/controller", "/admission", "/admission/registration", "/admission/authentication"}
 )
 public class ControllerServlet extends HttpServlet {
 

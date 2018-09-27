@@ -43,14 +43,14 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=home">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/admission?command=home">
                         <i class="material-icons">home</i>
                         <p><fmt:message key="label.homepage" /></p>
                     </a>
                 </li>
                 <c:if test="${sessionScope.role.toString() eq 'ADMIN' || sessionScope.role.toString() eq 'CLIENT' }" >
                     <li class="nav-item active">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=profile">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/admission?command=profile">
                             <i class="material-icons">person</i>
                             <p><fmt:message key="label.profile" /></p>
                         </a>

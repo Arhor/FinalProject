@@ -38,10 +38,10 @@ public class RegisterCommand implements ActionCommand {
 
         HttpSession session = request.getSession();
 
-        String email = request.getParameter(PARAM_NAME_EMAIL);
+        String email = request.getParameter(PARAM_NAME_EMAIL).replaceAll("</?script>", "");
         String password = request.getParameter(PARAM_NAME_PASSWORD);
-        String firstName = request.getParameter(PARAM_NAME_FIRST_NAME);
-        String lastName = request.getParameter(PARAM_NAME_LAST_NAME);
+        String firstName = request.getParameter(PARAM_NAME_FIRST_NAME).replaceAll("</?script>", "");
+        String lastName = request.getParameter(PARAM_NAME_LAST_NAME).replaceAll("</?script>", "");
         String language = request.getParameter(PARAM_LANGUAGE);
 
         if (EmailValidator.validate(email)) {

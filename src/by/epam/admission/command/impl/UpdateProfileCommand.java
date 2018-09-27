@@ -20,15 +20,15 @@ public class UpdateProfileCommand implements ActionCommand {
 
         HttpSession session = request.getSession();
 
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
+        String firstName = request.getParameter("firstName").replaceAll("</?script>", "");
+        String lastName = request.getParameter("lastName").replaceAll("</?script>", "");
         String password = request.getParameter("password");
 
         User user = (User) session.getAttribute("user");
 
         if (user.getRole() == User.Role.CLIENT) {
-            String city = request.getParameter("city");
-            String country = request.getParameter("country");
+            String city = request.getParameter("city").replaceAll("</?script>", "");
+            String country = request.getParameter("country").replaceAll("</?script>", "");
             String certificate = request.getParameter("certificate");
             Enrollee enrollee = (Enrollee) session.getAttribute("enrollee");
             if (enrollee == null) {

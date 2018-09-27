@@ -11,6 +11,6 @@
         <title>$Title$</title>
     </head>
     <body>
-        <jsp:forward page="/controller?command=start" />
+        <jsp:forward page="/admission?command=start" />
     </body>
 </html>
