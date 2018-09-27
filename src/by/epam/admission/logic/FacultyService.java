@@ -6,10 +6,16 @@ import by.epam.admission.dao.impl.FacultyDao;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Faculty;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FacultyService {
+
+    private static final Logger LOG = LogManager.getLogger(FacultyService.class);
 
     public static List<Faculty> findFaculties() throws ProjectException {
         List<Faculty> faculties = null;
@@ -42,20 +48,26 @@ public class FacultyService {
         return result;
     }
 
-    public static boolean checkFaculty(int enrolleeId, int facultyId)
+    public static HashMap<Integer, Boolean> checkFaculty(String enrolleeId, String[] facultyIds)
             throws ProjectException {
-        boolean result = false;
+        HashMap<Integer, Boolean> resultSet = new HashMap<>();
         DaoHelper helper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
         try {
             helper.startTransaction(enrolleeDao);
-            result = enrolleeDao.checkFaculty(enrolleeId, facultyId);
+            int eid = Integer.parseInt(enrolleeId);
+
+            for (String facultyId : facultyIds) {
+                int fid = Integer.parseInt(facultyId);
+                boolean result = enrolleeDao.checkFaculty(eid, fid);
+                resultSet.put(fid, result);
+            }
         } catch (ProjectException e) {
             throw e;
         } finally {
             helper.endTransaction();
         }
-        return result;
+        return resultSet;
     }
 
     public static boolean checkInactive(int enrolleeId, int facultyId)

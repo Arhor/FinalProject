@@ -3,31 +3,41 @@ $(document).ready(function () {
     var enrolleeID = $('#enrolleeID').val();
 
     if (enrolleeID > 0) {
+
+        var sendTo = {
+            command    : 'check_faculty',
+            enrolleeId : $('#enrolleeID').val(),
+            facultyId  : []
+        };
+
         $('.faculty').each(function () {
+            sendTo.facultyId.push($(this).attr('id'));
+        });
 
-            var sendTo = {
-                command    : 'check_faculty',
-                enrolleeId : $('#enrolleeID').val(),
-                facultyId  : $(this).attr('id')
-            };
+        $.ajax({
+            url: 'ajaxServlet',
+            data: sendTo,
+            dataType: 'text json',
+            success : function (data) {
 
-            $.ajax({
-                url: 'ajaxServlet',
-                data: sendTo,
-                dataType: 'text json',
-                success : function (data) {
+                console.log(data['resultSet']);
 
-                    switch (data['result'].toString()) {
+                $('.faculty').each(function () {
+                    var fid = $(this).attr('id');
+                    var result = data['resultSet'][fid];
+                    switch (result.toString()) {
                         case 'true':
-                            $('#fac' + data['faculty'].toString() + '.btn-danger').css('display', 'inline');
+                            $('#fac' + fid + '.btn-danger').css('display', 'inline');
                             break;
                         case 'false':
-                            $('#fac' + data['faculty'].toString() + '.btn-success').css('display', 'inline');
+                            $('#fac' + fid + '.btn-success').css('display', 'inline');
                             break;
                     }
-                }
-            });
+                });
+
+            }
         });
+
     } else {
         $('.success').css('visibility', 'hidden').attr('disabled', 'disabled');
         $('.danger').css('visibility', 'hidden').attr('disabled', 'disabled'); // REFACTORING AWAITS YOU *_*
