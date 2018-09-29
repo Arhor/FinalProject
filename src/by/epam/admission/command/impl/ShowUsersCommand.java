@@ -28,7 +28,7 @@ public class ShowUsersCommand implements ActionCommand {
             helper.startTransaction(userDao);
             users = userDao.findAll(FIRST_PAGE, ROWS_PER_PAGE);
             int totalUsers = userDao.findTotalAmount();
-            int pageMax = totalUsers / ROWS_PER_PAGE;
+            int pageMax = (int) (Math.ceil((double) totalUsers / ROWS_PER_PAGE) - 1);
             request.setAttribute("users", users);
             request.getSession().setAttribute("pageNum", FIRST_PAGE);
             request.getSession().setAttribute("pageMax", pageMax);

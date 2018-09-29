@@ -30,6 +30,8 @@ public class UserDao extends AbstractDao<Integer, User> {
     private static final String SQL_SELECT_USER_BY_EMAIL;
     private static final String SQL_SELECT_USERS_PAGINATION;
     private static final String SQL_SELECT_USERS_TOTAL_AMOUNT;
+    private static final String SQL_SELECT_USER_STATUS;
+    private static final String SQL_RESTORE_USER_BY_ID;
 
     // column labels
     private static final String ID = "id";
@@ -123,11 +125,39 @@ public class UserDao extends AbstractDao<Integer, User> {
         return result;
     }
 
+    public boolean checkUser(int userId) throws ProjectException {
+        boolean result = false;
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_SELECT_USER_STATUS)) {
+            st.setInt(1, userId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                result = (rs.getInt(1) == 1);
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return result;
+    }
+
     @Override
     public boolean delete(Integer id) throws ProjectException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_USER_BY_ID)) {
+            st.setInt(1, id);
+            flag = st.executeUpdate();
+        } catch (SQLException e) {
+            LOG.error("Deletion error", e);
+            throw new ProjectException("Deletion error", e);
+        }
+        return flag != 0;
+    }
+
+    public boolean restore(int id) throws ProjectException {
+        int flag;
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_RESTORE_USER_BY_ID)) {
             st.setInt(1, id);
             flag = st.executeUpdate();
         } catch (SQLException e) {
@@ -322,10 +352,37 @@ public class UserDao extends AbstractDao<Integer, User> {
                         "AND `users`.`password` = ?" +
                         "AND `users`.`available` = 1";
         SQL_DELETE_USER_BY_ID =
-                "DELETE FROM `users` " +
-                "WHERE `users`.`id` = ?";
+                "UPDATE `users` " +
+                "LEFT JOIN   `enrollees` " +
+                "ON `users`.`id` = `enrollees`.`users_id` " +
+                "LEFT JOIN   `enrollees_has_subjects` " +
+                "ON `enrollees`.`id` = `enrollees_has_subjects`.`enrollees_id` " +
+                "LEFT JOIN   `admission_list` " +
+                "ON `enrollees`.`id` = `admission_list`.`enrollees_id`" +
+                "SET     `users`.`available` = 0, " +
+                        "`enrollees`.`available` = 0, " +
+                        "`enrollees_has_subjects`.`available` = 0, " +
+                        "`admission_list`.`available` = 0 " +
+                "WHERE  `users`.`id` = ?";
+        SQL_RESTORE_USER_BY_ID =
+                "UPDATE `users` " +
+                "LEFT JOIN   `enrollees` " +
+                "ON `users`.`id` = `enrollees`.`users_id` " +
+                "LEFT JOIN   `enrollees_has_subjects` " +
+                "ON `enrollees`.`id` = `enrollees_has_subjects`.`enrollees_id` " +
+                "LEFT JOIN   `admission_list` " +
+                "ON `enrollees`.`id` = `admission_list`.`enrollees_id`" +
+                "SET     `users`.`available` = 1, " +
+                        "`enrollees`.`available` = 1, " +
+                        "`enrollees_has_subjects`.`available` = 1, " +
+                        "`admission_list`.`available` = 1 " +
+                "WHERE   `users`.`id` = ?";
         SQL_SELECT_USERS_TOTAL_AMOUNT =
                 "SELECT COUNT(*) " +
                 "FROM `users`";
+        SQL_SELECT_USER_STATUS =
+                "SELECT `available` " +
+                "FROM `users` " +
+                "WHERE `id` = ?";
     }
 }

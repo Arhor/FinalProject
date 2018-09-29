@@ -17,7 +17,8 @@ public class ShowFacultiesPrevCommand implements ActionCommand {
     private static final int ROWS_PER_PAGE = 10;
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request,
+                          HttpServletResponse response) {
         String page;
         Router router = new Router();
         List<User> users;
@@ -25,13 +26,15 @@ public class ShowFacultiesPrevCommand implements ActionCommand {
         UserDao userDao = new UserDao();
         try {
             helper.startTransaction(userDao);
-            Integer pageNum = (Integer) request.getSession().getAttribute("pageNum");
+            Integer pageNum = (Integer)
+                    request.getSession().getAttribute("pageNum");
             if (pageNum == null) {
                 pageNum = 0;
             }
             users = userDao.findAll(--pageNum, ROWS_PER_PAGE);
             int totalUsers = userDao.findTotalAmount();
-            int pageMax = totalUsers / ROWS_PER_PAGE;
+            int pageMax = (int) (
+                    Math.ceil((double) totalUsers / ROWS_PER_PAGE) - 1);
             request.setAttribute("users", users);
             request.getSession().setAttribute("pageNum", pageNum);
             request.getSession().setAttribute("pageMax", pageMax);

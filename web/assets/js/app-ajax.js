@@ -20,8 +20,6 @@ $(document).ready(function () {
             dataType: 'text json',
             success : function (data) {
 
-                console.log(data['resultSet']);
-
                 $('.faculty').each(function () {
                     var fid = $(this).attr('id');
                     var result = data['resultSet'][fid];

@@ -7,7 +7,8 @@ import by.epam.admission.model.User;
 
 public class LoginLogic {
 
-    public static User checkLogin(String login, String password) throws ProjectException {
+    public static User checkLogin(String login, String password)
+            throws ProjectException {
         DaoHelper helper = new DaoHelper();
         UserDao userDao = new UserDao();
         User user;

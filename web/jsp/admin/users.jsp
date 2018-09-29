@@ -96,15 +96,24 @@
                                             <th><fmt:message key="label.email" /></th>
                                             <th><fmt:message key="label.name.first" /></th>
                                             <th><fmt:message key="label.name.last" /></th>
+                                            <th class="text-center">Actions</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <c:forEach items="${users}" var="currUser">
-                                            <tr>
+                                            <tr class="admission-user" id="${currUser.id}">
                                                 <td>${currUser.id}</td>
                                                 <td>${currUser.email}</td>
                                                 <td>${currUser.firstName}</td>
                                                 <td>${currUser.lastName}</td>
+                                                <td class="td-actions text-center">
+                                                    <button type="button" rel="tooltip" class="btn btn-success" style="display : none" id="uid${currUser.id}">
+                                                        <i class="material-icons">person</i>
+                                                    </button>
+                                                    <button type="button" rel="tooltip" class="btn btn-danger" style="display : none" id="uid${currUser.id}">
+                                                        <i class="material-icons">close</i>
+                                                    </button>
+                                                </td>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
@@ -138,16 +147,6 @@
                                         </c:choose>
                                     </ul>
                                 </nav>
-                                <%--<div class="row">--%>
-                                    <%--<div class="col-4 mr-auto ml-auto">--%>
-                                        <%--<c:if test="${requestScope.pageNum != 0}">--%>
-                                            <%--<a href="#" class="btn btn-primary btn-sm float-left">prev</a>--%>
-                                        <%--</c:if>--%>
-                                        <%--<c:if test="${requestScope.pageNum != requestScope.pageMax}">--%>
-                                            <%--<a href="#" class="btn btn-primary btn-sm float-right">next</a>--%>
-                                        <%--</c:if>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
                             </div>
                         </div>
                     </div>
@@ -165,11 +164,15 @@
                         </li>
                     </ul>
                 </nav>
-                <c:import url="/jsp/modules/copyright.jspf" />
+                <%@ include file="/jsp/modules/copyright.jspf"%>
+                <%--<c:import url="/jsp/modules/copyright.jspf" />--%>
             </div>
         </footer>
     </div>
 </div>
+<!-- Ajax -->
+<script src="https://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/js/users-ajax.js" type="text/javascript"></script>
 <!--   Core JS Files   -->
 <script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
 <script src="assets/js/core/popper.min.js" type="text/javascript"></script>

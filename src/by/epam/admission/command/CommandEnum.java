@@ -22,7 +22,10 @@ public enum CommandEnum {
     SHOW_USERS (new ShowUsersCommand()),
     REGISTER_TO_FACULTY (new RegisterToFacultyCommand()),
     CHECK_FACULTY (new CheckFacultyCommand()),
-    DEREGISTER_FROM_FACULTY (new DeregisterFromFaculty());
+    DEREGISTER_FROM_FACULTY (new DeregisterFromFaculty()),
+    CHECK_USERS (new CheckUsersCommand()),
+    BLOCK_USER (new BlockUserCommand()),
+    UNBLOCK_USER (new UnblockUserCommand());
 
     CommandEnum(ActionCommand command) {
         this.command = command;
