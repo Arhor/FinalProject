@@ -49,7 +49,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final int ACTIVE = 1;
     private static final int INACTIVE = 0;
 
-    @Override
+//    @Override
     public List<Enrollee> findAll() throws ProjectException {
         ArrayList<Enrollee> enrollees = new ArrayList<>();
         try (PreparedStatement st = connection.prepareStatement(

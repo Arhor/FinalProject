@@ -110,6 +110,44 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        <c:choose>
+                                            <c:when test="${sessionScope.pageNum <= 0}">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="/controller?command=show_faculties_prev" tabindex="-1">Previous</a>
+                                                </li>
+                                            </c:when>
+                                            <c:when test="${sessionScope.pageNum > 0}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/controller?command=show_faculties_prev">Previous</a>
+                                                </li>
+                                            </c:when>
+                                        </c:choose>
+                                        <c:choose>
+                                            <c:when test="${sessionScope.pageNum >= sessionScope.pageMax}">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="/controller?command=show_faculties_next" tabindex="-1">Next</a>
+                                                </li>
+                                            </c:when>
+                                            <c:when test="${sessionScope.pageNum < sessionScope.pageMax}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/controller?command=show_faculties_next">Next</a>
+                                                </li>
+                                            </c:when>
+                                        </c:choose>
+                                    </ul>
+                                </nav>
+                                <%--<div class="row">--%>
+                                    <%--<div class="col-4 mr-auto ml-auto">--%>
+                                        <%--<c:if test="${requestScope.pageNum != 0}">--%>
+                                            <%--<a href="#" class="btn btn-primary btn-sm float-left">prev</a>--%>
+                                        <%--</c:if>--%>
+                                        <%--<c:if test="${requestScope.pageNum != requestScope.pageMax}">--%>
+                                            <%--<a href="#" class="btn btn-primary btn-sm float-right">next</a>--%>
+                                        <%--</c:if>--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
                             </div>
                         </div>
                     </div>

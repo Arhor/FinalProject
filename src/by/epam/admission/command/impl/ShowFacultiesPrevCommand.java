@@ -12,10 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class ShowUsersCommand implements ActionCommand {
+public class ShowFacultiesPrevCommand implements ActionCommand {
 
     private static final int ROWS_PER_PAGE = 10;
-    private static final int FIRST_PAGE = 0;
 
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
@@ -26,11 +25,15 @@ public class ShowUsersCommand implements ActionCommand {
         UserDao userDao = new UserDao();
         try {
             helper.startTransaction(userDao);
-            users = userDao.findAll(FIRST_PAGE, ROWS_PER_PAGE);
+            Integer pageNum = (Integer) request.getSession().getAttribute("pageNum");
+            if (pageNum == null) {
+                pageNum = 0;
+            }
+            users = userDao.findAll(--pageNum, ROWS_PER_PAGE);
             int totalUsers = userDao.findTotalAmount();
             int pageMax = totalUsers / ROWS_PER_PAGE;
             request.setAttribute("users", users);
-            request.getSession().setAttribute("pageNum", FIRST_PAGE);
+            request.getSession().setAttribute("pageNum", pageNum);
             request.getSession().setAttribute("pageMax", pageMax);
             page = ConfigurationManager.getProperty("path.page.admin.users");
         } catch (ProjectException e) {

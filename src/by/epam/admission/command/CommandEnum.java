@@ -13,6 +13,8 @@ public enum CommandEnum {
     CONFIRM (new ConfirmCommand()),
     START (new StartCommand()),
     SHOW_FACULTIES (new ShowFacultiesCommand()),
+    SHOW_FACULTIES_PREV (new ShowFacultiesPrevCommand()),
+    SHOW_FACULTIES_NEXT (new ShowFacultiesNextCommand()),
     ENGLISH (new EnglishCommand()),
     RUSSIAN (new RussianCommand()),
     PROFILE (new ProfileCommand()),

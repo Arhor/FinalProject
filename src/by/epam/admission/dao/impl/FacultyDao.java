@@ -41,7 +41,7 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
     private static final String SEATS_PAID = "seats_paid";
     private static final String SEATS_BUDGET = "seats_budget";
 
-    @Override
+//    @Override
     public List<Faculty> findAll() throws ProjectException {
         ArrayList<Faculty> faculties = new ArrayList<>();
         try (Statement st = connection.createStatement()) {

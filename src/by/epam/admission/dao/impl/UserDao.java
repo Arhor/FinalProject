@@ -28,6 +28,8 @@ public class UserDao extends AbstractDao<Integer, User> {
     private static final String SQL_DELETE_USER_BY_ID;
     private static final String SQL_SELECT_USER_NAME_BY_EMAIL;
     private static final String SQL_SELECT_USER_BY_EMAIL;
+    private static final String SQL_SELECT_USERS_PAGINATION;
+    private static final String SQL_SELECT_USERS_TOTAL_AMOUNT;
 
     // column labels
     private static final String ID = "id";
@@ -38,18 +40,34 @@ public class UserDao extends AbstractDao<Integer, User> {
     private static final String ROLE = "role";
     private static final String AVAILABLE = "available";
 
-    @Override
-    public List<User> findAll() throws ProjectException {
+//    @Override
+    public List<User> findAll(int pageNumber, int rowsPerPager) throws ProjectException {
         ArrayList<User> users = new ArrayList<>();
         try (PreparedStatement st = connection.prepareStatement(
-                String.format(SQL_SELECT_USERS, AVAILABLE))) {
-            st.setInt(1,1);
+                SQL_SELECT_USERS_PAGINATION)) {
+            int leftBoder = pageNumber * rowsPerPager + 1;
+            int rightBorder = rowsPerPager * (pageNumber + 1);
+            st.setInt(1,leftBoder);
+            st.setInt(2, rightBorder);
             ResultSet rs = st.executeQuery();
             processResult(users, rs);
         } catch (SQLException e) {
             throw new ProjectException("Selection error", e);
         }
         return users;
+    }
+
+    public int findTotalAmount() throws ProjectException {
+        int totalAmount = 0;
+        try (Statement st = connection.createStatement()) {
+            ResultSet rs = st.executeQuery(SQL_SELECT_USERS_TOTAL_AMOUNT);
+            if (rs.next()) {
+                totalAmount += rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return totalAmount;
     }
 
     @Override
@@ -240,6 +258,16 @@ public class UserDao extends AbstractDao<Integer, User> {
 
 
     static {
+        SQL_SELECT_USERS_PAGINATION =
+                "SELECT  `id`, " +
+                        "`email`, " +
+                        "`first_name`, " +
+                        "`last_name`, " +
+                        "`lang`, " +
+                        "`role` " +
+                "FROM   `users` " +
+                "WHERE  `id` >= ? " +
+                        "AND `id` <= ?";
         SQL_SELECT_USERS =
                 "SELECT  `id`, " +
                         "`email`, " +
@@ -296,5 +324,8 @@ public class UserDao extends AbstractDao<Integer, User> {
         SQL_DELETE_USER_BY_ID =
                 "DELETE FROM `users` " +
                 "WHERE `users`.`id` = ?";
+        SQL_SELECT_USERS_TOTAL_AMOUNT =
+                "SELECT COUNT(*) " +
+                "FROM `users`";
     }
 }

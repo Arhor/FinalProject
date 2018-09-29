@@ -39,7 +39,7 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
     private static final String NAME_RU = "name_ru";
     private static final String NAME_EN = "name_en";
 
-    @Override
+//    @Override
     public List<Subject> findAll() throws ProjectException {
         ArrayList<Subject> subjects = new ArrayList<>();
         try (Statement st = connection.createStatement()) {

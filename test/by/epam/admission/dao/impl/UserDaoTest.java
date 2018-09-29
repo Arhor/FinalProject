@@ -27,7 +27,7 @@ public class UserDaoTest {
         UserDao uDAO = new UserDao();
         t.startTransaction(uDAO);
         try {
-            for (User user : uDAO.findAll()) {
+            for (User user : uDAO.findAll(1,1)) { // TODO: STUB
                 LOG.info(user);
             }
         } catch (ProjectException e) {
