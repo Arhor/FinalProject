@@ -59,7 +59,7 @@
         </div>
     </div>
     <div class="main-panel">
-        <c:import url="/jsp/modules/navbar_main.jspf" />
+        <%@include file="/jsp/modules/navbar_main.jspf"%>
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -133,22 +133,18 @@
                         </li>
                     </ul>
                 </nav>
-                <c:import url="/jsp/modules/copyright.jspf" />
+                <%@ include file="/jsp/modules/copyright.jspf"%>
             </div>
         </footer>
     </div>
 </div>
 <!--   Core JS Files   -->
-<script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!-- Chartist JS -->
-<script src="../assets/js/plugins/chartist.min.js"></script>
-<!--  Notifications Plugin    -->
-<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/core/jquery.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="../assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
 </body>
 
 </html>

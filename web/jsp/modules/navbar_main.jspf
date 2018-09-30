@@ -1,7 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
     <div class="container-fluid">
         <div class="navbar-wrapper">
-            <a class="navbar-brand" href="#pablo">Dashboard</a>
+            <c:if test="${sessionScope.role eq 'CLIENT' || sessionScope.role eq 'ADMIN'}">
+                <div id="maxInactivity" style="display: none" value="${pageContext.session.maxInactiveInterval}"></div>
+                <div id="time" style="font-family: monospace">
+                    <fmt:formatNumber value="${pageContext.session.maxInactiveInterval / 60}" maxFractionDigits="0" minIntegerDigits="2"/>:<fmt:formatNumber value="${pageContext.session.maxInactiveInterval % 60}" minIntegerDigits="2"/>
+                </div>
+            </c:if>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
