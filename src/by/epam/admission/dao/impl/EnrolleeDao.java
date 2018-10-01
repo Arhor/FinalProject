@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -39,7 +40,6 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SQL_SELECT_ADMISSION_LIST_ENTRY;
     private static final String SQL_RESTORE_ADMISSION_LIST_ENTRY;
     private static final String SQL_SELECT_ENROLLEE_MARKS;
-    private static final String SQL_CHECK_FACULTIES_BY_SUBJECTS;
 
     // column labels
     private static final String ID = "id";
@@ -113,53 +113,36 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         return enrollees;
     }
 
-    public TreeMap<Integer, Integer> findEnrolleeMarks(int enrolleeId)
+    public TreeMap<Subject, Integer> findEnrolleeMarks(int enrolleeId)
             throws ProjectException {
-        TreeMap<Integer, Integer> marks = new TreeMap<>();
+        TreeMap<Subject, Integer> marks = new TreeMap<>();
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_SELECT_ENROLLEE_MARKS)) {
             st.setInt(1, enrolleeId);
             st.setInt(2, ACTIVE);
+            LOG.debug(enrolleeId + " : " + ACTIVE);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                int subjectId = rs.getInt(SUBJECT_ID);
-                int score = rs.getInt(SCORE);
-                marks.put(subjectId, score);
+                LOG.debug("START SUBJECT");
+                Subject subject = new Subject();
+                int subjectId = rs.getInt("id");
+                String nameEn = rs.getString("name_en");
+                String nameRu = rs.getString("name_ru");
+                int score = rs.getInt("score");
+
+                LOG.debug(subjectId + " - " + nameEn + " - " + nameRu + " - " + score);
+
+                subject.setId(subjectId);
+                subject.setNameEn(nameEn);
+                subject.setNameRu(nameRu);
+                marks.put(subject, score);
+                LOG.debug("FINISH SUBJECT");
             }
+            LOG.debug("Marks: " + marks);
         } catch (SQLException e) {
             throw new ProjectException("Selection error", e);
         }
         return marks;
-    }
-
-    public boolean checkFacultyBySubjects(int facultyId,
-                                          ArrayList<Integer> subjectIds)
-            throws ProjectException {
-        boolean result = false;
-        StringBuilder sql_complete = new StringBuilder(
-                SQL_CHECK_FACULTIES_BY_SUBJECTS);
-
-        for (int i = 0; i < subjectIds.size(); i++) {
-            sql_complete.append(" OR `subjects_id` = ?");
-        }
-        sql_complete.append(")");
-
-        try (PreparedStatement st = connection.prepareStatement(
-                sql_complete.toString())) {
-            st.setInt(1, facultyId);
-            for (int i = 0; i < subjectIds.size(); i++) {
-                st.setInt(i + 2, subjectIds.get(i));
-            }
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                result = (rs.getInt(1) == 3);
-            }
-            LOG.debug("faculty: " + facultyId + " subjects: " + subjectIds + " result: " + result + " rows: " + rs.getInt(1));
-        } catch (SQLException e) {
-            throw new ProjectException("Selection error", e);
-        }
-
-        return result;
     }
 
     public boolean checkFaculty(int enrolleeId, int facultyId)
@@ -443,14 +426,14 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "WHERE  `enrollees_id` = ? " +
                         "AND `faculties_id` = ?";
         SQL_SELECT_ENROLLEE_MARKS =
-                "SELECT `enrollees_id`, `subjects_id`, `score`, `available` " +
+                "SELECT  `id`, " +
+                        "`name_en`, " +
+                        "`name_ru`, " +
+                        "`score` " +
                 "FROM `enrollees_has_subjects` " +
+                "JOIN `subjects` " +
+                "ON (`subjects`.`id` = `enrollees_has_subjects`.`subjects_id`) " +
                 "WHERE `enrollees_id` = ? AND `available` = ?";
-        SQL_CHECK_FACULTIES_BY_SUBJECTS =
-                "SELECT  COUNT(*) " +
-                "FROM   `faculties_has_subjects` " +
-                "WHERE  `faculties_id` = ? " +
-                        "AND (`subjects_id` = 0";
     }
 
 }

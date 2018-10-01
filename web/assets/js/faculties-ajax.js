@@ -6,14 +6,8 @@ $(document).ready(function () {
 
         var sendTo = {
             command    : 'check_faculty',
-            subjectId  : [],
-            enrolleeId : $('#enrolleeID').val(),
             facultyId  : []
         };
-
-        $('.subjectID').each(function () {
-            sendTo.subjectId.push($(this).val())
-        });
 
         $('.faculty').each(function () {
             sendTo.facultyId.push($(this).attr('id'));

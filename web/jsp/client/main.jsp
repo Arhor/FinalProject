@@ -79,7 +79,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="col-lg-4 col-md-4 col-sm-12 mr-0">
                         <div class="card card-stats">
                             <div class="card-header card-header-warning card-header-icon">
                                 <div class="card-icon">
@@ -95,6 +95,26 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 ml-0">
+                        <form action="/controller" method="POST">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Subject ID</th>
+                                        <th>Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${sessionScope.enrollee.marks}" var="subject">
+                                        <tr>
+                                            <td>${subject.key.nameEn}</td>
+                                            <td>${subject.value}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                 </div>
             </div>

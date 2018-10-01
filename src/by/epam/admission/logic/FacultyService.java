@@ -54,32 +54,25 @@ public class FacultyService {
         return result;
     }
 
-    public static HashMap<Integer, Boolean> checkFaculty(String enrolleeId, String[] subjectIds, String[] facultyIds)
+    public static HashMap<Integer, Boolean> checkFaculty(
+            int enrolleeId, Set<Subject> enrolleeSubjects, String[] facultyIds)
             throws ProjectException {
-        HashMap<Integer, Boolean> resultSet = new HashMap<>();
+        HashMap<Integer, Boolean> resultSet = null;
         DaoHelper helper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
-
-        ArrayList<Integer> subjectIdList = new ArrayList<>();
-        for (String sid : subjectIds) {
-            Integer subjectId = Integer.valueOf(sid);
-            subjectIdList.add(subjectId);
-        }
-
+        SubjectDao subjectDao = new SubjectDao();
         try {
-            helper.startTransaction(enrolleeDao);
-            int eid = Integer.parseInt(enrolleeId);
-
+            helper.startTransaction(enrolleeDao, subjectDao);
+            resultSet = new HashMap<>();
             for (String facultyId : facultyIds) {
                 int fid = Integer.parseInt(facultyId);
-
-                if (enrolleeDao.checkFacultyBySubjects(fid, subjectIdList)) {
-                    boolean result = enrolleeDao.checkFaculty(eid, fid);
+                Set<Subject> facultySubjects =
+                        subjectDao.findSubjectsByFacultyId(fid);
+                if (enrolleeSubjects.containsAll(facultySubjects)) {
+                    boolean result = enrolleeDao.checkFaculty(enrolleeId, fid);
                     resultSet.put(fid, result);
                 }
-
             }
-            LOG.debug(resultSet);
         } catch (ProjectException e) {
             throw e;
         } finally {

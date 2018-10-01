@@ -208,7 +208,7 @@
 <!-- Clock -->
 <script src="${pageContext.request.contextPath}/assets/js/clock.js" type="text/javascript"></script>
 <!-- Ajax -->
-<script src="${pageContext.request.contextPath}/assets/js/app-ajax.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/assets/js/faculties-ajax.js" type="text/javascript"></script>
 </body>
 
 </html>
