@@ -79,7 +79,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-12 mr-0">
+                    <div class="col-lg-4 col-md-4 col-sm-12 float-right">
                         <div class="card card-stats">
                             <div class="card-header card-header-warning card-header-icon">
                                 <div class="card-icon">
@@ -96,25 +96,41 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 ml-0">
-                        <form action="/controller" method="POST">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Subject ID</th>
-                                        <th>Score</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach items="${sessionScope.enrollee.marks}" var="subject">
+                    <div class="col-lg-4 col-md-4 col-sm-12 float-left">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <h3 class="card-title">
+                                    Enrollee marks
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
                                         <tr>
-                                            <td>${subject.key.nameEn}</td>
-                                            <td>${subject.value}</td>
+                                            <th>Subject ID</th>
+                                            <th>Score</th>
                                         </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                        </form>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${sessionScope.enrollee.marks}" var="subject">
+                                            <tr>
+                                                <c:choose>
+                                                    <c:when test="${sessionScope.locale eq 'ru_RU'}">
+                                                        <td>${subject.key.nameRu}</td>
+                                                    </c:when>
+                                                    <c:when test="${sessionScope.locale eq 'en_US'}">
+                                                        <td>${subject.key.nameEn}</td>
+                                                    </c:when>
+                                                </c:choose>
+                                                <td>${subject.value}</td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
