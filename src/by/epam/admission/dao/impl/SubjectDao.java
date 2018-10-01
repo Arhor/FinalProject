@@ -15,7 +15,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * @author Maxim Burishinets
@@ -70,8 +72,8 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
         return subject;
     }
 
-    public List<Subject> findSubjectsByFacultyId(int id) throws ProjectException {
-        ArrayList<Subject> subjects = new ArrayList<>();
+    public TreeSet<Subject> findSubjectsByFacultyId(int id) throws ProjectException {
+        TreeSet<Subject> subjects = new TreeSet<>();
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_SELECT_SUBJECTS_BY_FACULTY_ID)) {
             st.setInt(1, id);
@@ -127,7 +129,7 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
         }
     }
 
-    private void processResult(ArrayList<Subject> subjects, ResultSet rs)
+    private void processResult(Collection<Subject> subjects, ResultSet rs)
             throws SQLException {
         while (rs.next()) {
             Subject subject = new Subject();

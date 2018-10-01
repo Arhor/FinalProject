@@ -6,9 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix = "c"  uri = "http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${locale}" />
+<fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="resources.pagecontent" />
 <!doctype html>
 <html lang="en">
@@ -47,31 +47,31 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/controller?command=home">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=home">
                         <i class="material-icons">home</i>
                         <p><fmt:message key="label.homepage" /></p>
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/controller?command=profile">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=profile">
                         <i class="material-icons">person</i>
                         <p><fmt:message key="label.profile" /></p>
                     </a>
                 </li>
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=show_faculties">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_faculties">
                         <i class="material-icons">domain</i>
                         <p><fmt:message key="label.faculties" /></p>
                     </a>
                 </li>
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=show_users">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_users">
                         <i class="material-icons">people</i>
                         <p><fmt:message key="label.admin.users" /></p>
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/controller?command=logout">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=logout">
                         <i class="material-icons">exit_to_app</i>
                         <p><fmt:message key="label.logout" /></p>
                     </a>
@@ -100,11 +100,11 @@
                                             <th><fmt:message key="label.email" /></th>
                                             <th><fmt:message key="label.name.first" /></th>
                                             <th><fmt:message key="label.name.last" /></th>
-                                            <th class="text-center">Actions</th>
+                                            <th class="text-center"><fmt:message key="label.status" /></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${users}" var="currUser">
+                                        <c:forEach items="${requestScope.users}" var="currUser">
                                             <tr class="admission-user" id="${currUser.id}">
                                                 <td>${currUser.id}</td>
                                                 <td>${currUser.email}</td>
@@ -128,24 +128,24 @@
                                         <c:choose>
                                             <c:when test="${sessionScope.pageNum <= 0}">
                                                 <li class="page-item disabled">
-                                                    <a class="page-link" href="/controller?command=show_faculties_prev" tabindex="-1">Previous</a>
+                                                    <a class="page-link" href="${pageContext.request.contextPath}/controller?command=show_users_prev" tabindex="-1"><fmt:message key="label.prev" /></a>
                                                 </li>
                                             </c:when>
                                             <c:when test="${sessionScope.pageNum > 0}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="/controller?command=show_faculties_prev">Previous</a>
+                                                    <a class="page-link" href="${pageContext.request.contextPath}/controller?command=show_users_prev"><fmt:message key="label.prev" /></a>
                                                 </li>
                                             </c:when>
                                         </c:choose>
                                         <c:choose>
                                             <c:when test="${sessionScope.pageNum >= sessionScope.pageMax}">
                                                 <li class="page-item disabled">
-                                                    <a class="page-link" href="/controller?command=show_faculties_next" tabindex="-1">Next</a>
+                                                    <a class="page-link" href="${pageContext.request.contextPath}/controller?command=show_users_next" tabindex="-1"><fmt:message key="label.next" /></a>
                                                 </li>
                                             </c:when>
                                             <c:when test="${sessionScope.pageNum < sessionScope.pageMax}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="/controller?command=show_faculties_next">Next</a>
+                                                    <a class="page-link" href="${pageContext.request.contextPath}/controller?command=show_users_next"><fmt:message key="label.next" /></a>
                                                 </li>
                                             </c:when>
                                         </c:choose>

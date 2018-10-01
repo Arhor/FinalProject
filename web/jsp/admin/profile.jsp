@@ -47,31 +47,31 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/controller?command=home">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=home">
                         <i class="material-icons">home</i>
                         <p><fmt:message key="label.homepage" /></p>
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/controller?command=profile">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=profile">
                         <i class="material-icons">person</i>
                         <p><fmt:message key="label.profile" /></p>
                     </a>
                 </li>
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=show_faculties">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_faculties">
                         <i class="material-icons">domain</i>
                         <p><fmt:message key="label.faculties" /></p>
                     </a>
                 </li>
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=show_users">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_users">
                         <i class="material-icons">people</i>
                         <p><fmt:message key="label.admin.users" /></p>
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/controller?command=logout">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=logout">
                         <i class="material-icons">exit_to_app</i>
                         <p><fmt:message key="label.logout" /></p>
                     </a>
@@ -91,18 +91,18 @@
                                 <h4 class="card-title"><fmt:message key="label.admin.profile.title" /></h4>
                             </div>
                             <div class="card-body">
-                                <form>
+                                <form action="${pageContext.request.contextPath}/controller" method="POST">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="bmd-label-floating"><fmt:message key="label.email" /></label>
-                                                <input type="email" class="form-control" value="${user.email}" disabled />
+                                                <input type="email" class="form-control" value="${sessionScope.user.email}" disabled />
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="bmd-label-floating"><fmt:message key="label.password" /></label>
-                                                <input type="password" class="form-control" name="password" />
+                                                <input type="password" class="form-control" name="password" required/>
                                             </div>
                                         </div>
                                     </div>
@@ -110,13 +110,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="bmd-label-floating"><fmt:message key="label.name.first" /></label>
-                                                <input type="text" class="form-control" name="firstName" value="${user.firstName}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,35}$" required/>
+                                                <input type="text" class="form-control" name="firstName" value="${sessionScope.user.firstName}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,35}$" required/>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="bmd-label-floating"><fmt:message key="label.name.last" /></label>
-                                                <input type="text" class="form-control" name="lastName" value="${user.lastName}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,35}$" required/>
+                                                <input type="text" class="form-control" name="lastName" value="${sessionScope.user.lastName}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,35}$" required/>
                                             </div>
                                         </div>
                                     </div>

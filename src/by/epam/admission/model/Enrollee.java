@@ -9,7 +9,7 @@ public class Enrollee extends Entity{
     private int schoolCertificate;
     private int userId;
     private boolean available;
-    private TreeMap<Subject, Integer> marks;
+    private TreeMap<Integer, Integer> marks;  // <SubjectID, Score>
 
     public String getCountry() {
         return country;
@@ -51,11 +51,11 @@ public class Enrollee extends Entity{
         this.available = available;
     }
 
-    public TreeMap<Subject, Integer> getMarks() {
+    public TreeMap<Integer, Integer> getMarks() {
         return marks;
     }
 
-    public void setMarks(TreeMap<Subject, Integer> marks) {
+    public void setMarks(TreeMap<Integer, Integer> marks) {
         this.marks = marks;
     }
 

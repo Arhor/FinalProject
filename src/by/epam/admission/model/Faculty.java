@@ -19,6 +19,7 @@ public class Faculty extends Entity {
     private String nameEn;
     private int seatsPaid;
     private int seatsBudget;
+    private TreeSet<Subject> subjects;
 
     public Faculty() {
         super();
@@ -63,6 +64,14 @@ public class Faculty extends Entity {
 
     public void setSeatsBudget(int seatsBudget) {
         this.seatsBudget = seatsBudget;
+    }
+
+    public TreeSet<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(TreeSet<Subject> subjects) {
+        this.subjects = subjects;
     }
 
     @Override

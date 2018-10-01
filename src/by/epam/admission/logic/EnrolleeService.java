@@ -7,6 +7,8 @@ import by.epam.admission.model.Enrollee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.TreeMap;
+
 public class EnrolleeService {
 
     private static final Logger LOG = LogManager.getLogger(EnrolleeService.class);
@@ -54,6 +56,9 @@ public class EnrolleeService {
         daoHelper.startTransaction(enrolleeDao);
         try {
             enrollee = enrolleeDao.findEnrolleeByUID(uid);
+            TreeMap<Integer, Integer> marks =
+                    enrolleeDao.findEnrolleeMarks(enrollee.getUserId());
+            enrollee.setMarks(marks);
         } catch (ProjectException e) {
             LOG.error(e);
         } finally {

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<fmt:setLocale value="${locale}" />
+<fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="resources.pagecontent" />
 <!doctype html>
 <html lang="en">
@@ -47,25 +47,25 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/controller?command=home">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=home">
                         <i class="material-icons">home</i>
                         <p><fmt:message key="label.homepage" /></p>
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/controller?command=profile">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=profile">
                         <i class="material-icons">person</i>
                         <p><fmt:message key="label.profile" /></p>
                     </a>
                 </li>
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=show_faculties">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_faculties">
                         <i class="material-icons">domain</i>
                         <p><fmt:message key="label.faculties" /></p>
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/controller?command=logout">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=logout">
                         <i class="material-icons">exit_to_app</i>
                         <p><fmt:message key="label.logout" /></p>
                     </a>

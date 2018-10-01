@@ -27,10 +27,12 @@ public class CheckFacultyCommand implements ActionCommand {
         LOG.debug("START");
 
         String enrolleeId = request.getParameter("enrolleeId");
+        String[] subjectIds = request.getParameterValues("subjectId[]");
         String[] facultyIds = request.getParameterValues("facultyId[]");
 
         try {
-            HashMap<Integer, Boolean> resultSet = FacultyService.checkFaculty(enrolleeId, facultyIds);
+            HashMap<Integer, Boolean> resultSet =
+                    FacultyService.checkFaculty(enrolleeId, subjectIds, facultyIds);
 
             LOG.debug(resultSet);
 

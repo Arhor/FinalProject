@@ -1,5 +1,3 @@
 <div class="copyright float-right">
-    <script>
-        document.write(new Date().getFullYear().toString())
-    </script>&copy;<fmt:message key="label.copyright" />
+    2018 &copy; <fmt:message key="label.copyright" />
 </div>

@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 /**
  * @author Maxim Burishinets
@@ -37,6 +38,8 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SQL_SELECT_ENROLLEE_TOTAL_SCORE;
     private static final String SQL_SELECT_ADMISSION_LIST_ENTRY;
     private static final String SQL_RESTORE_ADMISSION_LIST_ENTRY;
+    private static final String SQL_SELECT_ENROLLEE_MARKS;
+    private static final String SQL_CHECK_FACULTIES_BY_SUBJECTS;
 
     // column labels
     private static final String ID = "id";
@@ -45,6 +48,8 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SCHOOL_CERTIFICATE = "school_certificate";
     private static final String USER_ID = "users_id";
     private static final String AVAILABLE = "available";
+    private static final String SUBJECT_ID = "subjects_id";
+    private static final String SCORE = "score";
 
     private static final int ACTIVE = 1;
     private static final int INACTIVE = 0;
@@ -106,6 +111,55 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         ArrayList<Enrollee> enrollees = new ArrayList<>();
         findByAddress(CITY, enrollees, city);
         return enrollees;
+    }
+
+    public TreeMap<Integer, Integer> findEnrolleeMarks(int enrolleeId)
+            throws ProjectException {
+        TreeMap<Integer, Integer> marks = new TreeMap<>();
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_SELECT_ENROLLEE_MARKS)) {
+            st.setInt(1, enrolleeId);
+            st.setInt(2, ACTIVE);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                int subjectId = rs.getInt(SUBJECT_ID);
+                int score = rs.getInt(SCORE);
+                marks.put(subjectId, score);
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return marks;
+    }
+
+    public boolean checkFacultyBySubjects(int facultyId,
+                                          ArrayList<Integer> subjectIds)
+            throws ProjectException {
+        boolean result = false;
+        StringBuilder sql_complete = new StringBuilder(
+                SQL_CHECK_FACULTIES_BY_SUBJECTS);
+
+        for (int i = 0; i < subjectIds.size(); i++) {
+            sql_complete.append(" OR `subjects_id` = ?");
+        }
+        sql_complete.append(")");
+
+        try (PreparedStatement st = connection.prepareStatement(
+                sql_complete.toString())) {
+            st.setInt(1, facultyId);
+            for (int i = 0; i < subjectIds.size(); i++) {
+                st.setInt(i + 2, subjectIds.get(i));
+            }
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                result = (rs.getInt(1) == 3);
+            }
+            LOG.debug("faculty: " + facultyId + " subjects: " + subjectIds + " result: " + result + " rows: " + rs.getInt(1));
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+
+        return result;
     }
 
     public boolean checkFaculty(int enrolleeId, int facultyId)
@@ -388,6 +442,15 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "SET    `available` = 1 " +
                 "WHERE  `enrollees_id` = ? " +
                         "AND `faculties_id` = ?";
+        SQL_SELECT_ENROLLEE_MARKS =
+                "SELECT `enrollees_id`, `subjects_id`, `score`, `available` " +
+                "FROM `enrollees_has_subjects` " +
+                "WHERE `enrollees_id` = ? AND `available` = ?";
+        SQL_CHECK_FACULTIES_BY_SUBJECTS =
+                "SELECT  COUNT(*) " +
+                "FROM   `faculties_has_subjects` " +
+                "WHERE  `faculties_id` = ? " +
+                        "AND (`subjects_id` = 0";
     }
 
 }

@@ -3,15 +3,15 @@ package by.epam.admission.logic;
 import by.epam.admission.dao.DaoHelper;
 import by.epam.admission.dao.impl.EnrolleeDao;
 import by.epam.admission.dao.impl.FacultyDao;
+import by.epam.admission.dao.impl.SubjectDao;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Faculty;
+import by.epam.admission.model.Subject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class FacultyService {
 
@@ -21,9 +21,15 @@ public class FacultyService {
         List<Faculty> faculties = null;
         DaoHelper helper = new DaoHelper();
         FacultyDao facultyDao = new FacultyDao();
+        SubjectDao subjectDao = new SubjectDao();
         try {
-            helper.startTransaction(facultyDao);
+            helper.startTransaction(facultyDao, subjectDao);
             faculties = facultyDao.findAll();
+            for (Faculty faculty : faculties) {
+                TreeSet<Subject> subjects =
+                        subjectDao.findSubjectsByFacultyId(faculty.getId());
+                faculty.setSubjects(subjects);
+            }
         } catch (ProjectException e) {
             throw e;
         } finally {
@@ -48,20 +54,32 @@ public class FacultyService {
         return result;
     }
 
-    public static HashMap<Integer, Boolean> checkFaculty(String enrolleeId, String[] facultyIds)
+    public static HashMap<Integer, Boolean> checkFaculty(String enrolleeId, String[] subjectIds, String[] facultyIds)
             throws ProjectException {
         HashMap<Integer, Boolean> resultSet = new HashMap<>();
         DaoHelper helper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
+
+        ArrayList<Integer> subjectIdList = new ArrayList<>();
+        for (String sid : subjectIds) {
+            Integer subjectId = Integer.valueOf(sid);
+            subjectIdList.add(subjectId);
+        }
+
         try {
             helper.startTransaction(enrolleeDao);
             int eid = Integer.parseInt(enrolleeId);
 
             for (String facultyId : facultyIds) {
                 int fid = Integer.parseInt(facultyId);
-                boolean result = enrolleeDao.checkFaculty(eid, fid);
-                resultSet.put(fid, result);
+
+                if (enrolleeDao.checkFacultyBySubjects(fid, subjectIdList)) {
+                    boolean result = enrolleeDao.checkFaculty(eid, fid);
+                    resultSet.put(fid, result);
+                }
+
             }
+            LOG.debug(resultSet);
         } catch (ProjectException e) {
             throw e;
         } finally {

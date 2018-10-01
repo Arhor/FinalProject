@@ -47,33 +47,33 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/controller?command=home">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=home">
                         <i class="material-icons">home</i>
                         <p><fmt:message key="label.homepage" /></p>
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/controller?command=profile">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=profile">
                         <i class="material-icons">person</i>
                         <p><fmt:message key="label.profile" /></p>
                     </a>
                 </li>
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=show_faculties">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_faculties">
                         <i class="material-icons">domain</i>
                         <p><fmt:message key="label.faculties" /></p>
                     </a>
                 </li>
                 <c:if test="${sessionScope.role.toString() eq 'ADMIN'}">
                     <li class="nav-item active  ">
-                        <a class="nav-link" href="/controller?command=show_users">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_users">
                             <i class="material-icons">people</i>
                             <p><fmt:message key="label.admin.users" /></p>
                         </a>
                     </li>
                 </c:if>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/controller?command=logout">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=logout">
                         <i class="material-icons">exit_to_app</i>
                         <p><fmt:message key="label.logout" /></p>
                     </a>
@@ -130,8 +130,6 @@
         </footer>
     </div>
 </div>
-<!-- Clock -->
-<script src="${pageContext.request.contextPath}/assets/js/clock.js" type="text/javascript"></script>
 <!--   Core JS Files   -->
 <script src="${pageContext.request.contextPath}/assets/js/core/jquery.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/assets/js/core/popper.min.js" type="text/javascript"></script>
@@ -139,6 +137,8 @@
 <script src="${pageContext.request.contextPath}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="${pageContext.request.contextPath}/assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
+<!-- Clock -->
+<script src="${pageContext.request.contextPath}/assets/js/clock.js" type="text/javascript"></script>
 </body>
 
 </html>

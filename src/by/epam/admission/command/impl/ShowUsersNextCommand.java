@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class ShowFacultiesPrevCommand implements ActionCommand {
+public class ShowUsersNextCommand implements ActionCommand {
 
     private static final int ROWS_PER_PAGE = 10;
 
@@ -31,7 +31,7 @@ public class ShowFacultiesPrevCommand implements ActionCommand {
             if (pageNum == null) {
                 pageNum = 0;
             }
-            users = userDao.findAll(--pageNum, ROWS_PER_PAGE);
+            users = userDao.findAll(++pageNum, ROWS_PER_PAGE);
             int totalUsers = userDao.findTotalAmount();
             int pageMax = (int) (
                     Math.ceil((double) totalUsers / ROWS_PER_PAGE) - 1);

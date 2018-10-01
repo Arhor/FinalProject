@@ -6,9 +6,14 @@ $(document).ready(function () {
 
         var sendTo = {
             command    : 'check_faculty',
+            subjectId  : [],
             enrolleeId : $('#enrolleeID').val(),
             facultyId  : []
         };
+
+        $('.subjectID').each(function () {
+            sendTo.subjectId.push($(this).val())
+        });
 
         $('.faculty').each(function () {
             sendTo.facultyId.push($(this).attr('id'));
@@ -20,16 +25,21 @@ $(document).ready(function () {
             dataType: 'text json',
             success : function (data) {
 
+                console.log(data['resultSet']);
+
                 $('.faculty').each(function () {
                     var fid = $(this).attr('id');
                     var result = data['resultSet'][fid];
-                    switch (result.toString()) {
-                        case 'true':
-                            $('#fac' + fid + '.btn-danger').css('display', 'inline');
-                            break;
-                        case 'false':
-                            $('#fac' + fid + '.btn-success').css('display', 'inline');
-                            break;
+                    console.log(result);
+                    if (result !== undefined) {
+                        switch (result.toString()) {
+                            case 'true':
+                                $('#fac' + fid + '.btn-danger').css('display', 'inline');
+                                break;
+                            case 'false':
+                                $('#fac' + fid + '.btn-success').css('display', 'inline');
+                                break;
+                        }
                     }
                 });
 

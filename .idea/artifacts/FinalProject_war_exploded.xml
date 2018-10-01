@@ -7,6 +7,18 @@
         <element id="directory" name="classes">
           <element id="module-output" name="FinalProject" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="dbunit-2.5.4" />
+          <element id="library" level="project" name="log4j-api-2.4" />
+          <element id="library" level="project" name="log4j-core-2.4" />
+          <element id="library" level="project" name="mysql-connector-java-8.0.12" />
+          <element id="library" level="project" name="slf4j-api-1.7.25" />
+          <element id="library" level="project" name="slf4j-simple-1.7.25" />
+          <element id="library" level="project" name="testng-6.7" />
+          <element id="library" level="project" name="mail" />
+          <element id="library" level="project" name="jstl-1.2" />
+          <element id="library" level="project" name="java-json" />
+        </element>
       </element>
     </root>
   </artifact>
