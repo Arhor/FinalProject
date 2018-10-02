@@ -25,7 +25,8 @@ public enum CommandEnum {
     DEREGISTER_FROM_FACULTY (new DeregisterFromFaculty()),
     CHECK_USERS (new CheckUsersCommand()),
     BLOCK_USER (new BlockUserCommand()),
-    UNBLOCK_USER (new UnblockUserCommand());
+    UNBLOCK_USER (new UnblockUserCommand()),
+    ADD_SUBJECT (new AddSubjectCommand());
 
     CommandEnum(ActionCommand command) {
         this.command = command;

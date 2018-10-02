@@ -40,6 +40,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SQL_SELECT_ADMISSION_LIST_ENTRY;
     private static final String SQL_RESTORE_ADMISSION_LIST_ENTRY;
     private static final String SQL_SELECT_ENROLLEE_MARKS;
+    private static final String SQL_INSERT_SUBJECT_BY_ENROLLEE_ID;
 
     // column labels
     private static final String ID = "id";
@@ -272,6 +273,22 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         return result;
     }
 
+    public boolean addSubject(int enrolleeId, int subjectId, int subjectScore)
+            throws ProjectException {
+        boolean result = false;
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_INSERT_SUBJECT_BY_ENROLLEE_ID)) {
+            st.setInt(1, enrolleeId);
+            st.setInt(2, subjectId);
+            st.setInt(3, subjectScore);
+            int rows = st.executeUpdate();
+            result = (rows == 1);
+        } catch (SQLException e) {
+            throw new ProjectException("Subject insertion error", e);
+        }
+        return result;
+    }
+
     public boolean registerToFacultyById(int enrolleeId, int facultyId)
             throws ProjectException {
         int flag;
@@ -434,6 +451,10 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "JOIN `subjects` " +
                 "ON (`subjects`.`id` = `enrollees_has_subjects`.`subjects_id`) " +
                 "WHERE `enrollees_id` = ? AND `available` = ?";
+        SQL_INSERT_SUBJECT_BY_ENROLLEE_ID =
+                "INSERT INTO `enrollees_has_subjects` " +
+                "(`enrollees_id`,`subjects_id`,`score`) " +
+                "VALUES (?,?,?)";
     }
 
 }

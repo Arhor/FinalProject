@@ -173,14 +173,14 @@
                     </div>
                 </div>
             </div>
-            <%--<c:if test="${sessionScope.role eq 'CLIENT'}">--%>
-                <%--<form>--%>
-                    <%--<input type="hidden" id="enrolleeID" value="${sessionScope.enrollee.id}" />--%>
+            <c:if test="${sessionScope.role eq 'CLIENT'}">
+                <form>
+                    <input type="hidden" id="enrolleeID" value="${sessionScope.enrollee.id}" />
                     <%--<c:forEach items="${sessionScope.enrollee.marks.entrySet()}" var="subject">--%>
                         <%--<input type="hidden" class="subjectID" value="${subject.key}" />--%>
                     <%--</c:forEach>--%>
-                <%--</form>--%>
-            <%--</c:if>--%>
+                </form>
+            </c:if>
         </div>
         <footer class="footer">
             <div class="container-fluid">

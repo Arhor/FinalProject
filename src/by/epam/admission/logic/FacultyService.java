@@ -73,6 +73,7 @@ public class FacultyService {
                     resultSet.put(fid, result);
                 }
             }
+            LOG.debug(resultSet);
         } catch (ProjectException e) {
             throw e;
         } finally {

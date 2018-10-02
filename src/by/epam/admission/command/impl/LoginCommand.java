@@ -5,7 +5,9 @@ import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.logic.EnrolleeService;
 import by.epam.admission.logic.LoginLogic;
+import by.epam.admission.logic.SubjectService;
 import by.epam.admission.model.Enrollee;
+import by.epam.admission.model.Subject;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.MessageManager;
@@ -16,6 +18,7 @@ import org.apache.logging.log4j.core.appender.routing.Route;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public class LoginCommand implements ActionCommand {
 
@@ -42,7 +45,11 @@ public class LoginCommand implements ActionCommand {
                 session.setAttribute("locale", user.getLang().getValue());
                 if (user.getRole() == User.Role.CLIENT) {
                     Enrollee enrollee = EnrolleeService.findEnrollee(user.getId());
-                    LOG.debug(enrollee);
+
+                    List<Subject> subjects = SubjectService.findSubjects();
+                    subjects.removeAll(enrollee.getMarks().keySet());
+
+                    session.setAttribute("availableSubjects", subjects);
                     session.setAttribute("enrollee", enrollee);
                 }
                 switch (user.getRole()) {

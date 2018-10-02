@@ -69,4 +69,24 @@ public class EnrolleeService {
 
         return enrollee;
     }
+
+    public static boolean addSubject(int enrolleeId,
+                                     int subjectId,
+                                     int subjectScore) throws ProjectException {
+
+        boolean result = false;
+        DaoHelper helper = new DaoHelper();
+        EnrolleeDao enrolleeDao = new EnrolleeDao();
+        try {
+            helper.startTransaction(enrolleeDao);
+            result = enrolleeDao.addSubject(enrolleeId,subjectId,subjectScore);
+            helper.commit();
+        } catch (ProjectException e) {
+            helper.rollback();
+            throw e;
+        } finally {
+            helper.endTransaction();
+        }
+        return result;
+    }
 }

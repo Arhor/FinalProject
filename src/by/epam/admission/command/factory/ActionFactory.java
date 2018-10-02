@@ -16,13 +16,14 @@ public class ActionFactory {
 
         ActionCommand currentCommand = new EmptyCommand();
 
-        String action = request.getParameter("command")
-                               .replace(" ", "_")
-                               .replaceAll("[0-9]", "")
-                               .toUpperCase();
+        String action = request.getParameter("command");
 
         if (action == null || action.isEmpty()) {
             return currentCommand;
+        } else {
+            action = action.replace(" ", "_")
+                           .replaceAll("[0-9]", "")
+                           .toUpperCase();
         }
 
         try {

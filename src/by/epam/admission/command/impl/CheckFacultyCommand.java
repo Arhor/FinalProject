@@ -29,6 +29,8 @@ public class CheckFacultyCommand implements ActionCommand {
         Set<Subject> subjects = enrollee.getMarks().keySet();
         String[] facultyIds = request.getParameterValues("facultyId[]");
 
+        LOG.debug(subjects);
+
         try {
             HashMap<Integer, Boolean> resultSet =
                     FacultyService.checkFaculty(enrolleeId, subjects, facultyIds);

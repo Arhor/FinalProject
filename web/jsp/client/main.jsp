@@ -107,25 +107,54 @@
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead class="text-primary">
-                                        <tr>
-                                            <th>Subject ID</th>
-                                            <th>Score</th>
-                                        </tr>
+                                            <tr>
+                                                <th>Subject ID</th>
+                                                <th>Score</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${sessionScope.enrollee.marks}" var="subject">
-                                            <tr>
-                                                <c:choose>
-                                                    <c:when test="${sessionScope.locale eq 'ru_RU'}">
-                                                        <td>${subject.key.nameRu}</td>
-                                                    </c:when>
-                                                    <c:when test="${sessionScope.locale eq 'en_US'}">
-                                                        <td>${subject.key.nameEn}</td>
-                                                    </c:when>
-                                                </c:choose>
-                                                <td>${subject.value}</td>
-                                            </tr>
-                                        </c:forEach>
+                                            <c:forEach items="${sessionScope.enrollee.marks}" var="subject">
+                                                <tr>
+                                                    <c:choose>
+                                                        <c:when test="${sessionScope.locale eq 'ru_RU'}">
+                                                            <td>${subject.key.nameRu}</td>
+                                                        </c:when>
+                                                        <c:when test="${sessionScope.locale eq 'en_US'}">
+                                                            <td>${subject.key.nameEn}</td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                    <td>${subject.value}</td>
+                                                </tr>
+                                            </c:forEach>
+                                            <c:if test="${sessionScope.availableSubjects.size() > 0}">
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <div class="form-row">
+                                                            <div class="form-group col-8">
+                                                                <select class="form-control" id="subjectSelect" form="subject_form" name="subjectToAdd">
+                                                                    <c:forEach items="${sessionScope.availableSubjects}" var="availableSubject">
+                                                                        <option>
+                                                                            (ID: ${availableSubject.id})
+                                                                            <c:choose>
+                                                                                <c:when test="${sessionScope.locale eq 'ru_RU'}">
+                                                                                    ${availableSubject.nameRu}
+                                                                                </c:when>
+                                                                                <c:when test="${sessionScope.locale eq 'en_US'}">
+                                                                                    ${availableSubject.nameEn}
+                                                                                </c:when>
+                                                                            </c:choose>
+                                                                        </option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group col-4">
+                                                                <input type="text" class="form-control" placeholder="score" form="subject_form" name="subjectScore" pattern="^([0-9]{1,2})|(100)$" required />
+                                                            </div>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary" name="command" value="add_subject" form="subject_form">Add subject</button>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
                                         </tbody>
                                     </table>
                                 </div>
@@ -151,6 +180,7 @@
         </footer>
     </div>
 </div>
+<form action="/controller" method="get" id="subject_form"></form>
 <!--   Core JS Files   -->
 <script src="${pageContext.request.contextPath}/assets/js/core/jquery.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/assets/js/core/popper.min.js" type="text/javascript"></script>
