@@ -126,7 +126,7 @@
                                                     <td>${subject.value}</td>
                                                 </tr>
                                             </c:forEach>
-                                            <c:if test="${sessionScope.availableSubjects.size() > 0}">
+                                            <c:if test="${sessionScope.availableSubjects.size() > 0 && sessionScope.enrollee.marks.size() < 3}"> <%-- there are only 3 subjects allowed to pass --%>
                                                 <tr>
                                                     <td colspan="2">
                                                         <div class="form-row">

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.TreeSet;
 
 @WebFilter(filterName = "pageRedirectFilter", urlPatterns = "/jsp/*",
         initParams = {
@@ -40,6 +41,8 @@ public class PageRedirectSecutiryFilter implements Filter {
         User.Role role = (User.Role) session.getAttribute("role");
 
         String referer = httpRequest.getHeader("Referer");
+
+        LOG.debug(referer);
 
         if (referer == null) {
             if (role == User.Role.ADMIN || role == User.Role.CLIENT) {
