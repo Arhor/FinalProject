@@ -9,7 +9,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>clientMain</servlet-name>
-        <url-pattern>/client</url-pattern>
+        <url-pattern>/admission/client</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>15</session-timeout>

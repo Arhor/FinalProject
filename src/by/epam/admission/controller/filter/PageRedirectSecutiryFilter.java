@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.TreeSet;
 
-@WebFilter(filterName = "pageRedirectFilter", urlPatterns = "/jsp/*",
+@WebFilter(filterName = "pageRedirectFilter", urlPatterns = {"/jsp/*", "/admission/*"},
         initParams = {
         @WebInitParam(name = "INDEX_PATH", value = "/index.jsp")
 })
