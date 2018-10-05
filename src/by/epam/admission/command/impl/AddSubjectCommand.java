@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 public class AddSubjectCommand implements ActionCommand {
@@ -36,21 +37,28 @@ public class AddSubjectCommand implements ActionCommand {
         LOG.debug(subjectScore);
 
         try {
-            if (EnrolleeService.addSubject(enrollee.getUserId(), subjectId, subjectScore)) {
+            if (EnrolleeService.addSubject(enrollee.getId(), subjectId, subjectScore)) {
                 Subject subject = SubjectService.findSubjectById(subjectId);
                 subjects.remove(subject);
                 enrollee.getMarks().put(subject, subjectScore);
                 request.getSession().setAttribute("enrollee", enrollee);
                 request.getSession().setAttribute("availableSubjects", subjects);
-                router.setPage(ConfigurationManager.getProperty("path.page.client.main"));
+
+                LOG.debug("SUCCESS");
+
             }
         } catch (ProjectException e) {
             LOG.error(e);
-            router.setPage(ConfigurationManager.getProperty("path.page.error"));
+            LOG.debug(e);
+            try {
+                response.sendError(500);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
 
 
-
+        router.setPage(ConfigurationManager.getProperty("path.page.client.main"));
         router.setType(Router.Type.FORWARD);
         return router;
     }

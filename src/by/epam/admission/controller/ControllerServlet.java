@@ -52,6 +52,7 @@ public class ControllerServlet extends HttpServlet {
             case FORWARD:
                 RequestDispatcher dispatcher =
                         getServletContext().getRequestDispatcher(router.getPage());
+                LOG.debug("PAGE TO FORWARD: " + router.getPage());
                 dispatcher.forward(request, response);
                 break;
             case REDIRECT:

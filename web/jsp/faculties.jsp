@@ -109,9 +109,14 @@
                                                 <th class="text-center"><fmt:message key="label.faculties.table.payable" /></th>
                                                 <th class="text-center"><fmt:message key="label.faculties.table.free" /></th>
                                                 <th class="text-center">Subjects</th>
-                                                <c:if test="${sessionScope.role.toString() eq 'CLIENT'}">
-                                                    <th class="text-center"><fmt:message key="label.actions" /></th>
-                                                </c:if>
+                                                <c:choose>
+                                                    <c:when test="${sessionScope.role.toString() eq 'CLIENT'}">
+                                                        <th class="text-center"><fmt:message key="label.actions" /></th>
+                                                    </c:when>
+                                                    <c:when test="${sessionScope.role.toString() eq 'ADMIN'}">
+                                                        <th class="text-center"><fmt:message key="label.status" /></th>
+                                                    </c:when>
+                                                </c:choose>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -128,16 +133,25 @@
                                                                     <div>${subject.nameRu}</div>
                                                                 </c:forEach>
                                                             </td>
-                                                            <c:if test="${sessionScope.role.toString() eq 'CLIENT'}">
-                                                                <td class="td-actions text-center">
-                                                                    <button type="button" rel="tooltip" class="btn btn-success" style="display : none" id="fac${faculty.id}">
-                                                                        <i class="material-icons">edit</i>
-                                                                    </button>
-                                                                    <button type="button" rel="tooltip" class="btn btn-danger" style="display : none" id="fac${faculty.id}">
-                                                                        <i class="material-icons">close</i>
-                                                                    </button>
-                                                                </td>
-                                                            </c:if>
+                                                            <c:choose>
+                                                                <c:when test="${sessionScope.role.toString() eq 'CLIENT'}">
+                                                                    <td class="td-actions text-center">
+                                                                        <button type="button" class="btn btn-success" style="display : none" id="fac${faculty.id}">
+                                                                            <i class="material-icons">edit</i>
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-danger" style="display : none" id="fac${faculty.id}">
+                                                                            <i class="material-icons">close</i>
+                                                                        </button>
+                                                                    </td>
+                                                                </c:when>
+                                                                <c:when test="${sessionScope.role.toString() eq 'ADMIN'}">
+                                                                    <td class="text-center">
+                                                                        <button type="button" class="btn btn-primary" id="fac${faculty.id}">
+                                                                            <i class="material-icons">poll</i> ${faculty.checked}
+                                                                        </button>
+                                                                    </td>
+                                                                </c:when>
+                                                            </c:choose>
                                                         </tr>
                                                     </c:when>
                                                     <c:when test="${sessionScope.locale eq 'en_US'}" >
@@ -147,20 +161,29 @@
                                                             <td class="text-center">${faculty.seatsPaid}</td>
                                                             <td class="text-center">${faculty.seatsBudget}</td>
                                                             <td class="text-center">
-                                                                    <c:forEach items="${faculty.subjects}" var="subject">
-                                                                        <div>${subject.nameEn}</div>
-                                                                    </c:forEach>
+                                                                <c:forEach items="${faculty.subjects}" var="subject">
+                                                                    <div>${subject.nameEn}</div>
+                                                                </c:forEach>
                                                             </td>
-                                                            <c:if test="${sessionScope.role.toString() eq 'CLIENT'}">
-                                                                <td class="td-actions text-center">
-                                                                    <button type="button" rel="tooltip" class="btn btn-success" style="display : none" id="fac${faculty.id}">
-                                                                        <i class="material-icons">edit</i>
-                                                                    </button>
-                                                                    <button type="button" rel="tooltip" class="btn btn-danger" style="display : none" id="fac${faculty.id}">
-                                                                        <i class="material-icons">close</i>
-                                                                    </button>
-                                                                </td>
-                                                            </c:if>
+                                                            <c:choose>
+                                                                <c:when test="${sessionScope.role.toString() eq 'CLIENT'}">
+                                                                    <td class="td-actions text-center">
+                                                                        <button type="button" class="btn btn-success" style="display : none" id="fac${faculty.id}">
+                                                                            <i class="material-icons">edit</i>
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-danger" style="display : none" id="fac${faculty.id}">
+                                                                            <i class="material-icons">close</i>
+                                                                        </button>
+                                                                    </td>
+                                                                </c:when>
+                                                                <c:when test="${sessionScope.role.toString() eq 'ADMIN'}">
+                                                                    <td class="text-center">
+                                                                        <button type="button" class="btn btn-primary" id="fac${faculty.id}">
+                                                                            <i class="material-icons">poll</i> ${faculty.checked}
+                                                                        </button>
+                                                                    </td>
+                                                                </c:when>
+                                                            </c:choose>
                                                         </tr>
                                                     </c:when>
                                                 </c:choose>

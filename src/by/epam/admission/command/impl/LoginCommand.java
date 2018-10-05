@@ -43,13 +43,19 @@ public class LoginCommand implements ActionCommand {
                 session.setAttribute("user", user);
                 session.setAttribute("role", user.getRole());
                 session.setAttribute("locale", user.getLang().getValue());
+
                 if (user.getRole() == User.Role.CLIENT) {
                     Enrollee enrollee = EnrolleeService.findEnrollee(user.getId());
 
-                    List<Subject> subjects = SubjectService.findSubjects();
-                    subjects.removeAll(enrollee.getMarks().keySet());
+                    if (enrollee != null) {
 
-                    session.setAttribute("availableSubjects", subjects);
+                        LOG.debug(enrollee.getMarks());
+
+                        List<Subject> subjects = SubjectService.findSubjects();
+                        subjects.removeAll(enrollee.getMarks().keySet());
+                        session.setAttribute("availableSubjects", subjects);
+                    }
+
                     session.setAttribute("enrollee", enrollee);
                 }
                 switch (user.getRole()) {

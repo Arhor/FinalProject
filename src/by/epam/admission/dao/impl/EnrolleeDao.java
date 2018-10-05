@@ -93,6 +93,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 enrollee = setEnrollee(rs);
+                LOG.debug(enrollee);
             }
         } catch (SQLException e) {
             throw new ProjectException("Selection error", e);
@@ -276,14 +277,19 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     public boolean addSubject(int enrolleeId, int subjectId, int subjectScore)
             throws ProjectException {
         boolean result = false;
+
+        LOG.debug("Enrolle ID: "+ enrolleeId +" Subject ID: " + subjectId + " Score: " + subjectScore);
+
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_INSERT_SUBJECT_BY_ENROLLEE_ID)) {
             st.setInt(1, enrolleeId);
             st.setInt(2, subjectId);
             st.setInt(3, subjectScore);
             int rows = st.executeUpdate();
+            LOG.debug("AFFECTED ROWS: " + rows);
             result = (rows == 1);
         } catch (SQLException e) {
+            LOG.debug(e);
             throw new ProjectException("Subject insertion error", e);
         }
         return result;
@@ -443,14 +449,14 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "WHERE  `enrollees_id` = ? " +
                         "AND `faculties_id` = ?";
         SQL_SELECT_ENROLLEE_MARKS =
-                "SELECT  `id`, " +
-                        "`name_en`, " +
-                        "`name_ru`, " +
-                        "`score` " +
+                "SELECT  `subjects`.`id`, " +
+                        "`subjects`.`name_en`, " +
+                        "`subjects`.`name_ru`, " +
+                        "`enrollees_has_subjects`.`score` " +
                 "FROM `enrollees_has_subjects` " +
                 "JOIN `subjects` " +
                 "ON (`subjects`.`id` = `enrollees_has_subjects`.`subjects_id`) " +
-                "WHERE `enrollees_id` = ? AND `available` = ?";
+                "WHERE `enrollees_id` = ? AND `enrollees_has_subjects`.`available` = ?";
         SQL_INSERT_SUBJECT_BY_ENROLLEE_ID =
                 "INSERT INTO `enrollees_has_subjects` " +
                 "(`enrollees_id`,`subjects_id`,`score`) " +

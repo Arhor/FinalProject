@@ -20,6 +20,7 @@ public class Faculty extends Entity {
     private int seatsPaid;
     private int seatsBudget;
     private TreeSet<Subject> subjects;
+    private boolean checked;
 
     public Faculty() {
         super();
@@ -72,6 +73,14 @@ public class Faculty extends Entity {
 
     public void setSubjects(TreeSet<Subject> subjects) {
         this.subjects = subjects;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
     @Override

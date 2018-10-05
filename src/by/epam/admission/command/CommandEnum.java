@@ -26,7 +26,8 @@ public enum CommandEnum {
     CHECK_USERS (new CheckUsersCommand()),
     BLOCK_USER (new BlockUserCommand()),
     UNBLOCK_USER (new UnblockUserCommand()),
-    ADD_SUBJECT (new AddSubjectCommand());
+    ADD_SUBJECT (new AddSubjectCommand()),
+    DEFINE_RESULT (new DefineResultCommand());
 
     CommandEnum(ActionCommand command) {
         this.command = command;
