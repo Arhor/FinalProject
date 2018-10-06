@@ -1,3 +1,7 @@
+/*
+ * class: HomeCommand
+ */
+
 package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
@@ -9,10 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 03 Sep 2018
+ */
 public class HomeCommand implements ActionCommand {
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request,
+                          HttpServletResponse response) {
         String page;
         Router router = new Router();
         HttpSession session = request.getSession();

@@ -42,7 +42,7 @@ $(document).ready(function () {
 
     } else {
         $('.success').css('visibility', 'hidden').attr('disabled', 'disabled');
-        $('.danger').css('visibility', 'hidden').attr('disabled', 'disabled'); // REFACTORING AWAITS YOU *_*
+        $('.danger').css('visibility', 'hidden').attr('disabled', 'disabled');
     }
 
 });

@@ -1,3 +1,7 @@
+/*
+ * class: CheckFacultyCommand
+ */
+
 package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
@@ -13,40 +17,51 @@ import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 20 Sep 2018
+ */
 public class CheckFacultyCommand implements ActionCommand {
 
-    private static final Logger LOG = LogManager.getLogger(CheckFacultyCommand.class);
+    private static final Logger LOG =
+            LogManager.getLogger(CheckFacultyCommand.class);
+
+    private static final String ATTR_ENROLLEE = "enrollee";
+    private static final String PARAM_FACULTY_ID_ARRAY = "facultyId[]";
+    private static final String PARAM_RESULT_SET = "resultSet";
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request,
+                          HttpServletResponse response) {
 
-        Enrollee enrollee = (Enrollee) request.getSession().getAttribute("enrollee");
+        HttpSession session = request.getSession();
+
+        Enrollee enrollee = (Enrollee) session.getAttribute(ATTR_ENROLLEE);
 
         int enrolleeId = enrollee.getId();
         Set<Subject> subjects = enrollee.getMarks().keySet();
-        String[] facultyIds = request.getParameterValues("facultyId[]");
+        String[] facultyIds = request.getParameterValues(PARAM_FACULTY_ID_ARRAY);
 
         try {
-            HashMap<Integer, Boolean> resultSet =
-                    FacultyService.checkFaculty(enrolleeId, subjects, facultyIds);
+            HashMap<Integer, Boolean> resultSet = FacultyService.checkFaculty(
+                    enrolleeId, subjects, facultyIds);
 
             JSONObject jsonObject = new JSONObject();
-
+            jsonObject.put(PARAM_RESULT_SET, resultSet);
+            response.setContentType("application/json");
+            response.getWriter().write(jsonObject.toString());
+        } catch (ProjectException | IOException | JSONException e) {
+            LOG.error(e);
             try {
-                jsonObject.put("resultSet", resultSet);
-                response.setContentType("application/json");
-                response.getWriter().write(jsonObject.toString());
-            } catch (JSONException e) {
-                LOG.debug(e);
+                response.sendError(500);
+            } catch (IOException e1) {
+                LOG.error(e1);
             }
-
-        } catch (ProjectException | IOException e) {
-            LOG.debug(e); // TODO: STUB
         }
-
-        return null; // STUB
+        return null;
     }
 }

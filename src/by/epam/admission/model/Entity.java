@@ -1,7 +1,15 @@
+/*
+ * class: Entity
+ */
+
 package by.epam.admission.model;
 
 import java.io.Serializable;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 29 Aug 2018
+ */
 public abstract class Entity implements Serializable, Cloneable, Comparable<Entity> {
 
     private static final long serialVersionUID = -1825429275979947811L;

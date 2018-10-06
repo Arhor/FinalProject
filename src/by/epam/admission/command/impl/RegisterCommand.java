@@ -1,3 +1,7 @@
+/*
+ * class: RegisterCommand
+ */
+
 package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
@@ -12,40 +16,52 @@ import by.epam.admission.util.EmailValidator;
 import by.epam.admission.util.MessageManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ResourceBundle;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 05 Sep 2018
+ */
 public class RegisterCommand implements ActionCommand {
 
-    private static final Logger LOG = LogManager.getLogger(RegisterCommand.class);
+    private static final Logger LOG =
+            LogManager.getLogger(RegisterCommand.class);
 
-    private static final String PARAM_NAME_EMAIL = "email";
-    private static final String PARAM_NAME_PASSWORD = "password";
-    private static final String PARAM_NAME_FIRST_NAME = "firstName";
-    private static final String PARAM_NAME_LAST_NAME = "lastName";
+    private static final String PARAM_EMAIL = "email";
+    private static final String PARAM_PASSWORD = "password";
+    private static final String PARAM_FIRST_NAME = "firstName";
+    private static final String PARAM_LAST_NAME = "lastName";
     private static final String PARAM_LANGUAGE = "language";
-    private static final String CONFIRMATION_SUBJECT = "Registration confirmation";
+    private static final String EMAIL_SUBJECT = "Registration confirmation";
+    private static final String ATTR_USER = "user";
+    private static final String ATTR_PASSWORD = "password";
+    private static final String ATTR_CONFIRMATION_CODE = "confirmationCode";
+    private static final String ATTR_REGISTRATION_ERROR = "registrationError";
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request,
+                          HttpServletResponse response) {
 
         String page;
-
         Router router = new Router();
-
         HttpSession session = request.getSession();
 
-        String email = request.getParameter(PARAM_NAME_EMAIL).replaceAll("</?script>", "");
-        String password = request.getParameter(PARAM_NAME_PASSWORD);
-        String firstName = request.getParameter(PARAM_NAME_FIRST_NAME).replaceAll("</?script>", "");
-        String lastName = request.getParameter(PARAM_NAME_LAST_NAME).replaceAll("</?script>", "");
+        String email = request.getParameter(PARAM_EMAIL);
+        String password = request.getParameter(PARAM_PASSWORD);
+        String firstName = request.getParameter(PARAM_FIRST_NAME);
+        String lastName = request.getParameter(PARAM_LAST_NAME);
         String language = request.getParameter(PARAM_LANGUAGE);
 
-        if (EmailValidator.validate(email)) {
-            try {
+        email = email.replaceAll("</?script>", "");
+        firstName = firstName.replaceAll("</?script>", "");
+        lastName = lastName.replaceAll("</?script>", "");
+
+        try {
+            if (EmailValidator.validate(email)) {
                 if (CheckEmailLogic.checkEmail(email)) {
                     User user = new User();
                     user.setEmail(email);
@@ -60,32 +76,39 @@ public class RegisterCommand implements ActionCommand {
                             user.setLang(User.Lang.EN);
                             break;
                     }
-                    session.setAttribute("user", user);
-                    session.setAttribute("password", password);
-                    String confirmationCode = ConfirmationCodeGenerator.generate();
-                    session.setAttribute("confirmationCode",confirmationCode);
+                    session.setAttribute(ATTR_USER, user);
+                    session.setAttribute(ATTR_PASSWORD, password);
+                    String confirmCode = ConfirmationCodeGenerator.generate();
+                    session.setAttribute(ATTR_CONFIRMATION_CODE,confirmCode);
                     ResourceBundle mailResources =
                             ResourceBundle.getBundle("resources.mail");
                     new MailLogic(
                             email,
-                            CONFIRMATION_SUBJECT,
-                            confirmationCode,
+                            EMAIL_SUBJECT,
+                            confirmCode,
                             mailResources).start();
                     page = ConfigurationManager.getProperty("path.page.confirm");
                 } else {
-                    request.setAttribute("registrationError", email + " "
+                    request.setAttribute(ATTR_REGISTRATION_ERROR, email + " "
                             + MessageManager.getProperty("message.email.inuse"));
                     page = ConfigurationManager.getProperty("path.page.registration");
                 }
-            } catch (ProjectException e) {
-                LOG.error("Registration error", e);
-                page = ConfigurationManager.getProperty("path.page.error");
+            } else {
+                request.setAttribute(ATTR_REGISTRATION_ERROR, email + " "
+                        + MessageManager.getProperty("message.email.invalid"));
+                page = ConfigurationManager.getProperty("path.page.registration");
             }
-        } else {
-            page = MessageManager.getProperty("message.email.invalid");
+            router.setPage(page);
+            router.setType(Router.Type.FORWARD);
+        } catch (ProjectException e) {
+            LOG.error("Registration error", e);
+            router.setType(Router.Type.ERROR);
+            try {
+                response.sendError(500);
+            } catch (IOException e1) {
+                LOG.error(e1);
+            }
         }
-        router.setPage(page);
-        router.setType(Router.Type.FORWARD);
         return router;
     }
 }

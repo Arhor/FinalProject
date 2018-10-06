@@ -1,7 +1,15 @@
+/*
+ * class: Enrollee
+ */
+
 package by.epam.admission.model;
 
 import java.util.TreeMap;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 29 Aug 2018
+ */
 public class Enrollee extends Entity{
 
     private String country;

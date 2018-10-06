@@ -1,3 +1,7 @@
+/*
+ * class: AddSubjectCommand
+ */
+
 package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
@@ -13,53 +17,64 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 03 Oct 2018
+ */
 public class AddSubjectCommand implements ActionCommand {
 
-    private static final Logger LOG = LogManager.getLogger(AddSubjectCommand.class);
+    private static final Logger LOG =
+            LogManager.getLogger(AddSubjectCommand.class);
+
+    private static final String ATTR_ENROLLEE = "enrollee";
+    private static final String ATTR_AVAILABLE_SUBJECT = "availableSubjects";
+    private static final String PARAM_SUBJECT_TO_ADD = "subjectToAdd";
+    private static final String PARAM_SUBJECT_SCORE = "subjectScore";
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request,
+                          HttpServletResponse response) {
         Router router = new Router();
 
-        Enrollee enrollee = (Enrollee) request.getSession().getAttribute("enrollee");
-        List<Subject> subjects = (List<Subject>) request.getSession().getAttribute("availableSubjects");
+        HttpSession session = request.getSession();
+
+        Enrollee enrollee = (Enrollee) session.getAttribute(ATTR_ENROLLEE);
+        List<Subject> subjects = (List<Subject>) session.getAttribute(
+                ATTR_AVAILABLE_SUBJECT);
 
         int subjectId = Integer.valueOf(
-                request.getParameter("subjectToAdd")
+                request.getParameter(PARAM_SUBJECT_TO_ADD)
                        .replaceAll("[^0-9]", ""));
         int subjectScore = Integer.valueOf(
-                request.getParameter("subjectScore"));
-
-        LOG.debug(subjectId);
-        LOG.debug(subjectScore);
+                request.getParameter(PARAM_SUBJECT_SCORE));
 
         try {
-            if (EnrolleeService.addSubject(enrollee.getId(), subjectId, subjectScore)) {
+            boolean result = EnrolleeService.addSubject(
+                    enrollee.getId(), subjectId, subjectScore);
+            if (result) {
                 Subject subject = SubjectService.findSubjectById(subjectId);
                 subjects.remove(subject);
                 enrollee.getMarks().put(subject, subjectScore);
-                request.getSession().setAttribute("enrollee", enrollee);
-                request.getSession().setAttribute("availableSubjects", subjects);
-
-                LOG.debug("SUCCESS");
-
+                session.setAttribute(ATTR_ENROLLEE, enrollee);
+                session.setAttribute(ATTR_AVAILABLE_SUBJECT, subjects);
             }
+            String page = ConfigurationManager.getProperty(
+                    "path.page.client.main");
+            router.setPage(page);
+            router.setType(Router.Type.FORWARD);
         } catch (ProjectException e) {
             LOG.error(e);
-            LOG.debug(e);
+            router.setType(Router.Type.ERROR);
             try {
                 response.sendError(500);
             } catch (IOException e1) {
-                e1.printStackTrace();
+                LOG.error(e1);
             }
         }
-
-
-        router.setPage(ConfigurationManager.getProperty("path.page.client.main"));
-        router.setType(Router.Type.FORWARD);
         return router;
     }
 }

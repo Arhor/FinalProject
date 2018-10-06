@@ -1,3 +1,7 @@
+/*
+ * class: ProfileCommand
+ */
+
 package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
@@ -9,20 +13,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 10 Sep 2018
+ */
 public class ProfileCommand implements ActionCommand {
 
+    private static final String ATTR_ROLE = "role";
+
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request,
+                          HttpServletResponse response) {
         Router router = new Router();
         String page;
         HttpSession session = request.getSession();
-        User.Role role = (User.Role) session.getAttribute("role");
+        User.Role role = (User.Role) session.getAttribute(ATTR_ROLE);
         switch (role) {
             case CLIENT:
-                page = ConfigurationManager.getProperty("path.page.client.profile");
+                page = ConfigurationManager.getProperty(
+                        "path.page.client.profile");
                 break;
             case ADMIN:
-                page = ConfigurationManager.getProperty("path.page.admin.profile");
+                page = ConfigurationManager.getProperty(
+                        "path.page.admin.profile");
                 break;
             case GUEST:
             default:

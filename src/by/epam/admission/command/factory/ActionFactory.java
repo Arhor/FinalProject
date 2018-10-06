@@ -1,3 +1,7 @@
+/*
+ * class: ActionFactory
+ */
+
 package by.epam.admission.command.factory;
 
 import by.epam.admission.command.ActionCommand;
@@ -8,6 +12,10 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 02 Sep 2018
+ */
 public class ActionFactory {
 
     private static final Logger LOG = LogManager.getLogger(ActionFactory.class);

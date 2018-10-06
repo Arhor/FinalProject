@@ -12,9 +12,13 @@ import java.util.TreeMap;
 
 public class EnrolleeService {
 
-    private static final Logger LOG = LogManager.getLogger(EnrolleeService.class);
+    private static final Logger LOG =
+            LogManager.getLogger(EnrolleeService.class);
 
-    public static boolean registerEnrollee(Enrollee enrollee) {
+    private EnrolleeService(){}
+
+    public static boolean registerEnrollee(Enrollee enrollee)
+            throws ProjectException {
         boolean result = false;
         DaoHelper daoHelper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
@@ -25,15 +29,16 @@ public class EnrolleeService {
             result = true;
         } catch (ProjectException e) {
             daoHelper.rollback();
-            LOG.debug(e);
+            throw e;
         } finally {
             daoHelper.endTransaction();
         }
         return result;
     }
 
-    public static Enrollee updateEnrollee(Enrollee enrollee) {
-        Enrollee result;
+    public static Enrollee updateEnrollee(Enrollee enrollee)
+            throws ProjectException {
+        Enrollee result = null;
         DaoHelper daoHelper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
         daoHelper.startTransaction(enrolleeDao);
@@ -41,17 +46,16 @@ public class EnrolleeService {
             result = enrolleeDao.update(enrollee);
             daoHelper.commit();
         } catch (ProjectException e) {
-            result = enrollee;
             daoHelper.rollback();
+            throw e;
         } finally {
             daoHelper.endTransaction();
         }
         return result;
     }
 
-    public static Enrollee findEnrollee(int uid) {
+    public static Enrollee findEnrollee(int uid) throws ProjectException {
         Enrollee enrollee = null;
-
         DaoHelper daoHelper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
         daoHelper.startTransaction(enrolleeDao);
@@ -63,12 +67,10 @@ public class EnrolleeService {
                 enrollee.setMarks(marks);
             }
         } catch (ProjectException e) {
-            LOG.error(e);
-            LOG.debug(e);
+            throw e;
         } finally {
             daoHelper.endTransaction();
         }
-
         return enrollee;
     }
 

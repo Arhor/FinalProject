@@ -1,3 +1,7 @@
+/*
+ * class: UpdateProfileCommand
+ */
+
 package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
@@ -19,27 +23,50 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.TreeMap;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 10 Sep 2018
+ */
 public class UpdateProfileCommand implements ActionCommand {
 
-    private static final Logger LOG = LogManager.getLogger(UpdateProfileCommand.class);
+    private static final Logger LOG =
+            LogManager.getLogger(UpdateProfileCommand.class);
+
+    private static final String PARAM_FIRST_NAME = "firstName";
+    private static final String PARAM_LAST_NAME = "lastName";
+    private static final String PARAM_PASSWORD = "password";
+    private static final String PARAM_CITY = "city";
+    private static final String PARAM_COUNTRY = "country";
+    private static final String PARAM_CERTIFICATE = "certificate";
+    private static final String ATTR_USER = "user";
+    private static final String ATTR_ENROLLEE = "enrollee";
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request,
+                          HttpServletResponse response) {
         Router router = new Router();
 
         HttpSession session = request.getSession();
 
-        String firstName = request.getParameter("firstName").replaceAll("</?script>", "");
-        String lastName = request.getParameter("lastName").replaceAll("</?script>", "");
-        String password = request.getParameter("password");
+        String firstName = request.getParameter(PARAM_FIRST_NAME);
+        String lastName = request.getParameter(PARAM_LAST_NAME);
+        String password = request.getParameter(PARAM_PASSWORD);
 
-        User user = (User) session.getAttribute("user");
+        firstName = firstName.replaceAll("</?script>", "");
+        lastName = lastName.replaceAll("</?script>", "");
+
+        User user = (User) session.getAttribute(ATTR_USER);
 
         if (user.getRole() == User.Role.CLIENT) {
-            String city = request.getParameter("city").replaceAll("</?script>", "");
-            String country = request.getParameter("country").replaceAll("</?script>", "");
-            String certificate = request.getParameter("certificate");
-            Enrollee enrollee = (Enrollee) session.getAttribute("enrollee");
+            String city = request.getParameter(PARAM_CITY);
+            String country = request.getParameter(PARAM_COUNTRY);
+            String certificate = request.getParameter(PARAM_CERTIFICATE);
+
+            city = city.replaceAll("</?script>", "");
+            country = country.replaceAll("</?script>", "");
+            certificate = certificate.replaceAll("</?script>", "");
+
+            Enrollee enrollee = (Enrollee) session.getAttribute(ATTR_ENROLLEE);
             if (enrollee == null) {
                 enrollee = new Enrollee();
                 enrollee.setUserId(user.getId());

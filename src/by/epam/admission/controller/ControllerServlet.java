@@ -47,16 +47,16 @@ public class ControllerServlet extends HttpServlet {
         ActionCommand command = client.defineCommand(request);
 
         router = command.execute(request, response);
+        String page = router.getPage();
 
         switch (router.getType()) {
             case FORWARD:
                 RequestDispatcher dispatcher =
-                        getServletContext().getRequestDispatcher(router.getPage());
-                LOG.debug("PAGE TO FORWARD: " + router.getPage());
+                        getServletContext().getRequestDispatcher(page);
                 dispatcher.forward(request, response);
                 break;
             case REDIRECT:
-                response.sendRedirect(request.getContextPath() + router.getPage());
+                response.sendRedirect(request.getContextPath() + page);
                 break;
         }
     }

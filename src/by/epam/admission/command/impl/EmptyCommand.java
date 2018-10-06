@@ -1,3 +1,7 @@
+/*
+ * class: EmptyCommand
+ */
+
 package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
@@ -7,10 +11,15 @@ import by.epam.admission.util.ConfigurationManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 29 Aug 2019
+ */
 public class EmptyCommand implements ActionCommand {
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request,
+                          HttpServletResponse response) {
         String page = ConfigurationManager.getProperty("path.page.index");
         Router router = new Router();
         router.setPage(page);

@@ -1,3 +1,7 @@
+/*
+ * class: LoginCommand
+ */
+
 package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
@@ -13,22 +17,32 @@ import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.MessageManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.appender.routing.Route;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 05 Sep 2018
+ */
 public class LoginCommand implements ActionCommand {
 
     private static final Logger LOG = LogManager.getLogger(LoginCommand.class);
 
     private static final String PARAM_NAME_EMAIL = "email";
     private static final String PARAM_NAME_PASSWORD = "password";
+    private static final String ATTR_USER = "user";
+    private static final String ATTR_ROLE = "role";
+    private static final String ATTR_LOCALE = "locale";
+    private static final String ATTR_ENROLLEE = "enrollee";
+    private static final String ATTR_AVAILABLE_SUBJECTS = "availableSubjects";
+    private static final String ATTR_ERROR_LOGIN_MESSAGE = "errorLoginMessage";
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request,
+                          HttpServletResponse response) {
         String page;
         Router router = new Router();
         String login = request.getParameter(PARAM_NAME_EMAIL);
@@ -40,40 +54,39 @@ public class LoginCommand implements ActionCommand {
         try {
             user = LoginLogic.checkLogin(login, password);
             if(user != null) {
-                session.setAttribute("user", user);
-                session.setAttribute("role", user.getRole());
-                session.setAttribute("locale", user.getLang().getValue());
-
+                session.setAttribute(ATTR_USER, user);
+                session.setAttribute(ATTR_ROLE, user.getRole());
+                session.setAttribute(ATTR_LOCALE, user.getLang().getValue());
                 if (user.getRole() == User.Role.CLIENT) {
-                    Enrollee enrollee = EnrolleeService.findEnrollee(user.getId());
+                    int userId = user.getId();
+                    Enrollee enrollee = EnrolleeService.findEnrollee(userId);
 
                     if (enrollee != null) {
-
-                        LOG.debug(enrollee.getMarks());
-
                         List<Subject> subjects = SubjectService.findSubjects();
                         subjects.removeAll(enrollee.getMarks().keySet());
-                        session.setAttribute("availableSubjects", subjects);
+                        session.setAttribute(ATTR_AVAILABLE_SUBJECTS, subjects);
                     }
 
-                    session.setAttribute("enrollee", enrollee);
+                    session.setAttribute(ATTR_ENROLLEE, enrollee);
                 }
                 switch (user.getRole()) {
                     case CLIENT:
-                        page = ConfigurationManager.getProperty("path.page.client.main");
+                        page = ConfigurationManager.getProperty(
+                                "path.page.client.main");
                         break;
                     case ADMIN:
-                        page = ConfigurationManager.getProperty("path.page.admin.main");
+                        page = ConfigurationManager.getProperty(
+                                "path.page.admin.main");
                         break;
                     case GUEST:
                     default:
-                        page = ConfigurationManager.getProperty("path.page.main");
+                        page = ConfigurationManager.getProperty(
+                                "path.page.main");
                 }
-
                 router.setType(Router.Type.REDIRECT);
             } else {
                 String message = MessageManager.getProperty("message.loginerror");
-                request.setAttribute("errorLoginMessage", message);
+                request.setAttribute(ATTR_ERROR_LOGIN_MESSAGE, message);
                 page = ConfigurationManager.getProperty("path.page.login");
                 router.setType(Router.Type.FORWARD);
             }
@@ -82,7 +95,6 @@ public class LoginCommand implements ActionCommand {
             page = ConfigurationManager.getProperty("path.page.error");
             router.setType(Router.Type.FORWARD);
         }
-
         router.setPage(page);
         return router;
     }

@@ -1,7 +1,15 @@
+/*
+ * class: CommandEnum
+ */
+
 package by.epam.admission.command;
 
 import by.epam.admission.command.impl.*;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 03 Sep 2018
+ */
 public enum CommandEnum {
 
     SIGN_IN (new SignInCommand()),
@@ -15,8 +23,7 @@ public enum CommandEnum {
     SHOW_FACULTIES (new ShowFacultiesCommand()),
     SHOW_USERS_PREV (new ShowUsersPrevCommand()),
     SHOW_USERS_NEXT (new ShowUsersNextCommand()),
-    ENGLISH (new EnglishCommand()),
-    RUSSIAN (new RussianCommand()),
+    CHANGE_LANG (new ChangeLangCommand()),
     PROFILE (new ProfileCommand()),
     UPDATE_PROFILE (new UpdateProfileCommand()),
     SHOW_USERS (new ShowUsersCommand()),
@@ -29,11 +36,11 @@ public enum CommandEnum {
     ADD_SUBJECT (new AddSubjectCommand()),
     DEFINE_RESULT (new DefineResultCommand());
 
+    private ActionCommand command;
+
     CommandEnum(ActionCommand command) {
         this.command = command;
     }
-
-    private ActionCommand command;
 
     public ActionCommand getCurrentCommand() {
         return command;

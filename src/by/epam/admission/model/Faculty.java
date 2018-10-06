@@ -4,7 +4,6 @@
 
 package by.epam.admission.model;
 
-import java.util.ArrayList;
 import java.util.TreeSet;
 
 /**

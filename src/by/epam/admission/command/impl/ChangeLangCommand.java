@@ -1,3 +1,7 @@
+/*
+ * class: ChangeLangCommand
+ */
+
 package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
@@ -9,17 +13,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class EnglishCommand implements ActionCommand {
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 03 Sep 2018
+ */
+public class ChangeLangCommand implements ActionCommand {
 
-    private static final String LOCALE = "en_US";
+    private static final String ATTR_LOCALE = "locale";
+    private static final String ATTR_ROLE = "role";
+    private static final String EN = "en";
+    private static final String RU = "ru";
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
-        Router router = new Router();
+    public Router execute(HttpServletRequest request,
+                          HttpServletResponse response) {
         String page;
+        Router router = new Router();
         HttpSession session = request.getSession();
-        session.setAttribute("locale", LOCALE);
-        User.Role currentRole = (User.Role) session.getAttribute("role");
+        String lang = request.getParameter("lang");
+        switch (lang) {
+            case EN:
+                session.setAttribute(ATTR_LOCALE, User.Lang.EN.getValue());
+                break;
+            case RU:
+                session.setAttribute(ATTR_LOCALE, User.Lang.RU.getValue());
+                break;
+        }
+        User.Role currentRole = (User.Role) session.getAttribute(ATTR_ROLE);
         switch (currentRole) {
             case GUEST:
                 page = ConfigurationManager.getProperty("path.page.main");
