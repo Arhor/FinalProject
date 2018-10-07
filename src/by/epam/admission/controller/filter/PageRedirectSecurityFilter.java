@@ -1,3 +1,7 @@
+/*
+ * class: PageRedirectSecurityFilter
+ */
+
 package by.epam.admission.controller.filter;
 
 import by.epam.admission.model.User;
@@ -14,11 +18,16 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.TreeSet;
 
-@WebFilter(filterName = "pageRedirectFilter", urlPatterns = {"/jsp/*", "/admission/*"},
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 29 Aug 2018
+ */
+@WebFilter(filterName = "pageRedirectFilter",
+        urlPatterns = {"/jsp/*", "/admission/*"},
         initParams = {
         @WebInitParam(name = "INDEX_PATH", value = "/index.jsp")
 })
-public class PageRedirectSecutiryFilter implements Filter {
+public class PageRedirectSecurityFilter implements Filter {
 
     private static final Logger LOG = LogManager.getLogger();
 

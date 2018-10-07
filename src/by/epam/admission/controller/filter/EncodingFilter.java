@@ -1,3 +1,7 @@
+/*
+ * class: EncodingFilter
+ */
+
 package by.epam.admission.controller.filter;
 
 import org.apache.logging.log4j.LogManager;
@@ -8,6 +12,10 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 29 Aug 2018
+ */
 @WebFilter(filterName = "encodingFilter", urlPatterns = {"/*"}, initParams = {
         @WebInitParam(
                 name = "encoding",
@@ -27,7 +35,10 @@ public class EncodingFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest,
+                         ServletResponse servletResponse,
+                         FilterChain filterChain)
+            throws IOException, ServletException {
         String codeRequest = servletRequest.getCharacterEncoding();
         if (code != null && !code.equalsIgnoreCase(codeRequest)) {
             servletRequest.setCharacterEncoding(code);

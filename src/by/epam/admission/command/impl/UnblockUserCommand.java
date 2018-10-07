@@ -57,8 +57,6 @@ public class UnblockUserCommand implements ActionCommand {
             LOG.error("Invalid user role");
             response.sendError(403);
         }
-
-
         return null;
     }
 }

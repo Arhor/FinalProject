@@ -46,7 +46,7 @@ public class UpdateProfileCommand implements ActionCommand {
 
     @Override
     public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
+                          HttpServletResponse response) throws IOException {
         Router router = new Router();
         String page;
         HttpSession session = request.getSession();
@@ -112,11 +112,7 @@ public class UpdateProfileCommand implements ActionCommand {
             router.setType(Router.Type.FORWARD);
         } catch (ProjectException e) {
             LOG.error("Profile updating error", e);
-            try {
-                response.sendError(500);
-            } catch (IOException e1) {
-                LOG.error(e);
-            }
+            response.sendError(500);
         }
         return router;
     }
