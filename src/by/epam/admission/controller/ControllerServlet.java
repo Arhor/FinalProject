@@ -1,3 +1,7 @@
+/*
+ * class: ControllerServlet
+ */
+
 package by.epam.admission.controller;
 
 import by.epam.admission.command.ActionCommand;
@@ -17,14 +21,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 29 Aug 2018
+ */
 @WebServlet(
         name = "ControllerServlet",
-        urlPatterns = {"/controller", "/admission", "/admission/registration", "/admission/authentication"}
+        urlPatterns = {
+                "/controller",
+                "/admission",
+                "/admission/registration",
+                "/admission/authentication"
+        }
 )
 public class ControllerServlet extends HttpServlet {
-
-    private static final Logger LOG =
-            LogManager.getLogger(ControllerServlet.class);
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)

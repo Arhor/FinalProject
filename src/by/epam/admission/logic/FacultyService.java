@@ -11,8 +11,6 @@ import by.epam.admission.dao.impl.SubjectDao;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Faculty;
 import by.epam.admission.model.Subject;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 
@@ -21,9 +19,6 @@ import java.util.*;
  * @version 1.0 09 Sep 2018
  */
 public class FacultyService {
-
-    private static final Logger LOG =
-            LogManager.getLogger(FacultyService.class);
 
     public static List<Faculty> findFaculties() throws ProjectException {
         List<Faculty> faculties;
@@ -38,8 +33,6 @@ public class FacultyService {
                         subjectDao.findSubjectsByFacultyId(faculty.getId());
                 faculty.setSubjects(subjects);
             }
-        } catch (ProjectException e) {
-            throw e;
         } finally {
             helper.endTransaction();
         }
@@ -48,13 +41,15 @@ public class FacultyService {
 
     public static boolean registerToFaculty(int enrolleeId, int facultyId)
             throws ProjectException {
-        boolean result = false;
+        boolean result;
         DaoHelper helper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
         try {
             helper.startTransaction(enrolleeDao);
             result = enrolleeDao.registerToFacultyById(enrolleeId, facultyId);
+            helper.commit();
         } catch (ProjectException e) {
+            helper.rollback();
             throw e;
         } finally {
             helper.endTransaction();
@@ -62,10 +57,10 @@ public class FacultyService {
         return result;
     }
 
-    public static HashMap<Integer, Boolean> checkFaculty(
+    public static HashMap<Integer, Boolean> checkFaculties(
             int enrolleeId, Set<Subject> enrolleeSubjects, String[] facultyIds)
             throws ProjectException {
-        HashMap<Integer, Boolean> resultSet = null;
+        HashMap<Integer, Boolean> resultSet;
         DaoHelper helper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
         SubjectDao subjectDao = new SubjectDao();
@@ -81,40 +76,39 @@ public class FacultyService {
                     resultSet.put(fid, result);
                 }
             }
-            LOG.debug(resultSet);
-        } catch (ProjectException e) {
-            throw e;
         } finally {
             helper.endTransaction();
         }
         return resultSet;
     }
 
-    public static boolean checkInactive(int enrolleeId, int facultyId)
+    public static boolean checkFaculty(int enrolleeId, int facultyId)
             throws ProjectException {
-        boolean result = false;
+        boolean result;
         DaoHelper helper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
         try {
             helper.startTransaction(enrolleeDao);
-            result = enrolleeDao.checkInactive(enrolleeId, facultyId);
-        } catch (ProjectException e) {
-            throw e;
+            result = enrolleeDao.checkFaculty(enrolleeId, facultyId);
         } finally {
             helper.endTransaction();
         }
         return result;
     }
 
-    public static boolean restoreFacultyRegistration(int enrolleeId, int facultyId)
+    public static boolean restoreFacultyRegistration(int enrolleeId,
+                                                     int facultyId)
             throws ProjectException {
-        boolean result = false;
+        boolean result;
         DaoHelper helper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
         try {
             helper.startTransaction(enrolleeDao);
-            result = enrolleeDao.restoreFacultyRegistration(enrolleeId, facultyId);
+            result = enrolleeDao.restoreFacultyRegistration(
+                    enrolleeId, facultyId);
+            helper.commit();
         } catch (ProjectException e) {
+            helper.rollback();
             throw e;
         } finally {
             helper.endTransaction();
@@ -124,13 +118,16 @@ public class FacultyService {
 
     public static boolean deregisterFromFaculty(int enrolleeId, int facultyId)
             throws ProjectException {
-        boolean result = false;
+        boolean result;
         DaoHelper helper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
         try {
             helper.startTransaction(enrolleeDao);
-            result = enrolleeDao.deregisterFromFacultyById(enrolleeId, facultyId);
+            result = enrolleeDao.deregisterFromFacultyById(
+                    enrolleeId, facultyId);
+            helper.commit();
         } catch (ProjectException e) {
+            helper.rollback();
             throw e;
         } finally {
             helper.endTransaction();

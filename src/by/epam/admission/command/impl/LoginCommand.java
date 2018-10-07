@@ -8,8 +8,8 @@ import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.logic.EnrolleeService;
-import by.epam.admission.logic.LoginLogic;
 import by.epam.admission.logic.SubjectService;
+import by.epam.admission.logic.UserService;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Subject;
 import by.epam.admission.model.User;
@@ -46,14 +46,12 @@ public class LoginCommand implements ActionCommand {
                           HttpServletResponse response) throws IOException {
         String page;
         Router router = new Router();
-        String login = request.getParameter(PARAM_NAME_EMAIL);
-        String password = request.getParameter(PARAM_NAME_PASSWORD);
-
         HttpSession session = request.getSession();
-
+        String email = request.getParameter(PARAM_NAME_EMAIL);
+        String password = request.getParameter(PARAM_NAME_PASSWORD);
         User user;
         try {
-            user = LoginLogic.checkLogin(login, password);
+            user = UserService.findUser(email, password);
             if(user != null) {
                 session.setAttribute(ATTR_USER, user);
                 session.setAttribute(ATTR_ROLE, user.getRole());

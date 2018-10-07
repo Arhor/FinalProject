@@ -23,17 +23,18 @@ public class UserDaoTest {
 
     @Test
     public void testFindAll() {
-        DaoHelper t = new DaoHelper();
+        DaoHelper daoHelper = new DaoHelper();
         UserDao uDAO = new UserDao();
-        t.startTransaction(uDAO);
         try {
+            daoHelper.startTransaction(uDAO);
             for (User user : uDAO.findAll(1,1)) { // TODO: STUB
                 LOG.info(user);
             }
         } catch (ProjectException e) {
             LOG.error(e);
+        } finally {
+            daoHelper.endTransaction();
         }
-        t.endTransaction();
     }
 
     @Test
@@ -41,53 +42,56 @@ public class UserDaoTest {
         for (int i = 0; i < 100; i++) {
             new Thread() {
                 public void run() {
-                    DaoHelper t = new DaoHelper();
+                    DaoHelper daoHelper = new DaoHelper();
                     UserDao uDAO = new UserDao();
-                    t.startTransaction(uDAO);
                     int id = (int)(Math.random() * 55 + 0.5);
                     try {
+                        daoHelper.startTransaction(uDAO);
                         LOG.info("UID: " + id + " - " + uDAO.findEntityById(id));
                     } catch (ProjectException e) {
                         LOG.error(e);
+                    } finally {
+                        daoHelper.endTransaction();
                     }
-                    t.endTransaction();
                 }
             }.start();
         }
     }
 
-    @Test
-    public void testFindUserByEmailAndPassword() {
-        String email = "example.30@gmail.com";
-        String password = "example.30@gmail.com";
-        DaoHelper t = new DaoHelper();
-        UserDao uDAO = new UserDao();
-        t.startTransaction(uDAO);
-        try {
-            LOG.info(uDAO.findUserByEmailAndPassword(email, password));
-        } catch (ProjectException e) {
-            LOG.error(e);
-        }
-        t.endTransaction();
-    }
+//    @Test
+//    public void testFindUserByEmailAndPassword() {
+//        String email = "example.30@gmail.com";
+//        String password = "example.30@gmail.com";
+//        DaoHelper daoHelper = new DaoHelper();
+//        UserDao uDAO = new UserDao();
+//        try {
+//            daoHelper.startTransaction(uDAO);
+//            LOG.info(uDAO.findUserByEmailAndPassword(email, password));
+//        } catch (ProjectException e) {
+//            LOG.error(e);
+//        } finally {
+//            daoHelper.endTransaction();
+//        }
+//    }
 
-    @Test
-    public void testDeleteByEmailAndPassword() {
-        User user = new User();
-        user.setEmail("test@gmail.com");
-        String password = "test@gmail.com";
-        DaoHelper t = new DaoHelper();
-        UserDao uDAO = new UserDao();
-        t.startTransaction(uDAO);
-        try {
-            LOG.info(uDAO.delete(user, password));
-            t.commit();
-        } catch (ProjectException e) {
-            LOG.error("DAO exception", e);
-            t.rollback();
-        }
-        t.endTransaction();
-    }
+//    @Test
+//    public void testDeleteByEmailAndPassword() {
+//        User user = new User();
+//        user.setEmail("test@gmail.com");
+//        String password = "test@gmail.com";
+//        DaoHelper daoHelper = new DaoHelper();
+//        UserDao uDAO = new UserDao();
+//        try {
+//            daoHelper.startTransaction(uDAO);
+//            LOG.info(uDAO.delete(user, password));
+//            daoHelper.commit();
+//        } catch (ProjectException e) {
+//            LOG.error("DAO exception", e);
+//            daoHelper.rollback();
+//        } finally {
+//            daoHelper.endTransaction();
+//        }
+//    }
 
     @Test
     public void testMultiCreate() {
@@ -95,9 +99,8 @@ public class UserDaoTest {
             final int number = i;
             new Thread() {
                 public void run() {
-                    DaoHelper t = new DaoHelper();
+                    DaoHelper daoHelper = new DaoHelper();
                     UserDao uDAO = new UserDao();
-                    t.startTransaction(uDAO);
                     User user = new User();
                     user.setEmail("test"+ number +"@gmail.com");
                     user.setFirstName("test" + number);
@@ -106,14 +109,16 @@ public class UserDaoTest {
                     user.setLang(User.Lang.RU);
                     String password = "test"+ number +"@gmail.com";
                     try {
+                        daoHelper.startTransaction(uDAO);
                         uDAO.create(user, password);
-                        t.commit();
+                        daoHelper.commit();
                         LOG.info("created user: " + user);
                     } catch (ProjectException e) {
                         LOG.error("DAO exception", e);
-                        t.rollback();
+                        daoHelper.rollback();
+                    } finally {
+                        daoHelper.endTransaction();
                     }
-                    t.endTransaction();
                 }
             }.start();
         }
@@ -127,9 +132,8 @@ public class UserDaoTest {
 
     @Test
     public void testCreate() {
-        DaoHelper t = new DaoHelper();
+        DaoHelper daoHelper = new DaoHelper();
         UserDao uDAO = new UserDao();
-        t.startTransaction(uDAO);
         User user = new User();
         user.setEmail("test@gmail.com");
         user.setFirstName("test");
@@ -138,23 +142,24 @@ public class UserDaoTest {
         user.setLang(User.Lang.RU);
         String password = "test@gmail.com";
         try {
+            daoHelper.startTransaction(uDAO);
             boolean flag = uDAO.create(user, password);
-            t.commit();
+            daoHelper.commit();
             if (flag) {
                 LOG.info("created user: " + user);
             }
         } catch (ProjectException e) {
             LOG.error("DAO exception", e);
-            t.rollback();
+            daoHelper.rollback();
+        } finally {
+            daoHelper.endTransaction();
         }
-        t.endTransaction();
     }
 
     @Test
     public void testUpdateByEmailAndPassword() {
-        DaoHelper t = new DaoHelper();
+        DaoHelper daoHelper = new DaoHelper();
         UserDao uDAO = new UserDao();
-        t.startTransaction(uDAO);
         User user = new User();
         user.setEmail("example.48@gmail.com");
         user.setFirstName("xxx");
@@ -163,10 +168,13 @@ public class UserDaoTest {
         String password = "example.48@gmail.com";
         boolean result = false;
         try {
+            daoHelper.startTransaction(uDAO);
             result = uDAO.update(user, password);
-            t.commit();
+            daoHelper.commit();
         } catch (ProjectException e) {
-            t.rollback();
+            daoHelper.rollback();
+        } finally {
+            daoHelper.endTransaction();
         }
         LOG.debug(user);
         Assert.assertTrue(result);
@@ -175,14 +183,16 @@ public class UserDaoTest {
     @Test
     public void testDelete() {
         boolean result = false;
-        DaoHelper t = new DaoHelper();
+        DaoHelper daoHelper = new DaoHelper();
         UserDao uDAO = new UserDao();
-        t.startTransaction(uDAO);
         try {
+            daoHelper.startTransaction(uDAO);
             result = uDAO.delete(50);
-            t.commit();
+            daoHelper.commit();
         } catch (ProjectException e) {
-            t.rollback();
+            daoHelper.rollback();
+        } finally {
+            daoHelper.endTransaction();
         }
         Assert.assertFalse(result);
     }

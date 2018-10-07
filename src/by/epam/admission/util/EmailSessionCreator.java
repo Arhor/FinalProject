@@ -10,7 +10,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 
-public class SessionCreator {
+public class EmailSessionCreator {
 
     private String smtpHost;
     private String smtpPort;
@@ -18,9 +18,9 @@ public class SessionCreator {
     private String userPass;
     private Properties sessionProperties;
 
-    private static final Logger LOG = LogManager.getLogger(SessionCreator.class);
+    private static final Logger LOG = LogManager.getLogger(EmailSessionCreator.class);
 
-    public SessionCreator(ResourceBundle resourceBundle) {
+    public EmailSessionCreator(ResourceBundle resourceBundle) {
         smtpHost = resourceBundle.getString("mail.smtp.host");
         smtpPort = resourceBundle.getString("mail.smtp.port");
         userName = resourceBundle.getString("mail.user.name");

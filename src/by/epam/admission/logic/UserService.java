@@ -5,11 +5,9 @@
 package by.epam.admission.logic;
 
 import by.epam.admission.dao.DaoHelper;
-import by.epam.admission.dao.impl.EnrolleeDao;
 import by.epam.admission.dao.impl.UserDao;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.User;
-import by.epam.admission.util.ConfigurationManager;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +20,23 @@ public class UserService {
 
     private UserService() {}
 
+    public static User findUser(String login, String password)
+            throws ProjectException {
+        DaoHelper helper = new DaoHelper();
+        UserDao userDao = new UserDao();
+        User user = null;
+        helper.startTransaction(userDao);
+        try {
+            if (userDao.checkPassword(login, password)) {
+                int userId = userDao.findUserId(login);
+                user = userDao.findEntityById(userId);
+            }
+        } finally {
+            helper.endTransaction();
+        }
+        return user;
+    }
+
     public static List<User> findUsers(int currPage, int rowsPerPage)
             throws ProjectException {
         List<User> users;
@@ -30,8 +45,6 @@ public class UserService {
         try {
             helper.startTransaction(userDao);
             users = userDao.findAll(currPage, rowsPerPage);
-        } catch (ProjectException e) {
-           throw e;
         } finally {
             helper.endTransaction();
         }
@@ -45,24 +58,25 @@ public class UserService {
         try {
             helper.startTransaction(userDao);
             usersAmount = userDao.findTotalAmount();
-        } catch(ProjectException e) {
-            throw e;
         } finally {
             helper.endTransaction();
         }
         return usersAmount;
     }
 
-    public static boolean updateUser(User user, String password) {
-        boolean result = false;
+    public static boolean updateUser(User user, String password)
+            throws ProjectException {
+        boolean result;
         DaoHelper daoHelper = new DaoHelper();
         UserDao userDao = new UserDao();
-        daoHelper.startTransaction(userDao);
+
         try {
+            daoHelper.startTransaction(userDao);
             result = userDao.update(user, password);
             daoHelper.commit();
         } catch (ProjectException e) {
             daoHelper.rollback();
+            throw e;
         } finally {
             daoHelper.endTransaction();
         }
@@ -81,8 +95,6 @@ public class UserService {
                 boolean result = userDao.checkUser(uid);
                 resultSet.put(uid, result);
             }
-        } catch (ProjectException e) {
-            throw e;
         } finally {
             helper.endTransaction();
         }
@@ -90,7 +102,7 @@ public class UserService {
     }
 
     public static boolean blockUser(int userId) throws ProjectException {
-        boolean result = false;
+        boolean result;
         DaoHelper daoHelper = new DaoHelper();
         UserDao userDao = new UserDao();
         daoHelper.startTransaction(userDao);
@@ -107,7 +119,7 @@ public class UserService {
     }
 
     public static boolean unblockUser(int userId) throws ProjectException {
-        boolean result = false;
+        boolean result;
         DaoHelper daoHelper = new DaoHelper();
         UserDao userDao = new UserDao();
         daoHelper.startTransaction(userDao);
@@ -121,5 +133,37 @@ public class UserService {
             daoHelper.endTransaction();
         }
         return result;
+    }
+
+    public static boolean checkEmail(String email) throws ProjectException {
+        boolean result;
+        DaoHelper helper = new DaoHelper();
+        UserDao userDao = new UserDao();
+        try {
+            helper.startTransaction(userDao);
+            result = userDao.checkEmail(email);
+        } finally {
+            helper.endTransaction();
+        }
+        return result;
+    }
+
+    public static User registerUser(User user, String password)
+            throws ProjectException {
+
+        boolean result;
+        DaoHelper helper = new DaoHelper();
+        UserDao userDao = new UserDao();
+        try {
+            helper.startTransaction(userDao);
+            result = userDao.create(user, password);
+            helper.commit();
+        } catch (ProjectException e) {
+            helper.rollback();
+            throw e;
+        } finally {
+            helper.endTransaction();
+        }
+        return result ? user : null;
     }
 }

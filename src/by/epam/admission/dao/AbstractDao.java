@@ -4,8 +4,6 @@
 
 package by.epam.admission.dao;
 
-import java.util.List;
-
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.exception.NotSupportedOperationException;
 import by.epam.admission.model.Entity;

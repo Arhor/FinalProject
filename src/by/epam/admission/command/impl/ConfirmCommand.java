@@ -7,7 +7,7 @@ package by.epam.admission.command.impl;
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
-import by.epam.admission.logic.RegisterLogic;
+import by.epam.admission.logic.UserService;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.MessageManager;
@@ -50,7 +50,7 @@ public class ConfirmCommand implements ActionCommand {
         try {
             String page;
             if (submittedCode.equals(realCode)) {
-                user = RegisterLogic.registerUser(user, password);
+                user = UserService.registerUser(user, password);
                 if (user != null) {
                     session.setAttribute(ATTR_USER, user);
                     session.setAttribute(ATTR_ROLE, user.getRole());

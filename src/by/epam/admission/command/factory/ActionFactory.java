@@ -20,12 +20,11 @@ public class ActionFactory {
 
     private static final Logger LOG = LogManager.getLogger(ActionFactory.class);
 
+    private static final String PARAM_COMMAND = "command";
+
     public ActionCommand defineCommand(HttpServletRequest request) {
-
         ActionCommand currentCommand = new EmptyCommand();
-
-        String action = request.getParameter("command");
-
+        String action = request.getParameter(PARAM_COMMAND);
         if (action == null || action.isEmpty()) {
             return currentCommand;
         } else {
@@ -33,14 +32,12 @@ public class ActionFactory {
                            .replaceAll("[0-9]", "")
                            .toUpperCase();
         }
-
         try {
             CommandEnum currentEnum = CommandEnum.valueOf(action);
             currentCommand = currentEnum.getCurrentCommand();
         } catch(IllegalArgumentException e) {
             LOG.error("Unknown command: " + action, e);
         }
-
         return currentCommand;
     }
 

@@ -7,8 +7,8 @@ package by.epam.admission.command.impl;
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
-import by.epam.admission.logic.CheckEmailLogic;
-import by.epam.admission.logic.MailLogic;
+import by.epam.admission.logic.MailService;
+import by.epam.admission.logic.UserService;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.ConfirmationCodeGenerator;
@@ -62,7 +62,7 @@ public class RegisterCommand implements ActionCommand {
 
         try {
             if (EmailValidator.validate(email)) {
-                if (CheckEmailLogic.checkEmail(email)) {
+                if (UserService.checkEmail(email)) {
                     User user = new User();
                     user.setEmail(email);
                     user.setFirstName(firstName);
@@ -82,7 +82,7 @@ public class RegisterCommand implements ActionCommand {
                     session.setAttribute(ATTR_CONFIRMATION_CODE,confirmCode);
                     ResourceBundle mailResources =
                             ResourceBundle.getBundle("resources.mail");
-                    new MailLogic(
+                    new MailService(
                             email,
                             EMAIL_SUBJECT,
                             confirmCode,

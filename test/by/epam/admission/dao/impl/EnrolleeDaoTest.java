@@ -1,6 +1,6 @@
 package by.epam.admission.dao.impl;
 
-import by.epam.admission.dao.DaoHelperDBUnit;
+import by.epam.admission.dao.DaoHelperDbUnit;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.pool.ConnectionPoolDBUnit;
@@ -21,65 +21,69 @@ public class EnrolleeDaoTest {
 
     @Test
     public void testFindAll() {
-        DaoHelperDBUnit t = new DaoHelperDBUnit();
+        DaoHelperDbUnit helperDbUnit = new DaoHelperDbUnit();
         EnrolleeDao enrolleeDAO = new EnrolleeDao();
-        t.startTransaction(enrolleeDAO);
         try {
+            helperDbUnit.startTransaction(enrolleeDAO);
             for (Enrollee enrollee : enrolleeDAO.findAll()) {
                 LOG.info(enrollee);
             }
         } catch (ProjectException e) {
             LOG.error("Test exception", e);
+        } finally {
+            helperDbUnit.endTransaction();
         }
-        t.endTransaction();
     }
 
     @Test
     public void testFindEnrolleesByCountry() {
-        DaoHelperDBUnit t = new DaoHelperDBUnit();
+        DaoHelperDbUnit helperDbUnit = new DaoHelperDbUnit();
         EnrolleeDao enrolleeDAO = new EnrolleeDao();
-        t.startTransaction(enrolleeDAO);
         try {
+            helperDbUnit.startTransaction(enrolleeDAO);
             for (Enrollee enrollee : enrolleeDAO.findEnrolleesByCountry("Беларусь")) {
                 LOG.info(enrollee);
             }
         } catch (ProjectException e) {
             LOG.error("DAO exception", e);
+        } finally {
+            helperDbUnit.endTransaction();
         }
-        t.endTransaction();
     }
 
     @Test
     public void testFindEnrolleesByCity() {
-        DaoHelperDBUnit t = new DaoHelperDBUnit();
+        DaoHelperDbUnit helperDbUnit = new DaoHelperDbUnit();
         EnrolleeDao enrolleeDAO = new EnrolleeDao();
-        t.startTransaction(enrolleeDAO);
         try {
+            helperDbUnit.startTransaction(enrolleeDAO);
             for (Enrollee enrollee : enrolleeDAO.findEnrolleesByCity("Минск")) {
                 LOG.info(enrollee);
             }
         } catch (ProjectException e) {
             LOG.error("DAO exception", e);
+        } finally {
+            helperDbUnit.endTransaction();
         }
-        t.endTransaction();
     }
 
     @Test
     public void testRegisterToFacultyById() {
-        DaoHelperDBUnit t = new DaoHelperDBUnit();
+        DaoHelperDbUnit helperDbUnit = new DaoHelperDbUnit();
         EnrolleeDao enrolleeDAO = new EnrolleeDao();
         Enrollee enrollee = new Enrollee();
         enrollee.setId(2);
         for (int i = 201; i < 209; i++) {
-            t.startTransaction(enrolleeDAO);
             try {
+                helperDbUnit.startTransaction(enrolleeDAO);
                 enrolleeDAO.registerToFacultyById(enrollee.getId(), i);
-                t.commit();
+                helperDbUnit.commit();
             } catch (ProjectException e) {
-                t.rollback();
+                helperDbUnit.rollback();
                 LOG.error("DAO exception", e);
+            } finally {
+                helperDbUnit.endTransaction();
             }
-            t.endTransaction();
         }
     }
 
@@ -88,16 +92,17 @@ public class EnrolleeDaoTest {
         for (int i = 0; i < 10; i++) {
             new Thread() {
                 public void run() {
-                    DaoHelperDBUnit t = new DaoHelperDBUnit();
+                    DaoHelperDbUnit helperDbUnit = new DaoHelperDbUnit();
                     EnrolleeDao enrolleeDAO = new EnrolleeDao();
-                    t.startTransaction(enrolleeDAO);
                     int id = (int)(Math.random() * 29 + 0.5);
                     try {
+                        helperDbUnit.startTransaction(enrolleeDAO);
                         LOG.info("ID: " + id + " - " + enrolleeDAO.findEntityById(id));
                     } catch (ProjectException e) {
                         LOG.error("Test exception", e);
+                    } finally {
+                        helperDbUnit.endTransaction();
                     }
-                    t.endTransaction();
                 }
             }.start();
         }
@@ -115,23 +120,24 @@ public class EnrolleeDaoTest {
             final int num = i;
             new Thread() {
                 public void run() {
-                    DaoHelperDBUnit t = new DaoHelperDBUnit();
+                    DaoHelperDbUnit helperDbUnit = new DaoHelperDbUnit();
                     EnrolleeDao enrolleeDAO = new EnrolleeDao();
-                    t.startTransaction(enrolleeDAO);
                     Enrollee enrollee = new Enrollee();
                     enrollee.setCountry("Testerstan");
                     enrollee.setCity("Testerville" );
                     enrollee.setSchoolCertificate(100);
                     enrollee.setUserId(num);
                     try {
+                        helperDbUnit.startTransaction(enrolleeDAO);
                         enrolleeDAO.create(enrollee);
-                        t.commit();
+                        helperDbUnit.commit();
                         LOG.info("created enrolle: " + enrollee);
                     } catch (ProjectException e) {
-                        t.rollback();
+                        helperDbUnit.rollback();
                         LOG.error("DAO exception", e);
+                    } finally {
+                        helperDbUnit.endTransaction();
                     }
-                    t.endTransaction();
                 }
             }.start();
         }
@@ -139,19 +145,20 @@ public class EnrolleeDaoTest {
 
     @Test
     public void testDelete() {
-        DaoHelperDBUnit t = new DaoHelperDBUnit();
+        DaoHelperDbUnit helperDbUnit = new DaoHelperDbUnit();
         EnrolleeDao enrolleeDAO = new EnrolleeDao();
         Enrollee enrollee = new Enrollee();
         enrollee.setId(2);
-        t.startTransaction(enrolleeDAO);
         try {
+            helperDbUnit.startTransaction(enrolleeDAO);
             LOG.info(enrolleeDAO.delete(enrollee));
-            t.commit();
+            helperDbUnit.commit();
         } catch (ProjectException e) {
-            t.rollback();
+            helperDbUnit.rollback();
             LOG.error("DAO exception", e);
+        } finally {
+            helperDbUnit.endTransaction();
         }
-        t.endTransaction();
     }
 
 

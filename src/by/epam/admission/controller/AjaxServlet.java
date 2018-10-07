@@ -1,10 +1,11 @@
+/*
+ * class: AjaxServlet
+ */
+
 package by.epam.admission.controller;
 
 import by.epam.admission.command.ActionCommand;
-import by.epam.admission.command.Router;
 import by.epam.admission.command.factory.ActionFactory;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,15 +13,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Enumeration;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 15 Sep 2018
+ */
 @WebServlet(
         name = "AjaxServlet",
         urlPatterns = "/ajaxServlet"
 )
 public class AjaxServlet extends HttpServlet {
-
-    private static final Logger LOG = LogManager.getLogger(AjaxServlet.class);
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)

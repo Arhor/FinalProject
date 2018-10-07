@@ -1,5 +1,10 @@
+/*
+ * class: DaoHelperDbUnit
+ */
+
 package by.epam.admission.dao;
 
+import by.epam.admission.exception.ProjectException;
 import by.epam.admission.pool.ConnectionPoolDBUnit;
 import by.epam.admission.pool.ProxyConnection;
 import org.apache.logging.log4j.LogManager;
@@ -8,34 +13,41 @@ import org.apache.logging.log4j.Logger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DaoHelperDBUnit {
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 19 Aug 2018
+ */
+public class DaoHelperDbUnit {
 
-    private static final Logger LOG = LogManager.getLogger(DaoHelperDBUnit.class);
+    private static final Logger LOG =
+            LogManager.getLogger(DaoHelperDbUnit.class);
 
     private ProxyConnection connection;
-
     private ArrayList<AbstractDao> currentDAOs;
 
-    public DaoHelperDBUnit() {
+    public DaoHelperDbUnit() {
         currentDAOs = new ArrayList<>();
     }
 
-    public void startTransaction(AbstractDao dao, AbstractDao...daos) {
+    public void startTransaction(AbstractDao dao, AbstractDao...daos)
+            throws ProjectException {
         if (connection == null) {
             connection = ConnectionPoolDBUnit.POOL.getConnection();
         }
         try {
             connection.setAutoCommit(false);
         } catch (SQLException e) {
-            LOG.error("SQL exception", e);
+            throw new ProjectException("Transaction error", e);
         }
         dao.setConnection(connection);
         currentDAOs.add(dao);
-        LOG.debug(dao.getClass().getSimpleName() + " - added to transaction");
+        LOG.debug(dao.getClass().getSimpleName() +
+                " - received test connection");
         for (AbstractDao concreteDao : daos) {
             concreteDao.setConnection(connection);
             currentDAOs.add(concreteDao);
-            LOG.debug(dao.getClass().getSimpleName() + " - added to transaction");
+            LOG.debug(dao.getClass().getSimpleName() +
+                    " - received test connection");
         }
     }
 
@@ -46,7 +58,8 @@ public class DaoHelperDBUnit {
          */
         for (AbstractDao dao : currentDAOs) {
             dao.setConnection(null);
-            LOG.debug(dao.getClass().getSimpleName() + " - lost test connection");
+            LOG.debug(dao.getClass().getSimpleName() +
+                    " - lost test connection");
         }
         currentDAOs.clear();
         if (connection != null) {
@@ -60,7 +73,7 @@ public class DaoHelperDBUnit {
             try {
                 connection.commit();
             } catch (SQLException e) {
-                LOG.error("SQL exception", e);
+                LOG.error("SQL exception during commit", e);
             }
         }
     }
@@ -70,7 +83,7 @@ public class DaoHelperDBUnit {
             try {
                 connection.rollback();
             } catch (SQLException e) {
-                LOG.error("SQL exception", e);
+                LOG.error("SQL exception during rollback", e);
             }
         }
     }

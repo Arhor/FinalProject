@@ -28,39 +28,28 @@ public class FacultyDaoTest {
 
     @Test
     public void findAllTest() {
-        daoHelper.startTransaction(facultyDao);
         try {
+            daoHelper.startTransaction(facultyDao);
             for (Faculty faculty : facultyDao.findAll()) {
                 LOG.info(faculty);
             }
         } catch (ProjectException e) {
             LOG.error("Test exception", e);
+        } finally {
+            daoHelper.endTransaction();
         }
-        daoHelper.endTransaction();
     }
 
     @Test
     public void findEntityByIdTest() {
-        daoHelper.startTransaction(facultyDao);
         try {
+            daoHelper.startTransaction(facultyDao);
             LOG.info(facultyDao.findEntityById(201));
         } catch (ProjectException e) {
             LOG.error("Test exception", e);
+        } finally {
+            daoHelper.endTransaction();
         }
-        daoHelper.endTransaction();
-    }
-
-    @Test
-    public void findFacultyBySubjectIdTest() {
-        daoHelper.startTransaction(facultyDao);
-        try {
-            for (Faculty faculty : facultyDao.findFacultiesBySubjectId(101)) {
-                LOG.info(faculty);
-            }
-        } catch (ProjectException e) {
-            LOG.error("Test exception", e);
-        }
-        daoHelper.endTransaction();
     }
 
     @Test
@@ -71,16 +60,17 @@ public class FacultyDaoTest {
         faculty.setNameEn("Test faculty");
         faculty.setSeatsPaid(200);
         faculty.setSeatsBudget(50);
-        daoHelper.startTransaction(facultyDao);
         boolean result = false;
         try {
+            daoHelper.startTransaction(facultyDao);
             result = facultyDao.create(faculty);
             daoHelper.commit();
         } catch (ProjectException e) {
             LOG.error("DAO exception", e);
             daoHelper.rollback();
+        } finally {
+            daoHelper.endTransaction();
         }
-        daoHelper.endTransaction();
         Assert.assertFalse(result);
     }
 

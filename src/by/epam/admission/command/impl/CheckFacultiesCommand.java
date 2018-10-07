@@ -47,7 +47,7 @@ public class CheckFacultiesCommand implements ActionCommand {
         String[] facultyIds = request.getParameterValues(PARAM_FACULTY_ID_ARRAY);
 
         try {
-            HashMap<Integer, Boolean> resultSet = FacultyService.checkFaculty(
+            HashMap<Integer, Boolean> resultSet = FacultyService.checkFaculties(
                     enrolleeId, subjects, facultyIds);
 
             JSONObject jsonObject = new JSONObject();

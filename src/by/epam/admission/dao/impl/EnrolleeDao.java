@@ -36,7 +36,6 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SQL_UPDATE_ENROLLEE;
     private static final String SQL_INSERT_TO_ADMISSION_LIST;
     private static final String SQL_DELETE_FROM_ADMISSION_LIST;
-    private static final String SQL_SELECT_ENROLLEE_TOTAL_SCORE;
     private static final String SQL_SELECT_ADMISSION_LIST_ENTRY;
     private static final String SQL_RESTORE_ADMISSION_LIST_ENTRY;
     private static final String SQL_SELECT_ENROLLEE_MARKS;
@@ -49,11 +48,8 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SCHOOL_CERTIFICATE = "school_certificate";
     private static final String USER_ID = "users_id";
     private static final String AVAILABLE = "available";
-    private static final String SUBJECT_ID = "subjects_id";
-    private static final String SCORE = "score";
 
     private static final int ACTIVE = 1;
-    private static final int INACTIVE = 0;
 
 //    @Override
     public List<Enrollee> findAll() throws ProjectException {
@@ -85,11 +81,11 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         return enrollee;
     }
 
-    public Enrollee findEnrolleeByUID(int uid) throws ProjectException {
+    public Enrollee findEnrolleeByUserId(int UserId) throws ProjectException {
         Enrollee enrollee = null;
         try (PreparedStatement st = connection.prepareStatement(
                 String.format(SQL_SELECT_ENROLLEES, USER_ID))) {
-            st.setInt(1, uid);
+            st.setInt(1, UserId);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 enrollee = setEnrollee(rs);
@@ -122,25 +118,18 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 SQL_SELECT_ENROLLEE_MARKS)) {
             st.setInt(1, enrolleeId);
             st.setInt(2, ACTIVE);
-            LOG.debug(enrolleeId + " : " + ACTIVE);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                LOG.debug("START SUBJECT");
                 Subject subject = new Subject();
                 int subjectId = rs.getInt("id");
                 String nameEn = rs.getString("name_en");
                 String nameRu = rs.getString("name_ru");
                 int score = rs.getInt("score");
-
-                LOG.debug(subjectId + " - " + nameEn + " - " + nameRu + " - " + score);
-
                 subject.setId(subjectId);
                 subject.setNameEn(nameEn);
                 subject.setNameRu(nameRu);
                 marks.put(subject, score);
-                LOG.debug("FINISH SUBJECT");
             }
-            LOG.debug("Marks: " + marks);
         } catch (SQLException e) {
             throw new ProjectException("Selection error", e);
         }
@@ -165,50 +154,6 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         return result;
     }
 
-    public boolean checkInactive(int enrolleeId, int facultyId)
-            throws ProjectException {
-        boolean result = false;
-        try (PreparedStatement st = connection.prepareStatement(
-                SQL_SELECT_ADMISSION_LIST_ENTRY)) {
-            st.setInt(1, enrolleeId);
-            st.setInt(2, facultyId);
-            st.setInt(3, INACTIVE);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                result = (rs.getInt(1) == 1);
-            }
-        } catch (SQLException e) {
-            throw new ProjectException("Selection error", e);
-        }
-        return result;
-    }
-
-    public int findEnrolleeTotalScore(Enrollee enrollee) throws ProjectException {
-        int result = -1;
-        try (PreparedStatement st = connection.prepareStatement(
-                SQL_SELECT_ENROLLEE_TOTAL_SCORE)) {
-            st.setInt(1, enrollee.getId());
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                result = rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            LOG.error("Selection error", e);
-            throw new ProjectException("Selection error", e);
-        }
-        return result;
-    }
-
-    // TODO: implemet
-    public int findSubjectScoreByEnrolle(Enrollee enrollee, int subjectId) {
-        return -1;
-    }
-
-    // TODO: find subject by enrollee
-    public List<Subject> findSubjectsByEnrollee() {
-        return null;
-    }
-
     /**
      * Hard deletion of Enrollee from database, supposed to use only by admin
      * @param id - Enrollee ID to delete from database
@@ -223,7 +168,6 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
             st.setInt(1, id);
             flag = st.executeUpdate();
         } catch (SQLException e) {
-            LOG.error("Deletion error", e);
             throw new ProjectException("Deletion error", e);
         }
         return flag != 0;
@@ -268,7 +212,6 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
             }
             result = flag != 0;
         } catch (SQLException e) {
-            LOG.error("SQL exception", e);
             throw new ProjectException("Insertion error", e);
         }
         return result;
@@ -276,20 +219,15 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
 
     public boolean addSubject(int enrolleeId, int subjectId, int subjectScore)
             throws ProjectException {
-        boolean result = false;
-
-        LOG.debug("Enrolle ID: "+ enrolleeId +" Subject ID: " + subjectId + " Score: " + subjectScore);
-
+        boolean result;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_INSERT_SUBJECT_BY_ENROLLEE_ID)) {
             st.setInt(1, enrolleeId);
             st.setInt(2, subjectId);
             st.setInt(3, subjectScore);
             int rows = st.executeUpdate();
-            LOG.debug("AFFECTED ROWS: " + rows);
             result = (rows == 1);
         } catch (SQLException e) {
-            LOG.debug(e);
             throw new ProjectException("Subject insertion error", e);
         }
         return result;
@@ -297,45 +235,39 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
 
     public boolean registerToFacultyById(int enrolleeId, int facultyId)
             throws ProjectException {
-        int flag;
-        try (PreparedStatement st = connection.prepareStatement(
-                SQL_INSERT_TO_ADMISSION_LIST)) {
-            st.setInt(1, enrolleeId);
-            st.setInt(2, facultyId);
-            flag = st.executeUpdate();
-        } catch (SQLException e) {
-            throw new ProjectException("Updating error", e);
-        }
+        int flag = processFacultyRegistration(enrolleeId, facultyId,
+                SQL_INSERT_TO_ADMISSION_LIST);
         return flag != 0;
     }
 
-    // TODO: implement faculty deregister
     public boolean deregisterFromFacultyById(int enrolleeId, int facultyId)
             throws ProjectException {
-        int flag;
-        try (PreparedStatement st = connection.prepareStatement(
-                SQL_DELETE_FROM_ADMISSION_LIST)) {
-            st.setInt(1, enrolleeId);
-            st.setInt(2, facultyId);
-            flag = st.executeUpdate();
-        } catch (SQLException e) {
-            throw new ProjectException("Updating error", e);
-        }
+        int flag = processFacultyRegistration(enrolleeId, facultyId,
+                SQL_DELETE_FROM_ADMISSION_LIST);
         return flag != 0;
     }
 
     public boolean restoreFacultyRegistration(int enrolleeId, int facultyId)
             throws ProjectException {
+        int flag = processFacultyRegistration(enrolleeId, facultyId,
+                SQL_RESTORE_ADMISSION_LIST_ENTRY);
+        return flag != 0;
+    }
+
+    private int processFacultyRegistration(int enrolleeId,
+                                           int facultyId,
+                                           String sql)
+            throws ProjectException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
-                SQL_RESTORE_ADMISSION_LIST_ENTRY)) {
+                sql)) {
             st.setInt(1, enrolleeId);
             st.setInt(2, facultyId);
             flag = st.executeUpdate();
         } catch (SQLException e) {
             throw new ProjectException("Updating error", e);
         }
-        return flag != 0;
+        return flag;
     }
 
     @Override
@@ -424,14 +356,6 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "INSERT INTO `admission_list` " +
                 "(`enrollees_id`,`faculties_id`) " +
                 "VALUES (?,?)";
-        SQL_SELECT_ENROLLEE_TOTAL_SCORE =
-                "SELECT (COALESCE(SUM(`enrollees_has_subjects`.`score`), 0) " +
-                        "+ `enrollees`.`school_certificate`) AS `total_score` " +
-                "FROM `enrollees_has_subjects` " +
-                "RIGHT JOIN `enrollees` " +
-                "ON `enrollees`.`id` = `enrollees_has_subjects`.`enrollees_id` " +
-                "WHERE `enrollees`.`id` = ? " +
-                "GROUP BY `enrollees_has_subjects`.`enrollees_id`";
         SQL_SELECT_ADMISSION_LIST_ENTRY =
                 "SELECT COUNT(*)" +
                 "FROM   `admission_list` " +

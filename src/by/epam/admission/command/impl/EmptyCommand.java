@@ -10,6 +10,7 @@ import by.epam.admission.util.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author Burishinets Maxim
@@ -19,11 +20,10 @@ public class EmptyCommand implements ActionCommand {
 
     @Override
     public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
-        String page = ConfigurationManager.getProperty("path.page.index");
+                          HttpServletResponse response) throws IOException {
         Router router = new Router();
-        router.setPage(page);
-        router.setType(Router.Type.FORWARD);
+        router.setType(Router.Type.ERROR);
+        response.sendError(404);
         return router;
     }
 }

@@ -1,6 +1,10 @@
+/*
+ * class: MailService
+ */
+
 package by.epam.admission.logic;
 
-import by.epam.admission.util.SessionCreator;
+import by.epam.admission.util.EmailSessionCreator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,9 +17,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.ResourceBundle;
 
-public class MailLogic extends Thread {
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 10 Sep 2018
+ */
+public class MailService extends Thread {
 
-    private static final Logger LOG = LogManager.getLogger(MailLogic.class);
+    private static final Logger LOG = LogManager.getLogger(MailService.class);
 
     private MimeMessage message;
     private String sendToEmail;
@@ -23,16 +31,17 @@ public class MailLogic extends Thread {
     private String mailText;
     private ResourceBundle resourceBundle;
 
-    public MailLogic(String sendToEmail, String mailSubject, String mailText,
-                     ResourceBundle resourceBundle) {
+    public MailService(String sendToEmail, String mailSubject, String mailText,
+                       ResourceBundle resourceBundle) {
         this.sendToEmail = sendToEmail;
         this.mailSubject = mailSubject;
         this.mailText = mailText;
         this.resourceBundle = resourceBundle;
     }
 
-    void init() {
-        Session mailSession = new SessionCreator(resourceBundle).createSession();
+    private void init() {
+        Session mailSession =
+                new EmailSessionCreator(resourceBundle).createSession();
         mailSession.setDebug(true);
 
         message = new MimeMessage(mailSession);

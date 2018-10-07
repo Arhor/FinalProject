@@ -38,39 +38,42 @@ public class SubjectDaoTest {
 
     @Test
     public void testFindAll() {
-        daoHelper.startTransaction(subjectDao);
         try {
+            daoHelper.startTransaction(subjectDao);
             for (Subject subject : subjectDao.findAll()) {
                 LOG.info(subject);
             }
         } catch (ProjectException e) {
             LOG.error("Test exception", e);
+        } finally {
+            daoHelper.endTransaction();
         }
-        daoHelper.endTransaction();
     }
 
     @Test
     public void findEntityByIdTest() {
-        daoHelper.startTransaction(subjectDao);
         try {
+            daoHelper.startTransaction(subjectDao);
             LOG.info(subjectDao.findEntityById(101));
         } catch (ProjectException e) {
             LOG.error("Test exception", e);
+        } finally {
+            daoHelper.endTransaction();
         }
-        daoHelper.endTransaction();
     }
 
     @Test
     public void findFacultyBySubjectIdTest() {
-        daoHelper.startTransaction(subjectDao);
         try {
+            daoHelper.startTransaction(subjectDao);
             for (Subject subject : subjectDao.findSubjectsByFacultyId(205)) {
                 LOG.info(subject);
             }
         } catch (ProjectException e) {
             LOG.error("Test exception", e);
+        } finally {
+            daoHelper.endTransaction();
         }
-        daoHelper.endTransaction();
     }
 
     @Test

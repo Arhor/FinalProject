@@ -32,9 +32,6 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
     private static final String SQL_DELETE_FACULTY;
     private static final String SQL_DELETE_FACULTY_BY_ID;
     private static final String SQL_UPDATE_FACULTY;
-    private static final String SQL_SELECT_FACULTIES_BY_SUBJECT_ID;
-    private static final String SQL_SELECT_SEATS_BUDGET;
-    private static final String SQL_SELECT_SEATS_PAID;
 
     // column labels
     private static final String ID = "id";
@@ -74,50 +71,6 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
             throw new ProjectException("Selection error", e);
         }
         return faculty;
-    }
-
-    public List<Faculty> findFacultiesBySubjectId(int id)
-            throws ProjectException {
-        ArrayList<Faculty> faculties = new ArrayList<>();
-        try (PreparedStatement st = connection.prepareStatement(
-                SQL_SELECT_FACULTIES_BY_SUBJECT_ID)) {
-            st.setInt(1, id);
-            ResultSet rs = st.executeQuery();
-            processResult(faculties, rs);
-        } catch (SQLException e) {
-            throw new ProjectException("Selection error", e);
-        }
-        return faculties;
-    }
-
-    public int findBudgetSeatsByFacultyId(int facultyId)
-            throws ProjectException {
-        int result;
-        result = getResult(facultyId, SQL_SELECT_SEATS_BUDGET);
-        return result;
-    }
-
-    public int findPaidSeatsByFacultyId(int facultyId)
-            throws ProjectException {
-        int result;
-        result = getResult(facultyId, SQL_SELECT_SEATS_PAID);
-        return result;
-    }
-
-    private int getResult(int facultyId, String sqlSelectSeats)
-            throws ProjectException {
-        int result = -1;
-        try (PreparedStatement st = connection.prepareStatement(
-                sqlSelectSeats)) {
-            st.setInt(1, facultyId);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                result = rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            throw new ProjectException("Selection error", e);
-        }
-        return result;
     }
 
     @Override
@@ -233,24 +186,5 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
                         "`seats_paid` = ?, " +
                         "`seats_budget` = ? " +
                 "WHERE `id` = ?";
-        SQL_SELECT_FACULTIES_BY_SUBJECT_ID =
-                "SELECT  `faculties`.`id`, " +
-                        "`faculties`.`name_ru`, " +
-                        "`faculties`.`name_en`, " +
-                        "`faculties`.`seats_paid`, " +
-                        "`faculties`.`seats_budget`, " +
-                        "`faculties`.`checked`" +
-                "FROM `faculties` " +
-                "JOIN `faculties_has_subjects` " +
-                "ON `faculties`.`id` = `faculties_has_subjects`.`faculties_id` " +
-                "WHERE `faculties_has_subjects`.`subjects_id` = ?";
-        SQL_SELECT_SEATS_BUDGET =
-                "SELECT `seats_budget` " +
-                "FROM   `faculties` " +
-                "WHERE  `faculties`.`id` = ?";
-        SQL_SELECT_SEATS_PAID =
-                "SELECT `seats_paid` " +
-                "FROM   `faculties` " +
-                "WHERE  `faculties`.`id` = ?";
     }
 }

@@ -41,7 +41,7 @@ public class RegisterToFacultyCommand implements ActionCommand {
         int eid = Integer.parseInt(enrolleeId);
         int fid = Integer.parseInt(facultyId);
         try {
-            if (FacultyService.checkInactive(eid, fid)) {
+            if (!FacultyService.checkFaculty(eid, fid)) {
                 result = FacultyService.restoreFacultyRegistration(eid, fid);
             } else {
                 result = FacultyService.registerToFaculty(eid, fid);

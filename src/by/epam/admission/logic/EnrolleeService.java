@@ -60,7 +60,7 @@ public class EnrolleeService {
         EnrolleeDao enrolleeDao = new EnrolleeDao();
         daoHelper.startTransaction(enrolleeDao);
         try {
-            enrollee = enrolleeDao.findEnrolleeByUID(uid);
+            enrollee = enrolleeDao.findEnrolleeByUserId(uid);
             if (enrollee != null) {
                 TreeMap<Subject, Integer> marks =
                         enrolleeDao.findEnrolleeMarks(enrollee.getId());
