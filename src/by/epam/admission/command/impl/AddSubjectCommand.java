@@ -37,7 +37,7 @@ public class AddSubjectCommand implements ActionCommand {
 
     @Override
     public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
+                          HttpServletResponse response) throws IOException {
         Router router = new Router();
 
         HttpSession session = request.getSession();
@@ -67,13 +67,9 @@ public class AddSubjectCommand implements ActionCommand {
             router.setPage(page);
             router.setType(Router.Type.FORWARD);
         } catch (ProjectException e) {
-            LOG.error(e);
+            LOG.error("Add subject error", e);
             router.setType(Router.Type.ERROR);
-            try {
-                response.sendError(500);
-            } catch (IOException e1) {
-                LOG.error(e1);
-            }
+            response.sendError(500);
         }
         return router;
     }

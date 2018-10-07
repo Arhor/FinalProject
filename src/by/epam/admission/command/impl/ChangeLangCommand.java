@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
  */
 public class ChangeLangCommand implements ActionCommand {
 
+    private static final String PARAM_LANG = "lang";
     private static final String ATTR_LOCALE = "locale";
     private static final String ATTR_ROLE = "role";
     private static final String EN = "en";
@@ -30,7 +31,7 @@ public class ChangeLangCommand implements ActionCommand {
         String page;
         Router router = new Router();
         HttpSession session = request.getSession();
-        String lang = request.getParameter("lang");
+        String lang = request.getParameter(PARAM_LANG);
         switch (lang) {
             case EN:
                 session.setAttribute(ATTR_LOCALE, User.Lang.EN.getValue());

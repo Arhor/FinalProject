@@ -21,6 +21,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class LoginCommand implements ActionCommand {
 
     @Override
     public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
+                          HttpServletResponse response) throws IOException {
         String page;
         Router router = new Router();
         String login = request.getParameter(PARAM_NAME_EMAIL);
@@ -60,13 +61,11 @@ public class LoginCommand implements ActionCommand {
                 if (user.getRole() == User.Role.CLIENT) {
                     int userId = user.getId();
                     Enrollee enrollee = EnrolleeService.findEnrollee(userId);
-
                     if (enrollee != null) {
                         List<Subject> subjects = SubjectService.findSubjects();
                         subjects.removeAll(enrollee.getMarks().keySet());
                         session.setAttribute(ATTR_AVAILABLE_SUBJECTS, subjects);
                     }
-
                     session.setAttribute(ATTR_ENROLLEE, enrollee);
                 }
                 switch (user.getRole()) {
@@ -90,12 +89,12 @@ public class LoginCommand implements ActionCommand {
                 page = ConfigurationManager.getProperty("path.page.login");
                 router.setType(Router.Type.FORWARD);
             }
+            router.setPage(page);
         } catch (ProjectException e) {
             LOG.error(e);
-            page = ConfigurationManager.getProperty("path.page.error");
-            router.setType(Router.Type.FORWARD);
+            router.setType(Router.Type.ERROR);
+            response.sendError(500);
         }
-        router.setPage(page);
         return router;
     }
 

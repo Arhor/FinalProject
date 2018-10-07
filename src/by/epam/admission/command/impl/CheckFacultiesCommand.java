@@ -1,5 +1,5 @@
 /*
- * class: CheckFacultyCommand
+ * class: CheckFacultiesCommand
  */
 
 package by.epam.admission.command.impl;
@@ -25,10 +25,10 @@ import java.util.*;
  * @author Burishinets Maxim
  * @version 1.0 20 Sep 2018
  */
-public class CheckFacultyCommand implements ActionCommand {
+public class CheckFacultiesCommand implements ActionCommand {
 
     private static final Logger LOG =
-            LogManager.getLogger(CheckFacultyCommand.class);
+            LogManager.getLogger(CheckFacultiesCommand.class);
 
     private static final String ATTR_ENROLLEE = "enrollee";
     private static final String PARAM_FACULTY_ID_ARRAY = "facultyId[]";
@@ -36,7 +36,7 @@ public class CheckFacultyCommand implements ActionCommand {
 
     @Override
     public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
+                          HttpServletResponse response) throws IOException {
 
         HttpSession session = request.getSession();
 
@@ -55,12 +55,8 @@ public class CheckFacultyCommand implements ActionCommand {
             response.setContentType("application/json");
             response.getWriter().write(jsonObject.toString());
         } catch (ProjectException | IOException | JSONException e) {
-            LOG.error(e);
-            try {
-                response.sendError(500);
-            } catch (IOException e1) {
-                LOG.error(e1);
-            }
+            LOG.error("Checking faculties error", e);
+            response.sendError(500);
         }
         return null;
     }

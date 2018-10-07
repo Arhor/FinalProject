@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 public class DefineResultCommand implements ActionCommand {
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) {
+    public Router execute(HttpServletRequest request,
+                          HttpServletResponse response) {
+        // TODO: implement faculty admission result
         return null;
     }
 }

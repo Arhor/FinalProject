@@ -19,13 +19,15 @@ import javax.servlet.http.HttpSession;
  */
 public class HomeCommand implements ActionCommand {
 
+    private static final String ATTR_ROLE = "role";
+
     @Override
     public Router execute(HttpServletRequest request,
                           HttpServletResponse response) {
         String page;
         Router router = new Router();
         HttpSession session = request.getSession();
-        User.Role currentRole = (User.Role) session.getAttribute("role");
+        User.Role currentRole = (User.Role) session.getAttribute(ATTR_ROLE);
         switch (currentRole) {
             case GUEST:
                 page = ConfigurationManager.getProperty("path.page.main");

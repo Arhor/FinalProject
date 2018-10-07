@@ -1,3 +1,7 @@
+/*
+ * class: UserService
+ */
+
 package by.epam.admission.logic;
 
 import by.epam.admission.dao.DaoHelper;
@@ -5,10 +9,49 @@ import by.epam.admission.dao.impl.EnrolleeDao;
 import by.epam.admission.dao.impl.UserDao;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.User;
+import by.epam.admission.util.ConfigurationManager;
 
 import java.util.HashMap;
+import java.util.List;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 10 Sep 2018
+ */
 public class UserService {
+
+    private UserService() {}
+
+    public static List<User> findUsers(int currPage, int rowsPerPage)
+            throws ProjectException {
+        List<User> users;
+        DaoHelper helper = new DaoHelper();
+        UserDao userDao = new UserDao();
+        try {
+            helper.startTransaction(userDao);
+            users = userDao.findAll(currPage, rowsPerPage);
+        } catch (ProjectException e) {
+           throw e;
+        } finally {
+            helper.endTransaction();
+        }
+        return users;
+    }
+
+    public static int findTotalUsersAmount() throws ProjectException {
+        int usersAmount;
+        DaoHelper helper = new DaoHelper();
+        UserDao userDao = new UserDao();
+        try {
+            helper.startTransaction(userDao);
+            usersAmount = userDao.findTotalAmount();
+        } catch(ProjectException e) {
+            throw e;
+        } finally {
+            helper.endTransaction();
+        }
+        return usersAmount;
+    }
 
     public static boolean updateUser(User user, String password) {
         boolean result = false;

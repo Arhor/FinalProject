@@ -31,7 +31,7 @@ public class CheckUsersCommand implements ActionCommand {
 
     @Override
     public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
+                          HttpServletResponse response) throws IOException {
 
         String[] userIds = request.getParameterValues(PARAM_USER_ID_ARRAY);
         try {
@@ -42,12 +42,8 @@ public class CheckUsersCommand implements ActionCommand {
             response.setContentType("application/json");
             response.getWriter().write(jsonObject.toString());
         } catch (ProjectException | IOException | JSONException e) {
-            LOG.error(e);
-            try {
-                response.sendError(500);
-            } catch (IOException e1) {
-                LOG.error(e1);
-            }
+            LOG.error("Checking users error", e);
+            response.sendError(500);
         }
         return null;
     }

@@ -66,7 +66,7 @@
                 </li>
                 <c:if test="${sessionScope.role.toString() eq 'ADMIN'}">
                     <li class="nav-item active  ">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_users">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_users&target_page=first">
                             <i class="material-icons">people</i>
                             <p><fmt:message key="label.admin.users" /></p>
                         </a>

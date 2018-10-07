@@ -32,7 +32,7 @@ public class DeregisterFromFaculty implements ActionCommand {
 
     @Override
     public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
+                          HttpServletResponse response) throws IOException {
 
         String enrolleeId = request.getParameter(PARAM_ENROLLEE_ID);
         String facultyId = request.getParameter(PARAM_FACULTY_ID);
@@ -50,11 +50,7 @@ public class DeregisterFromFaculty implements ActionCommand {
             response.getWriter().write(jsonObject.toString());
         } catch (ProjectException | IOException | JSONException e) {
             LOG.error("Deregister from faculty error", e);
-            try {
-                response.sendError(500);
-            } catch (IOException e1) {
-                LOG.error("Send error failed", e);
-            }
+            response.sendError(500);
         }
         return null;
     }

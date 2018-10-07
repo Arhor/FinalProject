@@ -1,3 +1,7 @@
+/*
+ * class: FacultyService
+ */
+
 package by.epam.admission.logic;
 
 import by.epam.admission.dao.DaoHelper;
@@ -5,7 +9,6 @@ import by.epam.admission.dao.impl.EnrolleeDao;
 import by.epam.admission.dao.impl.FacultyDao;
 import by.epam.admission.dao.impl.SubjectDao;
 import by.epam.admission.exception.ProjectException;
-import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Faculty;
 import by.epam.admission.model.Subject;
 import org.apache.logging.log4j.LogManager;
@@ -13,12 +16,17 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 09 Sep 2018
+ */
 public class FacultyService {
 
-    private static final Logger LOG = LogManager.getLogger(FacultyService.class);
+    private static final Logger LOG =
+            LogManager.getLogger(FacultyService.class);
 
     public static List<Faculty> findFaculties() throws ProjectException {
-        List<Faculty> faculties = null;
+        List<Faculty> faculties;
         DaoHelper helper = new DaoHelper();
         FacultyDao facultyDao = new FacultyDao();
         SubjectDao subjectDao = new SubjectDao();

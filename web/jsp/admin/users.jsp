@@ -65,7 +65,7 @@
                     </a>
                 </li>
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_users">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_users&target_page=first">
                         <i class="material-icons">people</i>
                         <p><fmt:message key="label.admin.users" /></p>
                     </a>
@@ -100,6 +100,7 @@
                                             <th><fmt:message key="label.email" /></th>
                                             <th><fmt:message key="label.name.first" /></th>
                                             <th><fmt:message key="label.name.last" /></th>
+                                            <th class="text-center"><fmt:message key="label.user.role" /></th>
                                             <th class="text-center"><fmt:message key="label.status" /></th>
                                         </tr>
                                         </thead>
@@ -110,13 +111,26 @@
                                                 <td>${currUser.email}</td>
                                                 <td>${currUser.firstName}</td>
                                                 <td>${currUser.lastName}</td>
+                                                <td class="text-center">${currUser.role}</td>
                                                 <td class="td-actions text-center">
-                                                    <button type="button" rel="tooltip" class="btn btn-success" style="display : none" id="uid${currUser.id}">
-                                                        <i class="material-icons">person</i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" class="btn btn-danger" style="display : none" id="uid${currUser.id}">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
+                                                    <c:choose>
+                                                        <c:when test="${currUser.role.toString() eq 'ADMIN'}">
+                                                            <button type="button" class="btn btn-success" style="display : none" id="uid${currUser.id}" disabled>
+                                                                <i class="material-icons">person</i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-danger" style="display : none" id="uid${currUser.id}" disabled>
+                                                                <i class="material-icons">close</i>
+                                                            </button>
+                                                        </c:when>
+                                                        <c:when test="${currUser.role.toString() eq 'CLIENT'}">
+                                                            <button type="button" class="btn btn-success" style="display : none" id="uid${currUser.id}">
+                                                                <i class="material-icons">person</i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-danger" style="display : none" id="uid${currUser.id}">
+                                                                <i class="material-icons">close</i>
+                                                            </button>
+                                                        </c:when>
+                                                    </c:choose>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -128,24 +142,24 @@
                                         <c:choose>
                                             <c:when test="${sessionScope.pageNum <= 0}">
                                                 <li class="page-item disabled">
-                                                    <a class="page-link" href="${pageContext.request.contextPath}/controller?command=show_users_prev" tabindex="-1"><fmt:message key="label.prev" /></a>
+                                                    <a class="page-link" href="${pageContext.request.contextPath}/controller?command=show_users&target_page=prev" tabindex="-1"><fmt:message key="label.prev" /></a>
                                                 </li>
                                             </c:when>
                                             <c:when test="${sessionScope.pageNum > 0}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="${pageContext.request.contextPath}/controller?command=show_users_prev"><fmt:message key="label.prev" /></a>
+                                                    <a class="page-link" href="${pageContext.request.contextPath}/controller?command=show_users&target_page=prev"><fmt:message key="label.prev" /></a>
                                                 </li>
                                             </c:when>
                                         </c:choose>
                                         <c:choose>
                                             <c:when test="${sessionScope.pageNum >= sessionScope.pageMax}">
                                                 <li class="page-item disabled">
-                                                    <a class="page-link" href="${pageContext.request.contextPath}/controller?command=show_users_next" tabindex="-1"><fmt:message key="label.next" /></a>
+                                                    <a class="page-link" href="${pageContext.request.contextPath}/controller?command=show_users&target_page=next" tabindex="-1"><fmt:message key="label.next" /></a>
                                                 </li>
                                             </c:when>
                                             <c:when test="${sessionScope.pageNum < sessionScope.pageMax}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="${pageContext.request.contextPath}/controller?command=show_users_next"><fmt:message key="label.next" /></a>
+                                                    <a class="page-link" href="${pageContext.request.contextPath}/controller?command=show_users&target_page=next"><fmt:message key="label.next" /></a>
                                                 </li>
                                             </c:when>
                                         </c:choose>

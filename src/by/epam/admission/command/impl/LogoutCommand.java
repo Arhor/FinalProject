@@ -26,6 +26,7 @@ public class LogoutCommand implements ActionCommand {
         router.setType(Router.Type.FORWARD);
         request.getSession().invalidate();
         return router;
+        // TODO: prevent return back via 'back' or 'backspace' buttons
     }
 
 }

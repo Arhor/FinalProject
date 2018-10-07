@@ -6,6 +6,7 @@ package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
+import by.epam.admission.logic.ProfileService;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
 
@@ -28,19 +29,7 @@ public class ProfileCommand implements ActionCommand {
         String page;
         HttpSession session = request.getSession();
         User.Role role = (User.Role) session.getAttribute(ATTR_ROLE);
-        switch (role) {
-            case CLIENT:
-                page = ConfigurationManager.getProperty(
-                        "path.page.client.profile");
-                break;
-            case ADMIN:
-                page = ConfigurationManager.getProperty(
-                        "path.page.admin.profile");
-                break;
-            case GUEST:
-            default:
-                page = ConfigurationManager.getProperty("path.page.main");
-        }
+        page = ProfileService.definePage(role);
         router.setPage(page);
         router.setType(Router.Type.FORWARD);
         return router;

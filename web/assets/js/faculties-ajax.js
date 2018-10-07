@@ -5,7 +5,7 @@ $(document).ready(function () {
     if (enrolleeID > 0) {
 
         var sendTo = {
-            command    : 'check_faculty',
+            command    : 'check_faculties',
             facultyId  : []
         };
 

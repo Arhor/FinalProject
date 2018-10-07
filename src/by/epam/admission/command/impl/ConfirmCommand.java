@@ -36,7 +36,7 @@ public class ConfirmCommand implements ActionCommand {
 
     @Override
     public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
+                          HttpServletResponse response) throws IOException {
         Router router = new Router();
         HttpSession session = request.getSession();
 
@@ -74,13 +74,9 @@ public class ConfirmCommand implements ActionCommand {
                 router.setType(Router.Type.FORWARD);
             }
         } catch (ProjectException e) {
-            LOG.error(e);
+            LOG.error("Registration confirm error", e);
             router.setType(Router.Type.ERROR);
-            try {
-                response.sendError(500);
-            } catch (IOException e1) {
-                LOG.error(e1);
-            }
+            response.sendError(500);
         } finally {
             session.removeAttribute(ATTR_CONFIRMATION_CODE);
             session.removeAttribute(ATTR_PASSWORD);
