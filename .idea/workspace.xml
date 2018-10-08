@@ -6,35 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43dc64a4-49e4-4d08-bbd3-db3f7a64b274" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/ActionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/ActionCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/ActionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/ActionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/Router.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/Router.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/AddSubjectCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/AddSubjectCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/BlockUserCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/BlockUserCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/ChangeLangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/ChangeLangCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/CheckFacultiesCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/CheckFacultiesCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/CheckUsersCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/CheckUsersCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/ConfirmCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/ConfirmCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/DefineResultCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/DefineResultCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/DeregisterFromFaculty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/DeregisterFromFaculty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/EmptyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/EmptyCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/HomeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/HomeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/LoginCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/LoginCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/LogoutCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/LogoutCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/ProfileCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/ProfileCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/RegisterCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/RegisterCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/RegisterToFacultyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/RegisterToFacultyCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/ShowFacultiesCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/ShowFacultiesCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/ShowUsersCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/ShowUsersCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/SignInCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/SignInCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/SignUpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/SignUpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/StartCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/StartCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/UnblockUserCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/UnblockUserCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/command/impl/UpdateProfileCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/command/impl/UpdateProfileCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/controller/AjaxServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/controller/AjaxServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/by/epam/admission/controller/ControllerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/by/epam/admission/controller/ControllerServlet.java" afterDir="false" />
-    </list>
+    <list default="true" id="43dc64a4-49e4-4d08-bbd3-db3f7a64b274" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -311,7 +283,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/ActionFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
+            <state relative-caret-position="90">
               <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
             </state>
           </provider>
@@ -513,7 +485,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539025575394" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539034702962" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/uml" />
@@ -802,7 +774,7 @@
       <workItem from="1538721755724" duration="9462000" />
       <workItem from="1538817961972" duration="34068000" />
       <workItem from="1538932369620" duration="14276000" />
-      <workItem from="1538988870821" duration="21357000" />
+      <workItem from="1538988870821" duration="21706000" />
     </task>
     <servers />
   </component>
@@ -839,7 +811,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="390390000" />
+    <option name="totallyTimeSpent" value="390739000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -852,7 +824,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6585366" visible="true" weight="0.2322239" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -875,7 +846,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info active="true" anchor="bottom" id="Run" order="13" visible="true" weight="0.3622951" />
+      <window_info active="true" anchor="bottom" id="Run" order="13" visible="true" weight="0.41311476" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -940,7 +911,7 @@
         <state relative-caret-position="172">
           <caret line="97" column="32" selection-start-line="97" selection-start-column="32" selection-end-line="97" selection-end-column="32" />
           <folding>
-            <marker date="1538950601979" expanded="true" signature="1746:2285" ph="..." />
+            <marker date="1539034670563" expanded="true" signature="1746:2285" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1268,7 +1239,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/epam/admission/command/ActionFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
+        <state relative-caret-position="90">
           <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
         </state>
       </provider>
