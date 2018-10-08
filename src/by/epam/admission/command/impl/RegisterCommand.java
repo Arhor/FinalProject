@@ -44,7 +44,12 @@ public class RegisterCommand implements ActionCommand {
         lastName = XssFilter.doFilter(lastName);
 
         try {
-            if (EmailValidator.validate(email)) {
+            boolean validEmail = InputValidator.validate(email, InputValidator.InputType.EMAIL);
+            boolean validPassword = InputValidator.validate(password, InputValidator.InputType.PASSWORD);
+            boolean validFirstName = InputValidator.validate(firstName, InputValidator.InputType.FIRST_NAME);
+            boolean validLastName = InputValidator.validate(lastName, InputValidator.InputType.LAST_NAME);
+
+            if (validEmail && validPassword && validFirstName && validLastName) {
                 if (UserService.checkEmail(email)) {
                     User user = new User();
                     user.setEmail(email);
@@ -78,7 +83,7 @@ public class RegisterCommand implements ActionCommand {
                 }
             } else {
                 request.setAttribute(Names.REGISTRATION_ERROR, email + " "
-                        + MessageManager.getProperty("message.email.invalid"));
+                        + MessageManager.getProperty("message.registration.invalid"));
                 page = ConfigurationManager.getProperty("path.page.registration");
             }
             router.setPage(page);

@@ -5,10 +5,10 @@
   Time: 20.56
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${locale}" />
+<fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="resources.pagecontent" />
 <!doctype html>
 <html lang="en">
@@ -43,13 +43,13 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=home">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=home">
                         <i class="material-icons">home</i>
                         <p><fmt:message key="label.homepage" /></p>
                     </a>
                 </li>
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=show_faculties">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_faculties">
                         <i class="material-icons">domain</i>
                         <p><fmt:message key="label.faculties" /></p>
                     </a>
@@ -69,12 +69,12 @@
                                 <h3 class="card-title"><fmt:message key="label.registration.title" /></h3>
                             </div>
                             <div class="card-body">
-                                <form action="/controller" name="registrationForm" method="POST">
+                                <form action="${pageContext.request.contextPath}/controller" name="registrationForm" method="POST">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-6">
                                             <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.email" /></label>
-                                                <input class="form-control" name="email" type="email" pattern="[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*([a-z]{2,4})" required />
+                                                <label for="email" class="bmd-label-floating"><fmt:message key="label.email" /></label>
+                                                <input class="form-control" id="email" name="email" type="email" pattern="[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*([a-z]{2,4})" required />
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-sm-6">
@@ -90,28 +90,28 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.password" /></label>
-                                                <input class="form-control" name="password" type="password" required />
+                                                <label for="password" class="bmd-label-floating"><fmt:message key="label.password" /></label>
+                                                <input class="form-control" id="password" name="password" type="password" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{6,10}$" required />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.name.first" /></label>
-                                                <input class="form-control" name="firstName" type="text" required />
+                                                <label for="firstName" class="bmd-label-floating"><fmt:message key="label.name.first" /></label>
+                                                <input class="form-control" id="firstName" name="firstName" type="text" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,35}$" required />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.name.last" /></label>
-                                                <input class="form-control" name="lastName" type="text" required />
+                                                <label for="lastName" class="bmd-label-floating"><fmt:message key="label.name.last" /></label>
+                                                <input class="form-control" id="lastName" name="lastName" type="text" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,35}$" required />
                                             </div>
                                         </div>
                                     </div>
-                                    ${registrationError}
+                                    ${requestScope.registrationError}
                                     <div class="row">
                                         <button class="btn btn-primary col-lg-8 col-md-8 ml-auto mr-auto" name="command" value="register"><fmt:message key="label.register" /></button>
                                     </div>

@@ -130,7 +130,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="bmd-label-floating"><fmt:message key="label.client.profile.certificate" /></label>
-                                                <input type="text" class="form-control" name="certificate" value="${sessionScope.enrollee.schoolCertificate}" pattern="^[0-9]{1,2}$" required/>
+                                                <input type="text" class="form-control" name="certificate" value="${sessionScope.enrollee.schoolCertificate}" pattern="^([0-9]{1,2})|(100)$" required/>
                                             </div>
                                         </div>
                                     </div>
@@ -159,15 +159,9 @@
         </footer>
     </div>
 </div>
+<%@ include file="/jsp/modules/core_js.jspf"%>
 <!-- Clock -->
 <script src="${pageContext.request.contextPath}/assets/js/clock.js" type="text/javascript"></script>
-<!--   Core JS Files   -->
-<script src="${pageContext.request.contextPath}/assets/js/core/jquery.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="${pageContext.request.contextPath}/assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
 </body>
 
 </html>

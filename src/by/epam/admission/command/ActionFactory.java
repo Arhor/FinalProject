@@ -4,7 +4,7 @@
 
 package by.epam.admission.command;
 
-import by.epam.admission.command.impl.EmptyCommand;
+import by.epam.admission.util.Names;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,13 +18,11 @@ public class ActionFactory {
 
     private static final Logger LOG = LogManager.getLogger(ActionFactory.class);
 
-    private static final String PARAM_COMMAND = "command";
-
     private ActionFactory() {}
 
     public static ActionCommand defineCommand(HttpServletRequest request) {
         ActionCommand currentCommand = CommandEnum.EMPTY_COMMAND.getCurrentCommand();
-        String action = request.getParameter(PARAM_COMMAND);
+        String action = request.getParameter(Names.COMMAND);
         if (action == null || action.isEmpty()) {
             return currentCommand;
         } else {
