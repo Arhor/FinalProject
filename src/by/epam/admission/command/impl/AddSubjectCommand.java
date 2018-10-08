@@ -12,6 +12,7 @@ import by.epam.admission.logic.SubjectService;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Subject;
 import by.epam.admission.util.ConfigurationManager;
+import by.epam.admission.util.Names;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,11 +31,6 @@ public class AddSubjectCommand implements ActionCommand {
     private static final Logger LOG =
             LogManager.getLogger(AddSubjectCommand.class);
 
-    private static final String ATTR_ENROLLEE = "enrollee";
-    private static final String ATTR_AVAILABLE_SUBJECT = "availableSubjects";
-    private static final String PARAM_SUBJECT_TO_ADD = "subjectToAdd";
-    private static final String PARAM_SUBJECT_SCORE = "subjectScore";
-
     @Override
     public Router execute(HttpServletRequest request,
                           HttpServletResponse response) throws IOException {
@@ -42,15 +38,15 @@ public class AddSubjectCommand implements ActionCommand {
 
         HttpSession session = request.getSession();
 
-        Enrollee enrollee = (Enrollee) session.getAttribute(ATTR_ENROLLEE);
+        Enrollee enrollee = (Enrollee) session.getAttribute(Names.ENROLLEE);
         List<Subject> subjects = (List<Subject>) session.getAttribute(
-                ATTR_AVAILABLE_SUBJECT);
+                Names.AVAILABLE_SUBJECTS);
 
         int subjectId = Integer.valueOf(
-                request.getParameter(PARAM_SUBJECT_TO_ADD)
+                request.getParameter(Names.SUBJECT_TO_ADD)
                        .replaceAll("[^0-9]", ""));
         int subjectScore = Integer.valueOf(
-                request.getParameter(PARAM_SUBJECT_SCORE));
+                request.getParameter(Names.SUBJECT_SCORE));
 
         try {
             boolean result = EnrolleeService.addSubject(
@@ -59,8 +55,8 @@ public class AddSubjectCommand implements ActionCommand {
                 Subject subject = SubjectService.findSubjectById(subjectId);
                 subjects.remove(subject);
                 enrollee.getMarks().put(subject, subjectScore);
-                session.setAttribute(ATTR_ENROLLEE, enrollee);
-                session.setAttribute(ATTR_AVAILABLE_SUBJECT, subjects);
+                session.setAttribute(Names.ENROLLEE, enrollee);
+                session.setAttribute(Names.AVAILABLE_SUBJECTS, subjects);
             }
             String page = ConfigurationManager.getProperty(
                     "path.page.client.main");

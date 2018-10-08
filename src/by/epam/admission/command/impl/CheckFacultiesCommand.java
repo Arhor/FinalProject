@@ -10,6 +10,7 @@ import by.epam.admission.exception.ProjectException;
 import by.epam.admission.logic.FacultyService;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Subject;
+import by.epam.admission.util.Names;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
@@ -30,28 +31,24 @@ public class CheckFacultiesCommand implements ActionCommand {
     private static final Logger LOG =
             LogManager.getLogger(CheckFacultiesCommand.class);
 
-    private static final String ATTR_ENROLLEE = "enrollee";
-    private static final String PARAM_FACULTY_ID_ARRAY = "facultyId[]";
-    private static final String PARAM_RESULT_SET = "resultSet";
-
     @Override
     public Router execute(HttpServletRequest request,
                           HttpServletResponse response) throws IOException {
 
         HttpSession session = request.getSession();
 
-        Enrollee enrollee = (Enrollee) session.getAttribute(ATTR_ENROLLEE);
+        Enrollee enrollee = (Enrollee) session.getAttribute(Names.ENROLLEE);
 
         int enrolleeId = enrollee.getId();
         Set<Subject> subjects = enrollee.getMarks().keySet();
-        String[] facultyIds = request.getParameterValues(PARAM_FACULTY_ID_ARRAY);
+        String[] facultyIds = request.getParameterValues(Names.FACULTY_ID_ARRAY);
 
         try {
             HashMap<Integer, Boolean> resultSet = FacultyService.checkFaculties(
                     enrolleeId, subjects, facultyIds);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put(PARAM_RESULT_SET, resultSet);
+            jsonObject.put(Names.RESULT_SET, resultSet);
             response.setContentType("application/json");
             response.getWriter().write(jsonObject.toString());
         } catch (ProjectException | IOException | JSONException e) {

@@ -5,7 +5,7 @@
 package by.epam.admission.controller;
 
 import by.epam.admission.command.ActionCommand;
-import by.epam.admission.command.factory.ActionFactory;
+import by.epam.admission.command.ActionFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,8 +40,7 @@ public class AjaxServlet extends HttpServlet {
                                 HttpServletResponse response)
             throws ServletException, IOException {
 
-        ActionFactory client = new ActionFactory();
-        ActionCommand command = client.defineCommand(request);
+        ActionCommand command = ActionFactory.defineCommand(request);
 
         command.execute(request, response);
     }

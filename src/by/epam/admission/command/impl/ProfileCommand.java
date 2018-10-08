@@ -9,6 +9,7 @@ import by.epam.admission.command.Router;
 import by.epam.admission.logic.ProfileService;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
+import by.epam.admission.util.Names;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,15 +21,13 @@ import javax.servlet.http.HttpSession;
  */
 public class ProfileCommand implements ActionCommand {
 
-    private static final String ATTR_ROLE = "role";
-
     @Override
     public Router execute(HttpServletRequest request,
                           HttpServletResponse response) {
         Router router = new Router();
         String page;
         HttpSession session = request.getSession();
-        User.Role role = (User.Role) session.getAttribute(ATTR_ROLE);
+        User.Role role = (User.Role) session.getAttribute(Names.ROLE);
         page = ProfileService.definePage(role);
         router.setPage(page);
         router.setType(Router.Type.FORWARD);

@@ -1,7 +1,8 @@
-package by.epam.admission.util;
+/*
+ * class: EmailSessionCreator
+ */
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+package by.epam.admission.util;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
@@ -9,7 +10,10 @@ import javax.mail.Session;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 20 Aug 2018
+ */
 public class EmailSessionCreator {
 
     private String smtpHost;
@@ -18,18 +22,11 @@ public class EmailSessionCreator {
     private String userPass;
     private Properties sessionProperties;
 
-    private static final Logger LOG = LogManager.getLogger(EmailSessionCreator.class);
-
     public EmailSessionCreator(ResourceBundle resourceBundle) {
         smtpHost = resourceBundle.getString("mail.smtp.host");
         smtpPort = resourceBundle.getString("mail.smtp.port");
         userName = resourceBundle.getString("mail.user.name");
         userPass = resourceBundle.getString("mail.user.password");
-
-        LOG.debug(smtpHost + "\n"
-                + smtpPort + "\n"
-                + userName + "\n"
-                + userPass + "\n");
 
         sessionProperties = new Properties();
 
@@ -45,7 +42,7 @@ public class EmailSessionCreator {
         sessionProperties.setProperty("mail.smtp.quitwait", "false");
     }
 
-    public Session createSession() {
+    public Session createEmailSession() {
         return Session.getDefaultInstance(sessionProperties,
                 new Authenticator() {
                     @Override

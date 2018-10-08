@@ -10,6 +10,7 @@ import by.epam.admission.exception.ProjectException;
 import by.epam.admission.logic.UserService;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
+import by.epam.admission.util.Names;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,28 +30,23 @@ public class ShowUsersCommand implements ActionCommand {
             LogManager.getLogger(ShowUsersCommand.class);
 
     private static final int ROWS_PER_PAGE = 10;
-    private static final String ATTR_USERS = "users";
-    private static final String ATTR_ROLE = "role";
-    private static final String ATTR_PAGE_NUM = "pageNum";
-    private static final String ATTR_PAGE_MAX = "pageMax";
-    private static final String PARAM_TARGET_PAGE = "target_page";
 
     @Override
     public Router execute(HttpServletRequest request,
                           HttpServletResponse response) throws IOException {
         Router router = new Router();
         HttpSession session = request.getSession();
-        User.Role role = (User.Role) session.getAttribute(ATTR_ROLE);
+        User.Role role = (User.Role) session.getAttribute(Names.ROLE);
         if (role == User.Role.ADMIN) {
             try {
                 String page;
                 List<User> users;
                 Integer pageNum = (Integer)
-                        request.getSession().getAttribute(ATTR_PAGE_NUM);
+                        request.getSession().getAttribute(Names.PAGE_NUM);
                 if (pageNum == null) {
                     pageNum = 0;
                 }
-                String targetPage = request.getParameter(PARAM_TARGET_PAGE);
+                String targetPage = request.getParameter(Names.TARGET_PAGE);
                 switch (targetPage) {
                     case "next":
                         pageNum++;
@@ -66,9 +62,9 @@ public class ShowUsersCommand implements ActionCommand {
                 int totalUsers = UserService.findTotalUsersAmount();
                 int pageMax = (int) (Math.ceil(
                         (double) totalUsers / ROWS_PER_PAGE) - 1);
-                request.setAttribute(ATTR_USERS, users);
-                request.getSession().setAttribute(ATTR_PAGE_NUM, pageNum);
-                request.getSession().setAttribute(ATTR_PAGE_MAX, pageMax);
+                request.setAttribute(Names.USERS, users);
+                request.getSession().setAttribute(Names.PAGE_NUM, pageNum);
+                request.getSession().setAttribute(Names.PAGE_MAX, pageMax);
                 page = ConfigurationManager.getProperty("path.page.admin.users");
                 router.setPage(page);
                 router.setType(Router.Type.FORWARD);

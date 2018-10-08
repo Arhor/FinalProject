@@ -1,5 +1,13 @@
+/*
+ * class: ConfirmationCodeGenerator
+ */
+
 package by.epam.admission.util;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 20 Aug 2018
+ */
 public class ConfirmationCodeGenerator {
 
     private static final int CODE_OFFSET = 65531;

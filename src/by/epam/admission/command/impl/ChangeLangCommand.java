@@ -8,10 +8,14 @@ import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
+import by.epam.admission.util.Names;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import static by.epam.admission.util.Names.EN;
+import static by.epam.admission.util.Names.RU;
 
 /**
  * @author Burishinets Maxim
@@ -19,28 +23,22 @@ import javax.servlet.http.HttpSession;
  */
 public class ChangeLangCommand implements ActionCommand {
 
-    private static final String PARAM_LANG = "lang";
-    private static final String ATTR_LOCALE = "locale";
-    private static final String ATTR_ROLE = "role";
-    private static final String EN = "en";
-    private static final String RU = "ru";
-
     @Override
     public Router execute(HttpServletRequest request,
                           HttpServletResponse response) {
         String page;
         Router router = new Router();
         HttpSession session = request.getSession();
-        String lang = request.getParameter(PARAM_LANG);
+        String lang = request.getParameter(Names.LANG);
         switch (lang) {
             case EN:
-                session.setAttribute(ATTR_LOCALE, User.Lang.EN.getValue());
+                session.setAttribute(Names.LOCALE, User.Lang.EN.getValue());
                 break;
             case RU:
-                session.setAttribute(ATTR_LOCALE, User.Lang.RU.getValue());
+                session.setAttribute(Names.LOCALE, User.Lang.RU.getValue());
                 break;
         }
-        User.Role currentRole = (User.Role) session.getAttribute(ATTR_ROLE);
+        User.Role currentRole = (User.Role) session.getAttribute(Names.ROLE);
         switch (currentRole) {
             case GUEST:
                 page = ConfigurationManager.getProperty("path.page.main");

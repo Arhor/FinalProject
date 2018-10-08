@@ -1,10 +1,19 @@
+/*
+ * class: MessageManager
+ */
+
 package by.epam.admission.util;
 
 import java.util.ResourceBundle;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 20 Aug 2018
+ */
 public class MessageManager {
 
-    private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("resources.messages");
+    private static final ResourceBundle resourceBundle =
+            ResourceBundle.getBundle("resources.messages");
 
     private MessageManager(){}
 

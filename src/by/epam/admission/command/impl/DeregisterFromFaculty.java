@@ -8,6 +8,7 @@ import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.logic.FacultyService;
+import by.epam.admission.util.Names;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
@@ -25,17 +26,12 @@ public class DeregisterFromFaculty implements ActionCommand {
     private static final Logger LOG =
             LogManager.getLogger(DeregisterFromFaculty.class);
 
-    private static final String PARAM_ENROLLEE_ID = "enrolleeId";
-    private static final String PARAM_FACULTY_ID = "facultyId";
-    private static final String PARAM_FACULTY = "faculty";
-    private static final String PARAM_RESULT = "result";
-
     @Override
     public Router execute(HttpServletRequest request,
                           HttpServletResponse response) throws IOException {
 
-        String enrolleeId = request.getParameter(PARAM_ENROLLEE_ID);
-        String facultyId = request.getParameter(PARAM_FACULTY_ID);
+        String enrolleeId = request.getParameter(Names.ENROLLEE_ID);
+        String facultyId = request.getParameter(Names.FACULTY_ID);
         facultyId = facultyId.replaceAll("[^0-9]","");
 
         int eid = Integer.parseInt(enrolleeId);
@@ -44,8 +40,8 @@ public class DeregisterFromFaculty implements ActionCommand {
         try {
             boolean result = FacultyService.deregisterFromFaculty(eid, fid);
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put(PARAM_FACULTY, fid);
-            jsonObject.put(PARAM_RESULT, result);
+            jsonObject.put(Names.FACULTY, fid);
+            jsonObject.put(Names.RESULT, result);
             response.setContentType("application/json");
             response.getWriter().write(jsonObject.toString());
         } catch (ProjectException | IOException | JSONException e) {

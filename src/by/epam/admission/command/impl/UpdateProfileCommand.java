@@ -14,6 +14,8 @@ import by.epam.admission.logic.UserService;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Subject;
 import by.epam.admission.model.User;
+import by.epam.admission.util.Names;
+import by.epam.admission.util.XssFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,17 +35,6 @@ public class UpdateProfileCommand implements ActionCommand {
     private static final Logger LOG =
             LogManager.getLogger(UpdateProfileCommand.class);
 
-    private static final String PARAM_FIRST_NAME = "firstName";
-    private static final String PARAM_LAST_NAME = "lastName";
-    private static final String PARAM_PASSWORD = "password";
-    private static final String PARAM_CITY = "city";
-    private static final String PARAM_COUNTRY = "country";
-    private static final String PARAM_CERTIFICATE = "certificate";
-    private static final String ATTR_USER = "user";
-    private static final String ATTR_ENROLLEE = "enrollee";
-    private static final String ATTR_ROLE = "role";
-    private static final String ATTR_AVAILABLE_SUBJECTS = "availableSubjects";
-
     @Override
     public Router execute(HttpServletRequest request,
                           HttpServletResponse response) throws IOException {
@@ -51,26 +42,26 @@ public class UpdateProfileCommand implements ActionCommand {
         String page;
         HttpSession session = request.getSession();
 
-        String firstName = request.getParameter(PARAM_FIRST_NAME);
-        String lastName = request.getParameter(PARAM_LAST_NAME);
-        String password = request.getParameter(PARAM_PASSWORD);
+        String firstName = request.getParameter(Names.FIRST_NAME);
+        String lastName = request.getParameter(Names.LAST_NAME);
+        String password = request.getParameter(Names.PASSWORD);
 
-        firstName = firstName.replaceAll("</?script>", "");
-        lastName = lastName.replaceAll("</?script>", "");
+        firstName = XssFilter.doFilter(firstName);
+        lastName = XssFilter.doFilter(lastName);
 
-        User user = (User) session.getAttribute(ATTR_USER);
+        User user = (User) session.getAttribute(Names.USER);
 
         try {
             if (user.getRole() == User.Role.CLIENT) {
-                String city = request.getParameter(PARAM_CITY);
-                String country = request.getParameter(PARAM_COUNTRY);
-                String certificate = request.getParameter(PARAM_CERTIFICATE);
+                String city = request.getParameter(Names.CITY);
+                String country = request.getParameter(Names.COUNTRY);
+                String certificate = request.getParameter(Names.CERTIFICATE);
 
-                city = city.replaceAll("</?script>", "");
-                country = country.replaceAll("</?script>", "");
-                certificate = certificate.replaceAll("</?script>", "");
+                city = XssFilter.doFilter(city);
+                country = XssFilter.doFilter(country);
+                certificate = XssFilter.doFilter(certificate);
 
-                Enrollee enrollee = (Enrollee) session.getAttribute(ATTR_ENROLLEE);
+                Enrollee enrollee = (Enrollee) session.getAttribute(Names.ENROLLEE);
                 if (enrollee == null) {
                     enrollee = new Enrollee();
                     enrollee.setUserId(user.getId());
@@ -82,7 +73,7 @@ public class UpdateProfileCommand implements ActionCommand {
                     List<Subject> subjects = SubjectService.findSubjects();
                     if (subjects != null) {
                         subjects.removeAll(enrollee.getMarks().keySet());
-                        session.setAttribute(ATTR_AVAILABLE_SUBJECTS, subjects);
+                        session.setAttribute(Names.AVAILABLE_SUBJECTS, subjects);
                     }
                     boolean registrationResult =
                             EnrolleeService.registerEnrollee(enrollee);
@@ -95,17 +86,17 @@ public class UpdateProfileCommand implements ActionCommand {
                     enrollee.setSchoolCertificate(Integer.parseInt(certificate));
                     enrollee = EnrolleeService.updateEnrollee(enrollee);
                 }
-                session.setAttribute(ATTR_ENROLLEE, enrollee);
+                session.setAttribute(Names.ENROLLEE, enrollee);
             }
 
             user.setFirstName(firstName);
             user.setLastName(lastName);
 
             if (UserService.updateUser(user, password)) {
-                session.setAttribute(ATTR_USER, user);
+                session.setAttribute(Names.USER, user);
             }
 
-            User.Role role = (User.Role) session.getAttribute(ATTR_ROLE);
+            User.Role role = (User.Role) session.getAttribute(Names.ROLE);
             page = ProfileService.definePage(role);
 
             router.setPage(page);

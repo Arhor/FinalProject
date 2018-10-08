@@ -23,11 +23,14 @@ public class EncryptAction {
 
     private static final String ENCRYPTION_TYPE = "SHA-512";
 
-    public <T> String encrypt(String toEncrypt, T salt) throws ProjectException {
+    private EncryptAction() {}
+
+    public static <T> String encrypt(String toEncrypt, T salt)
+            throws ProjectException {
         if (toEncrypt == null || salt == null) {
             throw new ProjectException("Wrong encryption arguments");
         }
-        String result = null;
+        String result;
         try {
             String saltString = String.valueOf(salt);
             MessageDigest md = MessageDigest.getInstance(ENCRYPTION_TYPE);
@@ -36,7 +39,7 @@ public class EncryptAction {
             byte[] encryptedBytes = md.digest(rawBytes);
             result = HexBin.encode(encryptedBytes);
         } catch (NoSuchAlgorithmException e) {
-            LOG.error("Encryption error", e);
+            throw new ProjectException("Encryption error", e);
         }
         return result;
     }

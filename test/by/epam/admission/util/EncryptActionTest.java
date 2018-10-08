@@ -11,10 +11,9 @@ public class EncryptActionTest {
 
     @Test
     public void testEncryptPassword() {
-        EncryptAction encryptAction = new EncryptAction();
         String result = null;
         try {
-            result = encryptAction.encrypt("", "12");
+            result = EncryptAction.encrypt("", "12");
         } catch (ProjectException e) {
             LOG.error("Test exception", e);
         }

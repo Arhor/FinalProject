@@ -195,9 +195,8 @@ public class UserDao extends AbstractDao<Integer, User> {
         boolean result = false;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_CHECK_PASSWORD)) {
-            EncryptAction encryptAction = new EncryptAction();
             String name = findNameByEmail(email);
-            String encryptedPassword = encryptAction.encrypt(password, name);
+            String encryptedPassword = EncryptAction.encrypt(password, name);
             st.setString(1, email);
             st.setString(2, encryptedPassword);
             ResultSet rs = st.executeQuery();
@@ -237,8 +236,7 @@ public class UserDao extends AbstractDao<Integer, User> {
         try {
             if (findNameByEmail(user.getEmail()) == null) {
                 int flag;
-                EncryptAction encryptAction = new EncryptAction();
-                String encryptedPassword = encryptAction.encrypt(
+                String encryptedPassword = EncryptAction.encrypt(
                         password, user.getFirstName());
                 try (PreparedStatement st = connection.prepareStatement(
                         SQL_INSERT_USER, Statement.RETURN_GENERATED_KEYS)) {
@@ -272,10 +270,9 @@ public class UserDao extends AbstractDao<Integer, User> {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_UPDATE_USER)) {
-            EncryptAction encryptAction = new EncryptAction();
             String name = findNameByEmail(user.getEmail());
-            String encryptedPassword = encryptAction.encrypt(password, name);
-            String newPassword = encryptAction.encrypt(password, user.getFirstName());
+            String encryptedPassword = EncryptAction.encrypt(password, name);
+            String newPassword = EncryptAction.encrypt(password, user.getFirstName());
             st.setString(1, newPassword);
             st.setString(2, user.getFirstName());
             st.setString(3, user.getLastName());

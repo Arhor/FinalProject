@@ -2,11 +2,9 @@
  * class: ActionFactory
  */
 
-package by.epam.admission.command.factory;
+package by.epam.admission.command;
 
-import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.impl.EmptyCommand;
-import by.epam.admission.command.CommandEnum;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,21 +20,23 @@ public class ActionFactory {
 
     private static final String PARAM_COMMAND = "command";
 
-    public ActionCommand defineCommand(HttpServletRequest request) {
+    private ActionFactory() {}
+
+    public static ActionCommand defineCommand(HttpServletRequest request) {
         ActionCommand currentCommand = new EmptyCommand();
         String action = request.getParameter(PARAM_COMMAND);
         if (action == null || action.isEmpty()) {
-            return currentCommand;
+            currentCommand = CommandEnum.EMPTY_COMMAND.getCurrentCommand();
         } else {
             action = action.replace(" ", "_")
                            .replaceAll("[0-9]", "")
                            .toUpperCase();
-        }
-        try {
-            CommandEnum currentEnum = CommandEnum.valueOf(action);
-            currentCommand = currentEnum.getCurrentCommand();
-        } catch(IllegalArgumentException e) {
-            LOG.error("Unknown command: " + action, e);
+            try {
+                CommandEnum currentEnum = CommandEnum.valueOf(action);
+                currentCommand = currentEnum.getCurrentCommand();
+            } catch(IllegalArgumentException e) {
+                LOG.error("Unknown command: " + action, e);
+            }
         }
         return currentCommand;
     }

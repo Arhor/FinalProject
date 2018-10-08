@@ -8,6 +8,7 @@ import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.logic.UserService;
+import by.epam.admission.util.Names;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
@@ -26,19 +27,16 @@ public class CheckUsersCommand implements ActionCommand {
     private static final Logger LOG =
             LogManager.getLogger(CheckUsersCommand.class);
 
-    private static final String PARAM_USER_ID_ARRAY = "userId[]";
-    private static final String PARAM_RESULT_SET = "resultSet";
-
     @Override
     public Router execute(HttpServletRequest request,
                           HttpServletResponse response) throws IOException {
 
-        String[] userIds = request.getParameterValues(PARAM_USER_ID_ARRAY);
+        String[] userIds = request.getParameterValues(Names.USER_ID_ARRAY);
         try {
             HashMap<Integer, Boolean> resultSet =
                     UserService.checkUsers(userIds);
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put(PARAM_RESULT_SET, resultSet);
+            jsonObject.put(Names.RESULT_SET, resultSet);
             response.setContentType("application/json");
             response.getWriter().write(jsonObject.toString());
         } catch (ProjectException | IOException | JSONException e) {

@@ -15,6 +15,7 @@ import by.epam.admission.model.Subject;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.MessageManager;
+import by.epam.admission.util.Names;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,40 +33,31 @@ public class LoginCommand implements ActionCommand {
 
     private static final Logger LOG = LogManager.getLogger(LoginCommand.class);
 
-    private static final String PARAM_NAME_EMAIL = "email";
-    private static final String PARAM_NAME_PASSWORD = "password";
-    private static final String ATTR_USER = "user";
-    private static final String ATTR_ROLE = "role";
-    private static final String ATTR_LOCALE = "locale";
-    private static final String ATTR_ENROLLEE = "enrollee";
-    private static final String ATTR_AVAILABLE_SUBJECTS = "availableSubjects";
-    private static final String ATTR_ERROR_LOGIN_MESSAGE = "errorLoginMessage";
-
     @Override
     public Router execute(HttpServletRequest request,
                           HttpServletResponse response) throws IOException {
         String page;
         Router router = new Router();
         HttpSession session = request.getSession();
-        String email = request.getParameter(PARAM_NAME_EMAIL);
-        String password = request.getParameter(PARAM_NAME_PASSWORD);
+        String email = request.getParameter(Names.EMAIL);
+        String password = request.getParameter(Names.PASSWORD);
         User user;
         try {
             if (!UserService.checkEmail(email)) {
                 user = UserService.findUser(email, password);
                 if(user != null) {
-                    session.setAttribute(ATTR_USER, user);
-                    session.setAttribute(ATTR_ROLE, user.getRole());
-                    session.setAttribute(ATTR_LOCALE, user.getLang().getValue());
+                    session.setAttribute(Names.USER, user);
+                    session.setAttribute(Names.ROLE, user.getRole());
+                    session.setAttribute(Names.LOCALE, user.getLang().getValue());
                     if (user.getRole() == User.Role.CLIENT) {
                         int userId = user.getId();
                         Enrollee enrollee = EnrolleeService.findEnrollee(userId);
                         if (enrollee != null) {
                             List<Subject> subjects = SubjectService.findSubjects();
                             subjects.removeAll(enrollee.getMarks().keySet());
-                            session.setAttribute(ATTR_AVAILABLE_SUBJECTS, subjects);
+                            session.setAttribute(Names.AVAILABLE_SUBJECTS, subjects);
                         }
-                        session.setAttribute(ATTR_ENROLLEE, enrollee);
+                        session.setAttribute(Names.ENROLLEE, enrollee);
                     }
                     switch (user.getRole()) {
                         case CLIENT:
@@ -84,13 +76,13 @@ public class LoginCommand implements ActionCommand {
                     router.setType(Router.Type.REDIRECT);
                 } else {
                     String message = MessageManager.getProperty("message.loginerror");
-                    request.setAttribute(ATTR_ERROR_LOGIN_MESSAGE, message);
+                    request.setAttribute(Names.ERROR_LOGIN_MESSAGE, message);
                     page = ConfigurationManager.getProperty("path.page.login");
                     router.setType(Router.Type.FORWARD);
                 }
             } else {
                 String message = MessageManager.getProperty("message.loginerror");
-                request.setAttribute(ATTR_ERROR_LOGIN_MESSAGE, message);
+                request.setAttribute(Names.ERROR_LOGIN_MESSAGE, message);
                 page = ConfigurationManager.getProperty("path.page.login");
                 router.setType(Router.Type.FORWARD);
             }

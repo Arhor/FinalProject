@@ -10,6 +10,7 @@ import by.epam.admission.exception.ProjectException;
 import by.epam.admission.logic.FacultyService;
 import by.epam.admission.model.Faculty;
 import by.epam.admission.util.ConfigurationManager;
+import by.epam.admission.util.Names;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,7 +28,7 @@ public class ShowFacultiesCommand implements ActionCommand {
     private static final Logger LOG =
             LogManager.getLogger(ShowFacultiesCommand.class);
 
-    private static final String ATTR_FACULTIES = "faculties";
+//    private static final String ATTR_FACULTIES = "faculties";
 
     @Override
     public Router execute(HttpServletRequest request,
@@ -38,7 +39,7 @@ public class ShowFacultiesCommand implements ActionCommand {
         try {
             faculties = FacultyService.findFaculties();
             page = ConfigurationManager.getProperty("path.page.faculties");
-            request.setAttribute(ATTR_FACULTIES, faculties);
+            request.setAttribute(Names.FACULTIES, faculties);
             router.setPage(page);
             router.setType(Router.Type.FORWARD);
         } catch (ProjectException e) {

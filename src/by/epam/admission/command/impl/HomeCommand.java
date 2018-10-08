@@ -8,6 +8,7 @@ import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
+import by.epam.admission.util.Names;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,15 +20,13 @@ import javax.servlet.http.HttpSession;
  */
 public class HomeCommand implements ActionCommand {
 
-    private static final String ATTR_ROLE = "role";
-
     @Override
     public Router execute(HttpServletRequest request,
                           HttpServletResponse response) {
         String page;
         Router router = new Router();
         HttpSession session = request.getSession();
-        User.Role currentRole = (User.Role) session.getAttribute(ATTR_ROLE);
+        User.Role currentRole = (User.Role) session.getAttribute(Names.ROLE);
         switch (currentRole) {
             case GUEST:
                 page = ConfigurationManager.getProperty("path.page.main");

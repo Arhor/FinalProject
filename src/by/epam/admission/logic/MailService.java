@@ -41,7 +41,7 @@ public class MailService extends Thread {
 
     private void init() {
         Session mailSession =
-                new EmailSessionCreator(resourceBundle).createSession();
+                new EmailSessionCreator(resourceBundle).createEmailSession();
         mailSession.setDebug(true);
 
         message = new MimeMessage(mailSession);
