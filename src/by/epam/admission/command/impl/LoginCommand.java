@@ -51,36 +51,43 @@ public class LoginCommand implements ActionCommand {
         String password = request.getParameter(PARAM_NAME_PASSWORD);
         User user;
         try {
-            user = UserService.findUser(email, password);
-            if(user != null) {
-                session.setAttribute(ATTR_USER, user);
-                session.setAttribute(ATTR_ROLE, user.getRole());
-                session.setAttribute(ATTR_LOCALE, user.getLang().getValue());
-                if (user.getRole() == User.Role.CLIENT) {
-                    int userId = user.getId();
-                    Enrollee enrollee = EnrolleeService.findEnrollee(userId);
-                    if (enrollee != null) {
-                        List<Subject> subjects = SubjectService.findSubjects();
-                        subjects.removeAll(enrollee.getMarks().keySet());
-                        session.setAttribute(ATTR_AVAILABLE_SUBJECTS, subjects);
+            if (!UserService.checkEmail(email)) {
+                user = UserService.findUser(email, password);
+                if(user != null) {
+                    session.setAttribute(ATTR_USER, user);
+                    session.setAttribute(ATTR_ROLE, user.getRole());
+                    session.setAttribute(ATTR_LOCALE, user.getLang().getValue());
+                    if (user.getRole() == User.Role.CLIENT) {
+                        int userId = user.getId();
+                        Enrollee enrollee = EnrolleeService.findEnrollee(userId);
+                        if (enrollee != null) {
+                            List<Subject> subjects = SubjectService.findSubjects();
+                            subjects.removeAll(enrollee.getMarks().keySet());
+                            session.setAttribute(ATTR_AVAILABLE_SUBJECTS, subjects);
+                        }
+                        session.setAttribute(ATTR_ENROLLEE, enrollee);
                     }
-                    session.setAttribute(ATTR_ENROLLEE, enrollee);
+                    switch (user.getRole()) {
+                        case CLIENT:
+                            page = ConfigurationManager.getProperty(
+                                    "path.page.client.main");
+                            break;
+                        case ADMIN:
+                            page = ConfigurationManager.getProperty(
+                                    "path.page.admin.main");
+                            break;
+                        case GUEST:
+                        default:
+                            page = ConfigurationManager.getProperty(
+                                    "path.page.main");
+                    }
+                    router.setType(Router.Type.REDIRECT);
+                } else {
+                    String message = MessageManager.getProperty("message.loginerror");
+                    request.setAttribute(ATTR_ERROR_LOGIN_MESSAGE, message);
+                    page = ConfigurationManager.getProperty("path.page.login");
+                    router.setType(Router.Type.FORWARD);
                 }
-                switch (user.getRole()) {
-                    case CLIENT:
-                        page = ConfigurationManager.getProperty(
-                                "path.page.client.main");
-                        break;
-                    case ADMIN:
-                        page = ConfigurationManager.getProperty(
-                                "path.page.admin.main");
-                        break;
-                    case GUEST:
-                    default:
-                        page = ConfigurationManager.getProperty(
-                                "path.page.main");
-                }
-                router.setType(Router.Type.REDIRECT);
             } else {
                 String message = MessageManager.getProperty("message.loginerror");
                 request.setAttribute(ATTR_ERROR_LOGIN_MESSAGE, message);
@@ -90,6 +97,7 @@ public class LoginCommand implements ActionCommand {
             router.setPage(page);
         } catch (ProjectException e) {
             LOG.error(e);
+            LOG.debug("ERROR MESSAGE: ", e);
             router.setType(Router.Type.ERROR);
             response.sendError(500);
         }

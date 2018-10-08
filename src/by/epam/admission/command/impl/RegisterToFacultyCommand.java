@@ -40,12 +40,17 @@ public class RegisterToFacultyCommand implements ActionCommand {
         facultyId = facultyId.replaceAll("[^0-9]","");
         int eid = Integer.parseInt(enrolleeId);
         int fid = Integer.parseInt(facultyId);
+        LOG.debug("Enrollee ID: " + eid + "\nFaculty ID: " + fid);
         try {
-            if (!FacultyService.checkFaculty(eid, fid)) {
+            LOG.debug("Check Faculty: " + FacultyService.checkAdmissionListEntry(eid, fid));
+            if (FacultyService.checkAdmissionListEntry(eid, fid)) {
+                LOG.debug("RESTORE REGISTRATION");
                 result = FacultyService.restoreFacultyRegistration(eid, fid);
             } else {
+                LOG.debug("REGISTER TO FACULTY");
                 result = FacultyService.registerToFaculty(eid, fid);
             }
+            LOG.debug("RESULT: " + result);
             JSONObject jsonObject = new JSONObject();
             jsonObject.put(FACULTY, fid);
             jsonObject.put(RESULT, result);

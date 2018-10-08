@@ -40,6 +40,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SQL_RESTORE_ADMISSION_LIST_ENTRY;
     private static final String SQL_SELECT_ENROLLEE_MARKS;
     private static final String SQL_INSERT_SUBJECT_BY_ENROLLEE_ID;
+    private static final String SQL_CHECK_ADMISSION_LIST_ENTRY;
 
     // column labels
     private static final String ID = "id";
@@ -144,6 +145,23 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
             st.setInt(1, enrolleeId);
             st.setInt(2, facultyId);
             st.setInt(3, ACTIVE);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                result = (rs.getInt(1) == 1);
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return result;
+    }
+
+    public boolean checkAdmissionListEntry(int enrolleeId, int facultyId)
+            throws ProjectException {
+        boolean result = false;
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_CHECK_ADMISSION_LIST_ENTRY)) {
+            st.setInt(1, enrolleeId);
+            st.setInt(2, facultyId);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 result = (rs.getInt(1) == 1);
@@ -385,6 +403,11 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "INSERT INTO `enrollees_has_subjects` " +
                 "(`enrollees_id`,`subjects_id`,`score`) " +
                 "VALUES (?,?,?)";
+        SQL_CHECK_ADMISSION_LIST_ENTRY =
+                "SELECT COUNT(*)" +
+                "FROM   `admission_list` " +
+                "WHERE  `enrollees_id` = ? " +
+                "AND `faculties_id` = ? ";
     }
 
 }
