@@ -15,8 +15,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -28,11 +26,8 @@ public class ShowFacultiesCommand implements ActionCommand {
     private static final Logger LOG =
             LogManager.getLogger(ShowFacultiesCommand.class);
 
-//    private static final String ATTR_FACULTIES = "faculties";
-
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
+    public Router execute(HttpServletRequest request) {
         String page;
         Router router = new Router();
         List<Faculty> faculties;
@@ -45,7 +40,7 @@ public class ShowFacultiesCommand implements ActionCommand {
         } catch (ProjectException e) {
             LOG.error("An error occurred during finding faculties", e);
             router.setType(Router.Type.ERROR);
-            response.sendError(500);
+            router.setErrorCode(500);
         }
         return router;
     }

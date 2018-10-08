@@ -23,10 +23,10 @@ public class ActionFactory {
     private ActionFactory() {}
 
     public static ActionCommand defineCommand(HttpServletRequest request) {
-        ActionCommand currentCommand = new EmptyCommand();
+        ActionCommand currentCommand = CommandEnum.EMPTY_COMMAND.getCurrentCommand();
         String action = request.getParameter(PARAM_COMMAND);
         if (action == null || action.isEmpty()) {
-            currentCommand = CommandEnum.EMPTY_COMMAND.getCurrentCommand();
+            return currentCommand;
         } else {
             action = action.replace(" ", "_")
                            .replaceAll("[0-9]", "")

@@ -49,13 +49,10 @@ public class ControllerServlet extends HttpServlet {
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response)
             throws ServletException, IOException {
-        Router router;
 
         ActionCommand command = ActionFactory.defineCommand(request);
-
-        router = command.execute(request, response);
+        Router router = command.execute(request);
         String page = router.getPage();
-
         switch (router.getType()) {
             case FORWARD:
                 RequestDispatcher dispatcher =
@@ -65,6 +62,11 @@ public class ControllerServlet extends HttpServlet {
             case REDIRECT:
                 response.sendRedirect(request.getContextPath() + page);
                 break;
+            case ERROR:
+                int errorCode = router.getErrorCode();
+                response.sendError(errorCode);
+            default:
+                // TODO: implement impossible type
         }
     }
 

@@ -16,9 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 /**
  * @author Burishinets maxim
@@ -30,9 +28,8 @@ public class UnblockUserCommand implements ActionCommand {
             LogManager.getLogger(UnblockUserCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
-
+    public Router execute(HttpServletRequest request) {
+        Router router = new Router();
         HttpSession session = request.getSession();
         User.Role role = (User.Role) session.getAttribute(Names.ROLE);
         if (role == User.Role.ADMIN) {
@@ -44,16 +41,18 @@ public class UnblockUserCommand implements ActionCommand {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put(Names.USER_ID, uid);
                 jsonObject.put(Names.RESULT, result);
-                response.setContentType("application/json");
-                response.getWriter().write(jsonObject.toString());
+                router.setType(Router.Type.AJAX);
+                router.setJsonObject(jsonObject);
             } catch (ProjectException | JSONException e) {
                 LOG.error("Unblocking user error", e);
-                response.sendError(500);
+                router.setType(Router.Type.ERROR);
+                router.setErrorCode(500);
             }
         } else {
             LOG.error("Invalid user role");
-            response.sendError(403);
+            router.setType(Router.Type.ERROR);
+            router.setErrorCode(403);
         }
-        return null;
+        return router;
     }
 }

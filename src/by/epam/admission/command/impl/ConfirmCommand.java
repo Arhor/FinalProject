@@ -15,9 +15,7 @@ import by.epam.admission.util.Names;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 /**
  * @author Burishinets Maxim
@@ -29,8 +27,7 @@ public class ConfirmCommand implements ActionCommand {
             LogManager.getLogger(ConfirmCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         HttpSession session = request.getSession();
 
@@ -70,7 +67,7 @@ public class ConfirmCommand implements ActionCommand {
         } catch (ProjectException e) {
             LOG.error("Registration confirm error", e);
             router.setType(Router.Type.ERROR);
-            response.sendError(500);
+            router.setErrorCode(500);
         } finally {
             session.removeAttribute(Names.CONFIRMATION_CODE);
             session.removeAttribute(Names.PASSWORD);

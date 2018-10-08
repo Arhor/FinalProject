@@ -28,22 +28,22 @@ public class CheckUsersCommand implements ActionCommand {
             LogManager.getLogger(CheckUsersCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
-
+    public Router execute(HttpServletRequest request) {
+        Router router = new Router();
         String[] userIds = request.getParameterValues(Names.USER_ID_ARRAY);
         try {
             HashMap<Integer, Boolean> resultSet =
                     UserService.checkUsers(userIds);
             JSONObject jsonObject = new JSONObject();
             jsonObject.put(Names.RESULT_SET, resultSet);
-            response.setContentType("application/json");
-            response.getWriter().write(jsonObject.toString());
-        } catch (ProjectException | IOException | JSONException e) {
+            router.setType(Router.Type.AJAX);
+            router.setJsonObject(jsonObject);
+        } catch (ProjectException | JSONException e) {
             LOG.error("Checking users error", e);
-            response.sendError(500);
+            router.setType(Router.Type.ERROR);
+            router.setErrorCode(500);
         }
-        return null;
+        return router;
     }
 
 }

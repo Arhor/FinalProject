@@ -18,8 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LogoutCommand implements ActionCommand {
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         String page = ConfigurationManager.getProperty("path.page.main");
         Router router = new Router();
         router.setPage(page);

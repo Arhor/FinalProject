@@ -14,8 +14,6 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * @author Burishinets Maxim
@@ -27,27 +25,25 @@ public class DeregisterFromFaculty implements ActionCommand {
             LogManager.getLogger(DeregisterFromFaculty.class);
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
-
+    public Router execute(HttpServletRequest request) {
+        Router router = new Router();
         String enrolleeId = request.getParameter(Names.ENROLLEE_ID);
         String facultyId = request.getParameter(Names.FACULTY_ID);
         facultyId = facultyId.replaceAll("[^0-9]","");
-
         int eid = Integer.parseInt(enrolleeId);
         int fid = Integer.parseInt(facultyId);
-
         try {
             boolean result = FacultyService.deregisterFromFaculty(eid, fid);
             JSONObject jsonObject = new JSONObject();
             jsonObject.put(Names.FACULTY, fid);
             jsonObject.put(Names.RESULT, result);
-            response.setContentType("application/json");
-            response.getWriter().write(jsonObject.toString());
-        } catch (ProjectException | IOException | JSONException e) {
+            router.setType(Router.Type.AJAX);
+            router.setJsonObject(jsonObject);
+        } catch (ProjectException | JSONException e) {
             LOG.error("Deregister from faculty error", e);
-            response.sendError(500);
+            router.setType(Router.Type.ERROR);
+            router.setErrorCode(500);
         }
-        return null;
+        return router;
     }
 }

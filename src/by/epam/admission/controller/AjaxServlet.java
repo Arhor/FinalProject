@@ -6,6 +6,8 @@ package by.epam.admission.controller;
 
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.ActionFactory;
+import by.epam.admission.command.Router;
+import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,8 +43,17 @@ public class AjaxServlet extends HttpServlet {
             throws ServletException, IOException {
 
         ActionCommand command = ActionFactory.defineCommand(request);
-
-        command.execute(request, response);
+        Router router = command.execute(request);
+        switch (router.getType()) {
+            case AJAX:
+                JSONObject jsonObject = router.getJsonObject();
+                response.setContentType("application/json");
+                response.getWriter().write(jsonObject.toString());
+                break;
+            case ERROR:
+                int errorCode = router.getErrorCode();
+                response.sendError(errorCode);
+        }
     }
 
 }

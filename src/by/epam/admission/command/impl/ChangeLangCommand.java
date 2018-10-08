@@ -11,7 +11,6 @@ import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.Names;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import static by.epam.admission.util.Names.EN;
@@ -24,8 +23,7 @@ import static by.epam.admission.util.Names.RU;
 public class ChangeLangCommand implements ActionCommand {
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         String page;
         Router router = new Router();
         HttpSession session = request.getSession();
@@ -50,7 +48,7 @@ public class ChangeLangCommand implements ActionCommand {
                 page = ConfigurationManager.getProperty("path.page.client.main");
                 break;
             default:
-                    page = ConfigurationManager.getProperty("path.page.index");
+                page = ConfigurationManager.getProperty("path.page.index");
         }
         router.setPage(page);
         router.setType(Router.Type.FORWARD);

@@ -4,6 +4,8 @@
 
 package by.epam.admission.command;
 
+import org.json.JSONObject;
+
 /**
  * @author Burishinets Maxim
  * @version 1.0 10 Sep 2018
@@ -13,6 +15,7 @@ public class Router {
     private String page;
     private Type type;
     private int errorCode;
+    private JSONObject jsonObject;
 
     public String getPage() {
         return page;
@@ -38,9 +41,18 @@ public class Router {
         this.errorCode = errorCode;
     }
 
+    public JSONObject getJsonObject() {
+        return jsonObject;
+    }
+
+    public void setJsonObject(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
+    }
+
     public enum Type {
         FORWARD,
         REDIRECT,
+        AJAX,
         ERROR
     }
 

@@ -20,9 +20,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -34,8 +32,7 @@ public class LoginCommand implements ActionCommand {
     private static final Logger LOG = LogManager.getLogger(LoginCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
+    public Router execute(HttpServletRequest request) {
         String page;
         Router router = new Router();
         HttpSession session = request.getSession();
@@ -89,9 +86,8 @@ public class LoginCommand implements ActionCommand {
             router.setPage(page);
         } catch (ProjectException e) {
             LOG.error(e);
-            LOG.debug("ERROR MESSAGE: ", e);
             router.setType(Router.Type.ERROR);
-            response.sendError(500);
+            router.setErrorCode(500);
         }
         return router;
     }

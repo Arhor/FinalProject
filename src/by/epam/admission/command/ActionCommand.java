@@ -13,5 +13,5 @@ import java.io.IOException;
  * @version 1.0 03 Sep 2018
  */
 public interface ActionCommand {
-    Router execute(HttpServletRequest request, HttpServletResponse response) throws IOException;
+    Router execute(HttpServletRequest request);
 }

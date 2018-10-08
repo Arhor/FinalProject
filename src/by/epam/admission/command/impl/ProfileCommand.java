@@ -8,11 +8,9 @@ import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.logic.ProfileService;
 import by.epam.admission.model.User;
-import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.Names;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -22,8 +20,7 @@ import javax.servlet.http.HttpSession;
 public class ProfileCommand implements ActionCommand {
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         String page;
         HttpSession session = request.getSession();

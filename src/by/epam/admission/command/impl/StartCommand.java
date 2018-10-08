@@ -18,8 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class StartCommand implements ActionCommand {
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         router.setPage(ConfigurationManager.getProperty("path.page.main"));
         router.setType(Router.Type.FORWARD);

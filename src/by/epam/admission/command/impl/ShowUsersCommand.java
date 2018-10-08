@@ -15,9 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -32,8 +30,7 @@ public class ShowUsersCommand implements ActionCommand {
     private static final int ROWS_PER_PAGE = 10;
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         HttpSession session = request.getSession();
         User.Role role = (User.Role) session.getAttribute(Names.ROLE);
@@ -71,12 +68,12 @@ public class ShowUsersCommand implements ActionCommand {
             } catch (ProjectException e) {
                 LOG.error("Finding users error", e);
                 router.setType(Router.Type.ERROR);
-                response.sendError(500);
+                router.setErrorCode(500);
             }
         } else {
             LOG.error("Invalid user role");
             router.setType(Router.Type.ERROR);
-            response.sendError(403);
+            router.setErrorCode(403);
         }
         return router;
     }

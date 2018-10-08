@@ -32,12 +32,9 @@ public class AddSubjectCommand implements ActionCommand {
             LogManager.getLogger(AddSubjectCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
-
         HttpSession session = request.getSession();
-
         Enrollee enrollee = (Enrollee) session.getAttribute(Names.ENROLLEE);
         List<Subject> subjects = (List<Subject>) session.getAttribute(
                 Names.AVAILABLE_SUBJECTS);
@@ -65,7 +62,7 @@ public class AddSubjectCommand implements ActionCommand {
         } catch (ProjectException e) {
             LOG.error("Add subject error", e);
             router.setType(Router.Type.ERROR);
-            response.sendError(500);
+            router.setErrorCode(500);
         }
         return router;
     }

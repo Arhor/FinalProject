@@ -16,9 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 /**
  * @author Burishinets Maxim
@@ -30,9 +28,8 @@ public class BlockUserCommand implements ActionCommand {
             LogManager.getLogger(BlockUserCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
-
+    public Router execute(HttpServletRequest request) {
+        Router router = new Router();
         HttpSession session = request.getSession();
         User.Role role = (User.Role) session.getAttribute(Names.ROLE);
         if (role == User.Role.ADMIN) {
@@ -42,22 +39,20 @@ public class BlockUserCommand implements ActionCommand {
             try {
                 boolean result = UserService.blockUser(uid);
                 JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put(Names.USER_ID, uid);
-                    jsonObject.put(Names.RESULT, result);
-                    response.setContentType("application/json");
-                    response.getWriter().write(jsonObject.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } catch (ProjectException | IOException e) {
+                jsonObject.put(Names.USER_ID, uid);
+                jsonObject.put(Names.RESULT, result);
+                router.setType(Router.Type.AJAX);
+                router.setJsonObject(jsonObject);
+            } catch (ProjectException | JSONException e) {
                 LOG.error("Blocking user error", e);
-                response.sendError(500);
+                router.setType(Router.Type.ERROR);
+                router.setErrorCode(500);
             }
         } else {
             LOG.error("Invalid user role");
-            response.sendError(403);
+            router.setType(Router.Type.ERROR);
+            router.setErrorCode(403);
         }
-        return null;
+        return router;
     }
 }

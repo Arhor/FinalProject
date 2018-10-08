@@ -15,8 +15,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * @author Burishinets Maxim
@@ -28,8 +26,8 @@ public class RegisterToFacultyCommand implements ActionCommand {
             LogManager.getLogger(RegisterToFacultyCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
+        Router router = new Router();
         boolean result;
         String enrolleeId = request.getParameter(Names.ENROLLEE_ID);
         String facultyId = request.getParameter(Names.FACULTY_ID);
@@ -45,16 +43,13 @@ public class RegisterToFacultyCommand implements ActionCommand {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put(Names.FACULTY, fid);
             jsonObject.put(Names.RESULT, result);
-            response.setContentType("application/json");
-            response.getWriter().write(jsonObject.toString());
-        } catch (ProjectException | JSONException | IOException e) {
+            router.setType(Router.Type.AJAX);
+            router.setJsonObject(jsonObject);
+        } catch (ProjectException | JSONException e) {
             LOG.error("Registration to faculty error", e);
-            try {
-                response.sendError(500);
-            } catch (IOException e1) {
-                LOG.error(e1);
-            }
+            router.setType(Router.Type.ERROR);
+            router.setErrorCode(500);
         }
-        return null;
+        return router;
     }
 }

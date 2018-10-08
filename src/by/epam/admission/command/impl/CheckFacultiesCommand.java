@@ -17,9 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -32,29 +30,25 @@ public class CheckFacultiesCommand implements ActionCommand {
             LogManager.getLogger(CheckFacultiesCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
-
+    public Router execute(HttpServletRequest request) {
+        Router router = new Router();
         HttpSession session = request.getSession();
-
         Enrollee enrollee = (Enrollee) session.getAttribute(Names.ENROLLEE);
-
         int enrolleeId = enrollee.getId();
         Set<Subject> subjects = enrollee.getMarks().keySet();
         String[] facultyIds = request.getParameterValues(Names.FACULTY_ID_ARRAY);
-
         try {
             HashMap<Integer, Boolean> resultSet = FacultyService.checkFaculties(
                     enrolleeId, subjects, facultyIds);
-
             JSONObject jsonObject = new JSONObject();
             jsonObject.put(Names.RESULT_SET, resultSet);
-            response.setContentType("application/json");
-            response.getWriter().write(jsonObject.toString());
-        } catch (ProjectException | IOException | JSONException e) {
+            router.setType(Router.Type.AJAX);
+            router.setJsonObject(jsonObject);
+        } catch (ProjectException | JSONException e) {
             LOG.error("Checking faculties error", e);
-            response.sendError(500);
+            router.setType(Router.Type.ERROR);
+            router.setErrorCode(500);
         }
-        return null;
+        return router;
     }
 }

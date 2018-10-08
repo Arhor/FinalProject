@@ -21,8 +21,7 @@ import javax.servlet.http.HttpSession;
 public class HomeCommand implements ActionCommand {
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
         String page;
         Router router = new Router();
         HttpSession session = request.getSession();

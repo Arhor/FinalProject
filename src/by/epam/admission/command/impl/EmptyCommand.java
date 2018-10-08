@@ -19,11 +19,10 @@ import java.io.IOException;
 public class EmptyCommand implements ActionCommand {
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         router.setType(Router.Type.ERROR);
-        response.sendError(404);
+        router.setErrorCode(404);
         return router;
     }
 }

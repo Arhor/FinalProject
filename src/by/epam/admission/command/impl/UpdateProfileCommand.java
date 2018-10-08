@@ -20,9 +20,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -36,8 +34,7 @@ public class UpdateProfileCommand implements ActionCommand {
             LogManager.getLogger(UpdateProfileCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
+    public Router execute(HttpServletRequest request) {
         Router router = new Router();
         String page;
         HttpSession session = request.getSession();
@@ -103,7 +100,8 @@ public class UpdateProfileCommand implements ActionCommand {
             router.setType(Router.Type.FORWARD);
         } catch (ProjectException e) {
             LOG.error("Profile updating error", e);
-            response.sendError(500);
+            router.setType(Router.Type.ERROR);
+            router.setErrorCode(500);
         }
         return router;
     }

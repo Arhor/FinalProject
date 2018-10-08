@@ -14,9 +14,7 @@ import by.epam.admission.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.ResourceBundle;
 
 /**
@@ -29,8 +27,7 @@ public class RegisterCommand implements ActionCommand {
             LogManager.getLogger(RegisterCommand.class);
 
     @Override
-    public Router execute(HttpServletRequest request,
-                          HttpServletResponse response) {
+    public Router execute(HttpServletRequest request) {
 
         String page;
         Router router = new Router();
@@ -89,11 +86,7 @@ public class RegisterCommand implements ActionCommand {
         } catch (ProjectException e) {
             LOG.error("Registration error", e);
             router.setType(Router.Type.ERROR);
-            try {
-                response.sendError(500);
-            } catch (IOException e1) {
-                LOG.error(e1);
-            }
+            router.setErrorCode(500);
         }
         return router;
     }
