@@ -4,3 +4,5 @@ logs/
 src/resources/mail_properties.properties
 src/resources/mail.properties
 .gitignore
+.idea/
+FinalProject.iml
