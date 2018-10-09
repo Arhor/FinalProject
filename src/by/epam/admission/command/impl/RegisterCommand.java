@@ -76,18 +76,21 @@ public class RegisterCommand implements ActionCommand {
                             confirmCode,
                             mailResources).start();
                     page = ConfigurationManager.getProperty("path.page.confirm");
+                    router.setType(Router.Type.REDIRECT);
                 } else {
                     request.setAttribute(Names.REGISTRATION_ERROR, email + " "
                             + MessageManager.getProperty("message.email.inuse"));
                     page = ConfigurationManager.getProperty("path.page.registration");
+                    router.setType(Router.Type.FORWARD);
                 }
             } else {
                 request.setAttribute(Names.REGISTRATION_ERROR, email + " "
                         + MessageManager.getProperty("message.registration.invalid"));
                 page = ConfigurationManager.getProperty("path.page.registration");
+                router.setType(Router.Type.FORWARD);
             }
             router.setPage(page);
-            router.setType(Router.Type.FORWARD);
+
         } catch (ProjectException e) {
             LOG.error("Registration error", e);
             router.setType(Router.Type.ERROR);
