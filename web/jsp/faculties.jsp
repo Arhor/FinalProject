@@ -13,11 +13,7 @@
         <fmt:message key="label.faculties" />
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <!-- CSS Files -->
-    <link href="${pageContext.request.contextPath}/assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+    <%@ include file="/jsp/modules/core_style.jspf"%>
 </head>
 
 <body class="">
@@ -70,7 +66,6 @@
                         </a>
                     </li>
                 </c:if>
-                <!-- your sidebar here -->
             </ul>
         </div>
     </div>
@@ -185,9 +180,6 @@
             <c:if test="${sessionScope.role eq 'CLIENT'}">
                 <form>
                     <input type="hidden" id="enrolleeID" value="${sessionScope.enrollee.id}" />
-                    <%--<c:forEach items="${sessionScope.enrollee.marks.entrySet()}" var="subject">--%>
-                        <%--<input type="hidden" class="subjectID" value="${subject.key}" />--%>
-                    <%--</c:forEach>--%>
                 </form>
             </c:if>
         </div>
