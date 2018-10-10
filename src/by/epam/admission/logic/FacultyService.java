@@ -11,6 +11,8 @@ import by.epam.admission.dao.impl.SubjectDao;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Faculty;
 import by.epam.admission.model.Subject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 
@@ -19,6 +21,8 @@ import java.util.*;
  * @version 1.0 09 Sep 2018
  */
 public class FacultyService {
+
+    private static final Logger LOG = LogManager.getLogger(FacultyService.class);
 
     public static List<Faculty> findFaculties() throws ProjectException {
         List<Faculty> faculties;
@@ -146,6 +150,33 @@ public class FacultyService {
         } finally {
             helper.endTransaction();
         }
+        return result;
+    }
+
+    public static boolean defineFacultyResult(int facultyId) throws ProjectException {
+        boolean result = false;
+        DaoHelper helper = new DaoHelper();
+        FacultyDao facultyDao = new FacultyDao();
+        EnrolleeDao enrolleeDao = new EnrolleeDao();
+
+        try {
+            helper.startTransaction(facultyDao, enrolleeDao);
+            Faculty faculty = facultyDao.findEntityById(facultyId);
+            ArrayList<Integer> idsForBudjet = enrolleeDao.findBestEnrolleesIds(facultyId,0, faculty.getSeatsBudget());
+            ArrayList<Integer> idsForPaid = enrolleeDao.findBestEnrolleesIds(facultyId, faculty.getSeatsBudget(), faculty.getSeatsPaid());
+
+            LOG.debug(idsForBudjet);
+            LOG.debug(idsForPaid);
+
+            helper.commit();
+            result = true;
+        } catch (ProjectException e) {
+            helper.rollback();
+            throw e;
+        } finally {
+            helper.endTransaction();
+        }
+
         return result;
     }
 

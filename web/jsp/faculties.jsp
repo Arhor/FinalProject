@@ -130,6 +130,7 @@
                                                                         <button type="button" class="btn btn-primary" id="fac${faculty.id}">
                                                                             <i class="material-icons">poll</i> ${faculty.checked}
                                                                         </button>
+                                                                        <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=define_result&facultyId=${faculty.id}">BUTTON</a>
                                                                     </td>
                                                                 </c:when>
                                                             </c:choose>
@@ -159,9 +160,10 @@
                                                                 </c:when>
                                                                 <c:when test="${sessionScope.role.toString() eq 'ADMIN'}">
                                                                     <td class="text-center">
-                                                                        <button type="button" class="btn btn-primary" id="fac${faculty.id}">
+                                                                        <button type="submit" form="defineResult" class="btn btn-primary" id="fac${faculty.id}">
                                                                             <i class="material-icons">poll</i> ${faculty.checked}
                                                                         </button>
+                                                                        <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=define_result&facultyId=${faculty.id}">BUTTON</a>
                                                                     </td>
                                                                 </c:when>
                                                             </c:choose>
@@ -181,6 +183,9 @@
                 <form>
                     <input type="hidden" id="enrolleeID" value="${sessionScope.enrollee.id}" />
                 </form>
+            </c:if>
+            <c:if test="${sessionScope.role eq 'ADMIN'}">
+                <form action="${pageContext.request.contextPath}/controller" id="defineResult" method="post"></form>
             </c:if>
         </div>
         <footer class="footer">

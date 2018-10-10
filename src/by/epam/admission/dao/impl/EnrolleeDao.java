@@ -41,6 +41,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SQL_SELECT_ENROLLEE_MARKS;
     private static final String SQL_INSERT_SUBJECT_BY_ENROLLEE_ID;
     private static final String SQL_CHECK_ADMISSION_LIST_ENTRY;
+    private static final String SQL_SELECT_BEST_ENROLLEES_IDS;
 
     // column labels
     private static final String ID = "id";
@@ -110,6 +111,22 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         ArrayList<Enrollee> enrollees = new ArrayList<>();
         findByAddress(CITY, enrollees, city);
         return enrollees;
+    }
+
+    public ArrayList<Integer> findBestEnrolleesIds(int facultyId, int offset, int limit) throws ProjectException {
+        ArrayList<Integer> ids = new ArrayList<>();
+        try (PreparedStatement st = connection.prepareStatement(SQL_SELECT_BEST_ENROLLEES_IDS)) {
+            st.setInt(1, facultyId);
+            st.setInt(2, limit);
+            st.setInt(3, offset);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                ids.add(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return ids;
     }
 
     public TreeMap<Subject, Integer> findEnrolleeMarks(int enrolleeId)
@@ -408,6 +425,19 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "FROM   `admission_list` " +
                 "WHERE  `enrollees_id` = ? " +
                 "AND `faculties_id` = ? ";
+        SQL_SELECT_BEST_ENROLLEES_IDS =
+                "SELECT `enrollees`.`id` " +
+                "FROM   `enrollees` " +
+                "JOIN   `admission_list` ON `enrollees`.`id` = `admission_list`.`enrollees_id` " +
+                "JOIN   `faculties` ON `faculties`.`id` = `admission_list`.`faculties_id` " +
+                "JOIN ( SELECT `enrollees_has_subjects`.`enrollees_id`, " +
+                "              sum(`score`) AS `score` " +
+                "       FROM `enrollees_has_subjects` " +
+                "       GROUP BY `enrollees_has_subjects`.`enrollees_id` " +
+                ") AS `total_score` ON `enrollees`.`id` = `total_score`.`enrollees_id` " +
+                "WHERE `faculties`.`id` = ? AND `admission_list`.`available` = 1 " +
+                "ORDER BY (`total_score`.`score` + `enrollees`.`school_certificate`) " +
+                "DESC LIMIT ? OFFSET ?";
     }
 
 }
