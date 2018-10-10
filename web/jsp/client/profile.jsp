@@ -115,6 +115,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <span style="color: red">${requestScope.profileErrorMessage}</span>
                                     <button type="submit" class="btn btn-primary pull-right" name="command" value="update_profile"><fmt:message key="label.profile.update" /></button>
                                     <div class="clearfix"></div>
                                 </form>

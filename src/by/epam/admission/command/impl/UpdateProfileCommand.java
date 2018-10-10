@@ -14,6 +14,7 @@ import by.epam.admission.logic.UserService;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Subject;
 import by.epam.admission.model.User;
+import by.epam.admission.util.InputValidator;
 import by.epam.admission.util.Names;
 import by.epam.admission.util.XssFilter;
 import org.apache.logging.log4j.LogManager;
@@ -35,8 +36,8 @@ public class UpdateProfileCommand implements ActionCommand {
 
     @Override
     public Router execute(HttpServletRequest request) {
-        Router router = new Router();
         String page;
+        Router router = new Router();
         HttpSession session = request.getSession();
 
         String firstName = request.getParameter(Names.FIRST_NAME);
@@ -46,56 +47,77 @@ public class UpdateProfileCommand implements ActionCommand {
         firstName = XssFilter.doFilter(firstName);
         lastName = XssFilter.doFilter(lastName);
 
-        User user = (User) session.getAttribute(Names.USER);
+        User currUser = (User) session.getAttribute(Names.USER);
+        User.Role role = currUser.getRole();
 
         try {
-            if (user.getRole() == User.Role.CLIENT) {
-                String city = request.getParameter(Names.CITY);
-                String country = request.getParameter(Names.COUNTRY);
-                String certificate = request.getParameter(Names.CERTIFICATE);
+            boolean validFirstName = InputValidator.validate(firstName, InputValidator.InputType.FIRST_NAME);
+            boolean validLastName = InputValidator.validate(lastName, InputValidator.InputType.LAST_NAME);
 
-                city = XssFilter.doFilter(city);
-                country = XssFilter.doFilter(country);
-                certificate = XssFilter.doFilter(certificate);
+            if (validFirstName && validLastName) {
 
-                Enrollee enrollee = (Enrollee) session.getAttribute(Names.ENROLLEE);
-                if (enrollee == null) {
-                    enrollee = new Enrollee();
-                    enrollee.setUserId(user.getId());
-                    enrollee.setCity(city);
-                    enrollee.setCountry(country);
-                    enrollee.setSchoolCertificate(Integer.parseInt(certificate));
-                    enrollee.setMarks(new TreeMap<>());
+                User user = UserService.findUser(currUser.getEmail(), password);
 
-                    List<Subject> subjects = SubjectService.findSubjects();
-                    if (subjects != null) {
-                        subjects.removeAll(enrollee.getMarks().keySet());
-                        session.setAttribute(Names.AVAILABLE_SUBJECTS, subjects);
+                if (user != null && user.equals(currUser)) {
+
+                    currUser.setFirstName(firstName);
+                    currUser.setLastName(lastName);
+
+                    if (UserService.updateUser(currUser, password)) {
+                        session.setAttribute(Names.USER, currUser);
                     }
-                    boolean registrationResult =
-                            EnrolleeService.registerEnrollee(enrollee);
-                    if (!registrationResult) {
-                        enrollee = null;
+
+                    if (role == User.Role.CLIENT) {
+                        String city = request.getParameter(Names.CITY);
+                        String country = request.getParameter(Names.COUNTRY);
+                        String certificate = request.getParameter(Names.CERTIFICATE);
+
+                        city = XssFilter.doFilter(city);
+                        country = XssFilter.doFilter(country);
+                        certificate = XssFilter.doFilter(certificate);
+
+                        boolean validCity = InputValidator.validate(city, InputValidator.InputType.CITY);
+                        boolean validCountry = InputValidator.validate(country, InputValidator.InputType.COUNTRY);
+                        boolean validCertificate = InputValidator.validate(certificate, InputValidator.InputType.CERTIFICATE);
+
+                        if (validCity && validCountry && validCertificate) {
+                            Enrollee enrollee = (Enrollee) session.getAttribute(Names.ENROLLEE);
+                            if (enrollee == null) {
+                                enrollee = new Enrollee();
+                                enrollee.setUserId(currUser.getId());
+                                enrollee.setCity(city);
+                                enrollee.setCountry(country);
+                                enrollee.setSchoolCertificate(Integer.parseInt(certificate));
+                                enrollee.setMarks(new TreeMap<>());
+
+                                List<Subject> subjects = SubjectService.findSubjects();
+                                if (subjects != null) {
+                                    subjects.removeAll(enrollee.getMarks().keySet());
+                                    session.setAttribute(Names.AVAILABLE_SUBJECTS, subjects);
+                                }
+                                boolean registrationResult =
+                                        EnrolleeService.registerEnrollee(enrollee);
+                                if (!registrationResult) {
+                                    enrollee = null;
+                                }
+                            } else {
+                                enrollee.setCity(city);
+                                enrollee.setCountry(country);
+                                enrollee.setSchoolCertificate(Integer.parseInt(certificate));
+                                enrollee = EnrolleeService.updateEnrollee(enrollee);
+                            }
+                            session.setAttribute(Names.ENROLLEE, enrollee);
+                        } else {
+                            request.setAttribute("profileErrorMessage", "UPDATE ERROR INVALID INPUT"); // TODO: STUB !!! replace
+                        }
                     }
                 } else {
-                    enrollee.setCity(city);
-                    enrollee.setCountry(country);
-                    enrollee.setSchoolCertificate(Integer.parseInt(certificate));
-                    enrollee = EnrolleeService.updateEnrollee(enrollee);
+                    request.setAttribute("profileErrorMessage", "UPDATE ERROR WRONG PASSWORD"); // TODO: STUB !!! replace
                 }
-                session.setAttribute(Names.ENROLLEE, enrollee);
+            } else {
+                request.setAttribute("profileErrorMessage", "UPDATE ERROR INVALID INPUT"); // TODO: STUB !!! replace
             }
-
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-
-            if (UserService.updateUser(user, password)) {
-                session.setAttribute(Names.USER, user);
-            }
-
-            User.Role role = (User.Role) session.getAttribute(Names.ROLE);
             page = ProfileService.definePage(role);
-
             router.setPage(page);
             router.setType(Router.Type.FORWARD);
         } catch (ProjectException e) {
