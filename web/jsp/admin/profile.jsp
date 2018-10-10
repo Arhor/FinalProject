@@ -1,14 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Maxim Burishinets
-  Date: 23.09.2018
-  Time: 20:20
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<fmt:setLocale value="${locale}" />
+<fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="resources.pagecontent" />
 <!doctype html>
 <html lang="en">
@@ -28,17 +21,10 @@
 </head>
 
 <body class="">
-
 <!-- Modal -->
 <%@ include file="/jsp/modules/SessionExpiredModal.jspf"%>
-
 <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white">
-        <!--
-          Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-          Tip 2: you can also add an image using data-image tag
-      -->
         <div class="logo">
             <span class="simple-text logo-normal">
                 <fmt:message key="label.title" />
@@ -95,28 +81,28 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.email" /></label>
-                                                <input type="email" class="form-control" value="${sessionScope.user.email}" disabled />
+                                                <label for="email" class="bmd-label-floating"><fmt:message key="label.email" /></label>
+                                                <input type="email" class="form-control" id="email" value="${sessionScope.user.email}" disabled />
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.password" /></label>
-                                                <input type="password" class="form-control" name="password" required/>
+                                                <label for="password" class="bmd-label-floating"><fmt:message key="label.password" /></label>
+                                                <input type="password" class="form-control" id="password" name="password" required/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.name.first" /></label>
-                                                <input type="text" class="form-control" name="firstName" value="${sessionScope.user.firstName}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,35}$" required/>
+                                                <label for="firstName" class="bmd-label-floating"><fmt:message key="label.name.first" /></label>
+                                                <input type="text" class="form-control" id="firstName" name="firstName" value="${sessionScope.user.firstName}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,35}$" required/>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.name.last" /></label>
-                                                <input type="text" class="form-control" name="lastName" value="${sessionScope.user.lastName}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,35}$" required/>
+                                                <label for="lastName" class="bmd-label-floating"><fmt:message key="label.name.last" /></label>
+                                                <input type="text" class="form-control" id="lastName" name="lastName" value="${sessionScope.user.lastName}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,35}$" required/>
                                             </div>
                                         </div>
                                     </div>
@@ -134,9 +120,7 @@
                 <nav class="float-left">
                     <ul>
                         <li>
-                            <%--<a href="https://www.creative-tim.com">--%>
-                            <%--Creative Tim--%>
-                            <%--</a>--%>
+
                         </li>
                     </ul>
                 </nav>
@@ -145,15 +129,9 @@
         </footer>
     </div>
 </div>
+<%@ include file="/jsp/modules/core_js.jspf"%>
 <!-- Clock -->
 <script src="${pageContext.request.contextPath}/assets/js/clock.js" type="text/javascript"></script>
-<!--   Core JS Files   -->
-<script src="${pageContext.request.contextPath}/assets/js/core/jquery.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="${pageContext.request.contextPath}/assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
 </body>
 
 </html>

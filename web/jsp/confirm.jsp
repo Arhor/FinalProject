@@ -1,14 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Maxim Burishinets
-  Date: 15.09.2018
-  Time: 21:17
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${locale}" />
+<fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="resources.pagecontent" />
 <!doctype html>
 <html lang="en">
@@ -30,11 +23,6 @@
 <body class="">
 <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white">
-        <!--
-          Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-          Tip 2: you can also add an image using data-image tag
-      -->
         <div class="logo">
             <span class="simple-text logo-normal">
                 <fmt:message key="label.title" />
@@ -43,13 +31,13 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=home">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=home">
                         <i class="material-icons">home</i>
                         <p><fmt:message key="label.homepage" /></p>
                     </a>
                 </li>
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=show_faculties">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_faculties">
                         <i class="material-icons">domain</i>
                         <p><fmt:message key="label.faculties" /></p>
                     </a>
@@ -70,12 +58,12 @@
                                 <p class="card-category"><fmt:message key="label.confirmation.description" /></p>
                             </div>
                             <div class="card-body">
-                                <form action="/controller" name="confirmationForm" method="POST">
+                                <form action="${pageContext.request.contextPath}/controller" name="confirmationForm" method="POST">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.confirmation.code" /></label>
-                                                <input class="form-control" name="confirmationCode" type="text" required />
+                                                <label for="confirmationCode" class="bmd-label-floating"><fmt:message key="label.confirmation.code" /></label>
+                                                <input class="form-control" id="confirmationCode" name="confirmationCode" type="text" required />
                                             </div>
                                         </div>
                                     </div>
@@ -94,9 +82,7 @@
                 <nav class="float-left">
                     <ul>
                         <li>
-                            <%--<a href="https://www.creative-tim.com">--%>
-                            <%--Creative Tim--%>
-                            <%--</a>--%>
+
                         </li>
                     </ul>
                 </nav>
@@ -105,13 +91,7 @@
         </footer>
     </div>
 </div>
-<!--   Core JS Files   -->
-<script src="${pageContext.request.contextPath}/assets/js/core/jquery.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="${pageContext.request.contextPath}/assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
+<%@ include file="/jsp/modules/core_js.jspf"%>
 </body>
 
 </html>

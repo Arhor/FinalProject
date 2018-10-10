@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: arhor
-  Date: 12.9.18
-  Time: 20.56
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -30,11 +23,6 @@
 <body class="">
 <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white">
-        <!--
-          Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-          Tip 2: you can also add an image using data-image tag
-      -->
         <div class="logo">
             <span class="simple-text logo-normal">
                 <fmt:message key="label.title" />
@@ -127,9 +115,7 @@
                 <nav class="float-left">
                     <ul>
                         <li>
-                            <%--<a href="https://www.creative-tim.com">--%>
-                                <%--Creative Tim--%>
-                            <%--</a>--%>
+
                         </li>
                     </ul>
                 </nav>
@@ -138,13 +124,7 @@
         </footer>
     </div>
 </div>
-<!--   Core JS Files   -->
-<script src="${pageContext.request.contextPath}/assets/js/core/jquery.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="${pageContext.request.contextPath}/assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
+<%@ include file="/jsp/modules/core_js.jspf"%>
 </body>
 
 </html>

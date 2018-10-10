@@ -1,11 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Maxim Burishinets
-  Date: 11.09.2018
-  Time: 14:00
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.locale}" />
@@ -30,11 +23,6 @@
 <body class="">
 <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white">
-        <!--
-          Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-          Tip 2: you can also add an image using data-image tag
-      -->
         <div class="logo">
             <span class="simple-text logo-normal">
                 <fmt:message key="label.title" />

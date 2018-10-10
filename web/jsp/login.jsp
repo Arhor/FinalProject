@@ -1,15 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Maxim Burishinets
-  Date: 11.09.2018
-  Time: 11:56
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<fmt:setLocale value="${locale}" />
+<fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="resources.pagecontent" />
 <!doctype html>
 <html lang="en">
@@ -31,11 +23,6 @@
 <body class="">
 <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white">
-        <!--
-          Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-          Tip 2: you can also add an image using data-image tag
-      -->
         <div class="logo">
             <span class="simple-text logo-normal">
                 <fmt:message key="label.title" />
@@ -44,13 +31,13 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=home">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=home">
                         <i class="material-icons">home</i>
                         <p><fmt:message key="label.homepage" /></p>
                     </a>
                 </li>
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="/controller?command=show_faculties">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=show_faculties">
                         <i class="material-icons">domain</i>
                         <p><fmt:message key="label.faculties" /></p>
                     </a>
@@ -70,24 +57,24 @@
                                 <h3 class="card-title"><fmt:message key="label.login.title" /></h3>
                             </div>
                             <div class="card-body">
-                                <form action="/controller" name="loginForm" method="POST">
+                                <form action="${pageContext.request.contextPath}/controller" name="loginForm" method="POST">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.email" /></label>
-                                                <input class="form-control" name="email" type="text" required />
+                                                <label for="email" class="bmd-label-floating"><fmt:message key="label.email" /></label>
+                                                <input class="form-control" id="email" name="email" type="text" required />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating"><fmt:message key="label.password" /></label>
-                                                <input class="form-control" name="password" type="password" required />
+                                                <label for="password" class="bmd-label-floating"><fmt:message key="label.password" /></label>
+                                                <input class="form-control" id="password" name="password" type="password" required />
                                             </div>
                                         </div>
                                     </div>
-                                    ${errorLoginMessage}
+                                    ${requestScope.errorLoginMessage}
                                     <div class="row">
                                         <button class="btn btn-primary col-lg-8 col-md-8 ml-auto mr-auto" name="command" value="login"><fmt:message key="label.login.enter" /></button>
                                     </div>
@@ -103,9 +90,7 @@
                 <nav class="float-left">
                     <ul>
                         <li>
-                            <%--<a href="https://www.creative-tim.com">--%>
-                                <%--Creative Tim--%>
-                            <%--</a>--%>
+
                         </li>
                     </ul>
                 </nav>
@@ -114,13 +99,7 @@
         </footer>
     </div>
 </div>
-<!--   Core JS Files   -->
-<script src="${pageContext.request.contextPath}/assets/js/core/jquery.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="${pageContext.request.contextPath}/assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
+<%@ include file="/jsp/modules/core_js.jspf"%>
 </body>
 
 </html>
