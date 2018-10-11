@@ -32,27 +32,33 @@ public class BlockUserCommand implements ActionCommand {
         Router router = new Router();
         HttpSession session = request.getSession();
         User.Role role = (User.Role) session.getAttribute(Names.ROLE);
+        JSONObject jsonObject = new JSONObject();
         if (role == User.Role.ADMIN) {
             String userId = request.getParameter(Names.USER_ID);
             userId = userId.replaceAll("[^0-9]","");
             int uid = Integer.parseInt(userId);
             try {
                 boolean result = UserService.blockUser(uid);
-                JSONObject jsonObject = new JSONObject();
                 jsonObject.put(Names.USER_ID, uid);
                 jsonObject.put(Names.RESULT, result);
-                router.setType(Router.Type.AJAX);
-                router.setJsonObject(jsonObject);
             } catch (ProjectException | JSONException e) {
                 LOG.error("Blocking user error", e);
-                router.setType(Router.Type.ERROR);
-                router.setErrorCode(500);
+                try {
+                    jsonObject.put("error", true);
+                } catch (JSONException e1) {
+                    LOG.error("JSON error", e1);
+                }
             }
         } else {
             LOG.error("Invalid user role");
-            router.setType(Router.Type.ERROR);
-            router.setErrorCode(403);
+            try {
+                jsonObject.put("error", true);
+            } catch (JSONException e) {
+                LOG.error("JSON error", e);
+            }
         }
+        router.setType(Router.Type.AJAX);
+        router.setJsonObject(jsonObject);
         return router;
     }
 }

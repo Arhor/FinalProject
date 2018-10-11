@@ -50,9 +50,6 @@ public class AjaxServlet extends HttpServlet {
                 response.setContentType("application/json");
                 response.getWriter().write(jsonObject.toString());
                 break;
-            case ERROR:
-                int errorCode = router.getErrorCode();
-                response.sendError(errorCode);
         }
     }
 

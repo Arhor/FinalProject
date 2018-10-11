@@ -32,6 +32,7 @@ public class CheckFacultiesCommand implements ActionCommand {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
+        JSONObject jsonObject = new JSONObject();
         HttpSession session = request.getSession();
         Enrollee enrollee = (Enrollee) session.getAttribute(Names.ENROLLEE);
         int enrolleeId = enrollee.getId();
@@ -40,15 +41,17 @@ public class CheckFacultiesCommand implements ActionCommand {
         try {
             HashMap<Integer, Boolean> resultSet = FacultyService.checkFaculties(
                     enrolleeId, subjects, facultyIds);
-            JSONObject jsonObject = new JSONObject();
             jsonObject.put(Names.RESULT_SET, resultSet);
-            router.setType(Router.Type.AJAX);
-            router.setJsonObject(jsonObject);
         } catch (ProjectException | JSONException e) {
             LOG.error("Checking faculties error", e);
-            router.setType(Router.Type.ERROR);
-            router.setErrorCode(500);
+            try {
+                jsonObject.put("error", true);
+            } catch (JSONException e1) {
+                LOG.error("JSON error", e1);
+            }
         }
+        router.setType(Router.Type.AJAX);
+        router.setJsonObject(jsonObject);
         return router;
     }
 }

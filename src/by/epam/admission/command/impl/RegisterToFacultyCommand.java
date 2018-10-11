@@ -51,13 +51,16 @@ public class RegisterToFacultyCommand implements ActionCommand {
             }
             jsonObject.put(Names.FACULTY, fid);
             jsonObject.put(Names.RESULT, result);
-            router.setType(Router.Type.AJAX);
-            router.setJsonObject(jsonObject);
         } catch (ProjectException | JSONException e) {
             LOG.error("Registration to faculty error", e);
-            router.setType(Router.Type.ERROR);
-            router.setErrorCode(500);
+            try {
+                jsonObject.put("error", true);
+            } catch (JSONException e1) {
+                LOG.error("JSON error", e1);
+            }
         }
+        router.setType(Router.Type.AJAX);
+        router.setJsonObject(jsonObject);
         return router;
     }
 }

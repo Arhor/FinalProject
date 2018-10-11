@@ -28,19 +28,22 @@ public class CheckUsersCommand implements ActionCommand {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
+        JSONObject jsonObject = new JSONObject();
         String[] userIds = request.getParameterValues(Names.USER_ID_ARRAY);
         try {
             HashMap<Integer, Boolean> resultSet =
                     UserService.checkUsers(userIds);
-            JSONObject jsonObject = new JSONObject();
             jsonObject.put(Names.RESULT_SET, resultSet);
-            router.setType(Router.Type.AJAX);
-            router.setJsonObject(jsonObject);
         } catch (ProjectException | JSONException e) {
             LOG.error("Checking users error", e);
-            router.setType(Router.Type.ERROR);
-            router.setErrorCode(500);
+            try {
+                jsonObject.put("error", true);
+            } catch (JSONException e1) {
+                LOG.error("JSON error", e1);
+            }
         }
+        router.setType(Router.Type.AJAX);
+        router.setJsonObject(jsonObject);
         return router;
     }
 

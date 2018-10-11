@@ -18,25 +18,25 @@ $(document).ready(function () {
             data: sendTo,
             dataType: 'text json',
             success : function (data) {
-
-                console.log(data['resultSet']);
-
-                $('.faculty').each(function () {
-                    var fid = $(this).attr('id');
-                    var result = data['resultSet'][fid];
-                    console.log(result);
-                    if (result !== undefined) {
-                        switch (result.toString()) {
-                            case 'true':
-                                $('#fac' + fid + '.btn-danger').css('display', 'inline');
-                                break;
-                            case 'false':
-                                $('#fac' + fid + '.btn-success').css('display', 'inline');
-                                break;
+                if (data['error']) {
+                    window.location.replace('/jsp/error.jsp');
+                } else {
+                    $('.faculty').each(function () {
+                        var fid = $(this).attr('id');
+                        var result = data['resultSet'][fid];
+                        console.log(result);
+                        if (result !== undefined) {
+                            switch (result.toString()) {
+                                case 'true':
+                                    $('#fac' + fid + '.btn-danger').css('display', 'inline');
+                                    break;
+                                case 'false':
+                                    $('#fac' + fid + '.btn-success').css('display', 'inline');
+                                    break;
+                            }
                         }
-                    }
-                });
-
+                    });
+                }
             }
         });
 
@@ -58,18 +58,22 @@ $('.btn-success').click(function () {
         data: sendTo,
         dataType: 'text json',
         success : function (data) {
-            switch (data['result'].toString()) {
-                case 'true':
-                    $('#fac' + data['faculty'].toString() + '.btn-danger').css('display', 'inline');
-                    $('#fac' + data['faculty'].toString() + '.btn-success').css('display', 'none');
-                    break;
-                case 'false':
-                    $('#errorMessage').text(data['message'].toString());
-                    $('#facultyClosed').modal({
-                        backdrop : 'static',
-                        keyboard : true
-                    });
-                    break;
+            if (data['error']) {
+                window.location.replace('/jsp/error.jsp');
+            } else {
+                switch (data['result'].toString()) {
+                    case 'true':
+                        $('#fac' + data['faculty'].toString() + '.btn-danger').css('display', 'inline');
+                        $('#fac' + data['faculty'].toString() + '.btn-success').css('display', 'none');
+                        break;
+                    case 'false':
+                        $('#errorMessage').text(data['message'].toString());
+                        $('#facultyClosed').modal({
+                            backdrop : 'static',
+                            keyboard : true
+                        });
+                        break;
+                }
             }
         }
     });
@@ -86,18 +90,22 @@ $('.btn-danger').click(function () {
         data: sendTo,
         dataType: 'text json',
         success : function (data) {
-            switch (data['result'].toString()) {
-                case 'true':
-                    $('#fac' + data['faculty'].toString() + '.btn-success').css('display', 'inline');
-                    $('#fac' + data['faculty'].toString() + '.btn-danger').css('display', 'none');
-                    break;
-                case 'false':
-                    $('#errorMessage').text(data['message'].toString());
-                    $('#facultyClosed').modal({
-                        backdrop : 'static',
-                        keyboard : true
-                    });
-                    break;
+            if (data['error']) {
+                window.location.replace('/jsp/error.jsp');
+            } else {
+                switch (data['result'].toString()) {
+                    case 'true':
+                        $('#fac' + data['faculty'].toString() + '.btn-success').css('display', 'inline');
+                        $('#fac' + data['faculty'].toString() + '.btn-danger').css('display', 'none');
+                        break;
+                    case 'false':
+                        $('#errorMessage').text(data['message'].toString());
+                        $('#facultyClosed').modal({
+                            backdrop : 'static',
+                            keyboard : true
+                        });
+                        break;
+                }
             }
         }
     });

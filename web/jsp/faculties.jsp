@@ -77,7 +77,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-10 col-md-10 col-sm-12 mr-auto ml-auto">
+                    <div class="col-lg-12 col-md-12 col-sm-12 mr-auto ml-auto">
                         <div class="card">
                             <div class="card-header card-header-primary">
                                 <h4 class="card-title"><fmt:message key="label.faculties" /></h4>

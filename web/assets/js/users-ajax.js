@@ -1,24 +1,19 @@
 $(document).ready(function () {
-
-    // var enrolleeID = $('#enrolleeID').val();
-
-    // if (enrolleeID > 0) {
-
-        var sendTo = {
-            command    : 'check_users',
-            userId  : []
-        };
-
-        $('.admission-user').each(function () {
-            sendTo.userId.push($(this).attr('id'));
-        });
-
-        $.ajax({
-            url: 'ajaxServlet',
-            data: sendTo,
-            dataType: 'text json',
-            success : function (data) {
-
+    var sendTo = {
+        command    : 'check_users',
+        userId  : []
+    };
+    $('.admission-user').each(function () {
+        sendTo.userId.push($(this).attr('id'));
+    });
+    $.ajax({
+        url: 'ajaxServlet',
+        data: sendTo,
+        dataType: 'text json',
+        success : function (data) {
+            if (data['error']) {
+                window.location.replace('/jsp/error.jsp');
+            } else {
                 $('.admission-user').each(function () {
                     var uid = $(this).attr('id');
                     var result = data['resultSet'][uid];
@@ -31,15 +26,9 @@ $(document).ready(function () {
                             break;
                     }
                 });
-
             }
-        });
-
-    // } else {
-    //     $('.success').css('visibility', 'hidden').attr('disabled', 'disabled');
-    //     $('.danger').css('visibility', 'hidden').attr('disabled', 'disabled'); // REFACTORING AWAITS YOU *_*
-    // }
-
+        }
+    });
 });
 
 $('.btn-success').click(function () {
@@ -52,14 +41,18 @@ $('.btn-success').click(function () {
         data: sendTo,
         dataType: 'text json',
         success : function (data) {
-            switch (data['result'].toString()) {
-                case 'true':
-                    $('#uid' + data['userId'].toString() + '.btn-danger').css('display', 'inline');
-                    $('#uid' + data['userId'].toString() + '.btn-success').css('display', 'none');
-                    break;
-                case 'false':
-                    // TODO: implement false user blockhandling
-                    break;
+            if (data['error']) {
+                window.location.replace('/jsp/error.jsp');
+            } else {
+                switch (data['result'].toString()) {
+                    case 'true':
+                        $('#uid' + data['userId'].toString() + '.btn-danger').css('display', 'inline');
+                        $('#uid' + data['userId'].toString() + '.btn-success').css('display', 'none');
+                        break;
+                    case 'false':
+                        // TODO: implement false user block handling
+                        break;
+                }
             }
         }
     });
@@ -75,14 +68,18 @@ $('.btn-danger').click(function () {
         data: sendTo,
         dataType: 'text json',
         success : function (data) {
-            switch (data['result'].toString()) {
-                case 'true':
-                    $('#uid' + data['userId'].toString() + '.btn-success').css('display', 'inline');
-                    $('#uid' + data['userId'].toString() + '.btn-danger').css('display', 'none');
-                    break;
-                case 'false':
-                    // TODO: implement false user unblock handling
-                    break;
+            if (data['error']) {
+                window.location.replace('/jsp/error.jsp');
+            } else {
+                switch (data['result'].toString()) {
+                    case 'true':
+                        $('#uid' + data['userId'].toString() + '.btn-success').css('display', 'inline');
+                        $('#uid' + data['userId'].toString() + '.btn-danger').css('display', 'none');
+                        break;
+                    case 'false':
+                        // TODO: implement false user unblock handling
+                        break;
+                }
             }
         }
     });
