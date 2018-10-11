@@ -66,6 +66,7 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
                 faculty.setNameEn(rs.getString(NAME_EN));
                 faculty.setSeatsPaid(rs.getInt(SEATS_PAID));
                 faculty.setSeatsBudget(rs.getInt(SEATS_BUDGET));
+                faculty.setChecked(rs.getInt(CHECKED) == 1);
             }
         } catch (SQLException e) {
             throw new ProjectException("Selection error", e);
@@ -98,23 +99,33 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
 
     @Override
     public boolean create(Faculty faculty) throws ProjectException {
+        int flag;
         try {
-            return executeDMLQuery(faculty, SQL_INSERT_FACULTY);
+            try (PreparedStatement st = connection.prepareStatement(SQL_INSERT_FACULTY)) {
+                st.setString(1, faculty.getNameRu());
+                st.setString(2, faculty.getNameEn());
+                st.setInt(3, faculty.getSeatsPaid());
+                st.setInt(4, faculty.getSeatsBudget());
+                st.setInt(5, faculty.getId());
+                flag = st.executeUpdate();
+            }
         } catch (SQLException e) {
             LOG.error("Insertion error", e);
             throw new ProjectException("Insertion error", e);
         }
+        return flag != 0;
     }
 
-    @Override
-    public Faculty update(Faculty faculty) throws ProjectException {
+//    @Override
+    public boolean update(Faculty faculty) throws ProjectException {
+        boolean result;
         try {
-            boolean result = executeDMLQuery(faculty, SQL_UPDATE_FACULTY);
-            return result ? faculty : null;
+            result = executeDMLQuery(faculty, SQL_UPDATE_FACULTY);
         } catch (SQLException e) {
             LOG.error("Update error", e);
             throw new ProjectException("Update error", e);
         }
+        return result;
     }
 
     private void processResult(ArrayList<Faculty> faculties, ResultSet rs)
@@ -140,7 +151,9 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
             st.setString(2, faculty.getNameEn());
             st.setInt(3, faculty.getSeatsPaid());
             st.setInt(4, faculty.getSeatsBudget());
-            st.setInt(5, faculty.getId());
+            int checked = faculty.isChecked() ? 1 : 0;
+            st.setInt(5, checked);
+            st.setInt(6, faculty.getId());
             flag = st.executeUpdate();
         }
         return flag != 0;
@@ -169,22 +182,28 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
                 "INSERT INTO `faculties` " +
                 "(`name_ru`,`name_en`,`seats_paid`,`seats_budget`,`id`) " +
                 "VALUES (?,?,?,?,?)";
+
+        // checked added
         SQL_DELETE_FACULTY =
                 "DELETE FROM `faculties` " +
                 "WHERE  `name_ru` = ? " +
                         "AND `name_en` = ? " +
                         "AND `seats_paid` = ? " +
                         "AND `seats_budget` = ? " +
+                        "AND `checked` = ? " +
                         "AND `id` = ?";
         SQL_DELETE_FACULTY_BY_ID =
                 "DELETE FROM `faculties` " +
                 "WHERE `id` = ?";
+
+        // checked added
         SQL_UPDATE_FACULTY =
                 "UPDATE  `faculties` " +
                 "SET     `name_ru` = ?, " +
                         "`name_en` = ?, " +
                         "`seats_paid` = ?, " +
-                        "`seats_budget` = ? " +
+                        "`seats_budget` = ?, " +
+                        "`checked` = ? " +
                 "WHERE `id` = ?";
     }
 }

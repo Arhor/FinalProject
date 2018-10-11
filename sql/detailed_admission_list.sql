@@ -12,3 +12,5 @@ FROM   `enrollees`
 				FROM `enrollees_has_subjects`
 				GROUP BY `enrollees_has_subjects`.`enrollees_id`
 			) AS `total_score` ON `enrollees`.`id` = `total_score`.`enrollees_id`
+WHERE `admission_list`.`available` = 1 AND `faculties`.`id` = 202
+ORDER BY `total_score` DESC

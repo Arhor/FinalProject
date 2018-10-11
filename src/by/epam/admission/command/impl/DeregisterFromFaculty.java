@@ -7,7 +7,7 @@ package by.epam.admission.command.impl;
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
-import by.epam.admission.logic.FacultyService;
+import by.epam.admission.service.FacultyService;
 import by.epam.admission.util.Names;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,15 +26,24 @@ public class DeregisterFromFaculty implements ActionCommand {
 
     @Override
     public Router execute(HttpServletRequest request) {
+        boolean result;
         Router router = new Router();
+        JSONObject jsonObject = new JSONObject();
         String enrolleeId = request.getParameter(Names.ENROLLEE_ID);
         String facultyId = request.getParameter(Names.FACULTY_ID);
         facultyId = facultyId.replaceAll("[^0-9]","");
         int eid = Integer.parseInt(enrolleeId);
         int fid = Integer.parseInt(facultyId);
         try {
-            boolean result = FacultyService.deregisterFromFaculty(eid, fid);
-            JSONObject jsonObject = new JSONObject();
+            if (!FacultyService.checkFacultyStatus(fid)) {
+                result = FacultyService.deregisterFromFaculty(eid, fid);
+                if (!result) {
+                    jsonObject.put("message", "faculty registration failed");
+                }
+            } else {
+                result = false;
+                jsonObject.put("message", "faculty registration is closed");
+            }
             jsonObject.put(Names.FACULTY, fid);
             jsonObject.put(Names.RESULT, result);
             router.setType(Router.Type.AJAX);

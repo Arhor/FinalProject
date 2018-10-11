@@ -2,7 +2,7 @@
  * class: ProfileService
  */
 
-package by.epam.admission.logic;
+package by.epam.admission.service;
 
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;

@@ -7,15 +7,13 @@ package by.epam.admission.command.impl;
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
-import by.epam.admission.logic.UserService;
+import by.epam.admission.service.UserService;
 import by.epam.admission.util.Names;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.HashMap;
 
 /**

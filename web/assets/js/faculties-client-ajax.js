@@ -64,7 +64,11 @@ $('.btn-success').click(function () {
                     $('#fac' + data['faculty'].toString() + '.btn-success').css('display', 'none');
                     break;
                 case 'false':
-                    // TODO: implement false faculty registration handling
+                    $('#errorMessage').text(data['message'].toString());
+                    $('#facultyClosed').modal({
+                        backdrop : 'static',
+                        keyboard : true
+                    });
                     break;
             }
         }
@@ -88,7 +92,11 @@ $('.btn-danger').click(function () {
                     $('#fac' + data['faculty'].toString() + '.btn-danger').css('display', 'none');
                     break;
                 case 'false':
-                    // TODO: implement false faculty registration handling
+                    $('#errorMessage').text(data['message'].toString());
+                    $('#facultyClosed').modal({
+                        backdrop : 'static',
+                        keyboard : true
+                    });
                     break;
             }
         }

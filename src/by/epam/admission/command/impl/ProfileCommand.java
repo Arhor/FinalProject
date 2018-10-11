@@ -6,7 +6,7 @@ package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
-import by.epam.admission.logic.ProfileService;
+import by.epam.admission.service.ProfileService;
 import by.epam.admission.model.User;
 import by.epam.admission.util.Names;
 

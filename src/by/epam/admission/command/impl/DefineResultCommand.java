@@ -7,13 +7,15 @@ package by.epam.admission.command.impl;
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
-import by.epam.admission.logic.FacultyService;
+import by.epam.admission.model.Faculty;
+import by.epam.admission.service.FacultyService;
 import by.epam.admission.util.ConfigurationManager;
+import by.epam.admission.util.Names;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @author Burishinets Maxim
@@ -26,11 +28,14 @@ public class DefineResultCommand implements ActionCommand {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
-        String page = ConfigurationManager.getProperty("path.page.faculties");
-
+        String page;
+        List<Faculty> faculties;
         int facultyId = Integer.parseInt(request.getParameter("facultyId"));
         try {
             FacultyService.defineFacultyResult(facultyId);
+            faculties = FacultyService.findFaculties();
+            request.setAttribute(Names.FACULTIES, faculties);
+            page = ConfigurationManager.getProperty("path.page.faculties");
             router.setType(Router.Type.FORWARD);
             router.setPage(page);
         } catch (ProjectException e) {

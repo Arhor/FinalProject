@@ -42,6 +42,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SQL_INSERT_SUBJECT_BY_ENROLLEE_ID;
     private static final String SQL_CHECK_ADMISSION_LIST_ENTRY;
     private static final String SQL_SELECT_BEST_ENROLLEES_IDS;
+    private static final String SQL_UPDATE_ADMISSION_LIST_STATUS;
 
     // column labels
     private static final String ID = "id";
@@ -52,6 +53,10 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String AVAILABLE = "available";
 
     private static final int ACTIVE = 1;
+
+    private static final String NONE = "none";
+    private static final String BUDGET = "budget";
+    private static final String PAID = "paid";
 
 //    @Override
     public List<Enrollee> findAll() throws ProjectException {
@@ -289,6 +294,50 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         return flag != 0;
     }
 
+    public boolean updateAdmissionList(int facultyId,
+                                       ArrayList<Integer> enrolleeIds,
+                                       Seats seats)
+            throws ProjectException {
+        boolean result = false;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < enrolleeIds.size(); i++) {
+            if (i == 0) { sb.append("("); }
+            sb.append(enrolleeIds.get(i));
+            if (i == enrolleeIds.size() - 1) {
+                sb.append(")");
+            } else {
+                sb.append(",");
+            }
+        }
+        LOG.debug(String.format(SQL_UPDATE_ADMISSION_LIST_STATUS, sb.toString()));
+        try (PreparedStatement st = connection.prepareStatement(
+                String.format(SQL_UPDATE_ADMISSION_LIST_STATUS, sb.toString()))) {
+            st.setString(1, seats.getValue());
+            st.setInt(2, facultyId);
+            int rows = st.executeUpdate();
+            result = (rows == enrolleeIds.size());
+        } catch (SQLException e) {
+            throw new ProjectException("Update error", e);
+        }
+        return result;
+    }
+
+//    @Override
+    public Enrollee update(Enrollee enrollee) throws ProjectException {
+        int flag;
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_UPDATE_ENROLLEE)) {
+            st.setString(1, enrollee.getCountry());
+            st.setString(2, enrollee.getCity());
+            st.setInt(3, enrollee.getSchoolCertificate());
+            st.setInt(4,enrollee.getId());
+            flag = st.executeUpdate();
+        } catch (SQLException e) {
+            throw new ProjectException("Updating error", e);
+        }
+        return flag != 0 ? enrollee : null;
+    }
+
     private int processFacultyRegistration(int enrolleeId,
                                            int facultyId,
                                            String sql)
@@ -303,22 +352,6 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
             throw new ProjectException("Updating error", e);
         }
         return flag;
-    }
-
-    @Override
-    public Enrollee update(Enrollee enrollee) throws ProjectException {
-        int flag;
-        try (PreparedStatement st = connection.prepareStatement(
-                SQL_UPDATE_ENROLLEE)) {
-            st.setString(1, enrollee.getCountry());
-            st.setString(2, enrollee.getCity());
-            st.setInt(3, enrollee.getSchoolCertificate());
-            st.setInt(4,enrollee.getId());
-            flag = st.executeUpdate();
-        } catch (SQLException e) {
-            throw new ProjectException("Updating error", e);
-        }
-        return flag != 0 ? enrollee : null;
     }
 
     private void processResult(ArrayList<Enrollee> enrollees, ResultSet rs)
@@ -348,6 +381,20 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
             processResult(enrollees, rs);
         } catch (SQLException e) {
             throw new ProjectException("Selection error", e);
+        }
+    }
+
+    public enum Seats {
+        BUDGET ("budget"), PAID ("paid");
+
+        private String value;
+
+        Seats(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
         }
     }
 
@@ -438,6 +485,10 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "WHERE `faculties`.`id` = ? AND `admission_list`.`available` = 1 " +
                 "ORDER BY (`total_score`.`score` + `enrollees`.`school_certificate`) " +
                 "DESC LIMIT ? OFFSET ?";
+        SQL_UPDATE_ADMISSION_LIST_STATUS =
+                "UPDATE `admission_list` " +
+                "SET `is_passed` = ? " +
+                "WHERE `enrollees_id` IN %s AND `faculties_id` = ?";
     }
 
 }

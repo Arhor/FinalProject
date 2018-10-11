@@ -2,7 +2,7 @@
  * class: FacultyService
  */
 
-package by.epam.admission.logic;
+package by.epam.admission.service;
 
 import by.epam.admission.dao.DaoHelper;
 import by.epam.admission.dao.impl.EnrolleeDao;
@@ -59,6 +59,19 @@ public class FacultyService {
             helper.endTransaction();
         }
         return result;
+    }
+
+    public static boolean checkFacultyStatus(int facultyId) throws ProjectException {
+        DaoHelper helper = new DaoHelper();
+        FacultyDao facultyDao = new FacultyDao();
+        try {
+            helper.startTransaction(facultyDao);
+            Faculty faculty = facultyDao.findEntityById(facultyId);
+            LOG.debug(faculty);
+            return faculty.isChecked();
+        } finally {
+            helper.endTransaction();
+        }
     }
 
     public static HashMap<Integer, Boolean> checkFaculties(
@@ -154,22 +167,35 @@ public class FacultyService {
     }
 
     public static boolean defineFacultyResult(int facultyId) throws ProjectException {
-        boolean result = false;
+        boolean result = true;
         DaoHelper helper = new DaoHelper();
         FacultyDao facultyDao = new FacultyDao();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
 
         try {
             helper.startTransaction(facultyDao, enrolleeDao);
+
             Faculty faculty = facultyDao.findEntityById(facultyId);
-            ArrayList<Integer> idsForBudjet = enrolleeDao.findBestEnrolleesIds(facultyId,0, faculty.getSeatsBudget());
+
+            ArrayList<Integer> idsForBudget = enrolleeDao.findBestEnrolleesIds(facultyId,0, faculty.getSeatsBudget());
             ArrayList<Integer> idsForPaid = enrolleeDao.findBestEnrolleesIds(facultyId, faculty.getSeatsBudget(), faculty.getSeatsPaid());
 
-            LOG.debug(idsForBudjet);
-            LOG.debug(idsForPaid);
+            if (!idsForBudget.isEmpty()) {
+                boolean resultBudget = enrolleeDao.updateAdmissionList(facultyId, idsForBudget, EnrolleeDao.Seats.BUDGET);
+                result = (result && resultBudget);
+            }
+            if (!idsForPaid.isEmpty()) {
+                boolean resultPaid = enrolleeDao.updateAdmissionList(facultyId, idsForPaid, EnrolleeDao.Seats.PAID);
+                result = (result && resultPaid);
+            }
+
+            faculty.setChecked(true);
+
+            boolean resultCheck = facultyDao.update(faculty);
+
+            result = (result && resultCheck);
 
             helper.commit();
-            result = true;
         } catch (ProjectException e) {
             helper.rollback();
             throw e;

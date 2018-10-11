@@ -20,6 +20,9 @@
 <c:if test="${sessionScope.role eq 'CLIENT' || sessionScope.role eq 'ADMIN'}">
     <!-- Modal -->
     <%@ include file="/jsp/modules/SessionExpiredModal.jspf"%>
+    <c:if test="${sessionScope.role eq 'CLIENT'}">
+        <%@ include file="/jsp/modules/facultyModal.jspf"%>
+    </c:if>
 </c:if>
 <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white">
@@ -126,11 +129,15 @@
                                                                     </td>
                                                                 </c:when>
                                                                 <c:when test="${sessionScope.role.toString() eq 'ADMIN'}">
-                                                                    <td class="text-center">
-                                                                        <button type="button" class="btn btn-primary" id="fac${faculty.id}">
-                                                                            <i class="material-icons">poll</i> ${faculty.checked}
-                                                                        </button>
-                                                                        <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=define_result&facultyId=${faculty.id}">BUTTON</a>
+                                                                    <td class="td-actions text-center">
+                                                                        <c:choose>
+                                                                            <c:when test="${faculty.checked}">
+                                                                                <a href="#" class="btn btn-warning btn-lg" role="button" aria-disabled="false"><i class="material-icons">done_outline</i>Already checked</a>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <a href="${pageContext.request.contextPath}/controller?command=define_result&facultyId=${faculty.id}" class="btn btn-info btn-lg" role="button" aria-disabled="false"><i class="material-icons">toc</i>Check faculty result</a>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
                                                                     </td>
                                                                 </c:when>
                                                             </c:choose>
@@ -156,14 +163,19 @@
                                                                         <button type="button" class="btn btn-danger" style="display : none" id="fac${faculty.id}">
                                                                             <i class="material-icons">close</i>
                                                                         </button>
+                                                                        <br />
                                                                     </td>
                                                                 </c:when>
                                                                 <c:when test="${sessionScope.role.toString() eq 'ADMIN'}">
-                                                                    <td class="text-center">
-                                                                        <button type="submit" form="defineResult" class="btn btn-primary" id="fac${faculty.id}">
-                                                                            <i class="material-icons">poll</i> ${faculty.checked}
-                                                                        </button>
-                                                                        <a class="nav-link" href="${pageContext.request.contextPath}/controller?command=define_result&facultyId=${faculty.id}">BUTTON</a>
+                                                                    <td class="td-actions text-center">
+                                                                        <c:choose>
+                                                                            <c:when test="${faculty.checked}">
+                                                                                <a href="#" class="btn btn-warning btn-lg" role="button" aria-disabled="false"><i class="material-icons">done_outline</i>Already checked</a>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <a href="${pageContext.request.contextPath}/controller?command=define_result&facultyId=${faculty.id}" class="btn btn-info btn-lg" role="button" aria-disabled="false"><i class="material-icons">toc</i>Check faculty result</a>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
                                                                     </td>
                                                                 </c:when>
                                                             </c:choose>
@@ -206,7 +218,9 @@
 <!-- Clock -->
 <script src="${pageContext.request.contextPath}/assets/js/clock.js" type="text/javascript"></script>
 <!-- Ajax -->
-<script src="${pageContext.request.contextPath}/assets/js/faculties-ajax.js" type="text/javascript"></script>
+<c:if test="${sessionScope.role eq 'CLIENT'}">
+    <script src="${pageContext.request.contextPath}/assets/js/faculties-client-ajax.js" type="text/javascript"></script>
+</c:if>
 </body>
 
 </html>

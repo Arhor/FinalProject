@@ -2,7 +2,7 @@
  * class: UserService
  */
 
-package by.epam.admission.logic;
+package by.epam.admission.service;
 
 import by.epam.admission.dao.DaoHelper;
 import by.epam.admission.dao.impl.UserDao;

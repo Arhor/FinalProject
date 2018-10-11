@@ -2,7 +2,7 @@
  * class: MailService
  */
 
-package by.epam.admission.logic;
+package by.epam.admission.service;
 
 import by.epam.admission.util.EmailSessionCreator;
 import org.apache.logging.log4j.LogManager;

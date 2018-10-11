@@ -7,7 +7,7 @@ package by.epam.admission.command.impl;
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
-import by.epam.admission.logic.FacultyService;
+import by.epam.admission.service.FacultyService;
 import by.epam.admission.util.Names;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,20 +27,28 @@ public class RegisterToFacultyCommand implements ActionCommand {
 
     @Override
     public Router execute(HttpServletRequest request) {
-        Router router = new Router();
         boolean result;
+        Router router = new Router();
+        JSONObject jsonObject = new JSONObject();
         String enrolleeId = request.getParameter(Names.ENROLLEE_ID);
         String facultyId = request.getParameter(Names.FACULTY_ID);
         facultyId = facultyId.replaceAll("[^0-9]","");
         int eid = Integer.parseInt(enrolleeId);
         int fid = Integer.parseInt(facultyId);
         try {
-            if (FacultyService.checkAdmissionListEntry(eid, fid)) {
-                result = FacultyService.restoreFacultyRegistration(eid, fid);
+            if (!FacultyService.checkFacultyStatus(fid)) {
+                if (FacultyService.checkAdmissionListEntry(eid, fid)) {
+                    result = FacultyService.restoreFacultyRegistration(eid, fid);
+                } else {
+                    result = FacultyService.registerToFaculty(eid, fid);
+                }
+                if (!result) {
+                    jsonObject.put("message", "faculty registration failed");
+                }
             } else {
-                result = FacultyService.registerToFaculty(eid, fid);
+                result = false;
+                jsonObject.put("message", "faculty registration is closed");
             }
-            JSONObject jsonObject = new JSONObject();
             jsonObject.put(Names.FACULTY, fid);
             jsonObject.put(Names.RESULT, result);
             router.setType(Router.Type.AJAX);

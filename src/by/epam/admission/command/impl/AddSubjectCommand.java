@@ -7,8 +7,8 @@ package by.epam.admission.command.impl;
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
-import by.epam.admission.logic.EnrolleeService;
-import by.epam.admission.logic.SubjectService;
+import by.epam.admission.service.EnrolleeService;
+import by.epam.admission.service.SubjectService;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Subject;
 import by.epam.admission.util.ConfigurationManager;
@@ -17,9 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.List;
 
 /**

@@ -286,7 +286,7 @@ public class UserDao extends AbstractDao<Integer, User> {
         return flag != 0;
     }
 
-    @Override
+//    @Override
     public User update(User user) throws NotSupportedOperationException {
         throw new NotSupportedOperationException();
     }
