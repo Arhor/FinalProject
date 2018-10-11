@@ -36,9 +36,9 @@ public class EnrolleeService {
         return result;
     }
 
-    public static Enrollee updateEnrollee(Enrollee enrollee)
+    public static boolean updateEnrollee(Enrollee enrollee)
             throws ProjectException {
-        Enrollee result = null;
+        boolean result;
         DaoHelper daoHelper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
         daoHelper.startTransaction(enrolleeDao);

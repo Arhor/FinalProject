@@ -108,9 +108,10 @@ public class UserDaoTest {
                     user.setRole(User.Role.CLIENT);
                     user.setLang(User.Lang.RU);
                     String password = "test"+ number +"@gmail.com";
+                    user.setPassword(password);
                     try {
                         daoHelper.startTransaction(uDAO);
-                        uDAO.create(user, password);
+                        uDAO.create(user);
                         daoHelper.commit();
                         LOG.info("created user: " + user);
                     } catch (ProjectException e) {
@@ -141,9 +142,10 @@ public class UserDaoTest {
         user.setRole(User.Role.CLIENT);
         user.setLang(User.Lang.RU);
         String password = "test@gmail.com";
+        user.setPassword(password);
         try {
             daoHelper.startTransaction(uDAO);
-            boolean flag = uDAO.create(user, password);
+            boolean flag = uDAO.create(user);
             daoHelper.commit();
             if (flag) {
                 LOG.info("created user: " + user);
@@ -165,11 +167,11 @@ public class UserDaoTest {
         user.setFirstName("xxx");
         user.setLastName("xxx");
         user.setLang(User.Lang.RU);
-        String password = "example.48@gmail.com";
+        user.setPassword("example.48@gmail.com");
         boolean result = false;
         try {
             daoHelper.startTransaction(uDAO);
-            result = uDAO.update(user, password);
+            result = uDAO.update(user);
             daoHelper.commit();
         } catch (ProjectException e) {
             daoHelper.rollback();

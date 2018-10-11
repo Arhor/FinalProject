@@ -32,7 +32,6 @@ public class ConfirmCommand implements ActionCommand {
         HttpSession session = request.getSession();
 
         User user = (User) session.getAttribute(Names.USER);
-        String password = (String) session.getAttribute(Names.PASSWORD);
 
         String submittedCode = request.getParameter(Names.CONFIRMATION_CODE);
         String realCode = String.valueOf(session.getAttribute(
@@ -41,8 +40,9 @@ public class ConfirmCommand implements ActionCommand {
         try {
             String page;
             if (submittedCode.equals(realCode)) {
-                user = UserService.registerUser(user, password);
+                user = UserService.registerUser(user);
                 if (user != null) {
+                    user.setPassword(null);
                     session.setAttribute(Names.USER, user);
                     session.setAttribute(Names.ROLE, user.getRole());
                     session.setAttribute(Names.LOCALE, user.getLang().getValue());

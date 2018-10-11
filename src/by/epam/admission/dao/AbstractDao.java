@@ -25,10 +25,9 @@ public abstract class AbstractDao<K, T extends Entity> {
     
     public abstract boolean delete(T entity) throws NotSupportedOperationException, ProjectException;
     
-    public abstract boolean create(T entity)
-            throws NotSupportedOperationException, ProjectException;
+    public abstract boolean create(T entity) throws ProjectException;
     
-//    public abstract T update(T entity) throws NotSupportedOperationException, ProjectException;
+    public abstract boolean update(T entity) throws ProjectException;
 
     void setConnection(ProxyConnection connection) {
         this.connection = connection;

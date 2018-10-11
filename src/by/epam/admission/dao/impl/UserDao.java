@@ -231,11 +231,13 @@ public class UserDao extends AbstractDao<Integer, User> {
     }
 
     // if return false - user with the same email already exists
-    public boolean create(User user, String password) throws ProjectException {
+    @Override
+    public boolean create(User user) throws ProjectException {
         boolean result = false;
         try {
             if (findNameByEmail(user.getEmail()) == null) {
                 int flag;
+                String password = user.getPassword();
                 String encryptedPassword = EncryptAction.encrypt(
                         password, user.getFirstName());
                 try (PreparedStatement st = connection.prepareStatement(
@@ -260,17 +262,14 @@ public class UserDao extends AbstractDao<Integer, User> {
         return result;
     }
 
-    @Override
-    public boolean create(User user) throws NotSupportedOperationException {
-        throw new NotSupportedOperationException();
-    }
-
     // password changes every time on first_name change
-    public boolean update(User user, String password) throws ProjectException {
+    @Override
+    public boolean update(User user) throws ProjectException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_UPDATE_USER)) {
             String name = findNameByEmail(user.getEmail());
+            String password = user.getPassword();
             String encryptedPassword = EncryptAction.encrypt(password, name);
             String newPassword = EncryptAction.encrypt(password, user.getFirstName());
             st.setString(1, newPassword);
@@ -287,9 +286,9 @@ public class UserDao extends AbstractDao<Integer, User> {
     }
 
 //    @Override
-    public User update(User user) throws NotSupportedOperationException {
-        throw new NotSupportedOperationException();
-    }
+//    public boolean update(User user) throws NotSupportedOperationException {
+//        throw new NotSupportedOperationException();
+//    }
 
     private void processResult(ArrayList<User> users, ResultSet rs)
             throws SQLException {

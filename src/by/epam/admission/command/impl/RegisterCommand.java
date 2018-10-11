@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -55,6 +56,7 @@ public class RegisterCommand implements ActionCommand {
                     user.setEmail(email);
                     user.setFirstName(firstName);
                     user.setLastName(lastName);
+                    user.setPassword(password);
                     user.setRole(User.Role.CLIENT);
                     switch (User.Lang.valueOf(language.toUpperCase())) {
                         case RU:

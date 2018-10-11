@@ -18,6 +18,8 @@ public class User extends Entity {
     private Lang lang;
     private Role role;
 
+    private String password;
+
     public User() {
         super();
     }
@@ -64,6 +66,14 @@ public class User extends Entity {
 
     public void setLang(Lang lang) {
         this.lang = lang;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public enum Lang {

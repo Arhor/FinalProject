@@ -119,10 +119,10 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
         }
     }
 
-//    @Override
-    public Subject update(Subject subject) throws ProjectException {
+    @Override
+    public boolean update(Subject subject) throws ProjectException {
         try {
-            return executeDMLQuery(subject, SQL_UPDATE_SUBJECT) ? subject : null;
+            return executeDMLQuery(subject, SQL_UPDATE_SUBJECT);
         } catch (SQLException e) {
             LOG.error("Update error", e);
             throw new ProjectException("Update error", e);

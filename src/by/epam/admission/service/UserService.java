@@ -64,7 +64,7 @@ public class UserService {
         return usersAmount;
     }
 
-    public static boolean updateUser(User user, String password)
+    public static boolean updateUser(User user)
             throws ProjectException {
         boolean result;
         DaoHelper daoHelper = new DaoHelper();
@@ -72,7 +72,7 @@ public class UserService {
 
         try {
             daoHelper.startTransaction(userDao);
-            result = userDao.update(user, password);
+            result = userDao.update(user);
             daoHelper.commit();
         } catch (ProjectException e) {
             daoHelper.rollback();
@@ -148,7 +148,7 @@ public class UserService {
         return result;
     }
 
-    public static User registerUser(User user, String password)
+    public static User registerUser(User user)
             throws ProjectException {
 
         boolean result;
@@ -156,7 +156,7 @@ public class UserService {
         UserDao userDao = new UserDao();
         try {
             helper.startTransaction(userDao);
-            result = userDao.create(user, password);
+            result = userDao.create(user);
             helper.commit();
         } catch (ProjectException e) {
             helper.rollback();

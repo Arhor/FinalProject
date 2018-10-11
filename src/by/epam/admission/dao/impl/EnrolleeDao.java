@@ -322,8 +322,8 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         return result;
     }
 
-//    @Override
-    public Enrollee update(Enrollee enrollee) throws ProjectException {
+    @Override
+    public boolean update(Enrollee enrollee) throws ProjectException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_UPDATE_ENROLLEE)) {
@@ -335,7 +335,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         } catch (SQLException e) {
             throw new ProjectException("Updating error", e);
         }
-        return flag != 0 ? enrollee : null;
+        return flag != 0;
     }
 
     private int processFacultyRegistration(int enrolleeId,

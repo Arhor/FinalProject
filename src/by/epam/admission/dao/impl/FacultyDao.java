@@ -116,7 +116,7 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
         return flag != 0;
     }
 
-//    @Override
+    @Override
     public boolean update(Faculty faculty) throws ProjectException {
         boolean result;
         try {

@@ -48,6 +48,7 @@ public class UpdateProfileCommand implements ActionCommand {
         lastName = XssFilter.doFilter(lastName);
 
         User currUser = (User) session.getAttribute(Names.USER);
+        currUser.setPassword(password);
         User.Role role = currUser.getRole();
 
         try {
@@ -63,7 +64,7 @@ public class UpdateProfileCommand implements ActionCommand {
                     currUser.setFirstName(firstName);
                     currUser.setLastName(lastName);
 
-                    if (UserService.updateUser(currUser, password)) {
+                    if (UserService.updateUser(currUser)) {
                         session.setAttribute(Names.USER, currUser);
                     }
 
@@ -100,13 +101,15 @@ public class UpdateProfileCommand implements ActionCommand {
                                 if (!registrationResult) {
                                     enrollee = null;
                                 }
+                                session.setAttribute(Names.ENROLLEE, enrollee);
                             } else {
                                 enrollee.setCity(city);
                                 enrollee.setCountry(country);
                                 enrollee.setSchoolCertificate(Integer.parseInt(certificate));
-                                enrollee = EnrolleeService.updateEnrollee(enrollee);
+                                if (EnrolleeService.updateEnrollee(enrollee)) {
+                                    session.setAttribute(Names.ENROLLEE, enrollee);
+                                }
                             }
-                            session.setAttribute(Names.ENROLLEE, enrollee);
                         } else {
                             request.setAttribute("profileErrorMessage", "UPDATE ERROR INVALID INPUT"); // TODO: STUB !!! replace
                         }
