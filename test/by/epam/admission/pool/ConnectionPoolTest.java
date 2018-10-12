@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.database.DatabaseConfig;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
@@ -29,7 +30,7 @@ public class ConnectionPoolTest {
 
     @Test
     public void mainTest() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             new Thread() {
                 public void run() {
                     ProxyConnection connection = pool.getConnection();
@@ -85,7 +86,7 @@ public class ConnectionPoolTest {
     @BeforeMethod
     public void setUpMethod() throws Exception {
         FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-        IDataSet dataSet = builder.build(new File("resources/all-tables-dataset.xml"));
+        IDataSet dataSet = builder.build(new File("resources/test-dataset_temp.xml"));
         pool.getTester().setDataSet(dataSet);
         pool.getTester().onSetup();
     }

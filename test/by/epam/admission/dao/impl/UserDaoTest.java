@@ -5,6 +5,7 @@
 package by.epam.admission.dao.impl;
 
 import by.epam.admission.dao.DaoHelper;
+import by.epam.admission.dao.DaoHelperDbUnit;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.User;
 import by.epam.admission.pool.ConnectionPool;
@@ -23,11 +24,13 @@ public class UserDaoTest {
 
     @Test
     public void testFindAll() {
-        DaoHelper daoHelper = new DaoHelper();
+        DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
         UserDao uDAO = new UserDao();
         try {
             daoHelper.startTransaction(uDAO);
-            for (User user : uDAO.findAll(1,1)) { // TODO: STUB
+            int totalUsers = uDAO.findTotalAmount();
+            LOG.info("total users: " + totalUsers);
+            for (User user : uDAO.findAll(0,totalUsers)) { // TODO: STUB
                 LOG.info(user);
             }
         } catch (ProjectException e) {

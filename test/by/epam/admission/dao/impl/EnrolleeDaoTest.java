@@ -166,7 +166,7 @@ public class EnrolleeDaoTest {
     public void setUpClass() {
         IDatabaseTester tester = ConnectionPoolDBUnit.POOL.getTester();
         tester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
-        tester.setTearDownOperation(DatabaseOperation.DELETE_ALL);
+        tester.setTearDownOperation(DatabaseOperation.NONE);
     }
 
     @AfterClass
@@ -181,7 +181,7 @@ public class EnrolleeDaoTest {
     @BeforeMethod
     public void setUpMethod() throws Exception {
         FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-        IDataSet dataSet = builder.build(new File("all-tables-dataset.xml"));
+        IDataSet dataSet = builder.build(new File("resources/test-dataset_temp.xml"));
         ConnectionPoolDBUnit.POOL.getTester().setDataSet(dataSet);
         ConnectionPoolDBUnit.POOL.getTester().onSetup();
     }
