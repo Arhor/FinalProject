@@ -29,58 +29,31 @@ public class ConnectionPoolTest {
     private static ConnectionPoolDBUnit pool = ConnectionPoolDBUnit.POOL;
 
     @Test
-    public void mainTest() {
-        for (int i = 0; i < 10; i++) {
-            new Thread() {
-                public void run() {
-                    ProxyConnection connection = pool.getConnection();
-                    try {
-                        Thread.sleep((int)(Math.random() * 10));
-                        pool.releaseConnection(connection);
-                    } catch (InterruptedException e) {
-                        LOG.error("Interrupted exception: ", e);
-                        Thread.currentThread().interrupt();
-                    }
-                }
-            }.start();
+    public void connectionLeakTest() {
+        for (int i = 0; i < 100000; i++) {
+            Thread thread = new Thread(() -> {
+                ProxyConnection connection = pool.getConnection();
+                pool.releaseConnection(connection);
+            });
+            thread.start();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                LOG.error("Interrupted exception: ", e);
+                Thread.currentThread().interrupt();
+            }
         }
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            LOG.error("Interrupted exception: ", e);
-            Thread.currentThread().interrupt();
-        }
+        pool.closePool();
+        int actual = pool.countAvailableConnections() + pool.countUsedConnections();
+        int expected = 0;
+        Assert.assertEquals(actual,expected);
     }
-
-//    @Test
-//    public void serializationTest()
-//            throws IOException, ClassNotFoundException, InterruptedException {
-//        ConnectionPool pool_1 = ConnectionPool.POOL;
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        ObjectOutputStream oos = new ObjectOutputStream(baos);
-//        oos.writeObject(pool_1);
-//        oos.close();
-//
-//        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-//        ObjectInputStream ois = new ObjectInputStream(bais);
-//
-//        ConnectionPool pool_2 = (ConnectionPool) ois.readObject();
-//        ois.close();
-//        Thread.sleep(10000);
-//        Assert.assertTrue(pool_1 == pool_2);
-//    }
-
 
     @BeforeClass
     public void setUpClass() {
         IDatabaseTester tester = pool.getTester();
         tester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
-        tester.setTearDownOperation(DatabaseOperation.DELETE_ALL);
-    }
-
-    @AfterClass
-    public void tearDown() {
-        pool.closePool();
+        tester.setTearDownOperation(DatabaseOperation.NONE);
     }
 
     @BeforeMethod
