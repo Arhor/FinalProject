@@ -44,7 +44,7 @@ public class RegisterCommand implements ActionCommand {
         firstName = XssFilter.doFilter(firstName);
         lastName = XssFilter.doFilter(lastName);
 
-        String locale = (String) session.getAttribute("locale");
+        String locale = (String) session.getAttribute(Names.LOCALE);
         User.Lang lang = User.Lang.getLang(locale);
 
         try {
@@ -88,13 +88,15 @@ public class RegisterCommand implements ActionCommand {
                     router.setType(Router.Type.REDIRECT);
                 } else {
                     request.setAttribute(Names.REGISTRATION_ERROR, email + " "
-                            + MessageManager.getProperty("message.registration.email.taken", lang));
+                            + MessageManager.getProperty(
+                                    "message.registration.email.taken", lang));
                     page = ConfigurationManager.getProperty("path.page.registration");
                     router.setType(Router.Type.FORWARD);
                 }
             } else {
                 request.setAttribute(Names.REGISTRATION_ERROR, email + " "
-                        + MessageManager.getProperty("message.registration.invalid", lang));
+                        + MessageManager.getProperty(
+                                "message.registration.invalid", lang));
                 page = ConfigurationManager.getProperty("path.page.registration");
                 router.setType(Router.Type.FORWARD);
             }

@@ -38,7 +38,8 @@ public class Names {
     public static final String PAGE_MAX = "pageMax";
     public static final String TARGET_PAGE = "target_page";
     public static final String COMMAND = "command";
-
+    public static final String MESSAGE = "message";
+    public static final String ERROR = "error";
 
     private Names() {}
 }

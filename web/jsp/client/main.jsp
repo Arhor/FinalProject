@@ -82,16 +82,19 @@
                         <div class="card">
                             <div class="card-header card-header-primary">
                                 <h3 class="card-title">
-                                    Enrollee marks
+                                    <fmt:message key="label.subject.title" />
                                 </h3>
+                                <p class="card-category">
+                                    <fmt:message key="label.subject.description" />
+                                </p>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead class="text-primary">
                                             <tr>
-                                                <th>Subject ID</th>
-                                                <th>Score</th>
+                                                <th><fmt:message key="label.subject.name" /></th>
+                                                <th><fmt:message key="label.subject.score" /></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -133,7 +136,7 @@
                                                                 <input type="text" class="form-control" placeholder="score" form="subject_form" name="subjectScore" pattern="^([0-9]{1,2})|(100)$" required />
                                                             </div>
                                                         </div>
-                                                        <button type="submit" class="btn btn-primary" name="command" value="add_subject" form="subject_form">Add subject</button>
+                                                        <button type="submit" class="btn btn-primary" name="command" value="add_subject" form="subject_form"><fmt:message key="label.client.subject.add" /></button>
                                                     </td>
                                                 </tr>
                                             </c:if>
