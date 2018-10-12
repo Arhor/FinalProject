@@ -30,7 +30,6 @@
   <users id="28" email="example.28@gmail.com" password="0759F640B5717023BB9ED39577531F6F71A0FF55815E53134294AF92D8B2F17BF17A59A491711E5DD5561D128B151993C04BB1BDD211E7F58AB7B32B871D5A9F" first_name="Вячеслав" last_name="Сысоев" role="client" lang="ru" available="true"/>
   <users id="29" email="example.29@gmail.com" password="A638F3FDF65DE1B23B2F92163D73CE433242E4374F8DDFDFA8F6D76E1D8BEABA847AB7ACBD22235DBD1C157F1AB66CA9C8B90B11C9DAC3E6545F2F2E5EA8B297" first_name="Виктор" last_name="Ермаков" role="client" lang="ru" available="true"/>
   <users id="30" email="example.30@gmail.com" password="D5524F684D74DCF8239FE39AA86A9491F7F47060830369F61628EC554B4A4DD105A9385F9AC722423EA1C0B54DE49D940FCA54317DFDC23DDD992F3D6374389D" first_name="Артур" last_name="Дмитриев" role="client" lang="ru" available="true"/>
-  <users id="32" email="arhor18@gmail.com" password="8C894319DF6A58195367B8302ECC3C52BBC9DE44A62285EA8B53DD8BDA1328753584AF06DBE072C038169A03DF56C193F3C0BEB94E3C26DBB6AD3D4F98702366" first_name="Max" last_name="Tester" role="client" lang="ru" available="true"/>
   <enrollees id="1" country="Россия" city="Екатеринбург" school_certificate="9" users_id="2" available="true"/>
   <enrollees id="2" country="USA" city="Los Angeles" school_certificate="61" users_id="3" available="true"/>
   <enrollees id="3" country="Россия" city="Екатеринбург" school_certificate="76" users_id="4" available="true"/>
@@ -60,7 +59,6 @@
   <enrollees id="27" country="Россия" city="Москва" school_certificate="83" users_id="28" available="true"/>
   <enrollees id="28" country="Россия" city="Калининград" school_certificate="76" users_id="29" available="true"/>
   <enrollees id="29" country="Беларусь" city="Витебск" school_certificate="51" users_id="30" available="true"/>
-  <enrollees id="31" country="Country" city="Minsk" school_certificate="100" users_id="32" available="true"/>
   <subjects id="101" name_ru="Русский язык" name_en="Russian language" available="true"/>
   <subjects id="102" name_ru="Физика" name_en="Physics" available="true"/>
   <subjects id="103" name_ru="Математика" name_en="Math" available="true"/>

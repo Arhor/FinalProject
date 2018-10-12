@@ -9,6 +9,8 @@ import by.epam.admission.exception.ProjectException;
 import by.epam.admission.util.EncryptAction;
 import by.epam.admission.exception.NotSupportedOperationException;
 import by.epam.admission.model.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +24,8 @@ import java.util.List;
  * @version 1.0 29 Aug 2018
  */
 public class UserDao extends AbstractDao<Integer, User> {
+
+    private static final Logger LOG = LogManager.getLogger(UserDao.class);
 
     // SQL queries
     private static final String SQL_SELECT_USERS;
@@ -284,11 +288,6 @@ public class UserDao extends AbstractDao<Integer, User> {
         }
         return flag != 0;
     }
-
-//    @Override
-//    public boolean update(User user) throws NotSupportedOperationException {
-//        throw new NotSupportedOperationException();
-//    }
 
     private void processResult(ArrayList<User> users, ResultSet rs)
             throws SQLException {

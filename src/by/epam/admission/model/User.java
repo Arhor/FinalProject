@@ -28,6 +28,32 @@ public class User extends Entity {
         super(id);
     }
 
+    public User(int id,
+                String firstName,
+                String lastName,
+                String email,
+                Lang lang,
+                Role role) {
+        super(id);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.lang = lang;
+        this.role = role;
+    }
+
+    public User(String firstName,
+                String lastName,
+                String email,
+                Lang lang,
+                Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.lang = lang;
+        this.role = role;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -146,6 +172,18 @@ public class User extends Entity {
                 + ", last_name=" + lastName
                 + ", lang=" + lang
                 + ", role=" + role + "]";
+    }
+
+    @Override
+    public User clone() throws CloneNotSupportedException {
+        User user = (User) super.clone();
+        user.setId(this.getId());
+        user.setEmail(this.email);
+        user.setFirstName(this.firstName);
+        user.setLastName(this.lastName);
+        user.setLang(this.lang);
+        user.setRole(this.role);
+        return user;
     }
 
 }
