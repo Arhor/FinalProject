@@ -44,11 +44,18 @@ public class RegisterCommand implements ActionCommand {
         firstName = XssFilter.doFilter(firstName);
         lastName = XssFilter.doFilter(lastName);
 
+        String locale = (String) session.getAttribute("locale");
+        User.Lang lang = User.Lang.getLang(locale);
+
         try {
-            boolean validEmail = InputValidator.validate(email, InputValidator.InputType.EMAIL);
-            boolean validPassword = InputValidator.validate(password, InputValidator.InputType.PASSWORD);
-            boolean validFirstName = InputValidator.validate(firstName, InputValidator.InputType.FIRST_NAME);
-            boolean validLastName = InputValidator.validate(lastName, InputValidator.InputType.LAST_NAME);
+            boolean validEmail = InputValidator.validate(
+                    email, InputValidator.InputType.EMAIL);
+            boolean validPassword = InputValidator.validate(
+                    password, InputValidator.InputType.PASSWORD);
+            boolean validFirstName = InputValidator.validate(
+                    firstName, InputValidator.InputType.FIRST_NAME);
+            boolean validLastName = InputValidator.validate(
+                    lastName, InputValidator.InputType.LAST_NAME);
 
             if (validEmail && validPassword && validFirstName && validLastName) {
                 if (UserService.checkEmail(email)) {
@@ -81,13 +88,13 @@ public class RegisterCommand implements ActionCommand {
                     router.setType(Router.Type.REDIRECT);
                 } else {
                     request.setAttribute(Names.REGISTRATION_ERROR, email + " "
-                            + MessageManager.getProperty("message.email.inuse"));
+                            + MessageManager.getProperty("message.registration.email.taken", lang));
                     page = ConfigurationManager.getProperty("path.page.registration");
                     router.setType(Router.Type.FORWARD);
                 }
             } else {
                 request.setAttribute(Names.REGISTRATION_ERROR, email + " "
-                        + MessageManager.getProperty("message.registration.invalid"));
+                        + MessageManager.getProperty("message.registration.invalid", lang));
                 page = ConfigurationManager.getProperty("path.page.registration");
                 router.setType(Router.Type.FORWARD);
             }

@@ -38,6 +38,10 @@ public class LoginCommand implements ActionCommand {
         HttpSession session = request.getSession();
         String email = request.getParameter(Names.EMAIL);
         String password = request.getParameter(Names.PASSWORD);
+
+        String locale = (String) session.getAttribute("locale");
+        User.Lang lang = User.Lang.getLang(locale);
+
         User user;
         try {
             if (!UserService.checkEmail(email)) {
@@ -72,13 +76,13 @@ public class LoginCommand implements ActionCommand {
                     }
                     router.setType(Router.Type.REDIRECT);
                 } else {
-                    String message = MessageManager.getProperty("message.loginerror");
+                    String message = MessageManager.getProperty("message.login.error", lang);
                     request.setAttribute(Names.ERROR_LOGIN_MESSAGE, message);
                     page = ConfigurationManager.getProperty("path.page.login");
                     router.setType(Router.Type.FORWARD);
                 }
             } else {
-                String message = MessageManager.getProperty("message.loginerror");
+                String message = MessageManager.getProperty("message.login.error", lang);
                 request.setAttribute(Names.ERROR_LOGIN_MESSAGE, message);
                 page = ConfigurationManager.getProperty("path.page.login");
                 router.setType(Router.Type.FORWARD);

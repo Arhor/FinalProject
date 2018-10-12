@@ -36,6 +36,8 @@ public class ConfirmCommand implements ActionCommand {
         String submittedCode = request.getParameter(Names.CONFIRMATION_CODE);
         String realCode = String.valueOf(session.getAttribute(
                 Names.CONFIRMATION_CODE));
+        String locale = (String) session.getAttribute("locale");
+        User.Lang lang = User.Lang.getLang(locale);
 
         try {
             String page;
@@ -52,7 +54,7 @@ public class ConfirmCommand implements ActionCommand {
                     router.setType(Router.Type.FORWARD);
                 } else {
                     String errorMessage =  MessageManager.getProperty(
-                            "message.loginerror");
+                            "message.loginerror", lang);
                     request.setAttribute(Names.ERROR_LOGIN_MESSAGE, errorMessage);
                     page = ConfigurationManager.getProperty("path.page.login");
                     router.setPage(page);

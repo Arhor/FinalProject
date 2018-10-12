@@ -40,7 +40,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6 mr-auto ml-auto">
                         <div class="card">
                             <div class="card-header card-header-warning">
                                 <h4 class="card-title">ERROR PAGE</h4>
@@ -76,10 +76,12 @@
                                                     </c:choose>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>Exception:</td>
-                                                <td>${pageContext.errorData.throwable}</td>
-                                            </tr>
+                                            <c:if test="${pageContext.errorData.throwable != null}">
+                                                <tr>
+                                                    <td>Exception:</td>
+                                                    <td>${pageContext.errorData.throwable}</td>
+                                                </tr>
+                                            </c:if>
                                         </tbody>
                                     </table>
                                 </div>

@@ -114,6 +114,16 @@ public class User extends Entity {
         public String getValue() {
             return value;
         }
+
+        public static Lang getLang(String locale) {
+            switch (locale) {
+                case "ru_RU":
+                    return RU;
+                case "en_US":
+                default:
+                    return EN;
+            }
+        }
     }
 
     public enum Role {

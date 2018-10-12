@@ -57,7 +57,7 @@ public class PageRedirectSecurityFilter implements Filter {
             if (role == User.Role.ADMIN || role == User.Role.CLIENT) {
                 httpResponse.sendRedirect("/controller?command=home");
             } else {
-                httpResponse.sendRedirect(httpRequest.getContextPath() + indexPath);
+                httpResponse.sendError(403);
             }
         }
 
