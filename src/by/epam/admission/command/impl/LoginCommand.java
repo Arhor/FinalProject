@@ -39,7 +39,7 @@ public class LoginCommand implements ActionCommand {
         String email = request.getParameter(Names.EMAIL);
         String password = request.getParameter(Names.PASSWORD);
 
-        String locale = (String) session.getAttribute("locale");
+        String locale = (String) session.getAttribute(Names.LOCALE);
         User.Lang lang = User.Lang.getLang(locale);
 
         User user;

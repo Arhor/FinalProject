@@ -1,0 +1,14 @@
+<footer class="footer">
+    <div class="container-fluid">
+        <nav class="float-left">
+            <ul>
+                <li>
+                    <ctg:current-time currentLocale="${sessionScope.locale}"/>
+                </li>
+            </ul>
+        </nav>
+        <div class="copyright float-right">
+            2018 &copy; <fmt:message key="label.copyright" />
+        </div>
+    </div>
+</footer>

@@ -51,10 +51,10 @@ public class ConfirmCommand implements ActionCommand {
                     page = ConfigurationManager.getProperty(
                             "path.page.client.main");
                     router.setPage(page);
-                    router.setType(Router.Type.FORWARD);
+                    router.setType(Router.Type.REDIRECT);
                 } else {
                     String errorMessage =  MessageManager.getProperty(
-                            "message.loginerror", lang);
+                            "message.registration.failed", lang);
                     request.setAttribute(Names.ERROR_LOGIN_MESSAGE, errorMessage);
                     page = ConfigurationManager.getProperty("path.page.login");
                     router.setPage(page);

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="resources.pagecontent" />
 <!doctype html>
@@ -145,18 +146,7 @@
                 </div>
             </div>
         </div>
-        <footer class="footer">
-            <div class="container-fluid">
-                <nav class="float-left">
-                    <ul>
-                        <li>
-
-                        </li>
-                    </ul>
-                </nav>
-                <%@ include file="/jsp/modules/copyright.jspf"%>
-            </div>
-        </footer>
+        <%@ include file="/jsp/modules/footer.jspf"%>
     </div>
 </div>
 <form action="${pageContext.request.contextPath}/controller" method="get" id="subject_form"></form>
