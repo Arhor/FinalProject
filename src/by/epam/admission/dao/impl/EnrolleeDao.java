@@ -43,6 +43,8 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SQL_CHECK_ADMISSION_LIST_ENTRY;
     private static final String SQL_SELECT_BEST_ENROLLEES_IDS;
     private static final String SQL_UPDATE_ADMISSION_LIST_STATUS;
+    private static final String SQL_SELECT_ENROLLEES_BY_FACULTY_ID;
+    private static final String SQL_SELECT_ENROLLEE_STATUS;
 
     // column labels
     private static final String ID = "id";
@@ -51,6 +53,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SCHOOL_CERTIFICATE = "school_certificate";
     private static final String USER_ID = "users_id";
     private static final String AVAILABLE = "available";
+    private static final String IS_PASSED = "is_passed";
 
     private static final int ACTIVE = 1;
 
@@ -104,18 +107,36 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         return enrollee;
     }
 
-    public List<Enrollee> findEnrolleesByCountry(String country)
+    public List<Enrollee> findEnrolleesByFacultyId(int facultyId)
             throws ProjectException {
         ArrayList<Enrollee> enrollees = new ArrayList<>();
-        findByAddress(COUNTRY, enrollees, country);
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_SELECT_ENROLLEES_BY_FACULTY_ID)) {
+            st.setInt(1, facultyId);
+            st.setInt(2 , ACTIVE);
+            ResultSet rs = st.executeQuery();
+            processResult(enrollees, rs);
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
         return enrollees;
     }
 
-    public List<Enrollee> findEnrolleesByCity(String city)
+    public String findEnrolleeStatus(int enrolleeId, int facultyId)
             throws ProjectException {
-        ArrayList<Enrollee> enrollees = new ArrayList<>();
-        findByAddress(CITY, enrollees, city);
-        return enrollees;
+        String result = "";
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_SELECT_ENROLLEE_STATUS)) {
+            st.setInt(1, enrolleeId);
+            st.setInt(2, facultyId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                result = rs.getString(IS_PASSED);
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return result;
     }
 
     public ArrayList<Integer> findBestEnrolleesIds(int facultyId, int offset, int limit) throws ProjectException {
@@ -407,6 +428,21 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                         "`users_id` " +
                 "FROM `enrollees` " +
                 "WHERE %s = ?";
+        SQL_SELECT_ENROLLEES_BY_FACULTY_ID =
+                "SELECT  enrollees.id, " +
+                        "enrollees.country, " +
+                        "enrollees.city, " +
+                        "enrollees.school_certificate, " +
+                        "enrollees.users_id " +
+                "FROM enrollees " +
+                "JOIN admission_list " +
+                "ON enrollees.id = admission_list.enrollees_id " +
+                "WHERE   admission_list.faculties_id = ? " +
+                        "AND admission_list.available = ?";
+        SQL_SELECT_ENROLLEE_STATUS =
+                "SELECT `is_passed` " +
+                "FROM `admission_list` " +
+                "WHERE `enrollees_id` = ? AND `faculties_id` = ?";
         SQL_DELETE_ENROLLEE_BY_ID =
                 "DELETE FROM `enrollees` " +
                 "WHERE `enrollees`.`id` = ?";

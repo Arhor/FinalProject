@@ -34,7 +34,8 @@ public enum CommandEnum {
     UNBLOCK_USER (new UnblockUserCommand()),
     ADD_SUBJECT (new AddSubjectCommand()),
     DEFINE_RESULT (new DefineResultCommand()),
-    EMPTY_COMMAND (new EmptyCommand());
+    EMPTY_COMMAND (new EmptyCommand()),
+    SHOW_FACULTY_STATISTICS (new ShowFacultyStatisticsCommand());
 
     private ActionCommand command;
 

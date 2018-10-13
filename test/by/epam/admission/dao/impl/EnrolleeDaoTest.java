@@ -1,3 +1,7 @@
+/*
+ * class: EnrolleeDaoTest
+ */
+
 package by.epam.admission.dao.impl;
 
 import by.epam.admission.dao.DaoHelperDbUnit;
@@ -10,14 +14,22 @@ import org.dbunit.IDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.io.File;
+import java.util.List;
 
+/**
+ * @author Burishinets Maxim
+ * @version 1.0 29 Aug 2018
+ */
 public class EnrolleeDaoTest {
 
     private static final Logger LOG = LogManager.getLogger(
             EnrolleeDaoTest.class);
+
+    private static final ConnectionPoolDBUnit pool = ConnectionPoolDBUnit.POOL;
 
     @Test
     public void testFindAll() {
@@ -30,38 +42,6 @@ public class EnrolleeDaoTest {
             }
         } catch (ProjectException e) {
             LOG.error("Test exception", e);
-        } finally {
-            helperDbUnit.endTransaction();
-        }
-    }
-
-    @Test
-    public void testFindEnrolleesByCountry() {
-        DaoHelperDbUnit helperDbUnit = new DaoHelperDbUnit();
-        EnrolleeDao enrolleeDAO = new EnrolleeDao();
-        try {
-            helperDbUnit.startTransaction(enrolleeDAO);
-            for (Enrollee enrollee : enrolleeDAO.findEnrolleesByCountry("Беларусь")) {
-                LOG.info(enrollee);
-            }
-        } catch (ProjectException e) {
-            LOG.error("DAO exception", e);
-        } finally {
-            helperDbUnit.endTransaction();
-        }
-    }
-
-    @Test
-    public void testFindEnrolleesByCity() {
-        DaoHelperDbUnit helperDbUnit = new DaoHelperDbUnit();
-        EnrolleeDao enrolleeDAO = new EnrolleeDao();
-        try {
-            helperDbUnit.startTransaction(enrolleeDAO);
-            for (Enrollee enrollee : enrolleeDAO.findEnrolleesByCity("Минск")) {
-                LOG.info(enrollee);
-            }
-        } catch (ProjectException e) {
-            LOG.error("DAO exception", e);
         } finally {
             helperDbUnit.endTransaction();
         }
@@ -163,33 +143,100 @@ public class EnrolleeDaoTest {
 
 
     @BeforeClass
-    public void setUpClass() {
-        IDatabaseTester tester = ConnectionPoolDBUnit.POOL.getTester();
+    public void setUpClass() throws Exception {
+        FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+        IDataSet dataSet = builder.build(new File("resources/test-dataset_temp.xml"));
+        IDatabaseTester tester = pool.getTester();
         tester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
         tester.setTearDownOperation(DatabaseOperation.NONE);
+        tester.setDataSet(dataSet);
+        tester.onSetup();
     }
 
     @AfterClass
-    public void tearDown() {
-        ConnectionPoolDBUnit.POOL.closePool();
+    public void tearDown() throws Exception {
+        pool.getTester().onTearDown();
+        pool.closePool();
         LOG.info("available connections: "
                 + ConnectionPoolDBUnit.POOL.countAvailableConnections());
         LOG.info("used connections: "
                 + ConnectionPoolDBUnit.POOL.countUsedConnections());
     }
 
-    @BeforeMethod
-    public void setUpMethod() throws Exception {
-        FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-        IDataSet dataSet = builder.build(new File("resources/test-dataset_temp.xml"));
-        ConnectionPoolDBUnit.POOL.getTester().setDataSet(dataSet);
-        ConnectionPoolDBUnit.POOL.getTester().onSetup();
+    @Test
+    public void testFindEnrolleeByUserId() {
     }
 
-    @AfterMethod
-    public void tearDownMethod() throws Exception {
-        ConnectionPoolDBUnit.POOL.getTester().onTearDown();
+    @Test
+    public void testFindEnrolleeStatus() {
+        String failMessage = "Enrollee status finding failed";
+        DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
+        EnrolleeDao eDAO = new EnrolleeDao();
+        try {
+            daoHelper.startTransaction(eDAO);
+            for (int i = 1; i < 5; i++) {
+                for (int j = 201; j < 209; j++) {
+                    LOG.info("Enrollee ID: " + i + " Faculty ID: " + j + " Status: " + eDAO.findEnrolleeStatus(i, j));
+                }
+            }
+        } catch (ProjectException e) {
+            Assert.fail(failMessage, e);
+        } finally {
+            daoHelper.endTransaction();
+        }
     }
 
+    @Test
+    public void testFindBestEnrolleesIds() {
+    }
 
+    @Test
+    public void testFindEnrolleeMarks() {
+    }
+
+    @Test
+    public void testCheckFaculty() {
+    }
+
+    @Test
+    public void testCheckAdmissionListEntry() {
+    }
+
+    @Test
+    public void testAddSubject() {
+    }
+
+    @Test
+    public void testDeregisterFromFacultyById() {
+    }
+
+    @Test
+    public void testRestoreFacultyRegistration() {
+    }
+
+    @Test
+    public void testUpdateAdmissionList() {
+    }
+
+    @Test
+    public void testUpdate() {
+    }
+
+    @Test
+    public void testFindEnrolleesByFacultyId() {
+        String failMessage = "Enrollees finding by faculty ID failed";
+        DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
+        EnrolleeDao eDAO = new EnrolleeDao();
+        try {
+            daoHelper.startTransaction(eDAO);
+            for (int i = 201; i < 209; i++) {
+                List<Enrollee> enrollees = eDAO.findEnrolleesByFacultyId(i);
+                LOG.info(enrollees);
+            }
+        } catch (ProjectException e) {
+            Assert.fail(failMessage, e);
+        } finally {
+            daoHelper.endTransaction();
+        }
+    }
 }

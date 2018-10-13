@@ -8,6 +8,7 @@ import by.epam.admission.model.Subject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.TreeMap;
 
 public class EnrolleeService {
@@ -17,13 +18,48 @@ public class EnrolleeService {
 
     private EnrolleeService(){}
 
+    public static List<Enrollee> findEnrolleesByFacultyId(int facultyId)
+            throws ProjectException {
+        List<Enrollee> enrollees;
+        DaoHelper helper = new DaoHelper();
+        EnrolleeDao enrolleeDao = new EnrolleeDao();
+        try {
+            helper.startTransaction(enrolleeDao);
+            enrollees = enrolleeDao.findEnrolleesByFacultyId(facultyId);
+            for (Enrollee enrollee : enrollees) {
+                if (enrollee != null) {
+                    TreeMap<Subject, Integer> marks =
+                            enrolleeDao.findEnrolleeMarks(enrollee.getId());
+                    enrollee.setMarks(marks);
+                }
+            }
+        } finally {
+            helper.endTransaction();
+        }
+        return enrollees;
+    }
+
+    public static String checkEnrolleeStatus(int enrolleeId, int facultyId)
+            throws ProjectException {
+        String result;
+        DaoHelper helper = new DaoHelper();
+        EnrolleeDao enrolleeDao = new EnrolleeDao();
+        try {
+            helper.startTransaction(enrolleeDao);
+            result = enrolleeDao.findEnrolleeStatus(enrolleeId, facultyId);
+        } finally {
+            helper.endTransaction();
+        }
+        return result;
+    }
+
     public static boolean registerEnrollee(Enrollee enrollee)
             throws ProjectException {
         boolean result = false;
         DaoHelper daoHelper = new DaoHelper();
         EnrolleeDao enrolleeDao = new EnrolleeDao();
-        daoHelper.startTransaction(enrolleeDao);
         try {
+            daoHelper.startTransaction(enrolleeDao);
             enrolleeDao.create(enrollee);
             daoHelper.commit();
             result = true;

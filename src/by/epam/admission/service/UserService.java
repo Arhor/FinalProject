@@ -25,12 +25,25 @@ public class UserService {
         DaoHelper helper = new DaoHelper();
         UserDao userDao = new UserDao();
         User user = null;
-        helper.startTransaction(userDao);
         try {
+            helper.startTransaction(userDao);
             if (userDao.checkPassword(login, password)) {
                 int userId = userDao.findUserId(login);
                 user = userDao.findEntityById(userId);
             }
+        } finally {
+            helper.endTransaction();
+        }
+        return user;
+    }
+
+    public static User findUserById(int userId) throws ProjectException {
+        DaoHelper helper = new DaoHelper();
+        UserDao userDao = new UserDao();
+        User user;
+        try {
+            helper.startTransaction(userDao);
+            user = userDao.findEntityById(userId);
         } finally {
             helper.endTransaction();
         }

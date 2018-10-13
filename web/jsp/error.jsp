@@ -49,41 +49,39 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table">
-                                        <tbody>
+                                        <tr>
+                                            <td>Failed request from:</td>
+                                            <td>${pageContext.errorData.requestURI}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status code:</td>
+                                            <td>${pageContext.errorData.statusCode}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Description:</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${pageContext.errorData.statusCode eq 500}">
+                                                        Internal server error
+                                                    </c:when>
+                                                    <c:when test="${pageContext.errorData.statusCode eq 403}">
+                                                        Access forbidden
+                                                    </c:when>
+                                                    <c:when test="${pageContext.errorData.statusCode eq 404}">
+                                                        Page not found
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        Unknown error
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                        </tr>
+                                        <c:if test="${pageContext.errorData.throwable != null}">
                                             <tr>
-                                                <td>Failed request from:</td>
-                                                <td>${pageContext.errorData.requestURI}</td>
+                                                <td>Exception:</td>
+                                                <td>${pageContext.errorData.throwable}</td>
                                             </tr>
-                                            <tr>
-                                                <td>Status code:</td>
-                                                <td>${pageContext.errorData.statusCode}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Description:</td>
-                                                <td>
-                                                    <c:choose>
-                                                        <c:when test="${pageContext.errorData.statusCode eq 500}">
-                                                            Internal server error
-                                                        </c:when>
-                                                        <c:when test="${pageContext.errorData.statusCode eq 403}">
-                                                            Access forbidden
-                                                        </c:when>
-                                                        <c:when test="${pageContext.errorData.statusCode eq 404}">
-                                                            Page not found
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            Unknown error
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </td>
-                                            </tr>
-                                            <c:if test="${pageContext.errorData.throwable != null}">
-                                                <tr>
-                                                    <td>Exception:</td>
-                                                    <td>${pageContext.errorData.throwable}</td>
-                                                </tr>
-                                            </c:if>
-                                        </tbody>
+                                        </c:if>
                                     </table>
                                 </div>
                             </div>
@@ -96,6 +94,7 @@
     </div>
 </div>
 <%@ include file="/jsp/modules/core_js.jspf"%>
+
 </body>
 
 </html>

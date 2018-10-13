@@ -133,7 +133,7 @@
                                                                     <td class="td-actions text-center">
                                                                         <c:choose>
                                                                             <c:when test="${faculty.checked}">
-                                                                                <a href="#" class="btn btn-warning btn-lg" role="button" aria-disabled="false"><i class="material-icons">done_outline</i>Already checked</a>
+                                                                                <a href="${pageContext.request.contextPath}/controller?command=show_faculty_statistics&facultyId=${faculty.id}" class="btn btn-warning btn-lg" role="button" aria-disabled="false"><i class="material-icons">done_outline</i>Already checked</a>
                                                                             </c:when>
                                                                             <c:otherwise>
                                                                                 <a href="${pageContext.request.contextPath}/controller?command=define_result&facultyId=${faculty.id}" class="btn btn-info btn-lg" role="button" aria-disabled="false"><i class="material-icons">toc</i>Check faculty result</a>
@@ -171,7 +171,7 @@
                                                                     <td class="td-actions text-center">
                                                                         <c:choose>
                                                                             <c:when test="${faculty.checked}">
-                                                                                <a href="#" class="btn btn-warning btn-lg" role="button" aria-disabled="false"><i class="material-icons">done_outline</i>Already checked</a>
+                                                                                <a href="${pageContext.request.contextPath}/controller?command=show_faculty_statistics&facultyId=${faculty.id}" class="btn btn-warning btn-lg" role="button" aria-disabled="false"><i class="material-icons">done_outline</i>Already checked</a>
                                                                             </c:when>
                                                                             <c:otherwise>
                                                                                 <a href="${pageContext.request.contextPath}/controller?command=define_result&facultyId=${faculty.id}" class="btn btn-info btn-lg" role="button" aria-disabled="false"><i class="material-icons">toc</i>Check faculty result</a>
