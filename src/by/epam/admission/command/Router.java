@@ -7,6 +7,8 @@ package by.epam.admission.command;
 import org.json.JSONObject;
 
 /**
+ * Class router serves as container that contains result of executing command
+ *
  * @author Burishinets Maxim
  * @version 1.0 10 Sep 2018
  */

@@ -20,6 +20,12 @@ import javax.servlet.http.HttpSession;
  */
 public class HomeCommand implements ActionCommand {
 
+    /**
+     * The method forwards user to th home page depending on user's role
+     *
+     * @param request - HttpServletRequest object received from controller-servlet
+     * @return Router object that contains result of executing concrete command
+     */
     @Override
     public Router execute(HttpServletRequest request) {
         String page;

@@ -7,6 +7,7 @@ package by.epam.admission.command;
 import by.epam.admission.command.impl.*;
 
 /**
+ * CommandEnum class contains each command
  * @author Burishinets Maxim
  * @version 1.0 03 Sep 2018
  */

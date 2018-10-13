@@ -1,3 +1,7 @@
+/*
+ * class: CurrentDateTag
+ */
+
 package by.epam.admission.tag;
 
 import javax.servlet.jsp.JspException;
@@ -8,6 +12,14 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+/**
+ * CurrentDateTag class implements custom tag for JSP that displays current
+ * date depending on passed String attribute that represents current session
+ * language
+ *
+ * @author Burishinets Maxim
+ * @version 1.0 12 Oct 2018
+ */
 public class CurrentDateTag extends TagSupport {
 
     private static final Locale LOCALE_RU = new Locale("ru", "RU");
@@ -15,6 +27,14 @@ public class CurrentDateTag extends TagSupport {
 
     private String currentLocale;
 
+    /**
+     * Method receives new Calendar object that represents current date and
+     * displays it depending on 'currentLocale'-attribute passed to
+     * corresponding tag
+     *
+     * @return
+     * @throws JspException
+     */
     @Override
     public int doStartTag() throws JspException {
         Calendar calendar = Calendar.getInstance();
@@ -30,12 +50,10 @@ public class CurrentDateTag extends TagSupport {
                         LOCALE_EN);
                 break;
         }
-
-        String time = dateFormat.format(calendar.getTime());
-
+        String date = dateFormat.format(calendar.getTime());
         try {
             JspWriter out = pageContext.getOut();
-            out.write(time);
+            out.write(date);
         } catch (IOException e) {
             throw new JspException(e);
         }
