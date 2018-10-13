@@ -26,7 +26,7 @@ public enum ConnectionPoolDBUnit {
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "dragonlance";
 
-    private static final int DB_POOLSIZE = 10;
+    private static final int DB_POOLSIZE = 32;
 
     private LinkedBlockingQueue<ProxyConnection> availableConnections;
     private LinkedBlockingQueue<ProxyConnection> usedConnections;

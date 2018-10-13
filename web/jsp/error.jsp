@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        <fmt:message key="label.title" />
+        <fmt:message key="label.error" />
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <%@ include file="/jsp/modules/core_style.jspf"%>
@@ -41,45 +41,45 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6 mr-auto ml-auto">
+                    <div class="col-md-8 mr-auto ml-auto">
                         <div class="card">
                             <div class="card-header card-header-warning">
-                                <h4 class="card-title">ERROR PAGE</h4>
+                                <h4 class="card-title"><fmt:message key="label.error" /></h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tr>
-                                            <td>Failed request from:</td>
+                                            <td><fmt:message key="label.error.source" /></td>
                                             <td>${pageContext.errorData.requestURI}</td>
                                         </tr>
                                         <tr>
-                                            <td>Status code:</td>
+                                            <td><fmt:message key="label.error.code" /></td>
                                             <td>${pageContext.errorData.statusCode}</td>
                                         </tr>
                                         <tr>
-                                            <td>Description:</td>
+                                            <td><fmt:message key="label.error.description" /></td>
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${pageContext.errorData.statusCode eq 500}">
-                                                        Internal server error
+                                                        <fmt:message key="label.error.500" />
                                                     </c:when>
                                                     <c:when test="${pageContext.errorData.statusCode eq 403}">
-                                                        Access forbidden
+                                                        <fmt:message key="label.error.403" />
                                                     </c:when>
                                                     <c:when test="${pageContext.errorData.statusCode eq 404}">
-                                                        Page not found
+                                                        <fmt:message key="label.error.404" />
                                                     </c:when>
                                                     <c:otherwise>
-                                                        Unknown error
+                                                        <fmt:message key="label.error.unknown" />
                                                     </c:otherwise>
                                                 </c:choose>
                                             </td>
                                         </tr>
                                         <c:if test="${pageContext.errorData.throwable != null}">
                                             <tr>
-                                                <td>Exception:</td>
-                                                <td>${pageContext.errorData.throwable}</td>
+                                                <td><fmt:message key="label.error.cause" /></td>
+                                                <td><c:out value="${pageContext.errorData.throwable}" /></td>
                                             </tr>
                                         </c:if>
                                     </table>
@@ -94,7 +94,8 @@
     </div>
 </div>
 <%@ include file="/jsp/modules/core_js.jspf"%>
-
+<!-- Clock -->
+<script src="${pageContext.request.contextPath}/assets/js/clock.js" type="text/javascript"></script>
 </body>
 
 </html>

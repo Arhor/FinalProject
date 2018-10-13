@@ -6,9 +6,6 @@ package by.epam.admission.pool;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.dbunit.IDatabaseTester;
-import org.dbunit.JdbcDatabaseTester;
-import org.dbunit.database.DatabaseConfig;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
@@ -30,7 +27,7 @@ public class ConnectionPoolTest {
 
     @Test
     public void connectionLeakTest() {
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 10000; i++) {
             Thread thread = new Thread(() -> {
                 ProxyConnection connection = pool.getConnection();
                 pool.releaseConnection(connection);
@@ -50,23 +47,18 @@ public class ConnectionPoolTest {
     }
 
     @BeforeClass
-    public void setUpClass() {
-        IDatabaseTester tester = pool.getTester();
-        tester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
-        tester.setTearDownOperation(DatabaseOperation.NONE);
-    }
-
-    @BeforeMethod
-    public void setUpMethod() throws Exception {
+    public void setUpClass() throws Exception {
         FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
         IDataSet dataSet = builder.build(
                 new File("resources/test-dataset_temp.xml"));
+        pool.getTester().setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
+        pool.getTester().setTearDownOperation(DatabaseOperation.NONE);
         pool.getTester().setDataSet(dataSet);
         pool.getTester().onSetup();
     }
 
-    @AfterMethod
-    public void tearDownMethod() throws Exception {
+    @AfterClass
+    public void tearDownClass() throws Exception {
         pool.getTester().onTearDown();
     }
 }

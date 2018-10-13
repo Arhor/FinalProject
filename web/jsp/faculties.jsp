@@ -93,7 +93,7 @@
                                                 <th><fmt:message key="label.faculties.table.faculty" /></th>
                                                 <th class="text-center"><fmt:message key="label.faculties.table.payable" /></th>
                                                 <th class="text-center"><fmt:message key="label.faculties.table.free" /></th>
-                                                <th class="text-center">Subjects</th>
+                                                <th class="text-center"><fmt:message key="label.faculties.table.subjects" /></th>
                                                 <c:choose>
                                                     <c:when test="${sessionScope.role.toString() eq 'CLIENT'}">
                                                         <th class="text-center"><fmt:message key="label.actions" /></th>
@@ -133,10 +133,10 @@
                                                                     <td class="td-actions text-center">
                                                                         <c:choose>
                                                                             <c:when test="${faculty.checked}">
-                                                                                <a href="${pageContext.request.contextPath}/controller?command=show_faculty_statistics&facultyId=${faculty.id}" class="btn btn-warning btn-lg" role="button" aria-disabled="false"><i class="material-icons">done_outline</i>Already checked</a>
+                                                                                <a href="${pageContext.request.contextPath}/controller?command=show_faculty_statistics&facultyId=${faculty.id}" class="btn btn-warning btn-block" role="button"><fmt:message key="label.faculties.table.results.show" /> <i class="material-icons">done_outline</i></a>
                                                                             </c:when>
                                                                             <c:otherwise>
-                                                                                <a href="${pageContext.request.contextPath}/controller?command=define_result&facultyId=${faculty.id}" class="btn btn-info btn-lg" role="button" aria-disabled="false"><i class="material-icons">toc</i>Check faculty result</a>
+                                                                                <a href="${pageContext.request.contextPath}/controller?command=define_result&facultyId=${faculty.id}" class="btn btn-info btn-block" role="button"><fmt:message key="label.faculties.table.results.define" /> <i class="material-icons">toc</i></a>
                                                                             </c:otherwise>
                                                                         </c:choose>
                                                                     </td>
@@ -171,10 +171,10 @@
                                                                     <td class="td-actions text-center">
                                                                         <c:choose>
                                                                             <c:when test="${faculty.checked}">
-                                                                                <a href="${pageContext.request.contextPath}/controller?command=show_faculty_statistics&facultyId=${faculty.id}" class="btn btn-warning btn-lg" role="button" aria-disabled="false"><i class="material-icons">done_outline</i>Already checked</a>
+                                                                                <a href="${pageContext.request.contextPath}/controller?command=show_faculty_statistics&facultyId=${faculty.id}" class="btn btn-warning btn-block" role="button"><fmt:message key="label.faculties.table.results.show" /> <i class="material-icons">done_outline</i></a>
                                                                             </c:when>
                                                                             <c:otherwise>
-                                                                                <a href="${pageContext.request.contextPath}/controller?command=define_result&facultyId=${faculty.id}" class="btn btn-info btn-lg" role="button" aria-disabled="false"><i class="material-icons">toc</i>Check faculty result</a>
+                                                                                <a href="${pageContext.request.contextPath}/controller?command=define_result&facultyId=${faculty.id}" class="btn btn-info btn-block" role="button"><fmt:message key="label.faculties.table.results.define" /> <i class="material-icons">toc</i></a>
                                                                             </c:otherwise>
                                                                         </c:choose>
                                                                     </td>

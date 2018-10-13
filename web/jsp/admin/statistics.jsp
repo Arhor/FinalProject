@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        <fmt:message key="label.faculties" />
+        <fmt:message key="label.statistics.title" />
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <%@ include file="/jsp/modules/core_style.jspf"%>
@@ -81,21 +81,30 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 mr-auto ml-auto">
                         <div class="card">
                             <div class="card-header card-header-primary">
-                                <h4 class="card-title"><fmt:message key="label.faculties" /></h4>
-                                <p class="card-category"><fmt:message key="label.faculties.table.description" /></p>
+                                <h4 class="card-title"><fmt:message key="label.statistics.title" /></h4>
+                                <p class="card-category"><fmt:message key="label.statistics.description" />
+                                    <c:choose>
+                                        <c:when test="${sessionScope.locale eq 'en_US'}">
+                                            ${requestScope.faculty.nameEn}
+                                        </c:when>
+                                        <c:when test="${sessionScope.locale eq 'ru_RU'}">
+                                            ${requestScope.faculty.nameRu}
+                                        </c:when>
+                                    </c:choose>
+                                </p>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead class="text-primary">
                                             <tr>
-                                                <th>User ID</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Country</th>
-                                                <th>City</th>
-                                                <th>Total score</th>
-                                                <th>Status</th>
+                                                <th><fmt:message key="label.user.id" /></th>
+                                                <th><fmt:message key="label.name.first" /></th>
+                                                <th><fmt:message key="label.name.last" /></th>
+                                                <th><fmt:message key="label.client.profile.country" /></th>
+                                                <th><fmt:message key="label.client.profile.city" /></th>
+                                                <th><fmt:message key="label.score.total" /></th>
+                                                <th><fmt:message key="label.status" /></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -107,7 +116,7 @@
                                                     <c:forEach items="${userEntry.value}" var="enrolleEntry">
                                                         <td>${enrolleEntry.key.country}</td>
                                                         <td>${enrolleEntry.key.city}</td>
-                                                        <td>STUB</td>
+                                                        <td>${enrolleEntry.key.marks.values().stream().mapToInt(x -> x).sum() + enrolleEntry.key.schoolCertificate}</td>
                                                         <td>${enrolleEntry.value}</td>
                                                     </c:forEach>
                                                 </tr>

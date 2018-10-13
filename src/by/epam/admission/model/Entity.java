@@ -34,7 +34,7 @@ public abstract class Entity implements Serializable, Cloneable, Comparable<Enti
 
     @Override
     public int compareTo(Entity entity) {
-        return entity.id - this.id;
+        return this.id - entity.id;
     }
 
     @Override
@@ -43,8 +43,7 @@ public abstract class Entity implements Serializable, Cloneable, Comparable<Enti
         if (obj == null) { return false; }
         if (obj.getClass() != getClass()) { return false; }
         Entity entity = (Entity) obj;
-        if (id != entity.id) { return false; }
-        return true;
+        return id == entity.id;
     }
 
     @Override

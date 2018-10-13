@@ -43,6 +43,17 @@ public class FacultyService {
         return faculties;
     }
 
+    public static Faculty findFaculty(int facultyId) throws ProjectException {
+        DaoHelper helper = new DaoHelper();
+        FacultyDao facultyDao = new FacultyDao();
+        try {
+            helper.startTransaction(facultyDao);
+            return facultyDao.findEntityById(facultyId);
+        } finally {
+            helper.endTransaction();
+        }
+    }
+
     public static boolean registerToFaculty(int enrolleeId, int facultyId)
             throws ProjectException {
         boolean result;

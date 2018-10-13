@@ -76,7 +76,7 @@
   <enrollees id="19" country="Россия"   city="Ростов"       school_certificate="17" users_id="20" available="true"/>
   <enrollees id="20" country="Беларусь" city="Гродно"       school_certificate="99" users_id="21" available="true"/>
   <enrollees id="21" country="Беларусь" city="Минск"        school_certificate="58" users_id="22" available="true"/>
-  <enrollees id="22" country="France"   city="Marseille"    school_certificate="13" users_id="23" available="true"/>
+  <enrollees id="22" country="France"   city="Marcelle"    school_certificate="13" users_id="23" available="true"/>
   <enrollees id="23" country="Беларусь" city="Гродно"       school_certificate="66" users_id="24" available="true"/>
   <enrollees id="24" country="Germany"  city="Cologne"      school_certificate="65" users_id="25" available="true"/>
   <enrollees id="25" country="Germany"  city="Munich"       school_certificate="84" users_id="26" available="true"/>

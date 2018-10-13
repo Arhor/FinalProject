@@ -4,8 +4,10 @@ import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.Enrollee;
+import by.epam.admission.model.Faculty;
 import by.epam.admission.model.User;
 import by.epam.admission.service.EnrolleeService;
+import by.epam.admission.service.FacultyService;
 import by.epam.admission.service.UserService;
 import by.epam.admission.util.ConfigurationManager;
 import org.apache.logging.log4j.LogManager;
@@ -23,12 +25,10 @@ public class ShowFacultyStatisticsCommand implements ActionCommand {
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
         String page;
-
         int facultyId = Integer.parseInt(request.getParameter("facultyId"));
-
-        TreeMap<User, TreeMap<Enrollee, String>> resultSet = new TreeMap<>();
-
         try {
+            Faculty faculty = FacultyService.findFaculty(facultyId);
+            TreeMap<User, TreeMap<Enrollee, String>> resultSet = new TreeMap<>();
             List<Enrollee> enrollees = EnrolleeService.findEnrolleesByFacultyId(facultyId);
             for (Enrollee enrollee : enrollees) {
                 User user = UserService.findUserById(enrollee.getUserId());
@@ -40,7 +40,7 @@ public class ShowFacultyStatisticsCommand implements ActionCommand {
                 });
             }
             request.setAttribute("resultSet", resultSet);
-
+            request.setAttribute("faculty", faculty);
             page = ConfigurationManager.getProperty("path.page.faculty.statistics");
             router.setPage(page);
             router.setType(Router.Type.FORWARD);
