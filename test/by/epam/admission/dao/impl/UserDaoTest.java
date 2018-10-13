@@ -4,11 +4,9 @@
 
 package by.epam.admission.dao.impl;
 
-import by.epam.admission.dao.DaoHelper;
 import by.epam.admission.dao.DaoHelperDbUnit;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.model.User;
-import by.epam.admission.pool.ConnectionPool;
 import by.epam.admission.pool.ConnectionPoolDBUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,7 +32,7 @@ public class UserDaoTest {
     @Test(dataProvider = "usersDataSet", description = "positive test")
     public void testFindEntityById(User currUser) {
         String failMessage = "User finding test failed";
-        DaoHelper daoHelper = new DaoHelper();
+        DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
         UserDao uDAO = new UserDao();
         try {
             daoHelper.startTransaction(uDAO);
@@ -52,7 +50,7 @@ public class UserDaoTest {
     @Test(dataProvider = "usersToInsert", description = "positive test")
     public void testCreatePositive(User currUser) {
         String failMessage = "User creation positive test failed";
-        DaoHelper daoHelper = new DaoHelper();
+        DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
         UserDao uDAO = new UserDao();
         String password = currUser.getEmail();
         currUser.setPassword(password);
@@ -79,7 +77,7 @@ public class UserDaoTest {
     @Test(dataProvider = "usersDataSet", description = "negative test")
     public void testCreateNegative(User currUser) {
         String failMessage = "User creation negative test failed";
-        DaoHelper daoHelper = new DaoHelper();
+        DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
         UserDao uDAO = new UserDao();
         String password = currUser.getEmail();
         currUser.setPassword(password);
@@ -98,7 +96,7 @@ public class UserDaoTest {
     @Test(dataProvider = "usersDataSet", description = "positive test")
     public void testDeletePositive(User currUser) {
         String failMessage = "User deletion positive test failed";
-        DaoHelper daoHelper = new DaoHelper();
+        DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
         UserDao uDAO = new UserDao();
         try {
             daoHelper.startTransaction(uDAO);
@@ -120,7 +118,7 @@ public class UserDaoTest {
     @Test(dataProvider = "usersDataSet", description = "positive test")
     public void testUpdatePositive(User currUser) {
         String failMessage = "User update positive test failed";
-        DaoHelper daoHelper = new DaoHelper();
+        DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
         UserDao uDAO = new UserDao();
         try {
             daoHelper.startTransaction(uDAO);

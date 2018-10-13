@@ -31,9 +31,6 @@ public class CurrentDateTag extends TagSupport {
      * Method receives new Calendar object that represents current date and
      * displays it depending on 'currentLocale'-attribute passed to
      * corresponding tag
-     *
-     * @return
-     * @throws JspException
      */
     @Override
     public int doStartTag() throws JspException {

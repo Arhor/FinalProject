@@ -5,6 +5,8 @@
 package by.epam.admission.model;
 
 /**
+ * User class represent concrete user entity
+ *
  * @author Maxim Burishinets
  * @version 1.0 29 Aug 2018
  */
@@ -17,7 +19,6 @@ public class User extends Entity {
     private String email;
     private Lang lang;
     private Role role;
-
     private String password;
 
     public User() {
@@ -102,6 +103,9 @@ public class User extends Entity {
         this.password = password;
     }
 
+    /**
+     * Lang enum represents available for concrete user language and locale
+     */
     public enum Lang {
         RU("ru_RU"), EN("en_US");
 
@@ -126,6 +130,9 @@ public class User extends Entity {
         }
     }
 
+    /**
+     * Role enum represents available for concrete user roles
+     */
     public enum Role {
         GUEST, CLIENT, ADMIN
     }

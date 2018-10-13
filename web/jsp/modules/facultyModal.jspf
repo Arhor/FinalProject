@@ -1,13 +1,12 @@
-<div class="modal fade" id="facultyClosed" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="facultyClosed" tabindex="-1" role="dialog" aria-labelledby="facultyClosedLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="facultyClosedLabel">ERROR</h5>
+                <h5 class="modal-title" id="facultyClosedLabel"><fmt:message key="label.error" /></h5>
             </div>
-            <div id="errorMessage" class="modal-body text-center">
-            </div>
+            <div id="errorMessage" class="modal-body text-center"></div>
             <div class="modal-footer text-center">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><fmt:message key="label.close" /></button>
             </div>
         </div>
     </div>

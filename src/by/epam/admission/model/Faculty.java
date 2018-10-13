@@ -7,6 +7,8 @@ package by.epam.admission.model;
 import java.util.TreeSet;
 
 /**
+ * Class Faculty represents concrete faculty entity
+ *
  * @author Maxim Burishinets
  * @version 1.0 29 Aug 2018
  */
@@ -90,6 +92,7 @@ public class Faculty extends Entity {
         Faculty faculty = (Faculty) obj;
         if (seatsPaid != faculty.seatsPaid) { return false; }
         if (seatsBudget != faculty.seatsBudget) { return false; }
+        if (checked != faculty.checked) { return false; }
         if (nameRu == null) {
             if (faculty.nameRu != null) {
                 return false;
@@ -104,6 +107,13 @@ public class Faculty extends Entity {
         } else if (!nameEn.equals(faculty.nameEn)) {
             return false;
         }
+        if (subjects == null) {
+            if (faculty.subjects != null) {
+                return false;
+            }
+        } else if (!subjects.equals(faculty.subjects)) {
+            return false;
+        }
         return true;
     }
 
@@ -114,6 +124,10 @@ public class Faculty extends Entity {
         hashCode += nameEn == null ? 0 : nameEn.hashCode();
         hashCode += 31 * seatsPaid;
         hashCode += 31 * seatsBudget;
+        hashCode += checked ? 1 : 0;
+        for (Subject subject : subjects) {
+            hashCode += subject.hashCode();
+        }
         return hashCode;
     }
 
@@ -124,7 +138,9 @@ public class Faculty extends Entity {
                 + ", name_ru='" + nameRu
                 + "', name_en='" + nameEn
                 + "', seats_paid=" + seatsPaid
-                + ", seats_budget=" + seatsBudget + "]";
+                + ", seats_budget=" + seatsBudget
+                + ", subjects=" + subjects
+                + ", checked=" + checked + "]";
     }
 
 }

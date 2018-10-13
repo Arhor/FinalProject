@@ -21,7 +21,11 @@ public class XssFilter {
      * @return cleaned up text string
      */
     public static String doFilter(String text) {
-        return text.replaceAll("</?script>", "");
+        if (text != null) {
+            return text.replaceAll("</?script>", "");
+        } else {
+            return null;
+        }
     }
 
 }

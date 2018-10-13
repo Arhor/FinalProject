@@ -5,6 +5,8 @@
 package by.epam.admission.model;
 
 /**
+ * Class Subject represents concrete subject entity
+ *
  * @author Maxim Burishinets
  * @version 1.0 29 Aug 2018
  */

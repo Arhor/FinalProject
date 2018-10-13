@@ -22,10 +22,8 @@ public class XssFilterTest {
     @Test(dataProvider = "XSS examples", description = "positive test")
     public void testDoFilter(String text) {
         String filtered = XssFilter.doFilter(text);
-
         Pattern pattern = Pattern.compile("</?script>");
         Matcher matcher = pattern.matcher(filtered);
-
         Assert.assertFalse(matcher.find());
     }
 
@@ -40,13 +38,7 @@ public class XssFilterTest {
     @DataProvider(name = "XSS examples")
     public Object[][] createData() {
         return new Object[][]{
-            {"<script>alert('bang!');</script>"},
-//            {""},
-//            {""},
-//            {""},
-//            {""},
-//            {""},
-//            {""}
+            {"<script>alert('bang!');</script>"}
         };
     }
 

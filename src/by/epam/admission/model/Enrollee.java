@@ -4,6 +4,7 @@
 
 package by.epam.admission.model;
 
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -16,7 +17,6 @@ public class Enrollee extends Entity{
     private String city;
     private int schoolCertificate;
     private int userId;
-    private boolean available;
     private TreeMap<Subject, Integer> marks;
 
     public String getCountry() {
@@ -49,14 +49,6 @@ public class Enrollee extends Entity{
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
     }
 
     public TreeMap<Subject, Integer> getMarks() {
@@ -106,6 +98,12 @@ public class Enrollee extends Entity{
         hashCode += city == null ? 0 : city.hashCode();
         hashCode += 31 * schoolCertificate;
         hashCode += 31 * userId;
+        for (Map.Entry<Subject, Integer> mark : marks.entrySet()) {
+            Subject subject = mark.getKey();
+            Integer score = mark.getValue();
+            hashCode += subject == null ? 0 : subject.hashCode();
+            hashCode += score == null ? 0 : score.hashCode();
+        }
         return hashCode;
     }
 
@@ -116,7 +114,8 @@ public class Enrollee extends Entity{
                 + ", country=" + country
                 + ", city=" + city
                 + ", school_certificate=" + schoolCertificate
-                + ", UID=" + userId + "]";
+                + ", UID=" + userId
+                + "marks=" + marks + "]";
     }
 
 }
