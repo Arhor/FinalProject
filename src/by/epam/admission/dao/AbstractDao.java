@@ -16,7 +16,7 @@ public abstract class AbstractDao<K, T extends Entity> {
 
     protected ProxyConnection connection;
 
-//    public abstract List<T> findAll() throws ProjectException;
+    public abstract boolean checkStatus(K id) throws ProjectException;
     
     public abstract T findEntityById(K id) throws ProjectException;
     

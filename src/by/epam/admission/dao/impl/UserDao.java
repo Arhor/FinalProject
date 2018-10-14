@@ -45,7 +45,6 @@ public class UserDao extends AbstractDao<Integer, User> {
     private static final String ROLE = "role";
     private static final String AVAILABLE = "available";
 
-//    @Override
     public List<User> findAll(int pageNumber, int rowsPerPager)
             throws ProjectException {
         ArrayList<User> users = new ArrayList<>();
@@ -124,7 +123,8 @@ public class UserDao extends AbstractDao<Integer, User> {
         return result;
     }
 
-    public boolean checkStatus(int userId) throws ProjectException {
+    @Override
+    public boolean checkStatus(Integer userId) throws ProjectException {
         boolean result = false;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_SELECT_USER_STATUS)) {
@@ -349,31 +349,5 @@ public class UserDao extends AbstractDao<Integer, User> {
                 "SELECT `id` " +
                 "FROM `users` " +
                 "WHERE `email` = ?";
-//        SQL_SELECT_USER_BY_EMAIL_AND_PASSWORD =
-//                "SELECT  `id`, " +
-//                        "`email`, " +
-//                        "`first_name`, " +
-//                        "`last_name`, " +
-//                        "`lang`, " +
-//                        "`role` " +
-//                        "FROM `users`" +
-//                        "WHERE  `email` = ? " +
-//                        "AND `password` = ?" +
-//                        "AND `available` = 1";
-//        SQL_DELETE_USER_BY_EMAIL_AND_PASSWORD =
-//                "UPDATE `users` " +
-//                        "LEFT JOIN   `enrollees` " +
-//                        "ON `users`.`id` = `enrollees`.`users_id` " +
-//                        "LEFT JOIN   `enrollees_has_subjects` " +
-//                        "ON `enrollees`.`id` = `enrollees_has_subjects`.`enrollees_id` " +
-//                        "LEFT JOIN   `admission_list` " +
-//                        "ON `enrollees`.`id` = `admission_list`.`enrollees_id`" +
-//                        "SET    `users`.`available` = 0, " +
-//                        "`enrollees`.`available` = 0, " +
-//                        "`enrollees_has_subjects`.`available` = 0, " +
-//                        "`admission_list`.`available` = 0 " +
-//                        "WHERE  `users`.`email` = ?" +
-//                        "AND `users`.`password` = ?" +
-//                        "AND `users`.`available` = 1";
     }
 }

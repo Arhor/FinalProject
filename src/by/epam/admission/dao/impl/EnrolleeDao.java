@@ -17,7 +17,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -29,8 +28,10 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final Logger LOG = LogManager.getLogger(EnrolleeDao.class);
 
     // SQL queries
+    private static final String SQL_SELECT_ENROLLEES_PAGINATION;
+    private static final String SQL_SELECT_ENROLLEES_TOTAL_AMOUNT;
+
     private static final String SQL_SELECT_ENROLLEES;
-    private static final String SQL_DELETE_ENROLLEE_BY_ID;
     private static final String SQL_DELETE_ENROLLEE;
     private static final String SQL_INSERT_ENROLLEE;
     private static final String SQL_UPDATE_ENROLLEE;
@@ -40,11 +41,12 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     private static final String SQL_RESTORE_ADMISSION_LIST_ENTRY;
     private static final String SQL_SELECT_ENROLLEE_MARKS;
     private static final String SQL_INSERT_SUBJECT_BY_ENROLLEE_ID;
-    private static final String SQL_CHECK_ADMISSION_LIST_ENTRY;
+    private static final String SQL_CHECK_ADMISSION_LIST_STATUS;
     private static final String SQL_SELECT_BEST_ENROLLEES_IDS;
     private static final String SQL_UPDATE_ADMISSION_LIST_STATUS;
     private static final String SQL_SELECT_ENROLLEES_BY_FACULTY_ID;
     private static final String SQL_SELECT_ENROLLEE_STATUS;
+    private static final String SQL_CHECK_ENROLLEE_STATUS;
 
     // column labels
     private static final String ID = "id";
@@ -57,11 +59,6 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
 
     private static final int ACTIVE = 1;
 
-    private static final String NONE = "none";
-    private static final String BUDGET = "budget";
-    private static final String PAID = "paid";
-
-//    @Override
     public List<Enrollee> findAll() throws ProjectException {
         ArrayList<Enrollee> enrollees = new ArrayList<>();
         try (PreparedStatement st = connection.prepareStatement(
@@ -74,6 +71,43 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         }
         return enrollees;
     }
+
+
+
+
+    public List<Enrollee> findAll(int pageNumber, int rowsPerPager)
+            throws ProjectException {
+        ArrayList<Enrollee> enrollees = new ArrayList<>();
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_SELECT_ENROLLEES_PAGINATION)) {
+            int leftBorder = pageNumber * rowsPerPager + 1;
+            int rightBorder = rowsPerPager * (pageNumber + 1);
+            st.setInt(1,leftBorder);
+            st.setInt(2, rightBorder);
+            ResultSet rs = st.executeQuery();
+            processResult(enrollees, rs);
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return enrollees;
+    }
+
+    public int findTotalAmount() throws ProjectException {
+        int totalAmount = 0;
+        try (Statement st = connection.createStatement()) {
+            ResultSet rs = st.executeQuery(SQL_SELECT_ENROLLEES_TOTAL_AMOUNT);
+            if (rs.next()) {
+                totalAmount += rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return totalAmount;
+    }
+
+
+
+
 
     @Override
     public Enrollee findEntityById(Integer id) throws ProjectException {
@@ -180,6 +214,22 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         return marks;
     }
 
+    @Override
+    public boolean checkStatus(Integer enrolleeId) throws ProjectException {
+        boolean result = false;
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_CHECK_ENROLLEE_STATUS)) {
+            st.setInt(1, enrolleeId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                result = (rs.getInt(AVAILABLE) == 1);
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return result;
+    }
+
     public boolean checkFaculty(int enrolleeId, int facultyId)
             throws ProjectException {
         boolean result = false;
@@ -198,11 +248,11 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         return result;
     }
 
-    public boolean checkAdmissionListEntry(int enrolleeId, int facultyId)
+    public boolean checkAdmissionListStatus(int enrolleeId, int facultyId)
             throws ProjectException {
         boolean result = false;
         try (PreparedStatement st = connection.prepareStatement(
-                SQL_CHECK_ADMISSION_LIST_ENTRY)) {
+                SQL_CHECK_ADMISSION_LIST_STATUS)) {
             st.setInt(1, enrolleeId);
             st.setInt(2, facultyId);
             ResultSet rs = st.executeQuery();
@@ -300,7 +350,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                                        ArrayList<Integer> enrolleeIds,
                                        Seats seats)
             throws ProjectException {
-        boolean result = false;
+        boolean result;
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < enrolleeIds.size(); i++) {
             if (i == 0) { sb.append("("); }
@@ -311,10 +361,9 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 sb.append(",");
             }
         }
-        LOG.debug(String.format(SQL_UPDATE_ADMISSION_LIST_STATUS, sb.toString()));
         try (PreparedStatement st = connection.prepareStatement(
                 String.format(SQL_UPDATE_ADMISSION_LIST_STATUS, sb.toString()))) {
-            st.setString(1, seats.getValue());
+            st.setString(1, seats.toString().toLowerCase());
             st.setInt(2, facultyId);
             int rows = st.executeUpdate();
             result = (rows == enrolleeIds.size());
@@ -373,42 +422,11 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
         return enrollee;
     }
 
-    private void findByAddress(String place, ArrayList<Enrollee> enrollees,
-                               String value)
-            throws ProjectException {
-        try (PreparedStatement st = connection.prepareStatement(
-                String.format(SQL_SELECT_ENROLLEES, place))) {
-            st.setString(1, value);
-            ResultSet rs = st.executeQuery();
-            processResult(enrollees, rs);
-        } catch (SQLException e) {
-            throw new ProjectException("Selection error", e);
-        }
-    }
-
     public enum Seats {
-        BUDGET ("budget"), PAID ("paid");
-
-        private String value;
-
-        Seats(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
+        BUDGET, PAID
     }
 
     static {
-        SQL_SELECT_ENROLLEES =
-                "SELECT `id`, " +
-                        "`country`, " +
-                        "`city`, " +
-                        "`school_certificate`, " +
-                        "`users_id` " +
-                "FROM `enrollees` " +
-                "WHERE %s = ?";
         SQL_SELECT_ENROLLEES_BY_FACULTY_ID =
                 "SELECT  enrollees.id, " +
                         "enrollees.country, " +
@@ -424,20 +442,10 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "SELECT `is_passed` " +
                 "FROM `admission_list` " +
                 "WHERE `enrollees_id` = ? AND `faculties_id` = ?";
-        SQL_DELETE_ENROLLEE_BY_ID =
-                "DELETE FROM `enrollees` " +
-                "WHERE `enrollees`.`id` = ?";
         SQL_DELETE_ENROLLEE =
                 "UPDATE `enrollees` " +
-                "LEFT JOIN   `enrollees_has_subjects` " +
-                "ON `enrollees`.`id` = `enrollees_has_subjects`.`enrollees_id` " +
-                "LEFT JOIN   `admission_list` " +
-                "ON `enrollees`.`id` = `admission_list`.`enrollees_id`" +
-                "SET     `enrollees`.`available` = 0, " +
-                        "`enrollees_has_subjects`.`available` = 0, " +
-                        "`admission_list`.`available` = 0 " +
-                "WHERE  `id` = ? " +
-                "AND `enrollees`.`available` = 1";
+                "SET    `available` = 0, " +
+                "WHERE  `id` = ? ";
         SQL_INSERT_ENROLLEE =
                 "INSERT INTO `enrollees` " +
                         "(`country`," +
@@ -484,7 +492,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "INSERT INTO `enrollees_has_subjects` " +
                 "(`enrollees_id`,`subjects_id`,`score`) " +
                 "VALUES (?,?,?)";
-        SQL_CHECK_ADMISSION_LIST_ENTRY =
+        SQL_CHECK_ADMISSION_LIST_STATUS =
                 "SELECT COUNT(*)" +
                 "FROM   `admission_list` " +
                 "WHERE  `enrollees_id` = ? " +
@@ -506,6 +514,30 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "UPDATE `admission_list` " +
                 "SET `is_passed` = ? " +
                 "WHERE `enrollees_id` IN %s AND `faculties_id` = ?";
+        SQL_CHECK_ENROLLEE_STATUS =
+                "SELECT `available` " +
+                "FROM `enrollees` " +
+                "WHERE `id` = ?";
+        SQL_SELECT_ENROLLEES =
+                "SELECT `id`, " +
+                        "`country`, " +
+                        "`city`, " +
+                        "`school_certificate`, " +
+                        "`users_id` " +
+                        "FROM `enrollees` " +
+                        "WHERE %s = ?";
+        SQL_SELECT_ENROLLEES_PAGINATION =
+                "SELECT  `id`, " +
+                        "`country`, " +
+                        "`city`, " +
+                        "`school_certificate`, " +
+                        "`users_id` " +
+                "FROM   `enrollees` " +
+                "WHERE  `id` >= ? " +
+                        "AND `id` <= ?";
+        SQL_SELECT_ENROLLEES_TOTAL_AMOUNT =
+                "SELECT COUNT(*) " +
+                "FROM `enrollees`";
     }
 
 }

@@ -131,7 +131,7 @@ public class FacultyService {
         EnrolleeDao enrolleeDao = new EnrolleeDao();
         try {
             helper.startTransaction(enrolleeDao);
-            result = enrolleeDao.checkAdmissionListEntry(enrolleeId, facultyId);
+            result = enrolleeDao.checkAdmissionListStatus(enrolleeId, facultyId);
         } finally {
             helper.endTransaction();
         }

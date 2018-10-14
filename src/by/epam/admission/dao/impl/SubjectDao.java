@@ -128,7 +128,8 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
         }
     }
 
-    public boolean checkStatus(int subjectId) throws ProjectException {
+    @Override
+    public boolean checkStatus(Integer subjectId) throws ProjectException {
         boolean result = false;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_CHECK_SUBJECT_STATUS)) {

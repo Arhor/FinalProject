@@ -126,8 +126,8 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
         }
         return flag != 0;
     }
-
-    public boolean checkStatus(int facultyId) throws ProjectException {
+    @Override
+    public boolean checkStatus(Integer facultyId) throws ProjectException {
         boolean result = false;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_CHECK_FACULTY_STATUS)) {

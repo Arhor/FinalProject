@@ -116,7 +116,7 @@
                                                     <c:forEach items="${userEntry.value}" var="enrolleEntry">
                                                         <td>${enrolleEntry.key.country}</td>
                                                         <td>${enrolleEntry.key.city}</td>
-                                                        <td>${enrolleEntry.key.marks.values().stream().mapToInt(x -> x).sum() + enrolleEntry.key.schoolCertificate}</td>
+                                                        <td>${enrolleEntry.key.marks.values().stream().map(x -> x).sum() + enrolleEntry.key.schoolCertificate}</td>
                                                         <td>${enrolleEntry.value}</td>
                                                     </c:forEach>
                                                 </tr>
