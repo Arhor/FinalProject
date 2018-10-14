@@ -444,7 +444,7 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "WHERE `enrollees_id` = ? AND `faculties_id` = ?";
         SQL_DELETE_ENROLLEE =
                 "UPDATE `enrollees` " +
-                "SET    `available` = 0, " +
+                "SET    `available` = 0 " +
                 "WHERE  `id` = ? ";
         SQL_INSERT_ENROLLEE =
                 "INSERT INTO `enrollees` " +
@@ -469,6 +469,11 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "WHERE  `enrollees_id` = ? " +
                         "AND `faculties_id` = ? " +
                         "AND `available` = ?";
+        SQL_CHECK_ADMISSION_LIST_STATUS =
+                "SELECT COUNT(*)" +
+                "FROM   `admission_list` " +
+                "WHERE  `enrollees_id` = ? " +
+                        "AND `faculties_id` = ? ";
         SQL_DELETE_FROM_ADMISSION_LIST =
                 "UPDATE `admission_list` " +
                 "SET    `available` = 0 " +
@@ -492,11 +497,6 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
                 "INSERT INTO `enrollees_has_subjects` " +
                 "(`enrollees_id`,`subjects_id`,`score`) " +
                 "VALUES (?,?,?)";
-        SQL_CHECK_ADMISSION_LIST_STATUS =
-                "SELECT COUNT(*)" +
-                "FROM   `admission_list` " +
-                "WHERE  `enrollees_id` = ? " +
-                "AND `faculties_id` = ? ";
         SQL_SELECT_BEST_ENROLLEES_IDS =
                 "SELECT `enrollees`.`id` " +
                 "FROM   `enrollees` " +

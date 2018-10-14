@@ -6,6 +6,7 @@ package by.epam.admission.controller.filter;
 
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
+import by.epam.admission.util.Names;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,19 +24,13 @@ import java.util.TreeSet;
  * @version 1.0 29 Aug 2018
  */
 @WebFilter(filterName = "pageRedirectFilter",
-        urlPatterns = {"/jsp/*", "/admission/*"},
-        initParams = {
-        @WebInitParam(name = "INDEX_PATH", value = "/index.jsp")
-})
+           urlPatterns = {"/jsp/*", "/admission/*"})
 public class PageRedirectSecurityFilter implements Filter {
 
     private static final Logger LOG = LogManager.getLogger();
 
-    private String indexPath;
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        indexPath = filterConfig.getInitParameter("INDEX_PATH");
     }
 
     @Override
@@ -47,9 +42,9 @@ public class PageRedirectSecurityFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
 
         HttpSession session = httpRequest.getSession();
-        User.Role role = (User.Role) session.getAttribute("role");
+        User.Role role = (User.Role) session.getAttribute(Names.ROLE);
 
-        String referer = httpRequest.getHeader("Referer");
+        String referer = httpRequest.getHeader(Names.REFERER);
 
         LOG.debug(referer);
 

@@ -13,20 +13,32 @@ import java.util.TreeMap;
  */
 public class Enrollee extends Entity{
 
-    private final int id;
     private String country;
     private String city;
     private int schoolCertificate;
     private int userId;
     private TreeMap<Subject, Integer> marks;
 
+    public Enrollee() {
+        super();
+    }
+
+    public Enrollee(String country,
+                    String city,
+                    int schoolCertificate,
+                    int userId) {
+        this.country = country;
+        this.city = city;
+        this.schoolCertificate = schoolCertificate;
+        this.userId = userId;
+    }
+
     public Enrollee(int id,
                     String country,
                     String city,
                     int schoolCertificate,
                     int userId) {
-
-        this.id = id;
+        super(id);
         this.country = country;
         this.city = city;
         this.schoolCertificate = schoolCertificate;
@@ -129,7 +141,7 @@ public class Enrollee extends Entity{
                 + ", city=" + city
                 + ", school_certificate=" + schoolCertificate
                 + ", UID=" + userId
-                + "marks=" + marks + "]";
+                + ", marks=" + marks + "]";
     }
 
 }

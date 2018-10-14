@@ -110,20 +110,6 @@ public class FacultyService {
         return resultSet;
     }
 
-    public static boolean checkFaculty(int enrolleeId, int facultyId)
-            throws ProjectException {
-        boolean result;
-        DaoHelper helper = new DaoHelper();
-        EnrolleeDao enrolleeDao = new EnrolleeDao();
-        try {
-            helper.startTransaction(enrolleeDao);
-            result = enrolleeDao.checkFaculty(enrolleeId, facultyId);
-        } finally {
-            helper.endTransaction();
-        }
-        return result;
-    }
-
     public static boolean checkAdmissionListEntry(int enrolleeId, int facultyId)
             throws ProjectException {
         boolean result;

@@ -40,6 +40,7 @@ public class Names {
     public static final String COMMAND = "command";
     public static final String MESSAGE = "message";
     public static final String ERROR = "error";
+    public static final String REFERER = "Referer";
 
     private Names() {}
 }
