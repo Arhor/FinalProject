@@ -49,6 +49,7 @@ public class Subject extends Entity {
         if (obj == null) { return false; }
         if (obj.getClass() != getClass()) { return false; }
         Subject subject = (Subject) obj;
+        if (subject.getId() != this.getId()) { return false; }
         if (nameRu == null) {
             if (subject.nameRu != null) {
                 return false;
@@ -77,7 +78,7 @@ public class Subject extends Entity {
     @Override
     public String toString() {
         return getClass().getSimpleName()
-                + "ID=" + getId()
+                + "[ID=" + getId()
                 + ", name_ru=" + nameRu
                 + ", name_en=" + nameEn + "]";
     }

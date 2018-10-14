@@ -6,13 +6,8 @@ package by.epam.admission.pool;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.operation.DatabaseOperation;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
-import java.io.*;
 
 /**
  * @author Maxim Burishinets
@@ -23,7 +18,7 @@ public class ConnectionPoolTest {
     private static final Logger LOG = LogManager.getLogger(
             ConnectionPoolTest.class);
 
-    private static ConnectionPoolDBUnit pool = ConnectionPoolDBUnit.POOL;
+    private static ConnectionPool pool = ConnectionPool.POOL;
 
     @Test
     public void connectionLeakTest() {
@@ -44,21 +39,5 @@ public class ConnectionPoolTest {
         int actual = pool.countAvailableConnections() + pool.countUsedConnections();
         int expected = 0;
         Assert.assertEquals(actual,expected);
-    }
-
-    @BeforeClass
-    public void setUpClass() throws Exception {
-        FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-        IDataSet dataSet = builder.build(
-                new File("resources/test-dataset_temp.xml"));
-        pool.getTester().setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
-        pool.getTester().setTearDownOperation(DatabaseOperation.NONE);
-        pool.getTester().setDataSet(dataSet);
-        pool.getTester().onSetup();
-    }
-
-    @AfterClass
-    public void tearDownClass() throws Exception {
-        pool.getTester().onTearDown();
     }
 }

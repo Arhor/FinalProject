@@ -216,7 +216,8 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     }
 
     /**
-     * Hard deletion of Enrollee from database, supposed to use only by admin
+     * Soft deletion of Enrollee from database, supposed to use by client.
+     * Sets value `available` of corresponding enrollee to `0`
      * @param id - Enrollee ID to delete from database
      * @return true - if deletion was successful
      * @throws ProjectException - wrapped SQL exception
@@ -225,28 +226,8 @@ public class EnrolleeDao extends AbstractDao<Integer, Enrollee> {
     public boolean delete(Integer id) throws ProjectException {
         int flag;
         try (PreparedStatement st = connection.prepareStatement(
-                SQL_DELETE_ENROLLEE_BY_ID)) {
-            st.setInt(1, id);
-            flag = st.executeUpdate();
-        } catch (SQLException e) {
-            throw new ProjectException("Deletion error", e);
-        }
-        return flag != 0;
-    }
-
-    /**
-     * Soft deletion of Enrollee from database, supposed to use by client.
-     * Sets value `available` of corresponding enrollee to `0`
-     * @param enrollee - Enrollee object to delete from database
-     * @return true - if deletion was successful
-     * @throws ProjectException - wrapped SQL exception
-     */
-    @Override
-    public boolean delete(Enrollee enrollee) throws ProjectException {
-        int flag;
-        try (PreparedStatement st = connection.prepareStatement(
                 SQL_DELETE_ENROLLEE)) {
-            st.setInt(1, enrollee.getId());
+            st.setInt(1, id);
             flag = st.executeUpdate();
         } catch (SQLException e) {
             throw new ProjectException("Deletion error", e);

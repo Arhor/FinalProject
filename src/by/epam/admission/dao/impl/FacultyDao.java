@@ -88,16 +88,6 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
     }
 
     @Override
-    public boolean delete(Faculty faculty) throws ProjectException {
-        try {
-            return executeDMLQuery(faculty, SQL_DELETE_FACULTY);
-        } catch (SQLException e) {
-            LOG.error("Deletion error", e);
-            throw new ProjectException("Deletion error", e);
-        }
-    }
-
-    @Override
     public boolean create(Faculty faculty) throws ProjectException {
         int flag;
         try {

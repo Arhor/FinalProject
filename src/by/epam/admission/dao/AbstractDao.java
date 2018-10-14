@@ -5,7 +5,6 @@
 package by.epam.admission.dao;
 
 import by.epam.admission.exception.ProjectException;
-import by.epam.admission.exception.NotSupportedOperationException;
 import by.epam.admission.model.Entity;
 import by.epam.admission.pool.ProxyConnection;
 
@@ -21,10 +20,8 @@ public abstract class AbstractDao<K, T extends Entity> {
     
     public abstract T findEntityById(K id) throws ProjectException;
     
-    public abstract boolean delete(K id) throws NotSupportedOperationException, ProjectException;
-    
-    public abstract boolean delete(T entity) throws NotSupportedOperationException, ProjectException;
-    
+    public abstract boolean delete(K id) throws ProjectException;
+
     public abstract boolean create(T entity) throws ProjectException;
     
     public abstract boolean update(T entity) throws ProjectException;

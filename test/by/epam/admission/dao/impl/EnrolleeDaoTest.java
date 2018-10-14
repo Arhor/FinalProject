@@ -123,25 +123,6 @@ public class EnrolleeDaoTest {
         }
     }
 
-    @Test
-    public void testDelete() {
-        DaoHelperDbUnit helperDbUnit = new DaoHelperDbUnit();
-        EnrolleeDao enrolleeDAO = new EnrolleeDao();
-        Enrollee enrollee = new Enrollee();
-        enrollee.setId(2);
-        try {
-            helperDbUnit.startTransaction(enrolleeDAO);
-            LOG.info(enrolleeDAO.delete(enrollee));
-            helperDbUnit.commit();
-        } catch (ProjectException e) {
-            helperDbUnit.rollback();
-            LOG.error("DAO exception", e);
-        } finally {
-            helperDbUnit.endTransaction();
-        }
-    }
-
-
     @BeforeClass
     public void setUpClass() throws Exception {
         FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();

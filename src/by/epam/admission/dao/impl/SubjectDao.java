@@ -31,7 +31,6 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
     private static final String SQL_SELECT_ALL_SUBJECTS;
     private static final String SQL_SELECT_SUBJECT_BY_ID;
     private static final String SQL_INSERT_SUBJECT;
-    private static final String SQL_DELETE_SUBJECT;
     private static final String SQL_DELETE_SUBJECT_BY_ID;
     private static final String SQL_UPDATE_SUBJECT;
     private static final String SQL_SELECT_SUBJECTS_BY_FACULTY_ID;
@@ -85,6 +84,14 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
         return subjects;
     }
 
+    /**
+     * Method implements 'soft' deletion of subject from database, that means
+     * field `available` of corresponding record will be set to 0 rather then
+     * really deleted from database
+     * @param id - concrete subject ID
+     * @return true if deletion was successful (affected rows greater than 0)
+     * @throws ProjectException - wrapped SQLException
+     */
     @Override
     public boolean delete(Integer id) throws ProjectException {
         int flag;
@@ -97,16 +104,6 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
             throw new ProjectException("Deletion error", e);
         }
         return flag != 0;
-    }
-
-    @Override
-    public boolean delete(Subject subject) throws ProjectException {
-        try {
-            return executeDMLQuery(subject, SQL_DELETE_SUBJECT);
-        } catch (SQLException e) {
-            LOG.error("Deletion error", e);
-            throw new ProjectException("Deletion error", e);
-        }
     }
 
     @Override
@@ -163,13 +160,9 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
         SQL_INSERT_SUBJECT =
                 "INSERT INTO `subjects` (`name_ru`,`name_en`,`id`) " +
                 "VALUES (?,?,?)";
-        SQL_DELETE_SUBJECT =
-                "DELETE FROM `subjects` " +
-                "WHERE  `name_ru` = ? " +
-                        "AND `name_en` = ? " +
-                        "AND `id` = ?";
         SQL_DELETE_SUBJECT_BY_ID =
-                "DELETE FROM `subjects` " +
+                "UPDATE `subjects` " +
+                "SET `available` = 0 " +
                 "WHERE `id` = ?";
         SQL_UPDATE_SUBJECT =
                 "UPDATE `subjects` " +

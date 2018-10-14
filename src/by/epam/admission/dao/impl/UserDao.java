@@ -7,10 +7,7 @@ package by.epam.admission.dao.impl;
 import by.epam.admission.dao.AbstractDao;
 import by.epam.admission.exception.ProjectException;
 import by.epam.admission.util.EncryptAction;
-import by.epam.admission.exception.NotSupportedOperationException;
 import by.epam.admission.model.User;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,8 +22,6 @@ import java.util.List;
  */
 public class UserDao extends AbstractDao<Integer, User> {
 
-    private static final Logger LOG = LogManager.getLogger(UserDao.class);
-
     // SQL queries
     private static final String SQL_SELECT_USERS;
     private static final String SQL_INSERT_USER;
@@ -40,10 +35,6 @@ public class UserDao extends AbstractDao<Integer, User> {
     private static final String SQL_RESTORE_USER_BY_ID;
     private static final String SQL_CHECK_PASSWORD;
     private static final String SQL_SELECT_USER_ID;
-//    private static final String SQL_DELETE_USER_BY_EMAIL_AND_PASSWORD;
-//    private static final String SQL_SELECT_USER_BY_EMAIL_AND_PASSWORD;
-
-
 
     // column labels
     private static final String ID = "id";
@@ -114,28 +105,6 @@ public class UserDao extends AbstractDao<Integer, User> {
         }
         return id;
     }
-
-//    public User findUserByEmailAndPassword(String email, String password)
-//            throws ProjectException {
-//        User user = null;
-//        try (PreparedStatement st = connection.prepareStatement(
-//                SQL_SELECT_USER_BY_EMAIL_AND_PASSWORD)) {
-//            String name = findNameByEmail(email);
-//            if (name != null) {
-//                EncryptAction encryptAction = new EncryptAction();
-//                String encryptedPassword = encryptAction.encrypt(password, name);
-//                st.setString(1, email);
-//                st.setString(2, encryptedPassword);
-//                ResultSet rs = st.executeQuery();
-//                if (rs.next()) {
-//                    user = setUser(rs);
-//                }
-//            }
-//        } catch (SQLException e) {
-//            throw new ProjectException("Selection error", e);
-//        }
-//        return user;
-//    }
 
     public boolean checkEmail(String email) throws ProjectException {
         boolean result = false;
@@ -211,27 +180,6 @@ public class UserDao extends AbstractDao<Integer, User> {
             throw new ProjectException("Check password error", e);
         }
         return result;
-    }
-
-//    public boolean delete(User user, String password) throws ProjectException {
-//        int flag;
-//        try (PreparedStatement st = connection.prepareStatement(
-//                SQL_DELETE_USER_BY_EMAIL_AND_PASSWORD)) {
-//            EncryptAction encryptAction = new EncryptAction();
-//            String name = findNameByEmail(user.getEmail());
-//            String encryptedPassword = encryptAction.encrypt(password, name);
-//            st.setString(1, user.getEmail());
-//            st.setString(2, encryptedPassword);
-//            flag = st.executeUpdate();
-//        } catch (SQLException e) {
-//            throw new ProjectException("Deletion error", e);
-//        }
-//        return (flag != 0);
-//    }
-
-    @Override
-    public boolean delete(User user) throws NotSupportedOperationException {
-        throw new NotSupportedOperationException();
     }
 
     // if return false - user with the same email already exists
