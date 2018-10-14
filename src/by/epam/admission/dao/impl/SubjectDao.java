@@ -34,11 +34,13 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
     private static final String SQL_DELETE_SUBJECT_BY_ID;
     private static final String SQL_UPDATE_SUBJECT;
     private static final String SQL_SELECT_SUBJECTS_BY_FACULTY_ID;
+    private static final String SQL_CHECK_SUBJECT_STATUS;
 
     // column labels
     private static final String ID = "id";
     private static final String NAME_RU = "name_ru";
     private static final String NAME_EN = "name_en";
+    private static final String AVAILABLE = "available";
 
 //    @Override
     public List<Subject> findAll() throws ProjectException {
@@ -126,6 +128,21 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
         }
     }
 
+    public boolean checkStatus(int subjectId) throws ProjectException {
+        boolean result = false;
+        try (PreparedStatement st = connection.prepareStatement(
+                SQL_CHECK_SUBJECT_STATUS)) {
+            st.setInt(1, subjectId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                result = (rs.getInt(AVAILABLE) == 1);
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return result;
+    }
+
     private void processResult(Collection<Subject> subjects, ResultSet rs)
             throws SQLException {
         while (rs.next()) {
@@ -176,5 +193,9 @@ public class SubjectDao extends AbstractDao<Integer, Subject> {
                 "JOIN `faculties_has_subjects` " +
                 "ON `subjects`.`id` = `faculties_has_subjects`.`subjects_id` " +
                 "WHERE `faculties_has_subjects`.`faculties_id` = ?";
+        SQL_CHECK_SUBJECT_STATUS =
+                "SELECT `available` " +
+                "FROM `subjects` " +
+                "WHERE `subjects`.`id` = ?";
     }
 }

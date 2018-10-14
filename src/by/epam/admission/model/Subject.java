@@ -82,4 +82,13 @@ public class Subject extends Entity {
                 + ", name_ru=" + nameRu
                 + ", name_en=" + nameEn + "]";
     }
+
+    @Override
+    public Subject clone() throws CloneNotSupportedException {
+        Subject subject = (Subject) super.clone();
+        subject.setId(this.getId());
+        subject.nameEn = this.nameEn;
+        subject.nameRu = this.nameRu;
+        return subject;
+    }
 }

@@ -195,11 +195,11 @@ public class User extends Entity {
     public User clone() throws CloneNotSupportedException {
         User user = (User) super.clone();
         user.setId(this.getId());
-        user.setEmail(this.email);
-        user.setFirstName(this.firstName);
-        user.setLastName(this.lastName);
-        user.setLang(this.lang);
-        user.setRole(this.role);
+        user.email = this.email;
+        user.firstName = this.firstName;
+        user.lastName = this.lastName;
+        user.lang = this.lang;
+        user.role = this.role;
         return user;
     }
 
