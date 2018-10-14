@@ -156,7 +156,7 @@ public class UserDaoTest {
             daoHelper.startTransaction(uDAO);
             boolean result = uDAO.delete(currUser.getId());
             if (result) {
-                boolean status = uDAO.checkUser(currUser.getId());
+                boolean status = uDAO.checkStatus(currUser.getId());
                 Assert.assertFalse(status, failMessage);
             } else {
                 Assert.fail(failMessage);
@@ -251,7 +251,7 @@ public class UserDaoTest {
         UserDao uDAO = new UserDao();
         try {
             daoHelper.startTransaction(uDAO);
-            Assert.assertTrue(uDAO.checkUser(user.getId()));
+            Assert.assertTrue(uDAO.checkStatus(user.getId()));
         } catch (ProjectException e) {
             Assert.fail(failMessage, e);
         } finally {

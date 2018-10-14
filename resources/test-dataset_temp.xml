@@ -64,14 +64,14 @@
   <subjects id="103" name_ru="Математика" name_en="Math" available="true"/>
   <subjects id="104" name_ru="Химия" name_en="Chemistry" available="true"/>
   <subjects id="105" name_ru="Иностранный язык" name_en="Foreign language" available="true"/>
-  <faculties id="201" name_ru="Факультет компьютерного проектирования" name_en="Faculty of computer-aided design" seats_paid="5" seats_budget="3" available="true" checked="true"/>
-  <faculties id="202" name_ru="Факультет информационных технологий и управления" name_en="Faculty of information technologies and control" seats_paid="4" seats_budget="2" available="true" checked="true"/>
-  <faculties id="203" name_ru="Факультет радиотехники и электроники" name_en="Faculty of radioengineering and electronics" seats_paid="2" seats_budget="4" available="true" checked="true"/>
-  <faculties id="204" name_ru="Факультет компьютерных систем и сетей" name_en="Faculty of computer systems and networks" seats_paid="3" seats_budget="3" available="true" checked="true"/>
-  <faculties id="205" name_ru="Факультет инфокоммуникаций" name_en="Faculty of infocommunications" seats_paid="4" seats_budget="2" available="true" checked="true"/>
-  <faculties id="206" name_ru="Инженерно-экономический факультет" name_en="Faculty of engineering and economics" seats_paid="3" seats_budget="4" available="true" checked="true"/>
-  <faculties id="207" name_ru="Факультет инновационного непрерывного образования" name_en="Faculty of innovative lifelong learning" seats_paid="5" seats_budget="2" available="true" checked="true"/>
-  <faculties id="208" name_ru="Военный факультет" name_en="Military faculty" seats_paid="5" seats_budget="4" available="true" checked="true"/>
+  <faculties id="201" name_ru="Факультет компьютерного проектирования" name_en="Faculty of computer-aided design" seats_paid="5" seats_budget="3" available="true" checked="false"/>
+  <faculties id="202" name_ru="Факультет информационных технологий и управления" name_en="Faculty of information technologies and control" seats_paid="4" seats_budget="2" available="true" checked="false"/>
+  <faculties id="203" name_ru="Факультет радиотехники и электроники" name_en="Faculty of radioengineering and electronics" seats_paid="2" seats_budget="4" available="true" checked="false"/>
+  <faculties id="204" name_ru="Факультет компьютерных систем и сетей" name_en="Faculty of computer systems and networks" seats_paid="3" seats_budget="3" available="true" checked="false"/>
+  <faculties id="205" name_ru="Факультет инфокоммуникаций" name_en="Faculty of infocommunications" seats_paid="4" seats_budget="2" available="true" checked="false"/>
+  <faculties id="206" name_ru="Инженерно-экономический факультет" name_en="Faculty of engineering and economics" seats_paid="3" seats_budget="4" available="true" checked="false"/>
+  <faculties id="207" name_ru="Факультет инновационного непрерывного образования" name_en="Faculty of innovative lifelong learning" seats_paid="5" seats_budget="2" available="true" checked="false"/>
+  <faculties id="208" name_ru="Военный факультет" name_en="Military faculty" seats_paid="5" seats_budget="4" available="true" checked="false"/>
   <enrollees_has_subjects enrollees_id="1" subjects_id="101" score="71" available="true"/>
   <enrollees_has_subjects enrollees_id="1" subjects_id="102" score="77" available="true"/>
   <enrollees_has_subjects enrollees_id="1" subjects_id="103" score="48" available="true"/>
@@ -183,36 +183,36 @@
   <faculties_has_subjects faculties_id="203" subjects_id="105"/>
   <faculties_has_subjects faculties_id="207" subjects_id="105"/>
   <faculties_has_subjects faculties_id="208" subjects_id="105"/>
-  <admission_list enrollees_id="1" faculties_id="201" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="1" faculties_id="205" is_passed="paid" available="true"/>
-  <admission_list enrollees_id="2" faculties_id="204" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="3" faculties_id="206" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="4" faculties_id="202" is_passed="budget" available="false"/>
+  <admission_list enrollees_id="1" faculties_id="201" is_passed="none" available="true"/>
+  <admission_list enrollees_id="1" faculties_id="205" is_passed="none" available="true"/>
+  <admission_list enrollees_id="2" faculties_id="204" is_passed="none" available="true"/>
+  <admission_list enrollees_id="3" faculties_id="206" is_passed="none" available="true"/>
+  <admission_list enrollees_id="4" faculties_id="202" is_passed="none" available="false"/>
   <admission_list enrollees_id="5" faculties_id="201" is_passed="none" available="false"/>
   <admission_list enrollees_id="5" faculties_id="205" is_passed="none" available="false"/>
-  <admission_list enrollees_id="6" faculties_id="203" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="7" faculties_id="208" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="8" faculties_id="207" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="9" faculties_id="204" is_passed="paid" available="true"/>
-  <admission_list enrollees_id="10" faculties_id="201" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="11" faculties_id="204" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="12" faculties_id="206" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="13" faculties_id="208" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="14" faculties_id="207" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="15" faculties_id="202" is_passed="paid" available="true"/>
+  <admission_list enrollees_id="6" faculties_id="203" is_passed="none" available="true"/>
+  <admission_list enrollees_id="7" faculties_id="208" is_passed="none" available="true"/>
+  <admission_list enrollees_id="8" faculties_id="207" is_passed="none" available="true"/>
+  <admission_list enrollees_id="9" faculties_id="204" is_passed="none" available="true"/>
+  <admission_list enrollees_id="10" faculties_id="201" is_passed="none" available="true"/>
+  <admission_list enrollees_id="11" faculties_id="204" is_passed="none" available="true"/>
+  <admission_list enrollees_id="12" faculties_id="206" is_passed="none" available="true"/>
+  <admission_list enrollees_id="13" faculties_id="208" is_passed="none" available="true"/>
+  <admission_list enrollees_id="14" faculties_id="207" is_passed="none" available="true"/>
+  <admission_list enrollees_id="15" faculties_id="202" is_passed="none" available="true"/>
   <admission_list enrollees_id="16" faculties_id="201" is_passed="none" available="false"/>
   <admission_list enrollees_id="16" faculties_id="205" is_passed="none" available="false"/>
-  <admission_list enrollees_id="17" faculties_id="202" is_passed="paid" available="true"/>
-  <admission_list enrollees_id="18" faculties_id="208" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="19" faculties_id="206" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="20" faculties_id="207" is_passed="paid" available="true"/>
-  <admission_list enrollees_id="21" faculties_id="205" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="22" faculties_id="203" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="23" faculties_id="204" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="24" faculties_id="201" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="25" faculties_id="205" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="26" faculties_id="207" is_passed="paid" available="true"/>
-  <admission_list enrollees_id="27" faculties_id="204" is_passed="paid" available="true"/>
-  <admission_list enrollees_id="28" faculties_id="202" is_passed="budget" available="true"/>
-  <admission_list enrollees_id="29" faculties_id="203" is_passed="budget" available="true"/>
+  <admission_list enrollees_id="17" faculties_id="202" is_passed="none" available="true"/>
+  <admission_list enrollees_id="18" faculties_id="208" is_passed="none" available="true"/>
+  <admission_list enrollees_id="19" faculties_id="206" is_passed="none" available="true"/>
+  <admission_list enrollees_id="20" faculties_id="207" is_passed="none" available="true"/>
+  <admission_list enrollees_id="21" faculties_id="205" is_passed="none" available="true"/>
+  <admission_list enrollees_id="22" faculties_id="203" is_passed="none" available="true"/>
+  <admission_list enrollees_id="23" faculties_id="204" is_passed="none" available="true"/>
+  <admission_list enrollees_id="24" faculties_id="201" is_passed="none" available="true"/>
+  <admission_list enrollees_id="25" faculties_id="205" is_passed="none" available="true"/>
+  <admission_list enrollees_id="26" faculties_id="207" is_passed="none" available="true"/>
+  <admission_list enrollees_id="27" faculties_id="204" is_passed="none" available="true"/>
+  <admission_list enrollees_id="28" faculties_id="202" is_passed="none" available="true"/>
+  <admission_list enrollees_id="29" faculties_id="203" is_passed="none" available="true"/>
 </dataset>

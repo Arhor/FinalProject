@@ -89,6 +89,7 @@ public class SubjectDaoTest {
         try {
             daoHelper.startTransaction(sDAO);
             boolean result = sDAO.checkStatus(subject.getId());
+            LOG.info("Subject ID: " + subject.getId() + " Status: " + result);
             Assert.assertTrue(result, failMessage);
         } catch (ProjectException e) {
             Assert.fail(failMessage, e);
@@ -155,7 +156,7 @@ public class SubjectDaoTest {
             boolean result = sDAO.update(expected);
             Subject updated = sDAO.findEntityById(expected.getId());
             boolean equals =  expected.equals(updated);
-            LOG.info("Insertion result: " + result);
+            LOG.info("Update result: " + result);
             LOG.info("Equivalency: " + equals);
             if (!result || !equals) {
                 Assert.fail(failMessage);

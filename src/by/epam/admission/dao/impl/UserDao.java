@@ -43,6 +43,7 @@ public class UserDao extends AbstractDao<Integer, User> {
     private static final String LAST_NAME = "last_name";
     private static final String LANG = "lang";
     private static final String ROLE = "role";
+    private static final String AVAILABLE = "available";
 
 //    @Override
     public List<User> findAll(int pageNumber, int rowsPerPager)
@@ -123,14 +124,14 @@ public class UserDao extends AbstractDao<Integer, User> {
         return result;
     }
 
-    public boolean checkUser(int userId) throws ProjectException {
+    public boolean checkStatus(int userId) throws ProjectException {
         boolean result = false;
         try (PreparedStatement st = connection.prepareStatement(
                 SQL_SELECT_USER_STATUS)) {
             st.setInt(1, userId);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                result = (rs.getInt(1) == 1);
+                result = (rs.getInt(AVAILABLE) == 1);
             }
         } catch (SQLException e) {
             throw new ProjectException("Selection error", e);

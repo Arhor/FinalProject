@@ -105,7 +105,7 @@ public class UserService {
             helper.startTransaction(userDao);
             for (String userId : userIds) {
                 int uid = Integer.parseInt(userId);
-                boolean result = userDao.checkUser(uid);
+                boolean result = userDao.checkStatus(uid);
                 resultSet.put(uid, result);
             }
         } finally {

@@ -27,7 +27,10 @@ public class Faculty extends Entity {
         super();
     }
 
-    public Faculty(int id, String nameRu, String nameEn, int seatsPaid,
+    public Faculty(int id,
+                   String nameRu,
+                   String nameEn,
+                   int seatsPaid,
                    int seatsBudget) {
         super(id);
         this.nameRu = nameRu;
@@ -141,6 +144,20 @@ public class Faculty extends Entity {
                 + ", seats_budget=" + seatsBudget
                 + ", subjects=" + subjects
                 + ", checked=" + checked + "]";
+    }
+
+    @Override
+    public Faculty clone() throws CloneNotSupportedException {
+        Faculty faculty = (Faculty) super.clone();
+        faculty.nameEn = this.nameEn;
+        faculty.nameRu = this.nameRu;
+        faculty.seatsPaid = this.seatsPaid;
+        faculty.seatsBudget = this.seatsBudget;
+        faculty.checked = this.checked;
+        if (this.subjects != null) {
+            faculty.subjects = new TreeSet<>(this.subjects);
+        }
+        return faculty;
     }
 
 }
