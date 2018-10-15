@@ -40,7 +40,7 @@ public class BlockUserCommand implements ActionCommand {
      * results are placed in the JSON object, which is placed in a Router object
      *
      * @param request {@link HttpServletRequest} object received from
-     *               controller-servlet
+     *                controller-servlet
      * @return {@link Router} object that contains result of executing concrete
      * command
      */

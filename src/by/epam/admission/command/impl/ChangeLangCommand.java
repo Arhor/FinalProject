@@ -6,9 +6,7 @@ package by.epam.admission.command.impl;
 
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
-import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
-import by.epam.admission.util.Names;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -34,7 +32,7 @@ public class ChangeLangCommand implements ActionCommand {
      * placed in {@link Router} object
      *
      * @param request {@link HttpServletRequest} object received from
-     *               controller-servlet
+     *                controller-servlet
      * @return {@link Router} object that contains result of executing concrete
      * command
      */

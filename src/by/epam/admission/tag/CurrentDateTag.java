@@ -19,6 +19,7 @@ import java.util.Locale;
  *
  * @author Burishinets Maxim
  * @version 1.0 12 Oct 2018
+ * @see TagSupport
  */
 public class CurrentDateTag extends TagSupport {
 

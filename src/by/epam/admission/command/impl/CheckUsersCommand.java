@@ -36,7 +36,7 @@ public class CheckUsersCommand implements ActionCommand {
      * result of execution into JSON object
      *
      * @param request {@link HttpServletRequest} object received from
-     *               controller-servlet
+     *                controller-servlet
      * @return {@link Router} object that contains result of executing concrete
      * command
      */

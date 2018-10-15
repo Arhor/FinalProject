@@ -18,6 +18,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static by.epam.admission.command.Router.*;
 import static by.epam.admission.util.Names.*;
 
 /**
@@ -25,6 +26,7 @@ import static by.epam.admission.util.Names.*;
  *
  * @author Burishinets Maxim
  * @version 1.0 10 Sep 2018
+ * @see ActionCommand
  */
 public class ConfirmCommand implements ActionCommand {
 
@@ -32,15 +34,20 @@ public class ConfirmCommand implements ActionCommand {
             LogManager.getLogger(ConfirmCommand.class);
 
     /**
-     * 
+     * Method receives session attribute 'confirmationCode' that was sent to
+     * user's e-mail and compares it with the entered code, if they are equal
+     * then registration of new user initializes. On success user forwards to
+     * the corresponding it's role home page, otherwise user is redirected to
+     * error page
      *
      * @param request {@link HttpServletRequest} object received from
-     *               controller-servlet
+     *                controller-servlet
      * @return {@link Router} object that contains result of executing concrete
      * command
      */
     @Override
     public Router execute(HttpServletRequest request) {
+        String page;
         Router router = new Router();
         HttpSession session = request.getSession();
 
@@ -53,7 +60,6 @@ public class ConfirmCommand implements ActionCommand {
         User.Lang lang = User.Lang.getLang(locale);
 
         try {
-            String page;
             if (submittedCode.equals(realCode)) {
                 user = UserService.registerUser(user);
                 if (user != null) {
@@ -64,24 +70,27 @@ public class ConfirmCommand implements ActionCommand {
                     page = ConfigurationManager.getProperty(
                             "path.page.client.main");
                     router.setPage(page);
-                    router.setType(Router.Type.REDIRECT);
+                    router.setType(Type.REDIRECT);
                 } else {
                     String errorMessage =  MessageManager.getProperty(
                             "message.registration.failed", lang);
                     request.setAttribute(ERROR_LOGIN_MESSAGE, errorMessage);
                     page = ConfigurationManager.getProperty("path.page.login");
                     router.setPage(page);
-                    router.setType(Router.Type.FORWARD);
+                    router.setType(Type.FORWARD);
                 }
             } else {
+                LOG.debug("Registration failed. Wrong confirmation code:\n" +
+                        "Expected: " + realCode + "\n" +
+                        "  Actual: " + submittedCode);
                 session.removeAttribute(USER);
                 page = ConfigurationManager.getProperty("path.page.main");
                 router.setPage(page);
-                router.setType(Router.Type.FORWARD);
+                router.setType(Type.FORWARD);
             }
         } catch (ProjectException e) {
             LOG.error("Registration confirm error", e);
-            router.setType(Router.Type.ERROR);
+            router.setType(Type.ERROR);
             router.setErrorCode(500);
         } finally {
             session.removeAttribute(CONFIRMATION_CODE);

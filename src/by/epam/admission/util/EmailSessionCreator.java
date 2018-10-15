@@ -11,6 +11,8 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
+ * Class EmailSessionCreator used to create new Email session
+ *
  * @author Burishinets Maxim
  * @version 1.0 20 Aug 2018
  */
@@ -36,7 +38,8 @@ public class EmailSessionCreator {
         sessionProperties.put("mail.smtp.auth", "true");
         sessionProperties.put("mail.smtp.port", smtpPort);
         sessionProperties.put("mail.smtp.socketFactory.port", smtpPort);
-        sessionProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        sessionProperties.put("mail.smtp.socketFactory.class",
+                "javax.net.ssl.SSLSocketFactory");
         sessionProperties.put("mail.smtp.socketFactory.fallback", "false");
 
         sessionProperties.setProperty("mail.smtp.quitwait", "false");

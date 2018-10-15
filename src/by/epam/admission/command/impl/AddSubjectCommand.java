@@ -44,7 +44,7 @@ public class AddSubjectCommand implements ActionCommand {
      * after that list sets as session attribute.
      *
      * @param request {@link HttpServletRequest} object received from
-     *               controller-servlet
+     *                controller-servlet
      * @return {@link Router} object that contains result of executing concrete
      * command
      */
