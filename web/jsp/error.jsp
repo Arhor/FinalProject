@@ -79,7 +79,7 @@
                                         <c:if test="${pageContext.errorData.throwable != null}">
                                             <tr>
                                                 <td><fmt:message key="label.error.cause" /></td>
-                                                <td><c:out value="${pageContext.errorData.throwable}" /></td>
+                                                <td><pre><c:out value="${pageContext.errorData.throwable}" /></pre></td>
                                             </tr>
                                         </c:if>
                                     </table>

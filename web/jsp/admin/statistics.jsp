@@ -99,6 +99,7 @@
                                         <thead class="text-primary">
                                             <tr>
                                                 <th><fmt:message key="label.user.id" /></th>
+                                                <th><fmt:message key="label.email" /></th>
                                                 <th><fmt:message key="label.name.first" /></th>
                                                 <th><fmt:message key="label.name.last" /></th>
                                                 <th><fmt:message key="label.client.profile.country" /></th>
@@ -111,13 +112,24 @@
                                             <c:forEach items="${requestScope.resultSet}" var="userEntry">
                                                 <tr>
                                                     <td>${userEntry.key.id}</td>
+                                                    <td>${userEntry.key.email}</td>
                                                     <td>${userEntry.key.firstName}</td>
                                                     <td>${userEntry.key.lastName}</td>
                                                     <c:forEach items="${userEntry.value}" var="enrolleEntry">
                                                         <td>${enrolleEntry.key.country}</td>
                                                         <td>${enrolleEntry.key.city}</td>
                                                         <td>${enrolleEntry.key.marks.values().stream().map(x -> x).sum() + enrolleEntry.key.schoolCertificate}</td>
-                                                        <td>${enrolleEntry.value}</td>
+                                                        <c:choose>
+                                                            <c:when test="${enrolleEntry.value eq 'none'}">
+                                                                <td class="text-danger font-weight-bold">${enrolleEntry.value}</td>
+                                                            </c:when>
+                                                            <c:when test="${enrolleEntry.value eq 'paid'}">
+                                                                <td class="text-primary font-weight-bold">${enrolleEntry.value}</td>
+                                                            </c:when>
+                                                            <c:when test="${enrolleEntry.value eq 'budget'}">
+                                                                <td class="text-success font-weight-bold">${enrolleEntry.value}</td>
+                                                            </c:when>
+                                                        </c:choose>
                                                     </c:forEach>
                                                 </tr>
                                             </c:forEach>

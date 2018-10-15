@@ -33,7 +33,7 @@ public class EnrolleeDaoTest {
 
     private static ConnectionPoolDBUnit pool = ConnectionPoolDBUnit.POOL;
 
-    @Test(dataProvider = "enrolleesList", description = "positive test")
+    @Test(dataProvider = "enrolleesList", priority =  2, description = "positive test")
     public void testFindAll(List<Enrollee> expected) {
         String failMessage = "";
         DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
@@ -51,7 +51,7 @@ public class EnrolleeDaoTest {
         }
     }
 
-    @Test(dataProvider = "enrolleesDataSet", description = "positive test")
+    @Test(dataProvider = "enrolleesDataSet", priority =  2, description = "positive test")
     public void testFindEntityById(Enrollee expected) {
         String failMessage = "Enrollee finding test failed";
         DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
@@ -67,7 +67,7 @@ public class EnrolleeDaoTest {
         }
     }
 
-    @Test(dataProvider = "enrolleesDataSet", description = "positive test")
+    @Test(dataProvider = "enrolleesDataSet", priority =  2, description = "positive test")
     public void testFindEnrolleeByUserId(Enrollee expected) {
         String failMessage = "Enrollee finding test failed";
         DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
@@ -83,14 +83,15 @@ public class EnrolleeDaoTest {
         }
     }
 
-    @Test(dataProvider = "enrolleesByFaculty", description = "positive test")
-    public void testFindEnrolleesByFacultyId(Integer facultyId, List<Enrollee> expected ) {
+    @Test(dataProvider = "enrolleesByFacultyCount", priority =  2, description = "positive test")
+    public void testFindEnrolleesByFacultyId(int facultyId, int expected ) {
         String failMessage = "Enrollees by faculties finding test failed";
         DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
         EnrolleeDao eDAO = new EnrolleeDao();
         try {
             daoHelper.startTransaction(eDAO);
-            List<Enrollee> actual = eDAO.findEnrolleesByFacultyId(facultyId);
+            List<Enrollee> enrollees = eDAO.findEnrolleesByFacultyId(facultyId);
+            int actual = enrollees.size();
             Assert.assertEquals(actual, expected, failMessage);
         } catch (ProjectException e) {
             Assert.fail(failMessage, e);
@@ -99,7 +100,7 @@ public class EnrolleeDaoTest {
         }
     }
 
-    @Test(dataProvider = "enrolleesByFaculty", description = "positive test")
+    @Test(dataProvider = "enrolleesByFaculty", priority =  2, description = "positive test")
     public void testFindEnrolleeStatus(Integer facultyId, List<Enrollee> enrollees) {
         String failMessage = "Admission list status finding test failed";
         DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
@@ -119,7 +120,7 @@ public class EnrolleeDaoTest {
         }
     }
 
-    @Test(dataProvider = "EnrolleeMarks", description = "positive test")
+    @Test(dataProvider = "EnrolleeMarks", priority =  2, description = "positive test")
     public void testFindEnrolleeMarks(Integer enrolleeId, TreeMap<Subject, Integer> expected) {
         String failMessage = "Enrollee marks finding test failed";
         DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
@@ -135,7 +136,7 @@ public class EnrolleeDaoTest {
         }
     }
 
-    @Test(dataProvider = "enrolleesDataSet", description = "positive test")
+    @Test(dataProvider = "enrolleesDataSet", priority =  2, description = "positive test")
     public void testCheckStatus(Enrollee enrollee) {
         String failMessage = "Enrollee status finding test failed";
         DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
@@ -151,7 +152,7 @@ public class EnrolleeDaoTest {
         }
     }
 
-    @Test(dataProvider = "enrolleesByFaculty", description = "positive test")
+    @Test(dataProvider = "enrolleesByFaculty", priority =  2, description = "positive test")
     public void testCheckFaculty(Integer facultyId, List<Enrollee> enrollees) {
         String failMessage = "Enrollee active faculty registration status finding test failed";
         DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
@@ -169,7 +170,7 @@ public class EnrolleeDaoTest {
         }
     }
 
-    @Test(dataProvider = "enrolleesByFaculty", description = "positive test")
+    @Test(dataProvider = "enrolleesByFaculty", priority =  2, description = "positive test")
     public void testCheckAdmissionListStatus(Integer facultyId, List<Enrollee> enrollees) {
         String failMessage = "Enrollee faculty registration status finding test failed";
         DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
@@ -187,7 +188,7 @@ public class EnrolleeDaoTest {
         }
     }
 
-    @Test(dataProvider = "enrolleesDataSet", description = "positive test")
+    @Test(dataProvider = "enrolleesDataSet", priority =  2, description = "positive test")
     public void testDelete(Enrollee enrollee) {
         String failMessage = "Enrollee delete test failed";
         DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
@@ -209,7 +210,7 @@ public class EnrolleeDaoTest {
         }
     }
 
-    @Test(dataProvider = "enrolleesToInsert", priority =  0, description = "positive test")
+    @Test(dataProvider = "enrolleesToInsert", priority =  1, description = "positive test")
     public void testCreate(User user, Enrollee enrollee) {
         String failMessage = "Enrollee creation test failed";
         DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
@@ -227,6 +228,8 @@ public class EnrolleeDaoTest {
                 LOG.info("Creation result: " + result);
                 LOG.info("Equivalency: " + equals);
                 Assert.fail(failMessage);
+            } else {
+                daoHelper.commit();
             }
         } catch (ProjectException e) {
             Assert.fail(failMessage, e);
@@ -235,7 +238,7 @@ public class EnrolleeDaoTest {
         }
     }
 
-    @Test(dataProvider = "enrolleesToInsert", priority =  1, description = "positive test")
+    @Test(dataProvider = "enrolleesToInsert", priority =  99, description = "positive test")
     public void testAddSubject(User user, Enrollee enrollee) {
         String failMessage = "Enrollee add subject test failed";
         DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
@@ -250,76 +253,6 @@ public class EnrolleeDaoTest {
             if (!result || !equals) {
                 Assert.fail(failMessage);
             }
-        } catch (ProjectException e) {
-            Assert.fail(failMessage, e);
-        } finally {
-            daoHelper.endTransaction();
-        }
-    }
-
-    @Test
-    public void testRegisterToFacultyById() {
-        String failMessage = "Enrollee delete test failed";
-        DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
-        EnrolleeDao eDAO = new EnrolleeDao();
-        try {
-            daoHelper.startTransaction(eDAO);
-        } catch (ProjectException e) {
-            Assert.fail(failMessage, e);
-        } finally {
-            daoHelper.endTransaction();
-        }
-    }
-
-    @Test
-    public void testDeregisterFromFacultyById() {
-        String failMessage = "Enrollee delete test failed";
-        DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
-        EnrolleeDao eDAO = new EnrolleeDao();
-        try {
-            daoHelper.startTransaction(eDAO);
-        } catch (ProjectException e) {
-            Assert.fail(failMessage, e);
-        } finally {
-            daoHelper.endTransaction();
-        }
-    }
-
-    @Test
-    public void testRestoreFacultyRegistration() {
-        String failMessage = "Enrollee delete test failed";
-        DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
-        EnrolleeDao eDAO = new EnrolleeDao();
-        try {
-            daoHelper.startTransaction(eDAO);
-        } catch (ProjectException e) {
-            Assert.fail(failMessage, e);
-        } finally {
-            daoHelper.endTransaction();
-        }
-    }
-
-    @Test
-    public void testUpdateAdmissionList() {
-        String failMessage = "Enrollee delete test failed";
-        DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
-        EnrolleeDao eDAO = new EnrolleeDao();
-        try {
-            daoHelper.startTransaction(eDAO);
-        } catch (ProjectException e) {
-            Assert.fail(failMessage, e);
-        } finally {
-            daoHelper.endTransaction();
-        }
-    }
-
-    @Test
-    public void testUpdate() {
-        String failMessage = "Enrollee delete test failed";
-        DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
-        EnrolleeDao eDAO = new EnrolleeDao();
-        try {
-            daoHelper.startTransaction(eDAO);
         } catch (ProjectException e) {
             Assert.fail(failMessage, e);
         } finally {
@@ -350,7 +283,7 @@ public class EnrolleeDaoTest {
                 {new Enrollee(1, "Россия", "Екатеринбург", 9, 2)},
                 {new Enrollee(2, "USA", "Los Angeles", 61, 3)},
                 {new Enrollee(3, "Россия", "Екатеринбург", 76, 4)},
-                {new Enrollee(4, "Беларусь", "Минск", 53, 5)},
+                {new Enrollee(4, "Беларусь", "Брест", 53, 5)},
                 {new Enrollee(5, "France", "Paris", 79, 6)},
                 {new Enrollee(6, "USA", "Houston", 76, 7)},
                 {new Enrollee(7, "Germany", "Munich", 86, 8)},
@@ -365,23 +298,23 @@ public class EnrolleeDaoTest {
         return new Object[][] {
                 {
                     new User("MaxFactor", "Brown", "example.101@gmail.com", User.Lang.EN, User.Role.CLIENT),
-                    new Enrollee("Россия", "Екатеринбург", 9, 2)
+                    new Enrollee("Россия", "Екатеринбург", 9)
                 },
                 {
                     new User("Тимофей", "Королёв", "example.102@gmail.com", User.Lang.RU, User.Role.CLIENT),
-                    new Enrollee("USA", "Los Angeles", 61, 3)
+                    new Enrollee("USA", "Los Angeles", 61)
                 },
                 {
                     new User("Archie", "Edwards", "example.103@gmail.com", User.Lang.EN, User.Role.CLIENT),
-                    new Enrollee("Россия", "Екатеринбург", 76, 4)
+                    new Enrollee("Россия", "Екатеринбург", 76)
                 },
                 {
                     new User("Антон", "Устинов", "example.104@gmail.com", User.Lang.RU, User.Role.CLIENT),
-                    new Enrollee("Беларусь", "Минск", 53, 5)
+                    new Enrollee("Беларусь", "Минск", 53)
                 },
                 {
                     new User("Георгий", "Королёв", "example.105@gmail.com", User.Lang.RU, User.Role.CLIENT),
-                    new Enrollee("France", "Paris", 79, 6)
+                    new Enrollee("France", "Paris", 79)
                 }
         };
     }
@@ -395,7 +328,7 @@ public class EnrolleeDaoTest {
                             add(new Enrollee(1, "Россия", "Екатеринбург", 9, 2));
                             add(new Enrollee(2, "USA", "Los Angeles", 61, 3));
                             add(new Enrollee(3, "Россия", "Екатеринбург", 76, 4));
-                            add(new Enrollee(4, "Беларусь", "Минск", 53, 5));
+                            add(new Enrollee(4, "Беларусь", "Брест", 53, 5));
                             add(new Enrollee(5, "France", "Paris", 79, 6));
                             add(new Enrollee(6, "USA", "Houston", 76, 7));
                             add(new Enrollee(7, "Germany", "Munich", 86, 8));
@@ -413,8 +346,6 @@ public class EnrolleeDaoTest {
         return new Object[][] {
                 {201, new ArrayList<Enrollee>(){
                     {
-                        add(new Enrollee(1, "Россия", "Екатеринбург", 9, 2));
-                        add(new Enrollee(5, "France", "Paris", 79, 6));
                         add(new Enrollee(10, "Беларусь", "Брест", 69, 11));
                         add(new Enrollee(16, "Беларусь", "Брест", 11, 17));
                         add(new Enrollee(24, "Germany", "Cologne", 65, 25));
@@ -422,9 +353,6 @@ public class EnrolleeDaoTest {
                 }},
                 {202, new ArrayList<Enrollee>(){
                     {
-                        add(new Enrollee(4, "Беларусь", "Минск", 53, 5));
-                        add(new Enrollee(15, "Россия", "Калининград", 21, 16));
-                        add(new Enrollee(17, "Россия", "Калининград", 99, 18));
                         add(new Enrollee(28, "Россия", "Калининград", 76, 29));
                     }
                 }},
@@ -446,9 +374,6 @@ public class EnrolleeDaoTest {
                 }},
                 {205, new ArrayList<Enrollee>(){
                     {
-                        add(new Enrollee(1, "Россия", "Екатеринбург", 9, 2));
-                        add(new Enrollee(5, "France", "Paris", 79, 6));
-                        add(new Enrollee(16, "Беларусь", "Брест", 11, 17));
                         add(new Enrollee(21, "Беларусь", "Минск", 58, 22));
                         add(new Enrollee(25, "Germany", "Munich", 84, 26));
                     }
@@ -475,6 +400,20 @@ public class EnrolleeDaoTest {
                         add(new Enrollee(18, "Россия", "Москва", 78, 19));
                     }
                 }},
+        };
+    }
+
+    @DataProvider(name = "enrolleesByFacultyCount")
+    public Object[][] createEnrolleesByFacultiesCount() {
+        return new Object[][] {
+                {201, 8},
+                {202, 7},
+                {203, 7},
+                {204, 9},
+                {205, 7},
+                {206, 7},
+                {207, 7},
+                {208, 6},
         };
     }
 

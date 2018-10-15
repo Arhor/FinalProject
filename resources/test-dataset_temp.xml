@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-  <users id="1" email="example.1@gmail.com" password="079D3E43594DF2B1716D2D7C172A365714436D2BAF0F79B08316F79FE2F070B11034195CB6D44632BF5ABA45CB3C4F8CF3CEC35EF35A70A1A84B68DB22743D1F" first_name="MaxFactor" last_name="Brown" role="admin" lang="en" available="true"/>
+  <users id="1" email="example.1@gmail.com" password="BDE16E66E0841AA50EF17532DE834F053CA8C48BC02C147364CD644CCD98878065221341AA16339E86762AE0928DE08FB9BC3AA18F20240F3ADD276DFBB8C4CD" first_name="Leo" last_name="Brown" role="admin" lang="en" available="true"/>
   <users id="2" email="example.2@gmail.com" password="48D12CE112DD725185FE8D99B1C377BDE4D2A44985279816A5D646E24D6992D20D37961B188C6D1D985AD564ABAA466D4934488F6981BCF886D5A481A6170B81" first_name="Тимофей" last_name="Королёв" role="client" lang="ru" available="true"/>
   <users id="3" email="example.3@gmail.com" password="5C7C2B54550E5195ED524BB97C07E33C02715C18C094AC2E12AD6DC169DB6BC03BDC980DE360B527A0F7CC900BA699175648A6CE9BBB3C21C285338114B7666E" first_name="Archie" last_name="Edwards" role="client" lang="en" available="true"/>
   <users id="4" email="example.4@gmail.com" password="EAEAAD5C4088EB4177AE290EA139B9A078CFD1D5578D1F13A470BE907C9D01899C6F21B12C2097EA1296101E3AFCA7A98B4F96143C39D941A006500A99547177" first_name="Антон" last_name="Устинов" role="client" lang="ru" available="true"/>
@@ -30,10 +30,40 @@
   <users id="28" email="example.28@gmail.com" password="0759F640B5717023BB9ED39577531F6F71A0FF55815E53134294AF92D8B2F17BF17A59A491711E5DD5561D128B151993C04BB1BDD211E7F58AB7B32B871D5A9F" first_name="Вячеслав" last_name="Сысоев" role="client" lang="ru" available="true"/>
   <users id="29" email="example.29@gmail.com" password="A638F3FDF65DE1B23B2F92163D73CE433242E4374F8DDFDFA8F6D76E1D8BEABA847AB7ACBD22235DBD1C157F1AB66CA9C8B90B11C9DAC3E6545F2F2E5EA8B297" first_name="Виктор" last_name="Ермаков" role="client" lang="ru" available="true"/>
   <users id="30" email="example.30@gmail.com" password="D5524F684D74DCF8239FE39AA86A9491F7F47060830369F61628EC554B4A4DD105A9385F9AC722423EA1C0B54DE49D940FCA54317DFDC23DDD992F3D6374389D" first_name="Артур" last_name="Дмитриев" role="client" lang="ru" available="true"/>
+  <users id="31" email="example.31@gmail.com" password="0E86F46DBEF09F5568BE601DD427425A11A4C060D8A5FC3B15BE04780CB5F211ABABDD6E78F8A16065351AB881200CCE4A7358A284A44F9792E7CF04CACCE750" first_name="Денис" last_name="Никонов" role="client" lang="ru" available="true"/>
+  <users id="32" email="example.32@gmail.com" password="7BF4F6F508345922CEBDD58C2B3BA9EA9F3A718EF0AEA616788E9762C5FE59BAD9AB5078B51C9ED03C0C2DECB03D4A33343FD7EDF5D0321C372B20153B1F880B" first_name="Антон" last_name="Королёв" role="client" lang="ru" available="true"/>
+  <users id="33" email="example.33@gmail.com" password="0156E8CD85D00AE924099C3FC72FE639523C3126E9E5023ECE1E0B47A4D961BFB946C2D32CF1EC4ECD2CCA5C579B4121C9EF3C514C89D348171A5413146C613C" first_name="Иван" last_name="Иванов" role="client" lang="ru" available="true"/>
+  <users id="34" email="example.34@gmail.com" password="93DF13BC84530382ECD37071DCAC7A410E2DAE3670815D51CC13AD4DFDA2402BCDBB17E51657238D08D9BED6E74CCBCB5174F059AF07200F99D9E2089FEF1EC7" first_name="Георгий" last_name="Овчинников" role="client" lang="ru" available="true"/>
+  <users id="35" email="example.35@gmail.com" password="ADBFD7F380E926568B1ABE98BCF0102F0A07A7572A5C47B66E07607C127E2002D855677700216784F1504F48F8960024BD4019D98253CE897EAFE8F7E0341C61" first_name="Daniel" last_name="Green" role="client" lang="en" available="true"/>
+  <users id="36" email="example.36@gmail.com" password="38ECD1F5D968ED23AEF3FB349885AF6E10DEE464051ACABC852CC536517A6D534D8C06516359A5A66B8BC1F1087311C51B42F9590DC710E99D291C0B3BF079FC" first_name="Денис" last_name="Щербаков" role="client" lang="ru" available="true"/>
+  <users id="37" email="example.37@gmail.com" password="6FAE297C88084FF49BAAB165F11A064F8065D86E175AEF5DA631ED15AA5AB315C76214D9295F45D088568F986BAC356511818DF7DED39D25079B8430F0EB6B3D" first_name="Иван" last_name="Ширяев" role="client" lang="ru" available="true"/>
+  <users id="38" email="example.38@gmail.com" password="D62DF28C502930DD3A2C7B859C4AEE29B6E4CD8D39EEBC4627081B8BB5D4E4E6E3AF6D1008BD47BB2484BD6FFCAB50806256E8251A8C78A7D63EFA80CF325DEF" first_name="Виктор" last_name="Ермаков" role="client" lang="ru" available="true"/>
+  <users id="39" email="example.39@gmail.com" password="B6F738F8A7DA994A104EB70EA8EE52E70D2E1FBFF6D81134D9F6845AF748FD423B76D5E689A52203F6E750E46A4E71F6971B7CC830956CEFCE243E749B2C0D62" first_name="Иван" last_name="Мишин" role="client" lang="ru" available="true"/>
+  <users id="40" email="example.40@gmail.com" password="1BF45CC7EF2D0064ED6E1F18EA5B0C5FAA84ACFE3F5B728A21F7D31B4F32327E98E58DF222BF91F91812C0670851DA0875AF3CECBC41F92C9B75C02F0A12ACF0" first_name="Владислав" last_name="Уваров" role="client" lang="ru" available="true"/>
+  <users id="41" email="example.41@gmail.com" password="87DD5066844A1E6877E56E2D99A7F9619C1B3D0407C720F9665390AAB0942C0CD0BE4F4335BFEEC6331672D9C95B535ACC56DADD1D1D225ADBADF7C8B556057F" first_name="Edward" last_name="Hughes" role="client" lang="en" available="true"/>
+  <users id="42" email="example.42@gmail.com" password="60643170D9E18226BE5526911FDF261BAB776E8EEEC8815D0F8FE36E218CC3B30C7366C1AC4815E60E48FD930CECC3C96743606EDBAA317F2F2B4D7B36422FE6" first_name="Thomas" last_name="Williams" role="client" lang="en" available="true"/>
+  <users id="43" email="example.43@gmail.com" password="7D9E9CC0E18ED83F9FAF883E6BE6121442D5B4E1B03FFDF87B3420B820CCDB2EE0FE7F734CEEFA8780F5C61681B40701594525418900CDA6B9D27818BA34E44E" first_name="Lucas" last_name="Roberts" role="client" lang="en" available="true"/>
+  <users id="44" email="example.44@gmail.com" password="F52A55DAA93B0B5685979E5B854107AF98A270E11A20A7D9C24B131830A9A22052D64FCE3764AD725DD488276B8E0B58CDFAA8E91432E1F72408FF3934466A6D" first_name="Joseph" last_name="Williams" role="client" lang="en" available="true"/>
+  <users id="45" email="example.45@gmail.com" password="1FF8141EF9823690D236E1D8D48EB35F8A012B2C9535938F2863044043B973D860B2177B08E2EB577FE404D7CEB5E94598E1419A8C9E2FC663ECFE8A5A4F6CD9" first_name="James" last_name="Lewis" role="client" lang="en" available="true"/>
+  <users id="46" email="example.46@gmail.com" password="0F6E3130167DA3F8B0997260F31D886EE424A4205254CF67C8D4F72A078E3A67FB0EA0C59EDF239847D0AD15B82FA24286EFF568E1E5CF763B1FC3FB1A989DCE" first_name="Павел" last_name="Гурев" role="client" lang="ru" available="true"/>
+  <users id="47" email="example.47@gmail.com" password="907707405359B229447213099AB24F442E0FEF238456F2F5C218CD732F679C7D5B6BB395EA05CE842600D13BE6CCE3EAADA4A890CC81AA8A8B3FF84695B8661D" first_name="Владислав" last_name="Ермаков" role="client" lang="ru" available="true"/>
+  <users id="48" email="example.48@gmail.com" password="84CBB6AD91F4D7DFF43838AEC90E85B026A906A898FEDE31694752A96B6060B732A3342AF79BBB8F127DF40B8AB022ED83CDAABF43D413425672B4636B44289A" first_name="Сергей" last_name="Мишин" role="client" lang="ru" available="true"/>
+  <users id="49" email="example.49@gmail.com" password="2F395EAE4CAEB59A53F8B73F9C9F82DE5B66E127DA850F648218375BCC2B77F06FA1F06D3C20E1F7B3A70DB99D4D1772FF1E97679A1160FF7EF31E9E8D6F4E1B" first_name="Роман" last_name="Мишин" role="client" lang="ru" available="true"/>
+  <users id="50" email="example.50@gmail.com" password="7778B31A7C807A8FFA6AA87A0764701111AD8BB2CF6881538C0E2DB673785A10BB70598B53B65C37178FB217F00FD744DA1E7437AD42415E76171E6B9D926AF7" first_name="Harry" last_name="Wood" role="client" lang="en" available="true"/>
+  <users id="51" email="example.51@gmail.com" password="AC72F46D123F3D09F42111579A4504DD52AD4289F32EF39CB44792C8D437495D901078CBC6E3A977E6D4D5A80A84B6062679188729E6018E4A4922ABB294CF2B" first_name="Сергей" last_name="Дмитриев" role="client" lang="ru" available="true"/>
+  <users id="52" email="example.52@gmail.com" password="2C58D0B9C7C35A504EADFB92456EB534222832EBB72F3C9F6605321D799062AD15721C662895C81E41355ADFA8FD9BDD11A8187755737CF4E21B8920AFB1D0B0" first_name="Тимофей" last_name="Дементьев" role="client" lang="ru" available="true"/>
+  <users id="53" email="example.53@gmail.com" password="415413DFE20E0B3A85AE933FE95FAE201E0D264E2301DD475D24A8B93AB06FDC447F9957F4D9806AAD3B1E696BC7CE78C44CD08D275759ABE99BC62A2658EE97" first_name="Артур" last_name="Мишин" role="client" lang="ru" available="true"/>
+  <users id="54" email="example.54@gmail.com" password="72610F8265C95ED97D4D778509DEEC98C4B1F57CE4453AFDD4FCC686B8D5D55E7D100DD71046D82441A95EEED8E3A0E9607956FB096EB3E14951940923F8B3DB" first_name="Daniel" last_name="Evans" role="client" lang="en" available="true"/>
+  <users id="55" email="example.55@gmail.com" password="A0658382D08A43976D3EBACC0B565D023FC2F83BC02D7C9DF0E8E52E36FE2A7BC38D5FC5F84F12E462EE330929F40C0BD91050CB10DAD8C1D47924D3C1D7C36D" first_name="Семён" last_name="Гусев" role="client" lang="ru" available="true"/>
+  <users id="56" email="example.56@gmail.com" password="42FAD67E00C6CAA21C42FC35C1E9487ECE0816AF93E24EB07ED20B5528DA607C306E96990B14BABC9DF49922F49E7A6DF3E9E0BACB35817545C2678D51D3D213" first_name="Leo" last_name="Wood" role="client" lang="en" available="true"/>
+  <users id="57" email="example.57@gmail.com" password="3A464D70BCAB8233B2A8C3D58C66E9959C119BC544D8A3BB475E1C5AB0A86A824BB9EC9AC53D775094CD3BCD270CBFC49AD5D0E0806CA33046DF59FE95F56C03" first_name="Владислав" last_name="Ермаков" role="client" lang="ru" available="true"/>
+  <users id="58" email="example.58@gmail.com" password="B25E448AC551BC1AFF27095A1FBF7E7D24EB34D31871BE9A04C907CD77347D27AB28D9E5BA9380387F68C7C06E386A455F4A6C34EA18A31387864CE57FF7E51F" first_name="Александр" last_name="Овчинников" role="client" lang="ru" available="true"/>
+  <users id="59" email="example.59@gmail.com" password="13C30C48E30E088BE3C703DEB70B43BB1E5590D8113808B4BCC36BA58F30BA1B821C5B72575E0B123B72AB6BC5D36D8CAA8FFEBEA12AAEA8EC07E2DBC59F65FA" first_name="Генадий" last_name="Сысоев" role="client" lang="ru" available="true"/>
+  <users id="60" email="example.60@gmail.com" password="99082B73B66896B4505B1B70CDBECF246AAB9EADCD08C47DA815C34BF31483B3FE31360823FD96202BB921E864787126FBE4BDD94FD478F2ECDC4803C1B1DCA0" first_name="Samuel" last_name="Smith" role="client" lang="en" available="true"/>
   <enrollees id="1" country="Россия" city="Екатеринбург" school_certificate="9" users_id="2" available="true"/>
   <enrollees id="2" country="USA" city="Los Angeles" school_certificate="61" users_id="3" available="true"/>
   <enrollees id="3" country="Россия" city="Екатеринбург" school_certificate="76" users_id="4" available="true"/>
-  <enrollees id="4" country="Беларусь" city="Минск" school_certificate="53" users_id="5" available="true"/>
+  <enrollees id="4" country="Беларусь" city="Брест" school_certificate="53" users_id="5" available="true"/>
   <enrollees id="5" country="France" city="Paris" school_certificate="79" users_id="6" available="true"/>
   <enrollees id="6" country="USA" city="Houston" school_certificate="76" users_id="7" available="true"/>
   <enrollees id="7" country="Germany" city="Munich" school_certificate="86" users_id="8" available="true"/>
@@ -59,6 +89,36 @@
   <enrollees id="27" country="Россия" city="Москва" school_certificate="83" users_id="28" available="true"/>
   <enrollees id="28" country="Россия" city="Калининград" school_certificate="76" users_id="29" available="true"/>
   <enrollees id="29" country="Беларусь" city="Витебск" school_certificate="51" users_id="30" available="true"/>
+  <enrollees id="30" country="Беларусь" city="Брест" school_certificate="87" users_id="31" available="true"/>
+  <enrollees id="31" country="Беларусь" city="Гродно" school_certificate="81" users_id="32" available="true"/>
+  <enrollees id="32" country="Россия" city="Санкт-Петербург" school_certificate="33" users_id="33" available="true"/>
+  <enrollees id="33" country="Беларусь" city="Гродно" school_certificate="94" users_id="34" available="true"/>
+  <enrollees id="34" country="USA" city="Houston" school_certificate="24" users_id="35" available="true"/>
+  <enrollees id="35" country="Беларусь" city="Могилёв" school_certificate="65" users_id="36" available="true"/>
+  <enrollees id="36" country="Россия" city="Москва" school_certificate="92" users_id="37" available="true"/>
+  <enrollees id="37" country="Беларусь" city="Могилёв" school_certificate="98" users_id="38" available="true"/>
+  <enrollees id="38" country="Беларусь" city="Брест" school_certificate="53" users_id="39" available="true"/>
+  <enrollees id="39" country="Беларусь" city="Минск" school_certificate="83" users_id="40" available="true"/>
+  <enrollees id="40" country="Germany" city="Cologne" school_certificate="10" users_id="41" available="true"/>
+  <enrollees id="41" country="Germany" city="Cologne" school_certificate="72" users_id="42" available="true"/>
+  <enrollees id="42" country="USA" city="Phoenix" school_certificate="97" users_id="43" available="true"/>
+  <enrollees id="43" country="Germany" city="Frankfurt" school_certificate="41" users_id="44" available="true"/>
+  <enrollees id="44" country="USA" city="Los Angeles" school_certificate="43" users_id="45" available="true"/>
+  <enrollees id="45" country="Россия" city="Ростов" school_certificate="29" users_id="46" available="true"/>
+  <enrollees id="46" country="Россия" city="Екатеринбург" school_certificate="33" users_id="47" available="true"/>
+  <enrollees id="47" country="Беларусь" city="Гродно" school_certificate="19" users_id="48" available="true"/>
+  <enrollees id="48" country="Беларусь" city="Минск" school_certificate="43" users_id="49" available="true"/>
+  <enrollees id="49" country="France" city="Paris" school_certificate="74" users_id="50" available="true"/>
+  <enrollees id="50" country="Беларусь" city="Витебск" school_certificate="17" users_id="51" available="true"/>
+  <enrollees id="51" country="Беларусь" city="Витебск" school_certificate="6" users_id="52" available="true"/>
+  <enrollees id="52" country="Беларусь" city="Могилёв" school_certificate="26" users_id="53" available="true"/>
+  <enrollees id="53" country="USA" city="New York" school_certificate="89" users_id="54" available="true"/>
+  <enrollees id="54" country="Россия" city="Екатеринбург" school_certificate="0" users_id="55" available="true"/>
+  <enrollees id="55" country="USA" city="Houston" school_certificate="63" users_id="56" available="true"/>
+  <enrollees id="56" country="Беларусь" city="Могилёв" school_certificate="82" users_id="57" available="true"/>
+  <enrollees id="57" country="Россия" city="Москва" school_certificate="18" users_id="58" available="true"/>
+  <enrollees id="58" country="Беларусь" city="Брест" school_certificate="67" users_id="59" available="true"/>
+  <enrollees id="59" country="France" city="Paris" school_certificate="79" users_id="60" available="true"/>
   <subjects id="101" name_ru="Русский язык" name_en="Russian language" available="true"/>
   <subjects id="102" name_ru="Физика" name_en="Physics" available="true"/>
   <subjects id="103" name_ru="Математика" name_en="Math" available="true"/>
@@ -159,6 +219,96 @@
   <enrollees_has_subjects enrollees_id="29" subjects_id="103" score="62" available="true"/>
   <enrollees_has_subjects enrollees_id="29" subjects_id="104" score="94" available="true"/>
   <enrollees_has_subjects enrollees_id="29" subjects_id="105" score="42" available="true"/>
+  <enrollees_has_subjects enrollees_id="30" subjects_id="101" score="22" available="true"/>
+  <enrollees_has_subjects enrollees_id="30" subjects_id="102" score="7" available="true"/>
+  <enrollees_has_subjects enrollees_id="30" subjects_id="103" score="19" available="true"/>
+  <enrollees_has_subjects enrollees_id="31" subjects_id="101" score="58" available="true"/>
+  <enrollees_has_subjects enrollees_id="31" subjects_id="102" score="8" available="true"/>
+  <enrollees_has_subjects enrollees_id="31" subjects_id="104" score="44" available="true"/>
+  <enrollees_has_subjects enrollees_id="32" subjects_id="103" score="32" available="true"/>
+  <enrollees_has_subjects enrollees_id="32" subjects_id="104" score="51" available="true"/>
+  <enrollees_has_subjects enrollees_id="32" subjects_id="105" score="79" available="true"/>
+  <enrollees_has_subjects enrollees_id="33" subjects_id="101" score="77" available="true"/>
+  <enrollees_has_subjects enrollees_id="33" subjects_id="103" score="80" available="true"/>
+  <enrollees_has_subjects enrollees_id="33" subjects_id="104" score="11" available="true"/>
+  <enrollees_has_subjects enrollees_id="34" subjects_id="101" score="43" available="true"/>
+  <enrollees_has_subjects enrollees_id="34" subjects_id="102" score="86" available="true"/>
+  <enrollees_has_subjects enrollees_id="34" subjects_id="103" score="7" available="true"/>
+  <enrollees_has_subjects enrollees_id="35" subjects_id="102" score="23" available="true"/>
+  <enrollees_has_subjects enrollees_id="35" subjects_id="103" score="12" available="true"/>
+  <enrollees_has_subjects enrollees_id="35" subjects_id="104" score="78" available="true"/>
+  <enrollees_has_subjects enrollees_id="36" subjects_id="102" score="15" available="true"/>
+  <enrollees_has_subjects enrollees_id="36" subjects_id="103" score="35" available="true"/>
+  <enrollees_has_subjects enrollees_id="36" subjects_id="105" score="93" available="true"/>
+  <enrollees_has_subjects enrollees_id="37" subjects_id="101" score="51" available="true"/>
+  <enrollees_has_subjects enrollees_id="37" subjects_id="103" score="80" available="true"/>
+  <enrollees_has_subjects enrollees_id="37" subjects_id="105" score="62" available="true"/>
+  <enrollees_has_subjects enrollees_id="38" subjects_id="101" score="53" available="true"/>
+  <enrollees_has_subjects enrollees_id="38" subjects_id="102" score="62" available="true"/>
+  <enrollees_has_subjects enrollees_id="38" subjects_id="103" score="39" available="true"/>
+  <enrollees_has_subjects enrollees_id="39" subjects_id="101" score="97" available="true"/>
+  <enrollees_has_subjects enrollees_id="39" subjects_id="102" score="4" available="true"/>
+  <enrollees_has_subjects enrollees_id="39" subjects_id="104" score="90" available="true"/>
+  <enrollees_has_subjects enrollees_id="40" subjects_id="103" score="16" available="true"/>
+  <enrollees_has_subjects enrollees_id="40" subjects_id="104" score="40" available="true"/>
+  <enrollees_has_subjects enrollees_id="40" subjects_id="105" score="92" available="true"/>
+  <enrollees_has_subjects enrollees_id="41" subjects_id="101" score="53" available="true"/>
+  <enrollees_has_subjects enrollees_id="41" subjects_id="103" score="25" available="true"/>
+  <enrollees_has_subjects enrollees_id="41" subjects_id="104" score="28" available="true"/>
+  <enrollees_has_subjects enrollees_id="42" subjects_id="101" score="78" available="true"/>
+  <enrollees_has_subjects enrollees_id="42" subjects_id="102" score="77" available="true"/>
+  <enrollees_has_subjects enrollees_id="42" subjects_id="103" score="28" available="true"/>
+  <enrollees_has_subjects enrollees_id="43" subjects_id="102" score="78" available="true"/>
+  <enrollees_has_subjects enrollees_id="43" subjects_id="103" score="48" available="true"/>
+  <enrollees_has_subjects enrollees_id="43" subjects_id="104" score="82" available="true"/>
+  <enrollees_has_subjects enrollees_id="44" subjects_id="102" score="91" available="true"/>
+  <enrollees_has_subjects enrollees_id="44" subjects_id="103" score="87" available="true"/>
+  <enrollees_has_subjects enrollees_id="44" subjects_id="105" score="28" available="true"/>
+  <enrollees_has_subjects enrollees_id="45" subjects_id="101" score="83" available="true"/>
+  <enrollees_has_subjects enrollees_id="45" subjects_id="103" score="88" available="true"/>
+  <enrollees_has_subjects enrollees_id="45" subjects_id="105" score="57" available="true"/>
+  <enrollees_has_subjects enrollees_id="46" subjects_id="101" score="18" available="true"/>
+  <enrollees_has_subjects enrollees_id="46" subjects_id="102" score="5" available="true"/>
+  <enrollees_has_subjects enrollees_id="46" subjects_id="103" score="95" available="true"/>
+  <enrollees_has_subjects enrollees_id="47" subjects_id="101" score="59" available="true"/>
+  <enrollees_has_subjects enrollees_id="47" subjects_id="102" score="84" available="true"/>
+  <enrollees_has_subjects enrollees_id="47" subjects_id="104" score="62" available="true"/>
+  <enrollees_has_subjects enrollees_id="48" subjects_id="103" score="44" available="true"/>
+  <enrollees_has_subjects enrollees_id="48" subjects_id="104" score="98" available="true"/>
+  <enrollees_has_subjects enrollees_id="48" subjects_id="105" score="24" available="true"/>
+  <enrollees_has_subjects enrollees_id="49" subjects_id="101" score="7" available="true"/>
+  <enrollees_has_subjects enrollees_id="49" subjects_id="103" score="79" available="true"/>
+  <enrollees_has_subjects enrollees_id="49" subjects_id="104" score="61" available="true"/>
+  <enrollees_has_subjects enrollees_id="50" subjects_id="101" score="38" available="true"/>
+  <enrollees_has_subjects enrollees_id="50" subjects_id="102" score="51" available="true"/>
+  <enrollees_has_subjects enrollees_id="50" subjects_id="103" score="17" available="true"/>
+  <enrollees_has_subjects enrollees_id="51" subjects_id="102" score="91" available="true"/>
+  <enrollees_has_subjects enrollees_id="51" subjects_id="103" score="85" available="true"/>
+  <enrollees_has_subjects enrollees_id="51" subjects_id="104" score="34" available="true"/>
+  <enrollees_has_subjects enrollees_id="52" subjects_id="102" score="58" available="true"/>
+  <enrollees_has_subjects enrollees_id="52" subjects_id="103" score="93" available="true"/>
+  <enrollees_has_subjects enrollees_id="52" subjects_id="105" score="90" available="true"/>
+  <enrollees_has_subjects enrollees_id="53" subjects_id="101" score="18" available="true"/>
+  <enrollees_has_subjects enrollees_id="53" subjects_id="103" score="62" available="true"/>
+  <enrollees_has_subjects enrollees_id="53" subjects_id="105" score="63" available="true"/>
+  <enrollees_has_subjects enrollees_id="54" subjects_id="101" score="30" available="true"/>
+  <enrollees_has_subjects enrollees_id="54" subjects_id="102" score="99" available="true"/>
+  <enrollees_has_subjects enrollees_id="54" subjects_id="103" score="62" available="true"/>
+  <enrollees_has_subjects enrollees_id="55" subjects_id="101" score="18" available="true"/>
+  <enrollees_has_subjects enrollees_id="55" subjects_id="102" score="55" available="true"/>
+  <enrollees_has_subjects enrollees_id="55" subjects_id="104" score="65" available="true"/>
+  <enrollees_has_subjects enrollees_id="56" subjects_id="103" score="9" available="true"/>
+  <enrollees_has_subjects enrollees_id="56" subjects_id="104" score="6" available="true"/>
+  <enrollees_has_subjects enrollees_id="56" subjects_id="105" score="31" available="true"/>
+  <enrollees_has_subjects enrollees_id="57" subjects_id="101" score="20" available="true"/>
+  <enrollees_has_subjects enrollees_id="57" subjects_id="103" score="21" available="true"/>
+  <enrollees_has_subjects enrollees_id="57" subjects_id="104" score="89" available="true"/>
+  <enrollees_has_subjects enrollees_id="58" subjects_id="101" score="39" available="true"/>
+  <enrollees_has_subjects enrollees_id="58" subjects_id="102" score="90" available="true"/>
+  <enrollees_has_subjects enrollees_id="58" subjects_id="103" score="49" available="true"/>
+  <enrollees_has_subjects enrollees_id="59" subjects_id="102" score="35" available="true"/>
+  <enrollees_has_subjects enrollees_id="59" subjects_id="103" score="1" available="true"/>
+  <enrollees_has_subjects enrollees_id="59" subjects_id="104" score="97" available="true"/>
   <faculties_has_subjects faculties_id="201" subjects_id="101"/>
   <faculties_has_subjects faculties_id="202" subjects_id="101"/>
   <faculties_has_subjects faculties_id="204" subjects_id="101"/>
@@ -184,11 +334,9 @@
   <faculties_has_subjects faculties_id="207" subjects_id="105"/>
   <faculties_has_subjects faculties_id="208" subjects_id="105"/>
   <admission_list enrollees_id="1" faculties_id="201" is_passed="none" available="true"/>
-  <admission_list enrollees_id="1" faculties_id="205" is_passed="none" available="true"/>
   <admission_list enrollees_id="2" faculties_id="204" is_passed="none" available="true"/>
   <admission_list enrollees_id="3" faculties_id="206" is_passed="none" available="true"/>
   <admission_list enrollees_id="4" faculties_id="202" is_passed="none" available="true"/>
-  <admission_list enrollees_id="5" faculties_id="201" is_passed="none" available="true"/>
   <admission_list enrollees_id="5" faculties_id="205" is_passed="none" available="true"/>
   <admission_list enrollees_id="6" faculties_id="203" is_passed="none" available="true"/>
   <admission_list enrollees_id="7" faculties_id="208" is_passed="none" available="true"/>
@@ -201,8 +349,6 @@
   <admission_list enrollees_id="14" faculties_id="207" is_passed="none" available="true"/>
   <admission_list enrollees_id="15" faculties_id="202" is_passed="none" available="true"/>
   <admission_list enrollees_id="16" faculties_id="201" is_passed="none" available="true"/>
-  <admission_list enrollees_id="16" faculties_id="205" is_passed="none" available="true"/>
-  <admission_list enrollees_id="17" faculties_id="202" is_passed="none" available="true"/>
   <admission_list enrollees_id="18" faculties_id="208" is_passed="none" available="true"/>
   <admission_list enrollees_id="19" faculties_id="206" is_passed="none" available="true"/>
   <admission_list enrollees_id="20" faculties_id="207" is_passed="none" available="true"/>
@@ -215,4 +361,34 @@
   <admission_list enrollees_id="27" faculties_id="204" is_passed="none" available="true"/>
   <admission_list enrollees_id="28" faculties_id="202" is_passed="none" available="true"/>
   <admission_list enrollees_id="29" faculties_id="203" is_passed="none" available="true"/>
+  <admission_list enrollees_id="30" faculties_id="201" is_passed="none" available="true"/>
+  <admission_list enrollees_id="31" faculties_id="202" is_passed="none" available="true"/>
+  <admission_list enrollees_id="32" faculties_id="203" is_passed="none" available="true"/>
+  <admission_list enrollees_id="33" faculties_id="204" is_passed="none" available="true"/>
+  <admission_list enrollees_id="34" faculties_id="205" is_passed="none" available="true"/>
+  <admission_list enrollees_id="35" faculties_id="206" is_passed="none" available="true"/>
+  <admission_list enrollees_id="36" faculties_id="207" is_passed="none" available="true"/>
+  <admission_list enrollees_id="37" faculties_id="208" is_passed="none" available="true"/>
+  <admission_list enrollees_id="38" faculties_id="201" is_passed="none" available="true"/>
+  <admission_list enrollees_id="39" faculties_id="202" is_passed="none" available="true"/>
+  <admission_list enrollees_id="40" faculties_id="203" is_passed="none" available="true"/>
+  <admission_list enrollees_id="41" faculties_id="204" is_passed="none" available="true"/>
+  <admission_list enrollees_id="42" faculties_id="205" is_passed="none" available="true"/>
+  <admission_list enrollees_id="43" faculties_id="206" is_passed="none" available="true"/>
+  <admission_list enrollees_id="44" faculties_id="207" is_passed="none" available="true"/>
+  <admission_list enrollees_id="45" faculties_id="208" is_passed="none" available="true"/>
+  <admission_list enrollees_id="46" faculties_id="201" is_passed="none" available="true"/>
+  <admission_list enrollees_id="47" faculties_id="202" is_passed="none" available="true"/>
+  <admission_list enrollees_id="48" faculties_id="203" is_passed="none" available="true"/>
+  <admission_list enrollees_id="49" faculties_id="204" is_passed="none" available="true"/>
+  <admission_list enrollees_id="50" faculties_id="205" is_passed="none" available="true"/>
+  <admission_list enrollees_id="51" faculties_id="206" is_passed="none" available="true"/>
+  <admission_list enrollees_id="52" faculties_id="207" is_passed="none" available="true"/>
+  <admission_list enrollees_id="53" faculties_id="208" is_passed="none" available="true"/>
+  <admission_list enrollees_id="54" faculties_id="201" is_passed="none" available="true"/>
+  <admission_list enrollees_id="55" faculties_id="202" is_passed="none" available="true"/>
+  <admission_list enrollees_id="56" faculties_id="203" is_passed="none" available="true"/>
+  <admission_list enrollees_id="57" faculties_id="204" is_passed="none" available="true"/>
+  <admission_list enrollees_id="58" faculties_id="205" is_passed="none" available="true"/>
+  <admission_list enrollees_id="59" faculties_id="206" is_passed="none" available="true"/>
 </dataset>

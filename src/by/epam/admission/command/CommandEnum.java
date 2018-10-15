@@ -7,7 +7,7 @@ package by.epam.admission.command;
 import by.epam.admission.command.impl.*;
 
 /**
- * CommandEnum class contains each command
+ * CommandEnum class contains the a single instance for each command
  * @author Burishinets Maxim
  * @version 1.0 03 Sep 2018
  */
@@ -43,6 +43,12 @@ public enum CommandEnum {
         this.command = command;
     }
 
+
+    /**
+     * Method returns encapsulated command object
+     *
+     * @return concrete command object
+     */
     public ActionCommand getCurrentCommand() {
         return command;
     }

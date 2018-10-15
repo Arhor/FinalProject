@@ -38,7 +38,7 @@ public class UserDaoTest {
         UserDao uDAO = new UserDao();
         try {
             daoHelper.startTransaction(uDAO);
-            int expected = 30;
+            int expected = 60;
             int actual = uDAO.findTotalAmount();
             Assert.assertEquals(actual, expected, failMessage);
         } catch (ProjectException e) {
@@ -279,7 +279,7 @@ public class UserDaoTest {
     @DataProvider(name = "usersDataSet")
     public static Object[][] createSelectionData() {
         return new Object[][] {
-                {new User(1, "MaxFactor", "Brown", "example.1@gmail.com", User.Lang.EN, User.Role.ADMIN)},
+                {new User(1, "Leo", "Brown", "example.1@gmail.com", User.Lang.EN, User.Role.ADMIN)},
                 {new User(2, "Тимофей", "Королёв", "example.2@gmail.com", User.Lang.RU, User.Role.CLIENT)},
                 {new User(3, "Archie", "Edwards", "example.3@gmail.com", User.Lang.EN, User.Role.CLIENT)},
                 {new User(4, "Антон", "Устинов", "example.4@gmail.com", User.Lang.RU, User.Role.CLIENT)},
@@ -295,7 +295,7 @@ public class UserDaoTest {
     @DataProvider(name = "usersToInsert")
     public static Object[][] createInsertionData() {
         return new Object[][] {
-                {new User("MaxFactor", "Brown", "example.101@gmail.com", User.Lang.EN, User.Role.CLIENT)},
+                {new User("Leo", "Brown", "example.101@gmail.com", User.Lang.EN, User.Role.CLIENT)},
                 {new User("Тимофей", "Королёв", "example.102@gmail.com", User.Lang.RU, User.Role.CLIENT)},
                 {new User("Archie", "Edwards", "example.103@gmail.com", User.Lang.EN, User.Role.CLIENT)},
                 {new User("Антон", "Устинов", "example.104@gmail.com", User.Lang.RU, User.Role.CLIENT)},
@@ -314,7 +314,7 @@ public class UserDaoTest {
                 {
                     new ArrayList<User>(){
                         {
-                            add(new User(1, "MaxFactor", "Brown", "example.1@gmail.com", User.Lang.EN, User.Role.ADMIN));
+                            add(new User(1, "Leo", "Brown", "example.1@gmail.com", User.Lang.EN, User.Role.ADMIN));
                             add(new User(2, "Тимофей", "Королёв", "example.2@gmail.com", User.Lang.RU, User.Role.CLIENT));
                             add(new User(3, "Archie", "Edwards", "example.3@gmail.com", User.Lang.EN, User.Role.CLIENT));
                             add(new User(4, "Антон", "Устинов", "example.4@gmail.com", User.Lang.RU, User.Role.CLIENT));

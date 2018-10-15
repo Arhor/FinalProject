@@ -7,10 +7,8 @@ package by.epam.admission.command.impl;
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
-import by.epam.admission.service.EnrolleeService;
-import by.epam.admission.service.ProfileService;
-import by.epam.admission.service.SubjectService;
-import by.epam.admission.service.UserService;
+import by.epam.admission.model.Faculty;
+import by.epam.admission.service.*;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Subject;
 import by.epam.admission.model.User;
@@ -68,7 +66,7 @@ public class UpdateProfileCommand implements ActionCommand {
                         session.setAttribute(Names.USER, currUser);
                     }
 
-                    if (role == User.Role.CLIENT) {
+                    if (role == User.Role.CLIENT && FacultyService.checkAvailability()) {
                         String city = request.getParameter(Names.CITY);
                         String country = request.getParameter(Names.COUNTRY);
                         String certificate = request.getParameter(Names.CERTIFICATE);

@@ -124,6 +124,19 @@ public class FacultyService {
         return result;
     }
 
+    public static boolean checkAvailability() throws ProjectException {
+        boolean result;
+        DaoHelper helper = new DaoHelper();
+        FacultyDao facultyDao = new FacultyDao();
+        try {
+            helper.startTransaction(facultyDao);
+            result = facultyDao.checkFaculties();
+        } finally {
+            helper.endTransaction();
+        }
+        return result;
+    }
+
     public static boolean restoreFacultyRegistration(int enrolleeId,
                                                      int facultyId)
             throws ProjectException {

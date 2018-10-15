@@ -25,12 +25,10 @@ public class Enrollee extends Entity{
 
     public Enrollee(String country,
                     String city,
-                    int schoolCertificate,
-                    int userId) {
+                    int schoolCertificate) {
         this.country = country;
         this.city = city;
         this.schoolCertificate = schoolCertificate;
-        this.userId = userId;
     }
 
     public Enrollee(int id,

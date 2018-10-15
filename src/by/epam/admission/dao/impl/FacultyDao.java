@@ -32,6 +32,7 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
     private static final String SQL_DELETE_FACULTY;
     private static final String SQL_UPDATE_FACULTY;
     private static final String SQL_CHECK_FACULTY_STATUS;
+    private static final String SQL_CHECK_FACULTIES;
 
     // column labels
     private static final String ID = "id";
@@ -142,6 +143,19 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
         return result;
     }
 
+    public boolean checkFaculties() throws ProjectException {
+        boolean result = false;
+        try (Statement st = connection.createStatement()) {
+            ResultSet rs = st.executeQuery(SQL_CHECK_FACULTIES);
+            if (rs.next()) {
+                result = (rs.getInt(1) == 0);
+            }
+        } catch (SQLException e) {
+            throw new ProjectException("Selection error", e);
+        }
+        return result;
+    }
+
     private void processResult(ArrayList<Faculty> faculties, ResultSet rs)
             throws SQLException {
         while (rs.next()) {
@@ -198,5 +212,9 @@ public class FacultyDao extends AbstractDao<Integer, Faculty> {
                 "SELECT `available` " +
                 "FROM `faculties` " +
                 "WHERE `id` = ?";
+        SQL_CHECK_FACULTIES =
+                "SELECT COUNT(*) " +
+                "FROM `faculties` " +
+                "WHERE `checked` = 1";
     }
 }

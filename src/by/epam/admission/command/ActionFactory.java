@@ -30,7 +30,8 @@ public class ActionFactory {
      * "command" from received HttpServletRequest object
      */
     public static ActionCommand defineCommand(HttpServletRequest request) {
-        ActionCommand currentCommand = CommandEnum.EMPTY_COMMAND.getCurrentCommand();
+        ActionCommand currentCommand =
+                CommandEnum.EMPTY_COMMAND.getCurrentCommand();
         String action = request.getParameter(Names.COMMAND);
         if (action == null || action.isEmpty()) {
             return currentCommand;
