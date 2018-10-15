@@ -1,23 +1,51 @@
 package by.epam.admission.util;
 
 import by.epam.admission.exception.ProjectException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class EncryptActionTest {
 
-    private static final Logger LOG = LogManager.getLogger(EncryptActionTest.class);
-
-    @Test
-    public void testEncryptPassword() {
-        String result = null;
-        try {
-            result = EncryptAction.encrypt("", "12");
-        } catch (ProjectException e) {
-            LOG.error("Test exception", e);
-        }
-        System.out.println("Encrypted password: " + result);
-        System.out.println("Encrypted length  : " + result.length());
+    @Test(dataProvider = "strings to encrypt", description = "positive test")
+    public void testEncryptPositive(String toEncrypt, String salt)
+            throws ProjectException {
+        String encrypted = EncryptAction.encrypt(toEncrypt, salt);
+        int expected = 128;
+        int actual = encrypted.length();
+        Assert.assertEquals(actual, expected);
     }
+
+    @Test(dataProvider = "invalid params", description = "negative test",
+            expectedExceptions = {ProjectException.class})
+    public void testEncryptNegative(String toEncrypt, String salt)
+            throws ProjectException {
+        EncryptAction.encrypt(toEncrypt, salt);
+    }
+
+    @DataProvider(name = "strings to encrypt")
+    public Object[][] createData() {
+        return new Object[][] {
+                {"", ""},
+                {"a", "a"},
+                {"a", ""},
+                {"", "a"},
+                {" ", " "},
+                {"a", "b"},
+                {"b", "a"},
+                {"test", "string"},
+                {"string", "test"}
+        };
+    }
+
+    @DataProvider(name = "invalid params")
+    public Object[][] createInvalidData() {
+        return new Object[][] {
+                {null, ""},
+                {"", null},
+                {null, null}
+        };
+    }
+
 }

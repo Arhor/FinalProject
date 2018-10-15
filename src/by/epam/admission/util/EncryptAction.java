@@ -6,8 +6,6 @@ package by.epam.admission.util;
 
 import by.epam.admission.exception.ProjectException;
 import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -18,8 +16,6 @@ import java.security.NoSuchAlgorithmException;
  * @version 1.0 03 Sep 2018
  */
 public class EncryptAction {
-
-    private static final Logger LOG = LogManager.getLogger(EncryptAction.class);
 
     private static final String ENCRYPTION_TYPE = "SHA-512";
 

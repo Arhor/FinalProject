@@ -10,8 +10,9 @@ package by.epam.admission.util;
  */
 public class ConfirmationCodeGenerator {
 
-    private static final int CODE_OFFSET = 65531;
-    private static final int CODE_VARIATION = 1048575;
+    // codes geberated between 100000 and FFFFFF
+    private static final int CODE_OFFSET = 1048576;
+    private static final int CODE_VARIATION = 15728639;
 
     private ConfirmationCodeGenerator(){}
 
