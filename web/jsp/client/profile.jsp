@@ -100,19 +100,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="city" class="bmd-label-floating"><fmt:message key="label.client.profile.city" /></label>
-                                                <input type="text" class="form-control" id="city" name="city" value="${sessionScope.enrollee.city}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,55}$" required/>
+                                                <input type="text" class="form-control" id="city" name="city" value="${sessionScope.enrollee.city}" pattern="^[а-яА-ЯёЁa-zA-Z][-а-яА-ЯёЁa-zA-Z]{0,53}[а-яА-ЯёЁa-zA-Z]$" required/>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="country" class="bmd-label-floating"><fmt:message key="label.client.profile.country" /></label>
-                                                <input type="text" class="form-control" id="country" name="country" value="${sessionScope.enrollee.country}" pattern="^[-а-яА-ЯёЁa-zA-Z]{2,55}$" required/>
+                                                <input type="text" class="form-control" id="country" name="country" value="${sessionScope.enrollee.country}" pattern="^[а-яА-ЯёЁa-zA-Z][-а-яА-ЯёЁa-zA-Z]{0,53}[а-яА-ЯёЁa-zA-Z]$" required/>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="certificate" class="bmd-label-floating"><fmt:message key="label.client.profile.certificate" /></label>
-                                                <input type="text" class="form-control" id="certificate" name="certificate" value="${sessionScope.enrollee.schoolCertificate}" pattern="^([0-9]{1,2})|(100)$" required/>
+                                                <input type="text" class="form-control" id="certificate" name="certificate" value="${sessionScope.enrollee.schoolCertificate}" pattern="^([1-9][0-9]?)|(100)$" required/>
                                             </div>
                                         </div>
                                     </div>

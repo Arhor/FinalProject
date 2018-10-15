@@ -133,7 +133,7 @@
                                                                 </select>
                                                             </div>
                                                             <div class="form-group col-4">
-                                                                <input type="text" class="form-control" placeholder="score" form="subject_form" name="subjectScore" pattern="^([0-9]{1,2})|(100)$" required />
+                                                                <input type="text" class="form-control" placeholder="score" form="subject_form" name="subjectScore" pattern="^([1-9][0-9]?)|(100)$" required />
                                                             </div>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary" name="command" value="add_subject" form="subject_form"><fmt:message key="label.client.subject.add" /></button>
