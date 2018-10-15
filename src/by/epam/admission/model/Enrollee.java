@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
+ * Class Enrollee represents concrete enrollee entity
+ *
  * @author Burishinets Maxim
  * @version 1.0 29 Aug 2018
  */

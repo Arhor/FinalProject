@@ -13,30 +13,46 @@ import by.epam.admission.util.Names;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static by.epam.admission.model.User.*;
+import static by.epam.admission.util.Names.*;
 import static by.epam.admission.util.Names.EN;
 import static by.epam.admission.util.Names.RU;
 
 /**
+ * Class ChangeLangCommand is used to change the system language
+ *
  * @author Burishinets Maxim
  * @version 1.0 03 Sep 2018
+ * @see ActionCommand
  */
 public class ChangeLangCommand implements ActionCommand {
 
+    /**
+     * Method retrieves HTTP-request parameter 'language' and depending on it
+     * replaces session attribute 'locale' with 'ru_RU' or 'en_US', after all,
+     * depending on current session's role defines destination page that is
+     * placed in {@link Router} object
+     *
+     * @param request {@link HttpServletRequest} object received from
+     *               controller-servlet
+     * @return {@link Router} object that contains result of executing concrete
+     * command
+     */
     @Override
     public Router execute(HttpServletRequest request) {
         String page;
         Router router = new Router();
         HttpSession session = request.getSession();
-        String lang = request.getParameter(Names.LANG);
+        String lang = request.getParameter(LANG);
         switch (lang) {
-            case EN:
-                session.setAttribute(Names.LOCALE, User.Lang.EN.getValue());
-                break;
             case RU:
-                session.setAttribute(Names.LOCALE, User.Lang.RU.getValue());
+                session.setAttribute(LOCALE, Lang.RU.getValue());
                 break;
+            case EN:
+            default:
+                session.setAttribute(LOCALE, Lang.EN.getValue());
         }
-        User.Role currentRole = (User.Role) session.getAttribute(Names.ROLE);
+        Role currentRole = (Role) session.getAttribute(ROLE);
         switch (currentRole) {
             case GUEST:
                 page = ConfigurationManager.getProperty("path.page.main");

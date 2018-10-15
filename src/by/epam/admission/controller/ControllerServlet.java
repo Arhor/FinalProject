@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Class ControllerServlet serves as main controller for whole application
+ *
  * @author Burishinets Maxim
  * @version 1.0 29 Aug 2018
  */
@@ -46,6 +48,20 @@ public class ControllerServlet extends HttpServlet {
         processRequest(request, response);
     }
 
+    /**
+     * Method implements a unified way of processing messages by calling the
+     * appropriate commands and depending on the result, it forwards the
+     * request further or redirects the user
+     *
+     * @param request - Extends the ServletRequest interface to provide request
+     *               information for HTTP servlets
+     * @param response - Extends the ServletResponse interface to provide
+     *                HTTP-specific functionality in sending a response
+     * @throws ServletException - Defines a general exception a servlet can
+     * throw when it encounters difficulty
+     * @throws IOException Signals that an I/O exception of some sort has
+     * occurred
+     */
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response)
             throws ServletException, IOException {
@@ -66,7 +82,7 @@ public class ControllerServlet extends HttpServlet {
                 int errorCode = router.getErrorCode();
                 response.sendError(errorCode);
             default:
-                // TODO: implement impossible type
+                response.sendError(500);
         }
     }
 
@@ -74,6 +90,9 @@ public class ControllerServlet extends HttpServlet {
         super.init(config);
     }
 
+    /**
+     * closes existing database connections before shutting down the application
+     */
     public void destroy() {
         AbandonedConnectionCleanupThread.checkedShutdown();
         ConnectionPool.POOL.closePool();

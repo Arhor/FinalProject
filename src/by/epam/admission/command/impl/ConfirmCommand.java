@@ -11,13 +11,18 @@ import by.epam.admission.service.UserService;
 import by.epam.admission.model.User;
 import by.epam.admission.util.ConfigurationManager;
 import by.epam.admission.util.MessageManager;
-import by.epam.admission.util.Names;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static by.epam.admission.util.Names.*;
+
 /**
+ * Class ConfirmCommand used for final stage of new user registration
+ *
  * @author Burishinets Maxim
  * @version 1.0 10 Sep 2018
  */
@@ -26,17 +31,25 @@ public class ConfirmCommand implements ActionCommand {
     private static final Logger LOG =
             LogManager.getLogger(ConfirmCommand.class);
 
+    /**
+     * 
+     *
+     * @param request {@link HttpServletRequest} object received from
+     *               controller-servlet
+     * @return {@link Router} object that contains result of executing concrete
+     * command
+     */
     @Override
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
         HttpSession session = request.getSession();
 
-        User user = (User) session.getAttribute(Names.USER);
+        User user = (User) session.getAttribute(USER);
 
-        String submittedCode = request.getParameter(Names.CONFIRMATION_CODE);
+        String submittedCode = request.getParameter(CONFIRMATION_CODE);
         String realCode = String.valueOf(session.getAttribute(
-                Names.CONFIRMATION_CODE));
-        String locale = (String) session.getAttribute("locale");
+                CONFIRMATION_CODE));
+        String locale = (String) session.getAttribute(LOCALE);
         User.Lang lang = User.Lang.getLang(locale);
 
         try {
@@ -45,9 +58,9 @@ public class ConfirmCommand implements ActionCommand {
                 user = UserService.registerUser(user);
                 if (user != null) {
                     user.setPassword(null);
-                    session.setAttribute(Names.USER, user);
-                    session.setAttribute(Names.ROLE, user.getRole());
-                    session.setAttribute(Names.LOCALE, user.getLang().getValue());
+                    session.setAttribute(USER, user);
+                    session.setAttribute(ROLE, user.getRole());
+                    session.setAttribute(LOCALE, user.getLang().getValue());
                     page = ConfigurationManager.getProperty(
                             "path.page.client.main");
                     router.setPage(page);
@@ -55,13 +68,13 @@ public class ConfirmCommand implements ActionCommand {
                 } else {
                     String errorMessage =  MessageManager.getProperty(
                             "message.registration.failed", lang);
-                    request.setAttribute(Names.ERROR_LOGIN_MESSAGE, errorMessage);
+                    request.setAttribute(ERROR_LOGIN_MESSAGE, errorMessage);
                     page = ConfigurationManager.getProperty("path.page.login");
                     router.setPage(page);
                     router.setType(Router.Type.FORWARD);
                 }
             } else {
-                session.removeAttribute(Names.USER);
+                session.removeAttribute(USER);
                 page = ConfigurationManager.getProperty("path.page.main");
                 router.setPage(page);
                 router.setType(Router.Type.FORWARD);
@@ -71,8 +84,8 @@ public class ConfirmCommand implements ActionCommand {
             router.setType(Router.Type.ERROR);
             router.setErrorCode(500);
         } finally {
-            session.removeAttribute(Names.CONFIRMATION_CODE);
-            session.removeAttribute(Names.PASSWORD);
+            session.removeAttribute(CONFIRMATION_CODE);
+            session.removeAttribute(PASSWORD);
         }
         return router;
     }

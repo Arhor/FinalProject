@@ -25,8 +25,10 @@ import static by.epam.admission.util.Names.*;
 /**
  * Class AddSubjectCommand implements command that signals to add subject and
  * corresponding score to database for enrollee that invoked it
+ *
  * @author Burishinets Maxim
  * @version 1.0 03 Oct 2018
+ * @see ActionCommand
  */
 public class AddSubjectCommand implements ActionCommand {
 
@@ -34,15 +36,17 @@ public class AddSubjectCommand implements ActionCommand {
             LogManager.getLogger(AddSubjectCommand.class);
 
     /**
-     * Method retrieves Enrollee attribute and List of available for current
-     * enrollee subjects, also subject ID and subject score from user input.
-     * After that, an attempt is made to add the corresponding entry to the
-     * database. If attempt was successful subject removed form the list of
-     * available subjects and added to enrollee's Subject/Score map, after that
-     * list sets as session attribute.
+     * Method retrieves {@link Enrollee} attribute and List of available for
+     * current enrollee subjects, also subject ID and subject score from user
+     * input. After that, an attempt is made to add the corresponding entry to
+     * the database. If attempt was successful subject removed form the list of
+     * available subjects and added to enrollee's {@link Subject}/Score map,
+     * after that list sets as session attribute.
      *
-     * @param request - HttpServletRequest object received from controller-servlet
-     * @return Router object that contains result of executing concrete command
+     * @param request {@link HttpServletRequest} object received from
+     *               controller-servlet
+     * @return {@link Router} object that contains result of executing concrete
+     * command
      */
     @SuppressWarnings("unchecked")
     @Override

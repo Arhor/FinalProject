@@ -5,7 +5,7 @@
 package by.epam.admission.model;
 
 /**
- * User class represent concrete user entity
+ * User class represents concrete user entity
  *
  * @author Maxim Burishinets
  * @version 1.0 29 Aug 2018

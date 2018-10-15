@@ -23,8 +23,10 @@ import static by.epam.admission.util.Names.*;
 /**
  * Class BlockUserCommand implements command that signals to block concrete user
  * by UserID and update corresponding record in the database
+ *
  * @author Burishinets Maxim
  * @version 1.0 27 Sep 2018
+ * @see ActionCommand
  */
 public class BlockUserCommand implements ActionCommand {
 
@@ -33,10 +35,14 @@ public class BlockUserCommand implements ActionCommand {
 
     /**
      * Method at first current session's role and if it not an ADMIN returns
-     * JSON with 'error' flag. Otherwise 
+     * JSON with 'error' flag. Otherwise retrieves 'userId' parameter from HTTP
+     * request and tries to to block User with corresponding ID. After all the
+     * results are placed in the JSON object, which is placed in a Router object
      *
-     * @param request - HttpServletRequest object received from controller-servlet
-     * @return Router object that contains result of executing concrete command
+     * @param request {@link HttpServletRequest} object received from
+     *               controller-servlet
+     * @return {@link Router} object that contains result of executing concrete
+     * command
      */
     @Override
     public Router execute(HttpServletRequest request) {

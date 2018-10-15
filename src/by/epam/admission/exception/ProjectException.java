@@ -5,6 +5,8 @@
 package by.epam.admission.exception;
 
 /**
+ * Represents various exceptions that may occur during application running
+ *
  * @author Maxim Burishinets
  * @version 1.0 1 Sep 2018
  */

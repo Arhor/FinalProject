@@ -26,7 +26,10 @@ import org.apache.logging.log4j.Logger;
 public enum ConnectionPool {
     
     POOL;
-    
+
+    /**
+     * Maximum amount of available database connections
+     */
     public final int POOL_SIZE;
     
     private final Logger LOG = LogManager.getLogger(ConnectionPool.class);
@@ -35,10 +38,16 @@ public enum ConnectionPool {
     private static final String DB_USER = "db.user";
     private static final String DB_PASSWORD = "db.password";
     private static final String DB_POOLSIZE = "db.poolsize";
-    
+
+
     private LinkedBlockingQueue<ProxyConnection> availableConnections;
     private LinkedBlockingQueue<ProxyConnection> usedConnections;
 
+    /**
+     * Initializes connection pool object. Establishes fixed amount of
+     * connections with database, wraps them with ProxyConnection object
+     * and puts to available connections queue
+     */
     ConnectionPool() {
         ResourceBundle prop = DatabaseManager.readProperties();
         availableConnections = new LinkedBlockingQueue<>();
@@ -74,6 +83,13 @@ public enum ConnectionPool {
         }
     }
 
+    /**
+     * Receives connection from queue of available connection (if there is not
+     * any available connection method waits until it appears) and puts it to
+     * queue of used connections
+     *
+     * @return wrapped connection object
+     */
     public ProxyConnection getConnection() {
         ProxyConnection proxyConnection = null;
         try {
@@ -91,6 +107,12 @@ public enum ConnectionPool {
         return proxyConnection;
     }
 
+    /**
+     * Method releases passed connection, removes it from queue of used
+     * connection and puts it back to queue of available connections
+     *
+     * @param proxyConnection - wrapped connection object
+     */
     public void releaseConnection(ProxyConnection proxyConnection) {
         try {
             usedConnections.remove(proxyConnection);
@@ -112,6 +134,9 @@ public enum ConnectionPool {
         }
     }
 
+    /**
+     * Tries to close all connections in the connection pool
+     */
     public void closePool() {
         for (int i = 0; i < POOL_SIZE; i++) {
             try {
