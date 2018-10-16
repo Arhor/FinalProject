@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Burishinets maxim
  * @version 1.0 10 Sep 2018
+ * @see ActionCommand
  */
 public class UnblockUserCommand implements ActionCommand {
 

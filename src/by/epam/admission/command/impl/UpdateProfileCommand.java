@@ -7,15 +7,13 @@ package by.epam.admission.command.impl;
 import by.epam.admission.command.ActionCommand;
 import by.epam.admission.command.Router;
 import by.epam.admission.exception.ProjectException;
-import by.epam.admission.model.Faculty;
 import by.epam.admission.service.*;
 import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Subject;
 import by.epam.admission.model.User;
-import by.epam.admission.util.InputValidator;
 import by.epam.admission.util.MessageManager;
-import by.epam.admission.util.Names;
 import by.epam.admission.util.XssFilter;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,6 +38,12 @@ public class UpdateProfileCommand implements ActionCommand {
             LogManager.getLogger(UpdateProfileCommand.class);
 
     /**
+     * Method used to update user or user/enrollee profile. Depending on current
+     * user role method receives user's inputs as request parameters. Filters if
+     * for XSS tries after that validates. If user submitted valid text lines
+     * and password - method invokes user or user/enrollee services to update
+     * profile
+     *
      * @param request {@link HttpServletRequest} object received from
      *                controller-servlet
      * @return {@link Router} object that contains result of executing concrete
@@ -142,7 +146,7 @@ public class UpdateProfileCommand implements ActionCommand {
             }
             page = ProfileService.definePage(role);
             router.setPage(page);
-            router.setType(Router.Type.FORWARD);
+            router.setType(Router.Type.REDIRECT);
         } catch (ProjectException e) {
             LOG.error("Profile updating error", e);
             router.setType(Router.Type.ERROR);

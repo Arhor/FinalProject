@@ -74,7 +74,7 @@ public class AddSubjectCommand implements ActionCommand {
             String page = ConfigurationManager.getProperty(
                     "path.page.client.main");
             router.setPage(page);
-            router.setType(Type.FORWARD);
+            router.setType(Type.REDIRECT);
         } catch (ProjectException e) {
             LOG.error("Add subject error", e);
             router.setType(Type.ERROR);
