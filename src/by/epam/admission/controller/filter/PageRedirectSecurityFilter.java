@@ -25,6 +25,7 @@ import java.util.TreeSet;
  *
  * @author Burishinets Maxim
  * @version 1.0 29 Aug 2018
+ * @see javax.servlet.Filter
  */
 @WebFilter(filterName = "pageRedirectFilter",
            urlPatterns = {"/jsp/*", "/admission/*"})

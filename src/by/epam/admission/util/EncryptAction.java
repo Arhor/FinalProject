@@ -12,6 +12,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
+ * Class EncryptAction provides encryption service
+ *
  * @author Maxmim Burishinets
  * @version 1.0 03 Sep 2018
  */
@@ -21,6 +23,18 @@ public class EncryptAction {
 
     private EncryptAction() {}
 
+    /**
+     * Method takes String value to encrypt and object that will be used as
+     * encryption 'salt' and returns 129-digits hash-code of passed value
+     *
+     * @param toEncrypt User's input to encrypt
+     * @param salt Object that will be converted to text string and
+     *             used as encryption salt
+     * @param <T>  Generic object-type for encryption 'salt' object
+     * @return String representation of HEX number as result of encryption
+     * @throws ProjectException exception occurs when one (or both) of passed
+     * parameters are 'null'
+     */
     public static <T> String encrypt(String toEncrypt, T salt)
             throws ProjectException {
         if (toEncrypt == null || salt == null) {

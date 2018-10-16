@@ -14,6 +14,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
+ * Class DaoHelper provides various services to maintain transaction action for
+ * one or more database tables via their DAOs
+ *
  * @author Burishinets Maxim
  * @version 1.0 20 Aug 2018
  */
@@ -28,6 +31,15 @@ public class DaoHelper {
         currentDAOs = new ArrayList<>();
     }
 
+    /**
+     * Method takes passed DAO (optionally more than one), adds it to list of
+     * DAO objects used in current transaction and set one {@link ProxyConnection}
+     * to all of them
+     *
+     * @param dao concrete implementation of {@link AbstractDao}
+     * @param daos optional {@link AbstractDao} objects
+     * @throws ProjectException wrapped SQL exception
+     */
     public void startTransaction(AbstractDao dao, AbstractDao...daos)
             throws ProjectException {
         if (connection == null) {
@@ -50,6 +62,13 @@ public class DaoHelper {
         }
     }
 
+    /**
+     * Closing current transaction:
+     *     1) sets connection of used DAOs to 'null'
+     *     2) clears list of used DAOs
+     *     3) releases current connection back to connection pool and sets it
+     *        to 'null'
+     */
     public void endTransaction() {
         /*
          * IF statement prevents adding the same connection
@@ -66,6 +85,9 @@ public class DaoHelper {
         }
     }
 
+    /**
+     * The method is used to commit the changes made
+     */
     public void commit() {
         if (connection != null) {
             try {
@@ -76,6 +98,9 @@ public class DaoHelper {
         }
     }
 
+    /**
+     * The method is used to rollback the changes made.
+     */
     public void rollback() {
         if (connection != null) {
             try {

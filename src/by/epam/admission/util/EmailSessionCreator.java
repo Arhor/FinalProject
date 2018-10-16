@@ -24,6 +24,10 @@ public class EmailSessionCreator {
     private String userPass;
     private Properties sessionProperties;
 
+    /**
+     * @param resourceBundle {@link ResourceBundle} object that contains
+     *                       properties for establishing new e0mail session
+     */
     public EmailSessionCreator(ResourceBundle resourceBundle) {
         smtpHost = resourceBundle.getString("mail.smtp.host");
         smtpPort = resourceBundle.getString("mail.smtp.port");

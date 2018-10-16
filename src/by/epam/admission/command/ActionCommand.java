@@ -16,8 +16,10 @@ public interface ActionCommand {
      * The method refers to different services depending on the specific
      * implementation of the command.
      *
-     * @param request - HttpServletRequest object received from controller-servlet
-     * @return  Router object that contains result of executing concrete command
+     * @param request {@link HttpServletRequest} object received from
+     *                controller-servlet
+     * @return  {@link Router} object that contains result of executing
+     *          concrete command
      */
     Router execute(HttpServletRequest request);
 }

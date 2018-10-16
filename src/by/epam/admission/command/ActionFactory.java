@@ -25,9 +25,10 @@ public class ActionFactory {
     /**
      * Factory method that defines concrete type of Command object to return
      *
-     * @param request - HttpServletRequest object received from controller-servlet
-     * @return concrete implementation of ActionCommand depending on parameter
-     * "command" from received HttpServletRequest object
+     * @param request HttpServletRequest object received from
+     *                controller-servlet
+     * @return concrete implementation of {@link ActionCommand} depending on
+     * parameter "command" from received HttpServletRequest object
      */
     public static ActionCommand defineCommand(HttpServletRequest request) {
         ActionCommand currentCommand =

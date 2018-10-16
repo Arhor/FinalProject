@@ -1,5 +1,16 @@
+/*
+ * class: Names
+ */
+
 package by.epam.admission.util;
 
+/**
+ * Class Names contains String constants for attributes and parameters used in
+ * application
+ *
+ * @author Burishinets Maxim
+ * @version 1.0 14 Oct 2018
+ */
 public class Names {
 
     public static final String USER = "user";

@@ -18,6 +18,7 @@ import java.io.IOException;
  *
  * @author Burishinets Maxim
  * @version 1.0 29 Aug 2018
+ * @see javax.servlet.Filter
  */
 @WebFilter(filterName = "encodingFilter", urlPatterns = {"/*"}, initParams = {
         @WebInitParam(

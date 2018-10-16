@@ -13,6 +13,7 @@ import by.epam.admission.model.Enrollee;
 import by.epam.admission.model.Subject;
 import by.epam.admission.model.User;
 import by.epam.admission.util.InputValidator;
+import by.epam.admission.util.MessageManager;
 import by.epam.admission.util.Names;
 import by.epam.admission.util.XssFilter;
 import org.apache.logging.log4j.LogManager;
@@ -23,35 +24,50 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.TreeMap;
 
+import static by.epam.admission.util.InputValidator.*;
+import static by.epam.admission.util.Names.*;
+
 /**
+ * Class UpdateProfileCommand used to update current user profile
+ *
  * @author Burishinets Maxim
  * @version 1.0 10 Sep 2018
+ * @see ActionCommand
  */
 public class UpdateProfileCommand implements ActionCommand {
 
     private static final Logger LOG =
             LogManager.getLogger(UpdateProfileCommand.class);
 
+    /**
+     * @param request {@link HttpServletRequest} object received from
+     *                controller-servlet
+     * @return {@link Router} object that contains result of executing concrete
+     * command
+     */
     @Override
     public Router execute(HttpServletRequest request) {
         String page;
         Router router = new Router();
         HttpSession session = request.getSession();
 
-        String firstName = request.getParameter(Names.FIRST_NAME);
-        String lastName = request.getParameter(Names.LAST_NAME);
-        String password = request.getParameter(Names.PASSWORD);
+        String firstName = request.getParameter(FIRST_NAME);
+        String lastName = request.getParameter(LAST_NAME);
+        String password = request.getParameter(PASSWORD);
 
         firstName = XssFilter.doFilter(firstName);
         lastName = XssFilter.doFilter(lastName);
 
-        User currUser = (User) session.getAttribute(Names.USER);
+        User currUser = (User) session.getAttribute(USER);
         currUser.setPassword(password);
         User.Role role = currUser.getRole();
 
+        String locale = (String) session.getAttribute(LOCALE);
+        User.Lang lang = User.Lang.getLang(locale);
+
         try {
-            boolean validFirstName = InputValidator.validate(firstName, InputValidator.InputType.FIRST_NAME);
-            boolean validLastName = InputValidator.validate(lastName, InputValidator.InputType.LAST_NAME);
+            boolean validFirstName = validate(firstName, InputType.FIRST_NAME);
+            boolean validLastName = validate(lastName, InputType.LAST_NAME);
 
             if (validFirstName && validLastName) {
 
@@ -63,24 +79,24 @@ public class UpdateProfileCommand implements ActionCommand {
                     currUser.setLastName(lastName);
 
                     if (UserService.updateUser(currUser)) {
-                        session.setAttribute(Names.USER, currUser);
+                        session.setAttribute(USER, currUser);
                     }
 
                     if (role == User.Role.CLIENT && FacultyService.checkAvailability()) {
-                        String city = request.getParameter(Names.CITY);
-                        String country = request.getParameter(Names.COUNTRY);
-                        String certificate = request.getParameter(Names.CERTIFICATE);
+                        String city = request.getParameter(CITY);
+                        String country = request.getParameter(COUNTRY);
+                        String certificate = request.getParameter(CERTIFICATE);
 
                         city = XssFilter.doFilter(city);
                         country = XssFilter.doFilter(country);
                         certificate = XssFilter.doFilter(certificate);
 
-                        boolean validCity = InputValidator.validate(city, InputValidator.InputType.CITY);
-                        boolean validCountry = InputValidator.validate(country, InputValidator.InputType.COUNTRY);
-                        boolean validCertificate = InputValidator.validate(certificate, InputValidator.InputType.CERTIFICATE);
+                        boolean validCity = validate(city, InputType.CITY);
+                        boolean validCountry = validate(country, InputType.COUNTRY);
+                        boolean validCertificate = validate(certificate, InputType.CERTIFICATE);
 
                         if (validCity && validCountry && validCertificate) {
-                            Enrollee enrollee = (Enrollee) session.getAttribute(Names.ENROLLEE);
+                            Enrollee enrollee = (Enrollee) session.getAttribute(ENROLLEE);
                             if (enrollee == null) {
                                 enrollee = new Enrollee();
                                 enrollee.setUserId(currUser.getId());
@@ -92,31 +108,37 @@ public class UpdateProfileCommand implements ActionCommand {
                                 List<Subject> subjects = SubjectService.findSubjects();
                                 if (subjects != null) {
                                     subjects.removeAll(enrollee.getMarks().keySet());
-                                    session.setAttribute(Names.AVAILABLE_SUBJECTS, subjects);
+                                    session.setAttribute(AVAILABLE_SUBJECTS, subjects);
                                 }
                                 boolean registrationResult =
                                         EnrolleeService.registerEnrollee(enrollee);
                                 if (!registrationResult) {
                                     enrollee = null;
                                 }
-                                session.setAttribute(Names.ENROLLEE, enrollee);
+                                session.setAttribute(ENROLLEE, enrollee);
                             } else {
                                 enrollee.setCity(city);
                                 enrollee.setCountry(country);
                                 enrollee.setSchoolCertificate(Integer.parseInt(certificate));
                                 if (EnrolleeService.updateEnrollee(enrollee)) {
-                                    session.setAttribute(Names.ENROLLEE, enrollee);
+                                    session.setAttribute(ENROLLEE, enrollee);
                                 }
                             }
                         } else {
-                            request.setAttribute("profileErrorMessage", "UPDATE ERROR INVALID INPUT"); // TODO: STUB !!! replace
+                            request.setAttribute("profileErrorMessage",
+                                    MessageManager.getProperty(
+                                    "message.update.error.invalid.input", lang));
                         }
                     }
                 } else {
-                    request.setAttribute("profileErrorMessage", "UPDATE ERROR WRONG PASSWORD"); // TODO: STUB !!! replace
+                    request.setAttribute("profileErrorMessage",
+                            MessageManager.getProperty(
+                                    "message.update.error.wrong.password", lang));
                 }
             } else {
-                request.setAttribute("profileErrorMessage", "UPDATE ERROR INVALID INPUT"); // TODO: STUB !!! replace
+                request.setAttribute("profileErrorMessage",
+                        MessageManager.getProperty(
+                        "message.update.error.invalid.input", lang));
             }
             page = ProfileService.definePage(role);
             router.setPage(page);

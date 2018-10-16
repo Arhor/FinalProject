@@ -238,28 +238,6 @@ public class EnrolleeDaoTest {
         }
     }
 
-    @Test(dataProvider = "enrolleesToInsert", priority =  99, description = "positive test")
-    public void testAddSubject(User user, Enrollee enrollee) {
-        String failMessage = "Enrollee add subject test failed";
-        DaoHelperDbUnit daoHelper = new DaoHelperDbUnit();
-        EnrolleeDao eDAO = new EnrolleeDao();
-        try {
-            daoHelper.startTransaction(eDAO);
-            Subject subject = new Subject(103, "Математика", "Math");
-            int score = 99;
-            boolean result = eDAO.addSubject(enrollee.getId(), subject.getId(), score);
-            TreeMap<Subject, Integer> marks = eDAO.findEnrolleeMarks(enrollee.getId());
-            boolean equals = (marks.get(subject) == score);
-            if (!result || !equals) {
-                Assert.fail(failMessage);
-            }
-        } catch (ProjectException e) {
-            Assert.fail(failMessage, e);
-        } finally {
-            daoHelper.endTransaction();
-        }
-    }
-
     @BeforeClass
     public void setUpClass() throws Exception {
         FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
